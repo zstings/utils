@@ -1,0 +1,41 @@
+{
+  "name": "tings-utils",
+  "version": "0.0.10",
+  "license": "MIT",
+  "author": "tings",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/tings-utils.umd.cjs",
+  "module": "./dist/tings-utils.js",
+  "types": "./dist/types/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/tings-utils.js",
+      "require": "./dist/tings-utils.umd.cjs",
+      "types": "./dist/types/src/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc",
+    "b": "npx tsup ./types/index.ts --dts",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "utils",
+    "js-utils",
+    "jsutils",
+    "ts-utils",
+    "tsutils",
+    "ts-tools",
+    "tstools",
+    "js-tools",
+    "jstools",
+    "工具函数",
+    "js工具"
+  ],
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
+  }
+}
