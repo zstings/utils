@@ -1,6 +1,6 @@
 export type IsPhone = (str: string | number) => boolean
 
-export type PhoneEncrypt = (alue: string | number) => string
+export type PhoneEncrypt = (value: string | number) => string
 
 export type GetDataType = (value: any) => string
 
