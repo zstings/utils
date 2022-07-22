@@ -5,5 +5,15 @@
 
 
 // export { default as returnstr } from "./returnStr";
-export { phoneEncrypt } from "./modules";
-export { isArray, isPhone, getDataType } from "./common";
+export { 
+  isArray, 
+  isPhone, 
+  getDataType,
+} from "./common";
+
+
+export { 
+  phoneEncrypt,
+  getUrlParam,
+  downloadFile
+} from "./modules";

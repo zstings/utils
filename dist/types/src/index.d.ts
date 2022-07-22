@@ -1,3 +1,2 @@
-export { isArray, isPhone } from "./isFunc";
-export { getDataType } from "./common";
-export { phoneR1 } from "./phone";
+export { isArray, isPhone, getDataType, } from "./common";
+export { phoneEncrypt, getUrlParam, downloadFile } from "./modules";
