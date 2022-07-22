@@ -12,6 +12,7 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "removeComments": false,
     "emitDeclarationOnly": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

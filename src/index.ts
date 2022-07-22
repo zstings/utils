@@ -5,6 +5,5 @@
 
 
 // export { default as returnstr } from "./returnStr";
-export { isArray, isPhone } from "./isFunc";
-export { getDataType } from "./common";
-export { phoneR1 } from "./phone";
+export { phoneEncrypt } from "./modules";
+export { isArray, isPhone, getDataType } from "./common";
