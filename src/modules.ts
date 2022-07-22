@@ -16,7 +16,7 @@ export const phoneEncrypt: PhoneEncrypt = (value) => {
 
 
 export const getUrlParam: GetUrlParam = (name, url) => {
-  const urlPar = url ? new URL(url as string) : window.location;
+  const urlPar = url ? new URL(url) : window.location;
   // 构造一个含有目标参数的正则表达式对象
   const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
   // 匹配目标参数
