@@ -9,6 +9,8 @@ export {
   isArray, 
   isPhone, 
   getDataType,
+  isLocation,
+  isObject
 } from "./common";
 
 

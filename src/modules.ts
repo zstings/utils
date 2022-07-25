@@ -1,8 +1,8 @@
-import { PhoneEncrypt, GetUrlParam, DownloadFile } from '../types'
-import { isPhone } from './common'
+import  * as TPS from '../types'
+import { isPhone, isLocation } from './common'
 
 
-export const phoneEncrypt: PhoneEncrypt = (value) => {
+export const phoneEncrypt: TPS.PhoneEncrypt = (value) => {
   /**
    * 手机号脱敏
    * @param 支持字符串或者数字
@@ -15,8 +15,8 @@ export const phoneEncrypt: PhoneEncrypt = (value) => {
 }
 
 
-export const getUrlParam: GetUrlParam = (name, url) => {
-  const urlPar = url ? new URL(url) : window.location;
+export const getUrlParam: TPS.GetUrlParam = (name, url = window.location) => {
+  const urlPar = isLocation(url) ? window.location : new URL(url as string)
   // 构造一个含有目标参数的正则表达式对象
   const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
   // 匹配目标参数
@@ -29,7 +29,7 @@ export const getUrlParam: GetUrlParam = (name, url) => {
 }
 
 
-export const downloadFile: DownloadFile = (name, blob) => {
+export const downloadFile: TPS.DownloadFile = (name, blob) => {
   const a = document.createElement('a')
   const url = window.URL.createObjectURL(blob)
   // 默认隐藏
