@@ -16,6 +16,7 @@ export {
   isSet,
   isString,
   isSymbol,
+  isNumber
 } from "./common";
 
 
