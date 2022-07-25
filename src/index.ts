@@ -1,7 +1,5 @@
-// const version: string = require("../package.json").version
-
-// import { version } from '../package.json'
-// export { version };
+import { version } from '../package.json'
+export { version };
 
 
 // export { default as returnstr } from "./returnStr";
@@ -10,7 +8,14 @@ export {
   isPhone, 
   getDataType,
   isLocation,
-  isObject
+  isObject,
+  isDate,
+  isFunction,
+  isMap,
+  isPromise,
+  isSet,
+  isString,
+  isSymbol,
 } from "./common";
 
 
