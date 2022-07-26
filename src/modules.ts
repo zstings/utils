@@ -1,5 +1,5 @@
 import  * as TPS from '../types'
-import { isPhone, isLocation, isNumber } from './common'
+import { isPhone, isLocation } from './common'
 
 
 /**
