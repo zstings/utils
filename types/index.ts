@@ -13,3 +13,5 @@ export type ToIsTypes = (value: any) => boolean
 export type GetUUID = () => string
 
 export type GbkToUtf8 = (value: ArrayBuffer) => object | string
+
+export type PadInt = (value: string | number, len: number) => string

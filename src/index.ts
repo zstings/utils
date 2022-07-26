@@ -25,5 +25,6 @@ export {
   getUrlParam,
   downloadFile,
   getUUID,
-  gbkToUtf8
+  gbkToUtf8,
+  padInt
 } from "./modules";
