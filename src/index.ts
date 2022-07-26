@@ -23,5 +23,7 @@ export {
 export { 
   phoneEncrypt,
   getUrlParam,
-  downloadFile
+  downloadFile,
+  getUUID,
+  gbkToUtf8
 } from "./modules";

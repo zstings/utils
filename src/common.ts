@@ -2,7 +2,7 @@ import  * as TPS from '../types'
 
 /**
  * 获取数据类型
- * @param str 参数
+ * @param value 任意值
  * @return 返回str的类型
  * @example
  * ```ts
@@ -14,15 +14,15 @@ import  * as TPS from '../types'
  * getDataType([]) => 'Array'
  * ```
  */
-export const getDataType: TPS.GetDataType = function (str) {
-  return Object.prototype.toString.call(str).slice(8, -1)
+export const getDataType: TPS.GetDataType = function (value) {
+  return Object.prototype.toString.call(value).slice(8, -1)
 }
 
 
 
 /**
  * 判断是否为手机号
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -30,15 +30,15 @@ export const getDataType: TPS.GetDataType = function (str) {
  * isPhone(1330210152) => false
  * ```
  */
-export const isPhone: TPS.IsPhone = function (str) {
-  return /^1[3-9][\d]{9}$/.test(str.toString())
+export const isPhone: TPS.IsPhone = function (value) {
+  return /^1[3-9][\d]{9}$/.test(value.toString())
 }
 
 
 
 /**
  * 判断是否为数组
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -46,13 +46,13 @@ export const isPhone: TPS.IsPhone = function (str) {
  * isArray({}) => false
  * ```
  */
-export const isArray: TPS.ToIsTypes = str => getDataType(str) === 'Array'
+export const isArray: TPS.ToIsTypes = value => getDataType(value) === 'Array'
 
 
 
 /**
  * 判断是否为对象
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -60,13 +60,13 @@ export const isArray: TPS.ToIsTypes = str => getDataType(str) === 'Array'
  * isObject([]) => false
  * ```
  */
-export const isObject: TPS.ToIsTypes = str => str !== null && getDataType(str) === 'Object'
+export const isObject: TPS.ToIsTypes = value => value !== null && getDataType(value) === 'Object'
 
 
 
 /**
  * 判断是否为Location
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -74,13 +74,13 @@ export const isObject: TPS.ToIsTypes = str => str !== null && getDataType(str) =
  * isLocation(123) => false
  * ```
  */
-export const isLocation: TPS.ToIsTypes = str => getDataType(str) === 'Location'
+export const isLocation: TPS.ToIsTypes = value => getDataType(value) === 'Location'
 
 
 
 /**
  * 判断是否为Map
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -88,13 +88,13 @@ export const isLocation: TPS.ToIsTypes = str => getDataType(str) === 'Location'
  * isMap(123) => false
  * ```
  */
-export const isMap:TPS.ToIsTypes = str => getDataType(str) === 'Map'
+export const isMap:TPS.ToIsTypes = value => getDataType(value) === 'Map'
 
 
 
 /**
  * 判断是否为Set
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -102,13 +102,13 @@ export const isMap:TPS.ToIsTypes = str => getDataType(str) === 'Map'
  * isSet(123) => false
  * ```
  */
-export const isSet:TPS.ToIsTypes = str => getDataType(str) === 'Set'
+export const isSet:TPS.ToIsTypes = value => getDataType(value) === 'Set'
 
 
 
 /**
  * 判断是否为Date
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -116,13 +116,13 @@ export const isSet:TPS.ToIsTypes = str => getDataType(str) === 'Set'
  * isDate(123) => false
  * ```
  */
-export const isDate:TPS.ToIsTypes = str => getDataType(str) === 'Date'
+export const isDate:TPS.ToIsTypes = value => getDataType(value) === 'Date'
 
 
 
 /**
  * 判断是否为Function
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -130,13 +130,13 @@ export const isDate:TPS.ToIsTypes = str => getDataType(str) === 'Date'
  * isFunction(123) => false
  * ```
  */
-export const isFunction:TPS.ToIsTypes = str => getDataType(str) === 'Function'
+export const isFunction:TPS.ToIsTypes = value => getDataType(value) === 'Function'
 
 
 
 /**
  * 判断是否为字符串
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -144,13 +144,13 @@ export const isFunction:TPS.ToIsTypes = str => getDataType(str) === 'Function'
  * isString(123) => false
  * ```
  */
-export const isString:TPS.ToIsTypes = str => getDataType(str) === 'String'
+export const isString:TPS.ToIsTypes = value => getDataType(value) === 'String'
 
 
 
 /**
  * 判断是否为Symbol
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -158,13 +158,13 @@ export const isString:TPS.ToIsTypes = str => getDataType(str) === 'String'
  * isSymbol(Symbol) => false
  * ```
  */
-export const isSymbol:TPS.ToIsTypes = str => getDataType(str) === 'Symbol'
+export const isSymbol:TPS.ToIsTypes = value => getDataType(value) === 'Symbol'
 
 
 
 /**
  * 判断是否为数字
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -172,13 +172,13 @@ export const isSymbol:TPS.ToIsTypes = str => getDataType(str) === 'Symbol'
  * isNumber('123') => false
  * ```
  */
-export const isNumber:TPS.ToIsTypes = str => getDataType(str) === 'Number'
+export const isNumber:TPS.ToIsTypes = value => getDataType(value) === 'Number'
 
 
 
 /**
  * 判断是否为Promise
- * @param str 参数
+ * @param value 任意值
  * @return 返回布尔值
  * @example
  * ```ts
@@ -187,6 +187,6 @@ export const isNumber:TPS.ToIsTypes = str => getDataType(str) === 'Number'
  * isPromise(Promise) => false
  * ```
  */
-export const isPromise:TPS.ToIsTypes = str => {
-  return getDataType(str) === 'Promise' && isFunction(str.then) && isFunction(str.catch)
+export const isPromise:TPS.ToIsTypes = value => {
+  return getDataType(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch)
 }

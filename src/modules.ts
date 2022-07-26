@@ -5,7 +5,6 @@ import { isPhone, isLocation } from './common'
 /**
  * 对手机号进行加密处理
  * @param value 手机号：支持字符串或者数字
- * @return 返回加密后的字符串
  * @example
  * ```ts
  * phoneEncrypt(13300001111) => '133****1111'
@@ -18,6 +17,8 @@ export const phoneEncrypt: TPS.PhoneEncrypt = (value) => {
   if (typeof value === 'number') value = value.toString()
   return value.replace(value.substring(3, 7), '****')
 }
+
+
 
 /**
  * 获取url上的参数
@@ -44,6 +45,8 @@ export const getUrlParam: TPS.GetUrlParam = (name, url = window.location) => {
   return null
 }
 
+
+
 /**
  * 文件下载
  * @param name 文件名
@@ -62,4 +65,38 @@ export const downloadFile: TPS.DownloadFile = (name, blob) => {
   window.URL.revokeObjectURL(url)
   // 下载完成移除 a 标签
   a.remove()
+}
+
+
+
+/**
+ * 获取uuid
+ * @example
+ * 符合 RFC4122 版本 4 的 UUID。
+ * ```ts
+ * getUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'
+ * ```
+ */
+export const getUUID: TPS.GetUUID = () => {
+  const ysValue = String(1e7) + -1e3 + -4e3 + -8e3 + -1e11
+  return ysValue.replace(/[018]/g, c =>
+    (
+      Number(c) ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (Number(c) / 4)))
+    ).toString(16),
+  )
+}
+
+
+
+/**
+ * gbk 转 utf-8
+ * @param value ArrayBuffer
+ */
+export const gbkToUtf8: TPS.GbkToUtf8 = (value: ArrayBuffer) => {
+  try {
+    return JSON.parse(new TextDecoder('utf-8').decode(value))
+  } catch(err) {
+    return new TextDecoder('utf-8').decode(value)
+  }
 }
