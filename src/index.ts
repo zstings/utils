@@ -1,5 +1,5 @@
-import { version } from '../package.json'
-export { version };
+// import { version } from '../package.json'
+// export { version };
 
 
 // export { default as returnstr } from "./returnStr";
@@ -28,3 +28,7 @@ export {
   gbkToUtf8,
   padInt
 } from "./modules";
+
+// export {
+//   phoneEncry
+// } from './modules'

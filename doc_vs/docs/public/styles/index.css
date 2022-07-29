@@ -1,0 +1,17 @@
+#app .link-text {
+  white-space: pre-line;
+  font-size: 10px;
+  display: block;
+  /* zoom: 0.8; */
+}
+#app .link-text:first-line {
+  font-size: 14px;
+  /* font-size: 17.5px; */
+}
+
+#app .custom-block-title {
+  display: none;
+}
+#app .custom-block {
+  padding: 0 16px;
+}

@@ -21,6 +21,7 @@
     "dev": "vite",
     "build": "vite build && tsc",
     "doc": "typedoc --options ./typedoc.json",
+    "doc:json": "typedoc --json create_docs_md/data.json && node ./create_docs_md/index.mjs",
     "preview": "vite preview"
   },
   "keywords": [
