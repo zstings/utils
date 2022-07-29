@@ -1,7 +1,8 @@
 module.exports = {
-  title: 'tings-ut',
+  title: 'tings-utils',
+  base: './',
   head: [
-    ['link', { rel: 'stylesheet', href: '/styles/index.css' }]
+    ['link', { rel: 'stylesheet', href: './styles/index.css' }]
   ],
   markdown: {
     theme: 'material-palenight',
