@@ -1,8 +1,11 @@
+import em from './menu'
 module.exports = {
   title: 'tings-utils',
-  base: './',
+  description: 'Just playing around.',
+  base: '/tings-utils/',
+  outDir: '../../docs',
   head: [
-    ['link', { rel: 'stylesheet', href: './styles/index.css' }]
+    ['link', { rel: 'stylesheet', href: '/tings-utils/styles/index.css' }]
   ],
   markdown: {
     theme: 'material-palenight',
@@ -17,11 +20,7 @@ module.exports = {
     sidebar: [
       {
         text: '函数列表',
-        items: [
-          { text: 'isArray\n判断是否为数组', link: '/isArray' },
-          { text: 'isDate\n判断是否为时间', link: '/isDate' },
-          { text: 'downloadFile\n下载文件', link: '/downloadFile' },
-        ]
+        items: em
       }
     ],
     docFooter: {

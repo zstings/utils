@@ -15,3 +15,13 @@
 #app .custom-block {
   padding: 0 16px;
 }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #c1c1c1;
+}
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  background-color: #fafafa;
+}

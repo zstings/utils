@@ -38,6 +38,7 @@ function returnTags(tag) {
 
 
 let a = ''
+let menu = []
 data.children.forEach(item => {
   a = ''
   const signatures = item.signatures?.[0] || []
@@ -81,7 +82,13 @@ data.children.forEach(item => {
       }
     })
   }
+  menu.push({
+    text: `${signatures?.name}\n${signatures?.comment?.summary?.[0]?.text}`, link: `/${signatures?.name}`
+  })
   // 写入
   fs.writeFileSync(`./doc_vs/docs/${signatures?.name}.md`, a)
 })
 
+console.log('export default \n' + JSON.stringify(menu))
+
+fs.writeFileSync(`./doc_vs/docs/.vitepress/menu.js`, 'export default \n' + JSON.stringify(menu))
