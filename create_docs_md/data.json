@@ -231,11 +231,11 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "符合 RFC4122 版本 4 的 UUID。\n"
+										"text": "符合 RFC4122 版本 4 的 UUID。\r\n"
 									},
 									{
 										"kind": "code",
-										"text": "```ts\ngetUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'\n```"
+										"text": "```ts\r\ngetUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'\r\n```"
 									}
 								]
 							}
@@ -274,11 +274,11 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。\n"
+										"text": "支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。\r\n"
 									},
 									{
 										"kind": "code",
-										"text": "```ts\ngetUrlParam('id') => 'a' // window.location: https://a.b.com/?id=a\ngetUrlParam('id', 'https://a.b.com/?id=b') => 'b'\ngetUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'\n```"
+										"text": "```ts\r\ngetUrlParam('id') => 'a' // window.location: https://a.b.com/?id=a\r\ngetUrlParam('id', 'https://a.b.com/?id=b') => 'b'\r\ngetUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'\r\n```"
 									}
 								]
 							}
@@ -1217,7 +1217,7 @@
 								"content": [
 									{
 										"kind": "code",
-										"text": "```ts\npadInt(1) => '01'\npadInt(12) => '12'\npadInt(12, 3) => '012'\n```"
+										"text": "```ts\r\npadInt(1) => '01'\r\npadInt(12) => '12'\r\npadInt(12, 3) => '012'\r\n```"
 									}
 								]
 							}
@@ -1319,47 +1319,11 @@
 								]
 							},
 							{
-								"tag": "@throws",
-								"content": [
-									{
-										"kind": "text",
-										"text": "异常 手机号格式不正确1"
-									}
-								]
-							},
-							{
-								"tag": "@author",
-								"content": [
-									{
-										"kind": "text",
-										"text": "tings"
-									}
-								]
-							},
-							{
-								"tag": "@author",
-								"content": [
-									{
-										"kind": "text",
-										"text": "zt"
-									}
-								]
-							},
-							{
-								"tag": "@version",
-								"content": [
-									{
-										"kind": "text",
-										"text": "1.0"
-									}
-								]
-							},
-							{
 								"tag": "@example",
 								"content": [
 									{
 										"kind": "code",
-										"text": "```ts\nphoneEncrypt(13300001111) => '133****1111'\nphoneEncrypt('13300001111') => '133****1111'\nphoneEncrypt('1330000') => throw '手机号格式不正确'\n```"
+										"text": "```ts\r\nphoneEncrypt(13300001111) => '133****1111'\r\nphoneEncrypt('13300001111') => '133****1111'\r\nphoneEncrypt('1330000') => throw '手机号格式不正确'\r\n```"
 									}
 								]
 							}

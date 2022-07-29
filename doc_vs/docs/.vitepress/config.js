@@ -1,7 +1,7 @@
 import em from './menu'
 module.exports = {
   title: 'tings-utils',
-  description: 'Just playing around.',
+  description: 'JS & TS utils.',
   base: '/tings-utils/',
   outDir: '../../docs',
   head: [
@@ -12,6 +12,8 @@ module.exports = {
     lineNumbers: true
   },
   themeConfig: {
+    algolia: {
+    },
     // logo: '/logo.svg',
     nav: [
       { text: "home", link: "/" },
