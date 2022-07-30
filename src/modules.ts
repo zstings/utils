@@ -1,5 +1,5 @@
 import  * as TPS from '../types'
-import { isPhone, isLocation } from './common'
+import { isPhone, isLocation, getDataType } from './common'
 
 
 /**
@@ -117,7 +117,101 @@ export const gbkToUtf8: TPS.GbkToUtf8 = (value: ArrayBuffer) => {
  * padInt(12, 3) => '012'
  * ```
  */
- export const padInt:TPS.PadInt = (value, len = 2) => {
+export const padInt:TPS.PadInt = (value, len = 2) => {
   if (isNaN(Number(value))) throw '不是一个合法的数字'
   return Number(value).toString().padStart(len, '0')
+}
+
+
+
+
+/**
+ * 滚动至···
+ * @param option 可选的对象
+ * @param option.rate 滚动的步长，默认 4
+ * @param option.num 滚动的目标值，默认 0
+ * @param option.direction 滚动的反向，默认 'top', 支持 'top' | 'left'
+ * @param option.dom 滚动的目标元素，默认 document.scrollingElement
+ * @param callback 滚动结束的回调函数
+ * @example
+ * 回到顶部
+ * ```ts
+ * scrollTo()
+ * ```
+ * @example
+ * 回到顶部后触发回调
+ * ```ts
+ * scrollTo({}, () => console.log('到了'))
+ * ```
+ * @example
+ * 回到距离顶部的100像素的位置
+ * ```ts
+ * scrollTo({num: 100})
+ * ```
+ * @example
+ * 滚动到元素box的最左端
+ * ```ts
+ * scrollTo({dom: document.querySelector('.box')})
+ * ```
+ * @example
+ * 滚动到元素box距离左端100像素位置
+ * ```ts
+ * scrollTo({num: 100, dom: document.querySelector('.box')})
+ * ```
+ */
+export const scrollTo: TPS.ScrollTo = (option = {}, callback?) => {
+  let animat: number = 0
+  const {rate = 4, num = 0, direction = 'top', dom = document.scrollingElement} = option
+  const directions = {top: 'scrollTop', left: 'scrollLeft'}
+  let scrollVal = (dom as Element)[directions[direction] as 'scrollTop']
+  const animatRunFun = function() {
+    scrollVal = scrollVal + (num - scrollVal) / rate
+    // 临界判断，终止动画
+    if (Math.abs(scrollVal - num) <= 1) {
+      ;(dom as Element)[directions[direction] as 'scrollTop'] = num
+      cancelAnimationFrame(animat)
+      callback && callback()
+      return
+    }
+    ;(dom as Element)[directions[direction] as 'scrollTop'] = scrollVal
+    animat = requestAnimationFrame(animatRunFun)
+  }
+  animatRunFun()
+}
+
+
+
+
+/**
+ * 获取指定格式的时间
+ * @param value 时间对象或者时间戳
+ * @param format 返回格式 默认 YYYY-MM-DD hh:mm:ss
+ * @returns 指定格式的时间
+ * @example
+ * 获取当前的日期
+ * ```ts
+ * getFormatDateTime() // '2022-07-30 12:41:26'
+ * ```
+ * @example
+ * 获取当前时间的年月
+ * ```ts
+ * getFormatDateTime(Date.now(), 'YYYY-MM') // '2022-07'
+ * ```
+ * @example
+ * 获取具体日期的时间格式
+ * ```ts
+ * const date = new Date('2022/10/10 10:00:00')
+ * getFormatDateTime(date, 'YYYY-MM-DD') // '2022-10-10'
+ * ```
+ */
+ export const getFormatDateTime: TPS.GetFormatDateTime = (value = Date.now(), format = 'YYYY-MM-DD hh:mm:ss') => {
+  if (!(getDataType(value) == 'Date' || getDataType(value) == 'Number')) throw 'value参数错误，需要Date | number, 但收到' + getDataType(value)
+  const date = getDataType(value) == 'Number' ? new Date(value) : value as Date
+	const year= padInt(date.getFullYear())
+	const month = padInt(date.getMonth() + 1)
+	const day = padInt(date.getDate())
+	const hour = padInt(date.getHours())
+	const minute = padInt(date.getMinutes())
+	const second = padInt(date.getSeconds())
+  return format.replace('YYYY', year).replace('MM', month).replace('DD', day).replace('hh', hour).replace('mm', minute).replace('ss', second)
 }

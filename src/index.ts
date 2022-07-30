@@ -26,7 +26,9 @@ export {
   downloadFile,
   getUUID,
   gbkToUtf8,
-  padInt
+  padInt,
+  scrollTo,
+  getFormatDateTime
 } from "./modules";
 
 // export {

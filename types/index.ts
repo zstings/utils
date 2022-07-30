@@ -16,4 +16,8 @@ export type GetUUID = () => string
 
 export type GbkToUtf8 = (value: ArrayBuffer) => object | string
 
-export type PadInt = (value: string | number, len: number) => string
+export type PadInt = (value: string | number, len?: number) => string
+
+export type ScrollTo = (option?: {rate?: number, num?: number, direction?: 'top'|'left', dom?: HTMLElement}, callback?: Function) => void
+
+export type GetFormatDateTime = (value?: Date | number, format?: string) => string

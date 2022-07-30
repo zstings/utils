@@ -206,6 +206,139 @@
 			]
 		},
 		{
+			"id": 69,
+			"name": "getFormatDateTime",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 70,
+					"name": "getFormatDateTime",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "获取指定格式的时间"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "指定格式的时间"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "获取当前的日期\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetFormatDateTime() // '2022-07-30 12:41:26'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "获取当前时间的年月\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetFormatDateTime(Date.now(), 'YYYY-MM') // '2022-07'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "获取具体日期的时间格式\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nconst date = new Date('2022/10/10 10:00:00')\r\ngetFormatDateTime(date, 'YYYY-MM-DD') // '2022-10-10'\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 71,
+							"name": "value",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "时间对象或者时间戳"
+									}
+								]
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "number"
+									},
+									{
+										"type": "reference",
+										"name": "Date",
+										"qualifiedName": "Date",
+										"package": ".pnpm"
+									}
+								]
+							}
+						},
+						{
+							"id": 72,
+							"name": "format",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "返回格式 默认 YYYY-MM-DD hh:mm:ss"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			]
+		},
+		{
 			"id": 51,
 			"name": "getUUID",
 			"kind": 64,
@@ -1257,7 +1390,9 @@
 							"name": "len",
 							"kind": 32768,
 							"kindString": "Parameter",
-							"flags": {},
+							"flags": {
+								"isOptional": true
+							},
 							"comment": {
 								"summary": [
 									{
@@ -1365,6 +1500,261 @@
 					}
 				}
 			]
+		},
+		{
+			"id": 60,
+			"name": "scrollTo",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 61,
+					"name": "scrollTo",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "滚动至···"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "回到顶部\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nscrollTo()\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "回到顶部后触发回调\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nscrollTo({}, () => console.log('到了'))\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "回到距离顶部的100像素的位置\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nscrollTo({num: 100})\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "滚动到元素box的最左端\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nscrollTo({dom: document.querySelector('.box')})\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "滚动到元素box距离左端100像素位置\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nscrollTo({num: 100, dom: document.querySelector('.box')})\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 62,
+							"name": "option",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "可选的对象"
+									}
+								]
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 63,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 66,
+											"name": "direction",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "滚动的反向，默认 'top', 支持 'top' | 'left'"
+													}
+												]
+											},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "literal",
+														"value": "top"
+													},
+													{
+														"type": "literal",
+														"value": "left"
+													}
+												]
+											}
+										},
+										{
+											"id": 67,
+											"name": "dom",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "滚动的目标元素，默认 document.scrollingElement"
+													}
+												]
+											},
+											"type": {
+												"type": "reference",
+												"name": "HTMLElement",
+												"qualifiedName": "HTMLElement",
+												"package": ".pnpm"
+											}
+										},
+										{
+											"id": 65,
+											"name": "num",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "滚动的目标值，默认 0"
+													}
+												]
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 64,
+											"name": "rate",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "滚动的步长，默认 4"
+													}
+												]
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												66,
+												67,
+												65,
+												64
+											]
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 68,
+							"name": "callback",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "滚动结束的回调函数"
+									}
+								]
+							},
+							"type": {
+								"type": "reference",
+								"name": "Function",
+								"qualifiedName": "Function",
+								"package": ".pnpm"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "void"
+					}
+				}
+			]
 		}
 	],
 	"groups": [
@@ -1374,6 +1764,7 @@
 				47,
 				53,
 				7,
+				69,
 				51,
 				43,
 				1,
@@ -1389,7 +1780,8 @@
 				31,
 				34,
 				56,
-				40
+				40,
+				60
 			]
 		}
 	]
