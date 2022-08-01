@@ -3,6 +3,7 @@ import { GetUUID } from '@types'
 
 /**
  * 获取uuid
+ * @returns uuid
  * @example
  * 符合 RFC4122 版本 4 的 UUID。
  * ```ts

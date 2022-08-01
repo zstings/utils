@@ -40,14 +40,23 @@ function parameters(params, gk) {
   params.forEach(item => {
       let type = null
       if (item.type.type == 'reflection') type = '映射'
-      if (item.type.type == 'union') type = item.type.types.map(res => res.name).join(' | ')
-      if (item.type.type == 'intrinsic') type = item.type.name
+      if (item.type.type == 'union') type = item.type.types.map(res => (res.name || res.value) + '').join(' | ')
+      if (['intrinsic', 'reference'].includes(item.type.type)) type = item.type.name
       let ms = item?.comment?.summary?.[0]?.text
       const name = item.flags.isOptional ? `${item.name}?` : item.name
       str += `${gk || ''}- ${name} \`${type}\` ${ms} \n`
       
       if (item.type.type == 'reflection') parameters(item.type.declaration.children, '\t')
   })
+}
+
+function returnsTypes(types) {
+  if (!types) return undefined
+  let type = null
+  if (types.type == 'reflection') type = '映射'
+  if (types.type == 'union') type = types.types.map(res => (res.name || res.value) + '').join(' | ')
+  if (['intrinsic', 'reference'].includes(types.type)) type = types.name
+  return type
 }
 
 
@@ -77,7 +86,7 @@ data.children.forEach(item => {
     }, [])
     narr.forEach(ite => {
       str += `#### ${returnTags(ite.tag)} \n`
-      if (ite.tag == '@returns') str += `- \`${signatures?.type?.name}\` \n`
+      if (ite.tag == '@returns' && returnsTypes(signatures?.type)) str += `- \`${returnsTypes(signatures?.type)}\` \n`
       const ts = ite.tag == '@returns' ? 'tip' : ite.tag == '@throws' ? 'danger' : 'warning'
       if (ite.content[0].text && ite.tag != '@example') {
         ite.content.forEach(item => {
@@ -86,7 +95,7 @@ data.children.forEach(item => {
       }
       if (ite.content[0].text && ite.tag == '@example') {
         ite.content.forEach(item => {
-          str += `${item.text}\n`
+          str += `${item.text.replace(/\n/g, '\n\n') }\n`
         })
       }
     })

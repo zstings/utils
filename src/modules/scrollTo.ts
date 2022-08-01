@@ -6,7 +6,7 @@ import {ScrollTo} from '@types'
  * @param option 可选的对象
  * @param option.rate 滚动的步长，默认 4
  * @param option.num 滚动的目标值，默认 0
- * @param option.direction 滚动的反向，默认 'top', 支持 'top' | 'left'
+ * @param option.direction 滚动的方向，默认 'top', 支持 'top' | 'left'
  * @param option.dom 滚动的目标元素，默认 document.scrollingElement
  * @param callback 滚动结束的回调函数
  * @example

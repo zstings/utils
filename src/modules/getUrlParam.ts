@@ -6,6 +6,7 @@ import { isLocation } from '@/common'
  * 获取url上的参数
  * @param name 参数名，必填
  * @param url url地址，为空时是window.location， 非必填
+ * @returns 符合的值或者null
  * @example
  * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
  * 不传值时，默认从window.location中取值

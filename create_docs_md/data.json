@@ -25,6 +25,17 @@
 								"kind": "text",
 								"text": "文件下载"
 							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nconst res = await fetch('https://a.b.com/').then(res => res.blob())\r\ndownloadFile('a.jpg', res)\r\n```"
+									}
+								]
+							}
 						]
 					},
 					"parameters": [
@@ -94,6 +105,17 @@
 							{
 								"kind": "text",
 								"text": "gbk 转 utf-8"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "可以被JSON.parse转化时返回js对象，否则返回字符串"
+									}
+								]
 							}
 						]
 					},
@@ -360,6 +382,15 @@
 						],
 						"blockTags": [
 							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "uuid"
+									}
+								]
+							},
+							{
 								"tag": "@example",
 								"content": [
 									{
@@ -403,15 +434,50 @@
 						],
 						"blockTags": [
 							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "符合的值或者null"
+									}
+								]
+							},
+							{
 								"tag": "@example",
 								"content": [
 									{
 										"kind": "text",
-										"text": "支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。\r\n"
+										"text": "支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。\r\n不传值时，默认从window.location中取值\r\n"
 									},
 									{
 										"kind": "code",
-										"text": "```ts\r\ngetUrlParam('id') => 'a' // window.location: https://a.b.com/?id=a\r\ngetUrlParam('id', 'https://a.b.com/?id=b') => 'b'\r\ngetUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'\r\n```"
+										"text": "```ts\r\ngetUrlParam('id') => 'a' // window.location: https://a.b.com/?id=a\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "从第二个参数的url上取值\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetUrlParam('id', 'https://a.b.com/?id=b') => 'b'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "在第二个参数的url上优先从search中提取值。\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'\r\n```"
 									}
 								]
 							}
@@ -1350,7 +1416,25 @@
 								"content": [
 									{
 										"kind": "code",
-										"text": "```ts\r\npadInt(1) => '01'\r\npadInt(12) => '12'\r\npadInt(12, 3) => '012'\r\n```"
+										"text": "```ts\r\npadInt(1) => '01'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\npadInt(12) => '12'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\npadInt(12, 3) => '012'\r\n```"
 									}
 								]
 							}
@@ -1458,7 +1542,25 @@
 								"content": [
 									{
 										"kind": "code",
-										"text": "```ts\r\nphoneEncrypt(13300001111) => '133****1111'\r\nphoneEncrypt('13300001111') => '133****1111'\r\nphoneEncrypt('1330000') => throw '手机号格式不正确'\r\n```"
+										"text": "```ts\r\nphoneEncrypt(13300001111) => '133****1111'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nphoneEncrypt('13300001111') => '133****1111'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nphoneEncrypt('1330000') => throw '手机号格式不正确'\r\n```"
 									}
 								]
 							}
@@ -1627,7 +1729,7 @@
 												"summary": [
 													{
 														"kind": "text",
-														"text": "滚动的反向，默认 'top', 支持 'top' | 'left'"
+														"text": "滚动的方向，默认 'top', 支持 'top' | 'left'"
 													}
 												]
 											},
