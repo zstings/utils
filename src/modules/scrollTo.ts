@@ -1,5 +1,4 @@
-import {ScrollTo} from '@types'
-
+import { ScrollTo } from '@types'
 
 /**
  * 滚动至···
@@ -35,12 +34,12 @@ import {ScrollTo} from '@types'
  * scrollTo({num: 100, dom: document.querySelector('.box')})
  * ```
  */
- export const scrollTo: ScrollTo = (option = {}, callback?) => {
-  let animat: number = 0
-  const {rate = 4, num = 0, direction = 'top', dom = document.scrollingElement} = option
-  const directions = {top: 'scrollTop', left: 'scrollLeft'}
+export const scrollTo: ScrollTo = (option = {}, callback?) => {
+  let animat = 0
+  const { rate = 4, num = 0, direction = 'top', dom = document.scrollingElement } = option
+  const directions = { top: 'scrollTop', left: 'scrollLeft' }
   let scrollVal = (dom as Element)[directions[direction] as 'scrollTop']
-  const animatRunFun = function() {
+  const animatRunFun = function () {
     scrollVal = scrollVal + (num - scrollVal) / rate
     // 临界判断，终止动画
     if (Math.abs(scrollVal - num) <= 1) {

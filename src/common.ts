@@ -1,4 +1,4 @@
-import  * as TPS from '../types'
+import * as TPS from '../types'
 
 /**
  * 获取数据类型
@@ -39,8 +39,6 @@ export const getDataType: TPS.GetDataType = function (value) {
   return Object.prototype.toString.call(value).slice(8, -1)
 }
 
-
-
 /**
  * 判断是否为手机号
  * @param value 任意值
@@ -60,8 +58,6 @@ export const isPhone: TPS.IsPhone = function (value) {
   return /^1[3-9][\d]{9}$/.test(value.toString())
 }
 
-
-
 /**
  * 判断是否为数组
  * @param value 任意值
@@ -78,8 +74,6 @@ export const isPhone: TPS.IsPhone = function (value) {
  * ```
  */
 export const isArray: TPS.ToIsTypes = value => getDataType(value) === 'Array'
-
-
 
 /**
  * 判断是否为对象
@@ -98,8 +92,6 @@ export const isArray: TPS.ToIsTypes = value => getDataType(value) === 'Array'
  */
 export const isObject: TPS.ToIsTypes = value => value !== null && getDataType(value) === 'Object'
 
-
-
 /**
  * 判断是否为Location
  * @param value 任意值
@@ -117,8 +109,6 @@ export const isObject: TPS.ToIsTypes = value => value !== null && getDataType(va
  */
 export const isLocation: TPS.ToIsTypes = value => getDataType(value) === 'Location'
 
-
-
 /**
  * 判断是否为Map
  * @param value 任意值
@@ -134,9 +124,7 @@ export const isLocation: TPS.ToIsTypes = value => getDataType(value) === 'Locati
  * isMap(123) => false
  * ```
  */
-export const isMap:TPS.ToIsTypes = value => getDataType(value) === 'Map'
-
-
+export const isMap: TPS.ToIsTypes = value => getDataType(value) === 'Map'
 
 /**
  * 判断是否为Set
@@ -153,9 +141,7 @@ export const isMap:TPS.ToIsTypes = value => getDataType(value) === 'Map'
  * isSet(123) => false
  * ```
  */
-export const isSet:TPS.ToIsTypes = value => getDataType(value) === 'Set'
-
-
+export const isSet: TPS.ToIsTypes = value => getDataType(value) === 'Set'
 
 /**
  * 判断是否为Date
@@ -172,9 +158,7 @@ export const isSet:TPS.ToIsTypes = value => getDataType(value) === 'Set'
  * isDate(123) => false
  * ```
  */
-export const isDate:TPS.ToIsTypes = value => getDataType(value) === 'Date'
-
-
+export const isDate: TPS.ToIsTypes = value => getDataType(value) === 'Date'
 
 /**
  * 判断是否为Function
@@ -191,9 +175,7 @@ export const isDate:TPS.ToIsTypes = value => getDataType(value) === 'Date'
  * isFunction(123) => false
  * ```
  */
-export const isFunction:TPS.ToIsTypes = value => getDataType(value) === 'Function'
-
-
+export const isFunction: TPS.ToIsTypes = value => getDataType(value) === 'Function'
 
 /**
  * 判断是否为字符串
@@ -210,9 +192,7 @@ export const isFunction:TPS.ToIsTypes = value => getDataType(value) === 'Functio
  * isString(123) => false
  * ```
  */
-export const isString:TPS.ToIsTypes = value => getDataType(value) === 'String'
-
-
+export const isString: TPS.ToIsTypes = value => getDataType(value) === 'String'
 
 /**
  * 判断是否为Symbol
@@ -229,9 +209,7 @@ export const isString:TPS.ToIsTypes = value => getDataType(value) === 'String'
  * isSymbol(Symbol) => false
  * ```
  */
-export const isSymbol:TPS.ToIsTypes = value => getDataType(value) === 'Symbol'
-
-
+export const isSymbol: TPS.ToIsTypes = value => getDataType(value) === 'Symbol'
 
 /**
  * 判断是否为数字
@@ -248,9 +226,7 @@ export const isSymbol:TPS.ToIsTypes = value => getDataType(value) === 'Symbol'
  * isNumber('123') => false
  * ```
  */
-export const isNumber:TPS.ToIsTypes = value => getDataType(value) === 'Number'
-
-
+export const isNumber: TPS.ToIsTypes = value => getDataType(value) === 'Number'
 
 /**
  * 判断是否为Promise
@@ -272,6 +248,6 @@ export const isNumber:TPS.ToIsTypes = value => getDataType(value) === 'Number'
  * isPromise(Promise) => false
  * ```
  */
-export const isPromise:TPS.ToIsTypes = value => {
+export const isPromise: TPS.ToIsTypes = value => {
   return getDataType(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch)
 }

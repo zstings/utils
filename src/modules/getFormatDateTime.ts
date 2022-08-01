@@ -1,7 +1,6 @@
-import {GetFormatDateTime} from '@types'
+import { GetFormatDateTime } from '@types'
 import { getDataType } from '@/common'
 import { padInt } from '@/modules/padInt'
-
 
 /**
  * 获取指定格式的时间
@@ -25,14 +24,21 @@ import { padInt } from '@/modules/padInt'
  * getFormatDateTime(date, 'YYYY-MM-DD') // '2022-10-10'
  * ```
  */
- export const getFormatDateTime: GetFormatDateTime = (value = Date.now(), format = 'YYYY-MM-DD hh:mm:ss') => {
-  if (!(getDataType(value) == 'Date' || getDataType(value) == 'Number')) throw 'value参数错误，需要Date | number, 但收到' + getDataType(value)
-  const date = getDataType(value) == 'Number' ? new Date(value) : value as Date
-	const year= padInt(date.getFullYear())
-	const month = padInt(date.getMonth() + 1)
-	const day = padInt(date.getDate())
-	const hour = padInt(date.getHours())
-	const minute = padInt(date.getMinutes())
-	const second = padInt(date.getSeconds())
-  return format.replace('YYYY', year).replace('MM', month).replace('DD', day).replace('hh', hour).replace('mm', minute).replace('ss', second)
+export const getFormatDateTime: GetFormatDateTime = (value = Date.now(), format = 'YYYY-MM-DD hh:mm:ss') => {
+  if (!(getDataType(value) == 'Date' || getDataType(value) == 'Number'))
+    throw 'value参数错误，需要Date | number, 但收到' + getDataType(value)
+  const date = getDataType(value) == 'Number' ? new Date(value) : (value as Date)
+  const year = padInt(date.getFullYear())
+  const month = padInt(date.getMonth() + 1)
+  const day = padInt(date.getDate())
+  const hour = padInt(date.getHours())
+  const minute = padInt(date.getMinutes())
+  const second = padInt(date.getSeconds())
+  return format
+    .replace('YYYY', year)
+    .replace('MM', month)
+    .replace('DD', day)
+    .replace('hh', hour)
+    .replace('mm', minute)
+    .replace('ss', second)
 }

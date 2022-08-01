@@ -1,6 +1,5 @@
-import  { PhoneEncrypt } from '@types'
+import { PhoneEncrypt } from '@types'
 import { isPhone } from '@/common'
-
 
 /**
  * 对手机号进行加密处理
@@ -20,8 +19,8 @@ import { isPhone } from '@/common'
  * phoneEncrypt('1330000') => throw '手机号格式不正确'
  * ```
  */
-export const phoneEncrypt: PhoneEncrypt = (value) => {
-  if (!isPhone(value)) throw '手机号格式不正确' 
+export const phoneEncrypt: PhoneEncrypt = value => {
+  if (!isPhone(value)) throw '手机号格式不正确'
   if (typeof value === 'number') value = value.toString()
   return value.replace(value.substring(3, 7), '****')
 }

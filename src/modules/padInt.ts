@@ -1,6 +1,5 @@
 import { PadInt } from '@types'
 
-
 /**
  * 数字补0
  * @param value 数字或者字符串的数字
@@ -19,7 +18,7 @@ import { PadInt } from '@types'
  * padInt(12, 3) => '012'
  * ```
  */
- export const padInt: PadInt = (value, len = 2) => {
+export const padInt: PadInt = (value, len = 2) => {
   if (isNaN(Number(value))) throw '不是一个合法的数字'
   return Number(value).toString().padStart(len, '0')
 }

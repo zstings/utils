@@ -1,6 +1,5 @@
 import { GbkToUtf8 } from '@types'
 
-
 /**
  * gbk 转 utf-8
  * @param value ArrayBuffer
@@ -11,10 +10,10 @@ import { GbkToUtf8 } from '@types'
  * gbkToUtf8(res)
  * ```
  */
- export const gbkToUtf8: GbkToUtf8 = (value: ArrayBuffer) => {
+export const gbkToUtf8: GbkToUtf8 = (value: ArrayBuffer) => {
   try {
     return JSON.parse(new TextDecoder('utf-8').decode(value))
-  } catch(err) {
+  } catch (err) {
     return new TextDecoder('utf-8').decode(value)
   }
 }

@@ -1,6 +1,5 @@
 import { DownloadFile } from '@types'
 
-
 /**
  * 文件下载
  * @param name 文件名
@@ -11,7 +10,7 @@ import { DownloadFile } from '@types'
  * downloadFile('a.jpg', res)
  * ```
  */
- export const downloadFile: DownloadFile = (name, blob) => {
+export const downloadFile: DownloadFile = (name, blob) => {
   const a = document.createElement('a')
   const url = window.URL.createObjectURL(blob)
   // 默认隐藏

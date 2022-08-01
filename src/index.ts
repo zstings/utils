@@ -1,11 +1,10 @@
 // import { version } from '../package.json'
 // export { version };
 
-
 // export { default as returnstr } from "./returnStr";
-export { 
-  isArray, 
-  isPhone, 
+export {
+  isArray,
+  isPhone,
   getDataType,
   isLocation,
   isObject,
@@ -17,10 +16,9 @@ export {
   isString,
   isSymbol,
   isNumber
-} from "./common";
+} from './common'
 
-
-export { 
+export {
   phoneEncrypt,
   getUrlParam,
   downloadFile,
@@ -29,7 +27,7 @@ export {
   padInt,
   scrollTo,
   getFormatDateTime
-} from "./modules";
+} from './modules'
 
 // export {
 //   phoneEncry

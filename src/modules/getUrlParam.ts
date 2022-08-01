@@ -1,6 +1,5 @@
-import  { GetUrlParam } from '@types'
+import { GetUrlParam } from '@types'
 import { isLocation } from '@/common'
-
 
 /**
  * 获取url上的参数
@@ -24,13 +23,13 @@ import { isLocation } from '@/common'
  * getUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'
  * ```
  */
- export const getUrlParam: GetUrlParam = (name, url = window.location) => {
+export const getUrlParam: GetUrlParam = (name, url = window.location) => {
   const urlPar = isLocation(url) ? window.location : new URL(url as string)
   // 构造一个含有目标参数的正则表达式对象
-  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
   // 匹配目标参数
-  const r = urlPar.search.substring(1).match(reg);
-  const h = urlPar.hash.split('?')[1]?.match(reg);
+  const r = urlPar.search.substring(1).match(reg)
+  const h = urlPar.hash.split('?')[1]?.match(reg)
   // 返回参数
   if (r != null) return decodeURIComponent(r[2])
   if (h != null) return decodeURIComponent(h[2])

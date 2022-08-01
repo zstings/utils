@@ -21,3 +21,5 @@ export type PadInt = (value: string | number, len?: number) => string
 export type ScrollTo = (option?: {rate?: number, num?: number, direction?: 'top'|'left', dom?: HTMLElement}, callback?: Function) => void
 
 export type GetFormatDateTime = (value?: Date | number, format?: string) => string
+
+export type GetTimeStamp = (value?: Date | number | string) => number
