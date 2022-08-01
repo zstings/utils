@@ -4,6 +4,7 @@
   "license": "MIT",
   "author": "tings",
   "files": [ "dist" ],
+  "type": "module",
   "main": "./dist/tings-utils.umd.cjs",
   "module": "./dist/tings-utils.js",
   "types": "./dist/types/src/index.d.ts",

@@ -26,7 +26,8 @@ export {
   gbkToUtf8,
   padInt,
   scrollTo,
-  getFormatDateTime
+  getFormatDateTime,
+  getTimeStamp
 } from './modules'
 
 // export {

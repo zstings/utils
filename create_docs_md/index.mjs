@@ -1,6 +1,6 @@
-import url from "url"
-import path from "path"
-import { createRequire } from "module"
+import url from 'url'
+import path from 'path'
+import { createRequire } from 'module'
 import fs from 'fs'
 
 const data = loadJSON(getdirname() + '/data.json')
@@ -9,15 +9,13 @@ const data = loadJSON(getdirname() + '/data.json')
 //   fs.mkdirSync(getdirname() + '/md')
 // }
 
-
-
 function loadJSON(filepath) {
   const reg = /\S+.json$/g
   if (reg.test(filepath)) {
     const require = createRequire(import.meta.url)
     return require(filepath)
   } else {
-    throw new Error("loadJSON 的参数必须是一个json文件")
+    throw new Error('loadJSON 的参数必须是一个json文件')
   }
 }
 
@@ -31,22 +29,27 @@ function returnTags(tag) {
     '@throws': '异常',
     '@author': '作者',
     '@version': '版本',
-    '@example': '实例',
+    '@example': '实例'
   }
   return tags[tag]
 }
 
 function parameters(params, gk) {
   params.forEach(item => {
-      let type = null
-      if (item.type.type == 'reflection') type = '映射'
-      if (item.type.type == 'union') type = item.type.types.map(res => (res.name || res.value) + '').join(' | ')
-      if (['intrinsic', 'reference'].includes(item.type.type)) type = item.type.name
-      let ms = item?.comment?.summary?.[0]?.text
-      const name = item.flags.isOptional ? `${item.name}?` : item.name
-      str += `${gk || ''}- ${name} \`${type}\` ${ms} \n`
-      
-      if (item.type.type == 'reflection') parameters(item.type.declaration.children, '\t')
+    let type = null
+    if (item.type.type == 'reflection') {
+      type = item.type.declaration.signatures ? `() => ${item.type.declaration.signatures[0].type.name}` : '映射'
+    }
+    if (item.type.type == 'union') type = item.type.types.map(res => (res.name || res.value) + '').join(' | ')
+    if (['intrinsic', 'reference'].includes(item.type.type)) type = item.type.name
+    let ms = item?.comment?.summary?.[0]?.text
+    const name = item.flags.isOptional ? `${item.name}?` : item.name
+    str += `${gk || ''}- ${name} \`${type}\` ${ms} \n`
+
+    if (item.type.type == 'reflection' && item.type.declaration.children) {
+      // if (item.type.declaration.name == '__type')
+      parameters(item.type.declaration.children, '\t')
+    }
   })
 }
 
@@ -58,7 +61,6 @@ function returnsTypes(types) {
   if (['intrinsic', 'reference'].includes(types.type)) type = types.name
   return type
 }
-
 
 let str = ''
 let menu = []
@@ -102,7 +104,8 @@ data.children.forEach(item => {
     })
   }
   menu.push({
-    text: `${signatures?.name}\n${signatures?.comment?.summary?.[0]?.text}`, link: `/${signatures?.name}`
+    text: `${signatures?.name}\n${signatures?.comment?.summary?.[0]?.text}`,
+    link: `/${signatures?.name}`
   })
   // 写入
   fs.writeFileSync(`./doc_vs/docs/${signatures?.name}.md`, str)

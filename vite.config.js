@@ -1,22 +1,22 @@
 import { defineConfig } from 'vite'
-import {resolve} from 'path'
-import {name} from './package.json'
+import { resolve } from 'path'
+import { name } from './package.json'
 
 export default defineConfig({
   plugins: [],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '@types': resolve(__dirname, 'types'),
+      '@types': resolve(__dirname, 'types')
     }
   },
-  build:{
+  build: {
     assetsDir: '',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'tingsUtils',
       format: ['es', 'cjs'],
       fileName: name
-    },
+    }
   }
 })

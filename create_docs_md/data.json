@@ -306,14 +306,14 @@
 			]
 		},
 		{
-			"id": 69,
+			"id": 71,
 			"name": "getFormatDateTime",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 70,
+					"id": 72,
 					"name": "getFormatDateTime",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -378,7 +378,7 @@
 					},
 					"parameters": [
 						{
-							"id": 71,
+							"id": 73,
 							"name": "value",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -410,7 +410,7 @@
 							}
 						},
 						{
-							"id": 72,
+							"id": 74,
 							"name": "format",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -434,6 +434,179 @@
 					"type": {
 						"type": "intrinsic",
 						"name": "string"
+					}
+				}
+			]
+		},
+		{
+			"id": 75,
+			"name": "getTimeStamp",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 76,
+					"name": "getTimeStamp",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "获取时间戳"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "时间戳"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "Invalid Date 传入值无法转为Date时触发"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "参数错误 传入值不是字符串或者Date时触发"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "获取当前的时间戳\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetTimeStamp() // 1659334598129\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "获取当前的时间戳，单位秒(s)\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetTimeStamp('', 's') // 1659334598129\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "获取 2022-10-12 的时间戳\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetTimeStamp('2022-10-12') // 1665504000000\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "获取 2022-10-12 的时间戳, 以秒返回\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetTimeStamp('2022-10-12', 's') // 1665504000\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 77,
+							"name": "value",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "时间对象或者格式化后的时间"
+									}
+								]
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "reference",
+										"name": "Date",
+										"qualifiedName": "Date",
+										"package": ".pnpm"
+									}
+								]
+							}
+						},
+						{
+							"id": 78,
+							"name": "unit",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "返回格式,支持毫秒或者秒,默认毫秒"
+									}
+								]
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "literal",
+										"value": "ms"
+									},
+									{
+										"type": "literal",
+										"value": "s"
+									}
+								]
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
 					}
 				}
 			]
@@ -2135,10 +2308,27 @@
 								]
 							},
 							"type": {
-								"type": "reference",
-								"name": "Function",
-								"qualifiedName": "Function",
-								"package": ".pnpm"
+								"type": "reflection",
+								"declaration": {
+									"id": 69,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"signatures": [
+										{
+											"id": 70,
+											"name": "__type",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									]
+								}
 							}
 						}
 					],
@@ -2157,7 +2347,8 @@
 				47,
 				53,
 				7,
-				69,
+				71,
+				75,
 				51,
 				43,
 				1,

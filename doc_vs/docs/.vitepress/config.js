@@ -21,6 +21,15 @@ module.exports = {
     ],
     sidebar: [
       {
+        text: "开始",
+        items: [
+          {
+            text: '快速开始',
+            link: '/start'
+          }
+        ]
+      },
+      {
         text: '函数列表',
         items: em
       }
