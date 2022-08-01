@@ -15,7 +15,8 @@ export {
   isSet,
   isString,
   isSymbol,
-  isNumber
+  isNumber,
+  isBoolean
 } from './common'
 
 export {
@@ -27,7 +28,8 @@ export {
   padInt,
   scrollTo,
   getFormatDateTime,
-  getTimeStamp
+  getTimeStamp,
+  debounce
 } from './modules'
 
 // export {

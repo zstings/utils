@@ -7,14 +7,230 @@
 	"originalName": "",
 	"children": [
 		{
-			"id": 47,
+			"id": 82,
+			"name": "debounce",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 83,
+					"name": "debounce",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "防抖"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "awit不是number awit存在但不是数字时触发"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "immediate不是boolean immediate存在但不是boolean时触发"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... })\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "自定义时间\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... }, {awit: 300})\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "立即执行\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... }, {immediate: true})\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "在vue2中使用\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetlist: debounce(function () { //... })\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 84,
+							"name": "func",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "函数"
+									}
+								]
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 85,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"signatures": [
+										{
+											"id": 86,
+											"name": "__type",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									]
+								}
+							}
+						},
+						{
+							"id": 87,
+							"name": "option",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "可选的对象"
+									}
+								]
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 88,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 89,
+											"name": "awit",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "时间 默认 500毫秒"
+													}
+												]
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 90,
+											"name": "immediate",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "是否立即执行，默认 false"
+													}
+												]
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"children": [
+												89,
+												90
+											]
+										}
+									]
+								}
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "void"
+					}
+				}
+			]
+		},
+		{
+			"id": 50,
 			"name": "downloadFile",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 48,
+					"id": 51,
 					"name": "downloadFile",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -40,7 +256,7 @@
 					},
 					"parameters": [
 						{
-							"id": 49,
+							"id": 52,
 							"name": "name",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -59,7 +275,7 @@
 							}
 						},
 						{
-							"id": 50,
+							"id": 53,
 							"name": "blob",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -88,14 +304,14 @@
 			]
 		},
 		{
-			"id": 53,
+			"id": 56,
 			"name": "gbkToUtf8",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 54,
+					"id": 57,
 					"name": "gbkToUtf8",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -130,7 +346,7 @@
 					},
 					"parameters": [
 						{
-							"id": 55,
+							"id": 58,
 							"name": "value",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -306,14 +522,14 @@
 			]
 		},
 		{
-			"id": 71,
+			"id": 74,
 			"name": "getFormatDateTime",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 72,
+					"id": 75,
 					"name": "getFormatDateTime",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -378,7 +594,7 @@
 					},
 					"parameters": [
 						{
-							"id": 73,
+							"id": 76,
 							"name": "value",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -410,7 +626,7 @@
 							}
 						},
 						{
-							"id": 74,
+							"id": 77,
 							"name": "format",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -439,14 +655,14 @@
 			]
 		},
 		{
-			"id": 75,
+			"id": 78,
 			"name": "getTimeStamp",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 76,
+					"id": 79,
 					"name": "getTimeStamp",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -542,7 +758,7 @@
 					},
 					"parameters": [
 						{
-							"id": 77,
+							"id": 80,
 							"name": "value",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -574,7 +790,7 @@
 							}
 						},
 						{
-							"id": 78,
+							"id": 81,
 							"name": "unit",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -612,14 +828,14 @@
 			]
 		},
 		{
-			"id": 51,
+			"id": 54,
 			"name": "getUUID",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 52,
+					"id": 55,
 					"name": "getUUID",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -664,14 +880,14 @@
 			]
 		},
 		{
-			"id": 43,
+			"id": 46,
 			"name": "getUrlParam",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 44,
+					"id": 47,
 					"name": "getUrlParam",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -736,7 +952,7 @@
 					},
 					"parameters": [
 						{
-							"id": 45,
+							"id": 48,
 							"name": "name",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -755,7 +971,7 @@
 							}
 						},
 						{
-							"id": 46,
+							"id": 49,
 							"name": "url",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -864,6 +1080,92 @@
 					"parameters": [
 						{
 							"id": 3,
+							"name": "value",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "任意值"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				}
+			]
+		},
+		{
+			"id": 40,
+			"name": "isBoolean",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 41,
+					"name": "isBoolean",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "判断是否为Boolean"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "true | false"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisBoolean(true) => true\nisBoolean(false) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisBoolean(123) => false\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 42,
 							"name": "value",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -1846,14 +2148,14 @@
 			]
 		},
 		{
-			"id": 56,
+			"id": 59,
 			"name": "padInt",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 57,
+					"id": 60,
 					"name": "padInt",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -1906,7 +2208,7 @@
 					},
 					"parameters": [
 						{
-							"id": 58,
+							"id": 61,
 							"name": "value",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -1934,7 +2236,7 @@
 							}
 						},
 						{
-							"id": 59,
+							"id": 62,
 							"name": "len",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -1963,14 +2265,14 @@
 			]
 		},
 		{
-			"id": 40,
+			"id": 43,
 			"name": "phoneEncrypt",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 41,
+					"id": 44,
 					"name": "phoneEncrypt",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -2032,7 +2334,7 @@
 					},
 					"parameters": [
 						{
-							"id": 42,
+							"id": 45,
 							"name": "value",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -2068,14 +2370,14 @@
 			]
 		},
 		{
-			"id": 60,
+			"id": 63,
 			"name": "scrollTo",
 			"kind": 64,
 			"kindString": "Function",
 			"flags": {},
 			"signatures": [
 				{
-					"id": 61,
+					"id": 64,
 					"name": "scrollTo",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -2157,7 +2459,7 @@
 					},
 					"parameters": [
 						{
-							"id": 62,
+							"id": 65,
 							"name": "option",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -2175,14 +2477,14 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 63,
+									"id": 66,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"children": [
 										{
-											"id": 66,
+											"id": 69,
 											"name": "direction",
 											"kind": 1024,
 											"kindString": "Property",
@@ -2212,7 +2514,7 @@
 											}
 										},
 										{
-											"id": 67,
+											"id": 70,
 											"name": "dom",
 											"kind": 1024,
 											"kindString": "Property",
@@ -2235,7 +2537,7 @@
 											}
 										},
 										{
-											"id": 65,
+											"id": 68,
 											"name": "num",
 											"kind": 1024,
 											"kindString": "Property",
@@ -2256,7 +2558,7 @@
 											}
 										},
 										{
-											"id": 64,
+											"id": 67,
 											"name": "rate",
 											"kind": 1024,
 											"kindString": "Property",
@@ -2281,10 +2583,10 @@
 										{
 											"title": "Properties",
 											"children": [
-												66,
-												67,
-												65,
-												64
+												69,
+												70,
+												68,
+												67
 											]
 										}
 									]
@@ -2292,7 +2594,7 @@
 							}
 						},
 						{
-							"id": 68,
+							"id": 71,
 							"name": "callback",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -2310,14 +2612,14 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 69,
+									"id": 72,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"signatures": [
 										{
-											"id": 70,
+											"id": 73,
 											"name": "__type",
 											"kind": 4096,
 											"kindString": "Call signature",
@@ -2344,14 +2646,16 @@
 		{
 			"title": "Functions",
 			"children": [
-				47,
-				53,
+				82,
+				50,
+				56,
 				7,
-				71,
-				75,
-				51,
-				43,
+				74,
+				78,
+				54,
+				46,
 				1,
+				40,
 				16,
 				19,
 				10,
@@ -2363,9 +2667,9 @@
 				28,
 				31,
 				34,
-				56,
-				40,
-				60
+				59,
+				43,
+				63
 			]
 		}
 	]

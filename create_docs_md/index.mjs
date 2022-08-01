@@ -47,7 +47,6 @@ function parameters(params, gk) {
     str += `${gk || ''}- ${name} \`${type}\` ${ms} \n`
 
     if (item.type.type == 'reflection' && item.type.declaration.children) {
-      // if (item.type.declaration.name == '__type')
       parameters(item.type.declaration.children, '\t')
     }
   })

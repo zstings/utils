@@ -26,3 +26,5 @@ export type ScrollTo = (
 export type GetFormatDateTime = (value?: Date | number, format?: string) => string
 
 export type GetTimeStamp = (value?: Date | string, unit?: 'ms' | 's') => number
+
+export type Debounce = (func: () => void, option?: { awit?: number; immediate?: boolean }) => void
