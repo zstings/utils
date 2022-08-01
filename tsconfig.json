@@ -12,6 +12,11 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*":["src/*"],
+      "@types":["types"]
+    },
     "removeComments": false,
     "emitDeclarationOnly": true,
     "resolveJsonModule": true,

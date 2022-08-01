@@ -4,9 +4,7 @@
   "license": "MIT",
   "author": "tings",
   "type": "module",
-  "files": [
-    "dist"
-  ],
+  "files": [ "dist" ],
   "main": "./dist/tings-utils.umd.cjs",
   "module": "./dist/tings-utils.js",
   "types": "./dist/types/src/index.d.ts",
@@ -25,6 +23,7 @@
     "preview": "vite preview"
   },
   "keywords": [
+    "tings",
     "utils",
     "js-utils",
     "jsutils",
@@ -35,7 +34,8 @@
     "js-tools",
     "jstools",
     "工具函数",
-    "js工具"
+    "js工具",
+    "ts工具"
   ],
   "devDependencies": {
     "typedoc": "^0.23.9",

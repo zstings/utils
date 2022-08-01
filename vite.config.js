@@ -4,6 +4,12 @@ import {name} from './package.json'
 
 export default defineConfig({
   plugins: [],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      '@types': resolve(__dirname, 'types'),
+    }
+  },
   build:{
     assetsDir: '',
     lib: {
