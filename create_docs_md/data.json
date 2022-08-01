@@ -116,6 +116,15 @@
 										"text": "可以被JSON.parse转化时返回js对象，否则返回字符串"
 									}
 								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nconst res = await fetch('https://a.b.com/').then(res => res.arrayBuffer())\r\ngbkToUtf8(res)\r\n```"
+									}
+								]
 							}
 						]
 					},
@@ -184,7 +193,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回str的类型"
+										"text": "返回value的类型"
 									}
 								]
 							},
@@ -192,8 +201,77 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "数字\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\ngetDataType(12) => 'Number'\ngetDataType('12') => 'String'\ngetDataType(true) => 'Boolean'\ngetDataType(functuin(){}) => 'Function'\ngetDataType({}) => 'Object'\ngetDataType([]) => 'Array'\n```"
+										"text": "```ts\ngetDataType(12) => 'Number'\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "字符串\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\ngetDataType('12') => 'String'\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "布尔\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\ngetDataType(true) => 'Boolean'\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "函数\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\ngetDataType(functuin(){}) => 'Function'\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "对象\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\ngetDataType({}) => 'Object'\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "数组\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\ngetDataType([]) => 'Array'\n```"
 									}
 								]
 							}
@@ -578,7 +656,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -586,8 +664,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisArray([]) => true\nisArray({}) => false\n```"
+										"text": "```ts\nisArray([]) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisArray({}) => false\n```"
 									}
 								]
 							}
@@ -647,7 +742,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -655,8 +750,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisDate(new Date()) => true\nisDate(123) => false\n```"
+										"text": "```ts\nisDate(new Date()) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisDate(123) => false\n```"
 									}
 								]
 							}
@@ -716,7 +828,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -724,8 +836,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisFunction(function(){}) => true\nisFunction(123) => false\n```"
+										"text": "```ts\nisFunction(function(){}) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisFunction(123) => false\n```"
 									}
 								]
 							}
@@ -785,7 +914,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -793,8 +922,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisLocation(window.location) => true\nisLocation(123) => false\n```"
+										"text": "```ts\nisLocation(window.location) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisLocation(123) => false\n```"
 									}
 								]
 							}
@@ -854,7 +1000,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -862,8 +1008,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisMap(new Map()) => true\nisMap(123) => false\n```"
+										"text": "```ts\nisMap(new Map()) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisMap(123) => false\n```"
 									}
 								]
 							}
@@ -923,7 +1086,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -931,8 +1094,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisNumber(123) => true\nisNumber('123') => false\n```"
+										"text": "```ts\nisNumber(123) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisNumber('123') => false\n```"
 									}
 								]
 							}
@@ -992,7 +1172,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -1000,8 +1180,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisObject({}) => true\nisObject([]) => false\n```"
+										"text": "```ts\nisObject({}) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisObject([]) => false\n```"
 									}
 								]
 							}
@@ -1061,7 +1258,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -1069,8 +1266,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisPhone(13302101452) => true\nisPhone(1330210152) => false\n```"
+										"text": "```ts\nisPhone(13302101452) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisPhone(1330210152) => false\n```"
 									}
 								]
 							}
@@ -1131,7 +1345,33 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisPromise(new Promise(() => {})) => true\nisPromise(Promise.all([])) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisPromise(Promise) => false\n```"
 									}
 								]
 							},
@@ -1140,7 +1380,7 @@
 								"content": [
 									{
 										"kind": "code",
-										"text": "```ts\nisPromise(new Promise(() => {})) => true\nisPromise(Promise.all([])) => true\nisPromise(Promise) => false\n```"
+										"text": "```ts\nisPromise(Promise) => false\n```"
 									}
 								]
 							}
@@ -1200,7 +1440,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -1208,8 +1448,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisSet(new Set()) => true\nisSet(123) => false\n```"
+										"text": "```ts\nisSet(new Set()) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisSet(123) => false\n```"
 									}
 								]
 							}
@@ -1269,7 +1526,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -1277,8 +1534,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisString('abc') => true\nisString(123) => false\n```"
+										"text": "```ts\nisString('abc') => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisString(123) => false\n```"
 									}
 								]
 							}
@@ -1338,7 +1612,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "返回布尔值"
+										"text": "true | false"
 									}
 								]
 							},
@@ -1346,8 +1620,25 @@
 								"tag": "@example",
 								"content": [
 									{
+										"kind": "text",
+										"text": "验证通过\n"
+									},
+									{
 										"kind": "code",
-										"text": "```ts\nisSymbol(Symbol(1)) => true\nisSymbol(Symbol) => false\n```"
+										"text": "```ts\nisSymbol(Symbol(1)) => true\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "验证失败\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\nisSymbol(Symbol) => false\n```"
 									}
 								]
 							}

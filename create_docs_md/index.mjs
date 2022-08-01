@@ -95,7 +95,8 @@ data.children.forEach(item => {
       }
       if (ite.content[0].text && ite.tag == '@example') {
         ite.content.forEach(item => {
-          str += `${item.text.replace(/\n/g, '\n\n') }\n`
+          const text = item.kind == 'text' ? item.text.replace(/\n/g, '\n\n') : item.text
+          str += `${text}\n`
         })
       }
     })
