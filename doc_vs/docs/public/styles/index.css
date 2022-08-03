@@ -25,3 +25,8 @@
   height: 3px;
   background-color: #fafafa;
 }
+
+li code {
+  font-size: 12px!important;
+  zoom: 0.9;
+}

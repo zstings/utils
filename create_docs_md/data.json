@@ -41,7 +41,16 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "immediate不是boolean immediate存在但不是boolean时触发"
+										"text": "leading不是boolean leading存在但不是boolean时触发"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "trailing不是boolean trailing存在但不是boolean时触发"
 									}
 								]
 							},
@@ -63,7 +72,7 @@
 									},
 									{
 										"kind": "code",
-										"text": "```ts\r\ndebounce(function () { ... }, {awit: 300})\r\n```"
+										"text": "```ts\r\ndebounce(function () { ... }, 300)\r\n```"
 									}
 								]
 							},
@@ -72,11 +81,24 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "立即执行\r\n"
+										"text": "前置边缘执行,函数触发时立即执行一次\r\n"
 									},
 									{
 										"kind": "code",
-										"text": "```ts\r\ndebounce(function () { ... }, {immediate: true})\r\n```"
+										"text": "```ts\r\ndebounce(function () { ... }, 500, {leading: true})\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "后置边缘执行,函数延迟时间达到后执行\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... }, 500, {trailing: true})\r\n```"
 									}
 								]
 							},
@@ -125,9 +147,27 @@
 											"kind": 4096,
 											"kindString": "Call signature",
 											"flags": {},
+											"parameters": [
+												{
+													"id": 87,
+													"name": "params",
+													"kind": 32768,
+													"kindString": "Parameter",
+													"flags": {
+														"isRest": true
+													},
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												}
+											],
 											"type": {
 												"type": "intrinsic",
-												"name": "void"
+												"name": "any"
 											}
 										}
 									]
@@ -135,7 +175,28 @@
 							}
 						},
 						{
-							"id": 87,
+							"id": 88,
+							"name": "awit",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "延迟时间 默认 500毫秒"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 89,
 							"name": "option",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -153,15 +214,15 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 88,
+									"id": 90,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"children": [
 										{
-											"id": 89,
-											"name": "awit",
+											"id": 91,
+											"name": "leading",
 											"kind": 1024,
 											"kindString": "Property",
 											"flags": {
@@ -171,18 +232,18 @@
 												"summary": [
 													{
 														"kind": "text",
-														"text": "时间 默认 500毫秒"
+														"text": "前置边缘执行，默认 false"
 													}
 												]
 											},
 											"type": {
 												"type": "intrinsic",
-												"name": "number"
+												"name": "boolean"
 											}
 										},
 										{
-											"id": 90,
-											"name": "immediate",
+											"id": 92,
+											"name": "trailing",
 											"kind": 1024,
 											"kindString": "Property",
 											"flags": {
@@ -192,7 +253,7 @@
 												"summary": [
 													{
 														"kind": "text",
-														"text": "是否立即执行，默认 false"
+														"text": "后置边缘执行，默认 true"
 													}
 												]
 											},
@@ -206,8 +267,8 @@
 										{
 											"title": "Properties",
 											"children": [
-												89,
-												90
+												91,
+												92
 											]
 										}
 									]
@@ -217,7 +278,7 @@
 					],
 					"type": {
 						"type": "intrinsic",
-						"name": "void"
+						"name": "any"
 					}
 				}
 			]

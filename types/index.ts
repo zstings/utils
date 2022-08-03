@@ -27,4 +27,8 @@ export type GetFormatDateTime = (value?: Date | number, format?: string) => stri
 
 export type GetTimeStamp = (value?: Date | string, unit?: 'ms' | 's') => number
 
-export type Debounce = (func: () => void, option?: { awit?: number; immediate?: boolean }) => void
+export type Debounce = (
+  func: (...params: any[]) => any,
+  awit?: number,
+  option?: { leading?: boolean; trailing?: boolean }
+) => any

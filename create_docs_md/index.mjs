@@ -3,11 +3,21 @@ import path from 'path'
 import { createRequire } from 'module'
 import fs from 'fs'
 
-const data = loadJSON(getdirname() + '/data.json')
+// 脚本所在目录
+const _dirname = getdirname()
+// 命令执行目录
+const _pathname = path.resolve()
 
-// if (!fs.existsSync(getdirname() + '/doc_vs')) {
-//   fs.mkdirSync(getdirname() + '/md')
-// }
+import * as cheerio from 'cheerio'
+
+// let tdParametersArr = []
+
+function createFile(path) {
+  const buffer = fs.readFileSync(path)
+  return String(buffer)
+}
+
+const data = loadJSON(_dirname + '/data.json')
 
 function loadJSON(filepath) {
   const reg = /\S+.json$/g
@@ -34,22 +44,48 @@ function returnTags(tag) {
   return tags[tag]
 }
 
-function parameters(params, gk) {
-  params.forEach(item => {
-    let type = null
-    if (item.type.type == 'reflection') {
-      type = item.type.declaration.signatures ? `() => ${item.type.declaration.signatures[0].type.name}` : '映射'
-    }
-    if (item.type.type == 'union') type = item.type.types.map(res => (res.name || res.value) + '').join(' | ')
-    if (['intrinsic', 'reference'].includes(item.type.type)) type = item.type.name
-    let ms = item?.comment?.summary?.[0]?.text
-    const name = item.flags.isOptional ? `${item.name}?` : item.name
-    str += `${gk || ''}- ${name} \`${type}\` ${ms} \n`
+// function parameters(params, gk) {
+//   // 在json中获取
+//   params.forEach(item => {
+//     let type = null
+//     if (item.type.type == 'reflection') {
+//       type = item.type.declaration.signatures ? `() => ${item.type.declaration.signatures[0].type.name}` : '映射'
+//     }
+//     if (item.type.type == 'union') type = item.type.types.map(res => (res.name || res.value) + '').join(' | ')
+//     if (['intrinsic', 'reference'].includes(item.type.type)) type = item.type.name
+//     let ms = item?.comment?.summary?.[0]?.text
+//     const name = item.flags.isOptional ? `${item.name}?` : item.name
+//     str += `${gk || ''}- ${name} \`${type}\` ${ms} \n`
 
-    if (item.type.type == 'reflection' && item.type.declaration.children) {
-      parameters(item.type.declaration.children, '\t')
-    }
-  })
+//     if (item.type.type == 'reflection' && item.type.declaration.children) {
+//       parameters(item.type.declaration.children, '\t')
+//     }
+//   })
+// }
+
+function parameters($) {
+  const dom = $('.tsd-parameter-list').eq(0)
+  const li = dom.children('li')
+  function fil(doms, gk = '') {
+    $(doms).each((i, item) => {
+      let title = $(item)
+        .children('h5')
+        .text()
+        .replace(/Optional (\w+):/, '$1?:')
+        .replace('Optional ', '')
+      title = title.replace(':', '#').split('#')
+      title = title.map(ite => {
+        ite = ite.trim()
+        if (ite.startsWith('(') && ite.endsWith(')')) ite = ite.slice(1, -1)
+        return ite
+      })
+      const comment = $(item).children('.tsd-comment.tsd-typography')?.text() || ''
+      str += `${gk || ''}- ${title[0]} \`${title[1]}\` ${comment} \n`
+      const children = $(item).find('.tsd-parameter')
+      if (children.length > 0) fil(children, '\t')
+    })
+  }
+  fil(li)
 }
 
 function returnsTypes(types) {
@@ -61,11 +97,32 @@ function returnsTypes(types) {
   return type
 }
 
+// function tdParameters(td) {
+//   try {
+//     td = td.match(/\(([\s\S]+)\)/)[1]
+//     td = td.split(',').filter(item => !item.trim().startsWith('option'))
+//     td = td.map(item => item.trim().replace(':', '#').split('#'))
+//     td = td.map(item => {
+//       item[1] = item[1].trim()
+//       if (item[1].startsWith('(') && item[1].endsWith(')')) {
+//         item[1] = item[1].slice(1, -1)
+//       }
+//       return item
+//     })
+//     tdParametersArr = td
+//   } catch (err) {
+//     tdParametersArr = []
+//   }
+// }
+
 let str = ''
 let menu = []
 data.children.forEach(item => {
   str = ''
   const signatures = item.signatures?.[0] || []
+  const dom = createFile(_pathname + `/doc/functions/${signatures?.name}.html`)
+  const $ = cheerio.load(dom)
+  const td = $(`#${signatures?.name}`).text()
   // 标题
   if (signatures?.name) str += `## ${signatures?.name} :tada: :100: \n`
   // 描述
@@ -73,8 +130,10 @@ data.children.forEach(item => {
   // 参数
   if (signatures?.parameters) {
     str += '#### 参数 \n'
-    parameters(signatures?.parameters)
+    parameters($)
   }
+  // td.ts
+  if (td) str += `#### td.ts\n::: info\n${td}\n:::\n`
   // 返回
   if (signatures?.comment?.blockTags) {
     const arr = signatures?.comment?.blockTags
