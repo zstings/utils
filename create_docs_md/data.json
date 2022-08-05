@@ -2431,6 +2431,110 @@
 			]
 		},
 		{
+			"id": 96,
+			"name": "returnStr",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 97,
+					"name": "returnStr",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "返回字符串"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... })\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "自定义时间\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... }, 300)\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "前置边缘执行,函数触发时立即执行一次\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... }, 500, {leading: true})\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "后置边缘执行,函数延迟时间达到后执行\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ndebounce(function () { ... }, 500, {trailing: true})\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "在vue2中使用\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetlist: debounce(function () { //... })\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 98,
+							"name": "str",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			]
+		},
+		{
 			"id": 63,
 			"name": "scrollTo",
 			"kind": 64,
@@ -2701,6 +2805,101 @@
 					}
 				}
 			]
+		},
+		{
+			"id": 93,
+			"name": "upperFirst",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 94,
+					"name": "upperFirst",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "首字母大写"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "字符串"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nupperFirst('fred') // 'Fred'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "自定义时间\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nupperFirst('FRED') // 'FRED'\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "参数不是字符串，会先调用toString方法\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nupperFirst(true) // 'True'\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 95,
+							"name": "str",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "传入参数, 如果参数不是字符串，会先调用toString方法"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			]
 		}
 	],
 	"groups": [
@@ -2730,7 +2929,9 @@
 				34,
 				59,
 				43,
-				63
+				96,
+				63,
+				93
 			]
 		}
 	]

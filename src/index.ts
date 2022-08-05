@@ -29,7 +29,8 @@ export {
   scrollTo,
   getFormatDateTime,
   getTimeStamp,
-  debounce
+  debounce,
+  upperFirst
 } from './modules'
 
 // export {

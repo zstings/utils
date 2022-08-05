@@ -55,9 +55,3 @@ export const debounce: Debounce = function (func, awit = 500, option = { leading
     }, awit)
   }
 }
-
-// const a = debounce(function (a) {
-//   return a
-// }, 100)
-
-// a(1)

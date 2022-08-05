@@ -32,3 +32,5 @@ export type Debounce = (
   awit?: number,
   option?: { leading?: boolean; trailing?: boolean }
 ) => any
+
+export type UpperFirst = (str: any) => string

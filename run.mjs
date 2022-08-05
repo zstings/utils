@@ -1,5 +1,5 @@
-import url from "url"
-import path from "path"
+import url from 'url'
+import path from 'path'
 import shell from 'shelljs'
 
 const m1 = getdirname() + '/doc_vs/docs/.vitepress/dist'
