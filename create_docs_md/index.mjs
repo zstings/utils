@@ -170,7 +170,8 @@ data.children.forEach(item => {
 })
 
 function createMenu() {
-  const categories = data.groups[0].categories
+  let categories = data.groups[0].categories
+  categories = categoriesSort(categories)
   return categories.map(item => {
     item.text = item.title
     delete item.title
@@ -185,6 +186,14 @@ function createMenu() {
     delete item.children
     return item
   })
+}
+function categoriesSort(categories) {
+  const sort = ['字符串String', '数字Number', '数组Array', '对象Object', '函数Function', '时间Date', '工具Util']
+  const sortArr = []
+  sort.forEach(item => {
+    sortArr.push(categories.find(el => el.title == item))
+  })
+  return sortArr
 }
 
 fs.writeFileSync(`./doc_vs/docs/.vitepress/menu.js`, 'export default \n' + JSON.stringify(createMenu()))

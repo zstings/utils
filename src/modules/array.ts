@@ -3,6 +3,7 @@ import { isArray, isNumber, isString } from '@/common'
 /**
  * 移除所有 falsey 值的数组
  * @param array 数组
+ * @return 新的数组
  * @throws array参数需要Array array参数错误时触发
  * @category 数组Array
  * @example
@@ -20,6 +21,7 @@ export function compact(array: any[]): any[] {
  * 按长度拆分数组
  * @param array 数组
  * @param size 长度 默认1
+ * @return 新的数组
  * @throws array参数需要Array array参数错误时触发
  * @throws size参数需要Number size参数错误时触发
  * @category 数组Array
@@ -48,6 +50,7 @@ export function chunk(array: any[], size = 1): any[] {
 /**
  * 二维数组转化为对象
  * @param array 数组
+ * @return 新的数组
  * @throws array参数需要Array array参数错误时触发
  * @throws size参数需要Number size参数错误时触发
  * @category 数组Array
@@ -70,6 +73,7 @@ export function fromPairs(array: any[]): Record<string, unknown> {
  * 数组去重
  * @param array 数组
  * @param key 指定数组对象需要对比的key
+ * @return 新的数组
  * @throws array参数需要Array array参数错误时触发
  * @throws key参数需要String key存在且不是字符串时触发
  * @category 数组Array

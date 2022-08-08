@@ -16,7 +16,8 @@ export {
   isString,
   isSymbol,
   isNumber,
-  isBoolean
+  isBoolean,
+  isEmptyObject
 } from './common'
 
 export {
@@ -34,7 +35,8 @@ export {
   chunk,
   compact,
   fromPairs,
-  unique
+  unique,
+  throttle
 } from './modules'
 
 // export {

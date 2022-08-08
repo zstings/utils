@@ -4,6 +4,7 @@ import * as TPS from '../types'
  * 获取数据类型
  * @param value 任意值
  * @return 返回value的类型
+ * @category 工具Util
  * @example
  * 数字
  * ```ts
@@ -43,6 +44,7 @@ export const getDataType: TPS.GetDataType = function (value) {
  * 判断是否为手机号
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -62,6 +64,7 @@ export const isPhone: TPS.IsPhone = function (value) {
  * 判断是否为数组
  * @param value 任意值
  * @return true | false
+ * @category 数组Array
  * @example
  * 验证通过
  * ```ts
@@ -79,6 +82,7 @@ export const isArray: TPS.ToIsTypes = value => getDataType(value) === 'Array'
  * 判断是否为对象
  * @param value 任意值
  * @return true | false
+ * @category 对象Object
  * @example
  * 验证通过
  * ```ts
@@ -96,6 +100,7 @@ export const isObject: TPS.ToIsTypes = value => value !== null && getDataType(va
  * 判断是否为Location
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -113,6 +118,7 @@ export const isLocation: TPS.ToIsTypes = value => getDataType(value) === 'Locati
  * 判断是否为Map
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -130,6 +136,7 @@ export const isMap: TPS.ToIsTypes = value => getDataType(value) === 'Map'
  * 判断是否为Set
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -147,6 +154,7 @@ export const isSet: TPS.ToIsTypes = value => getDataType(value) === 'Set'
  * 判断是否为Date
  * @param value 任意值
  * @return true | false
+ * @category 时间Date
  * @example
  * 验证通过
  * ```ts
@@ -164,6 +172,7 @@ export const isDate: TPS.ToIsTypes = value => getDataType(value) === 'Date'
  * 判断是否为Function
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -181,6 +190,7 @@ export const isFunction: TPS.ToIsTypes = value => getDataType(value) === 'Functi
  * 判断是否为字符串
  * @param value 任意值
  * @return true | false
+ * @category 字符串String
  * @example
  * 验证通过
  * ```ts
@@ -198,6 +208,7 @@ export const isString: TPS.ToIsTypes = value => getDataType(value) === 'String'
  * 判断是否为Symbol
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -215,6 +226,7 @@ export const isSymbol: TPS.ToIsTypes = value => getDataType(value) === 'Symbol'
  * 判断是否为数字
  * @param value 任意值
  * @return true | false
+ * @category 数字Number
  * @example
  * 验证通过
  * ```ts
@@ -232,6 +244,7 @@ export const isNumber: TPS.ToIsTypes = value => getDataType(value) === 'Number'
  * 判断是否为Boolean
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -250,6 +263,7 @@ export const isBoolean: TPS.ToIsTypes = value => getDataType(value) === 'Boolean
  * 判断是否为Promise
  * @param value 任意值
  * @return true | false
+ * @category 工具Util
  * @example
  * 验证通过
  * ```ts
@@ -268,4 +282,26 @@ export const isBoolean: TPS.ToIsTypes = value => getDataType(value) === 'Boolean
  */
 export const isPromise: TPS.ToIsTypes = value => {
   return getDataType(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch)
+}
+
+/**
+ * 判断对象是否是空对象
+ * @param object 对象
+ * @return true | false
+ * @throws 传入参数不是Object 传入参数不是Object时触发
+ * @category 对象Object
+ * @example
+ * 验证通过
+ * ```ts
+ * isEmptyObject({}) => true
+ * ```
+ * @example
+ * 验证失败
+ * ```ts
+ * isEmptyObject({a: 1}) => false
+ * ```
+ */
+export function isEmptyObject(object: Record<string, unknown>): boolean {
+  if (!isObject(object)) throw '传入参数不是Object'
+  return !Object.keys(object).length
 }
