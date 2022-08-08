@@ -116,7 +116,7 @@ function returnsTypes(types) {
 // }
 
 let str = ''
-let menu = []
+// let menu = []
 data.children.forEach(item => {
   str = ''
   const signatures = item.signatures?.[0] || []
@@ -161,14 +161,30 @@ data.children.forEach(item => {
       }
     })
   }
-  menu.push({
-    text: `${signatures?.name}\n${signatures?.comment?.summary?.[0]?.text}`,
-    link: `/${signatures?.name}`
-  })
+  // menu.push({
+  //   text: `${signatures?.name}\n${signatures?.comment?.summary?.[0]?.text}`,
+  //   link: `/${signatures?.name}`
+  // })
   // 写入
   fs.writeFileSync(`./doc_vs/docs/${signatures?.name}.md`, str)
 })
 
-// console.log('export default \n' + JSON.stringify(menu))
+function createMenu() {
+  const categories = data.groups[0].categories
+  return categories.map(item => {
+    item.text = item.title
+    delete item.title
+    item.items = item.children.map(ite => {
+      const datas = data.children.filter(itx => itx.id == ite)[0]
 
-fs.writeFileSync(`./doc_vs/docs/.vitepress/menu.js`, 'export default \n' + JSON.stringify(menu))
+      return {
+        text: `${datas.name}\n${datas.signatures?.[0].comment?.summary?.[0]?.text}`,
+        link: `/${datas.name}`
+      }
+    })
+    delete item.children
+    return item
+  })
+}
+
+fs.writeFileSync(`./doc_vs/docs/.vitepress/menu.js`, 'export default \n' + JSON.stringify(createMenu()))

@@ -30,7 +30,9 @@ export {
   getFormatDateTime,
   getTimeStamp,
   debounce,
-  upperFirst
+  upperFirst,
+  chunk,
+  compact
 } from './modules'
 
 // export {

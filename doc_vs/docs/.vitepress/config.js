@@ -1,4 +1,16 @@
 import em from './menu'
+const sidebar = [
+  {
+    text: "开始",
+    items: [
+      {
+        text: '快速开始',
+        link: '/start'
+      }
+    ]
+  }
+]
+sidebar.push(...em)
 module.exports = {
   title: 'tings-utils',
   description: 'JS & TS utils.',
@@ -19,21 +31,7 @@ module.exports = {
       { text: "home", link: "/" },
       { text: "github", link: "https://github.com/qinzhongting/tings-utils/" },
     ],
-    sidebar: [
-      {
-        text: "开始",
-        items: [
-          {
-            text: '快速开始',
-            link: '/start'
-          }
-        ]
-      },
-      {
-        text: '函数列表',
-        items: em
-      }
-    ],
+    sidebar,
     docFooter: {
       prev: '上一页',
       next: '下一页'

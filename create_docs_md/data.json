@@ -7,6 +7,198 @@
 	"originalName": "",
 	"children": [
 		{
+			"id": 96,
+			"name": "chunk",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 97,
+					"name": "chunk",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "按长度拆分数组"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "传入参数需要Array array参数错误时触发"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "size传入参数需要Number size参数错误时触发"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nchunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 2) => [[{\"a\":1},{\"a\":2}],[{\"a\":3},{\"a\":4}]]\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nchunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3) => [[{\"a\":1},{\"a\":2},{\"a\":3}],[{\"a\":4}]]\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 98,
+							"name": "array",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "数组"
+									}
+								]
+							},
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							}
+						},
+						{
+							"id": 99,
+							"name": "size",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "长度 默认1"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"defaultValue": "1"
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "intrinsic",
+							"name": "any"
+						}
+					}
+				}
+			]
+		},
+		{
+			"id": 100,
+			"name": "compact",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 101,
+					"name": "compact",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "移除所有 falsey 值的数组"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "传入参数需要Array array参数错误时触发"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "falsey => 0 | false | null | undefined | NaN\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ncompact([1, 0, false, 2, NaN, 3, null]) => [1, 2, 3]\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 102,
+							"name": "array",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "数组"
+									}
+								]
+							},
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							}
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "intrinsic",
+							"name": "any"
+						}
+					}
+				}
+			]
+		},
+		{
 			"id": 82,
 			"name": "debounce",
 			"kind": 64,
@@ -2431,110 +2623,6 @@
 			]
 		},
 		{
-			"id": 96,
-			"name": "returnStr",
-			"kind": 64,
-			"kindString": "Function",
-			"flags": {},
-			"signatures": [
-				{
-					"id": 97,
-					"name": "returnStr",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {},
-					"comment": {
-						"summary": [
-							{
-								"kind": "text",
-								"text": "返回字符串"
-							}
-						],
-						"blockTags": [
-							{
-								"tag": "@example",
-								"content": [
-									{
-										"kind": "code",
-										"text": "```ts\r\ndebounce(function () { ... })\r\n```"
-									}
-								]
-							},
-							{
-								"tag": "@example",
-								"content": [
-									{
-										"kind": "text",
-										"text": "自定义时间\r\n"
-									},
-									{
-										"kind": "code",
-										"text": "```ts\r\ndebounce(function () { ... }, 300)\r\n```"
-									}
-								]
-							},
-							{
-								"tag": "@example",
-								"content": [
-									{
-										"kind": "text",
-										"text": "前置边缘执行,函数触发时立即执行一次\r\n"
-									},
-									{
-										"kind": "code",
-										"text": "```ts\r\ndebounce(function () { ... }, 500, {leading: true})\r\n```"
-									}
-								]
-							},
-							{
-								"tag": "@example",
-								"content": [
-									{
-										"kind": "text",
-										"text": "后置边缘执行,函数延迟时间达到后执行\r\n"
-									},
-									{
-										"kind": "code",
-										"text": "```ts\r\ndebounce(function () { ... }, 500, {trailing: true})\r\n```"
-									}
-								]
-							},
-							{
-								"tag": "@example",
-								"content": [
-									{
-										"kind": "text",
-										"text": "在vue2中使用\r\n"
-									},
-									{
-										"kind": "code",
-										"text": "```ts\r\ngetlist: debounce(function () { //... })\r\n```"
-									}
-								]
-							}
-						]
-					},
-					"parameters": [
-						{
-							"id": 98,
-							"name": "str",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {},
-							"type": {
-								"type": "intrinsic",
-								"name": "string"
-							}
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "string"
-					}
-				}
-			]
-		},
-		{
 			"id": 63,
 			"name": "scrollTo",
 			"kind": 64,
@@ -2906,6 +2994,8 @@
 		{
 			"title": "Functions",
 			"children": [
+				96,
+				100,
 				82,
 				50,
 				56,
@@ -2929,9 +3019,47 @@
 				34,
 				59,
 				43,
-				96,
 				63,
 				93
+			],
+			"categories": [
+				{
+					"title": "Other",
+					"children": [
+						82,
+						50,
+						56,
+						7,
+						74,
+						78,
+						54,
+						46,
+						1,
+						40,
+						16,
+						19,
+						10,
+						22,
+						37,
+						13,
+						4,
+						25,
+						28,
+						31,
+						34,
+						59,
+						43,
+						63,
+						93
+					]
+				},
+				{
+					"title": "数组Array",
+					"children": [
+						96,
+						100
+					]
+				}
 			]
 		}
 	]
