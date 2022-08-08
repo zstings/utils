@@ -32,7 +32,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "传入参数需要Array array参数错误时触发"
+										"text": "array参数需要Array array参数错误时触发"
 									}
 								]
 							},
@@ -41,7 +41,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "size传入参数需要Number size参数错误时触发"
+										"text": "size参数需要Number size参数错误时触发"
 									}
 								]
 							},
@@ -50,7 +50,7 @@
 								"content": [
 									{
 										"kind": "code",
-										"text": "```ts\r\nchunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 2) => [[{\"a\":1},{\"a\":2}],[{\"a\":3},{\"a\":4}]]\r\n```"
+										"text": "```ts\r\nchunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 2)\r\n// => [[{\"a\":1},{\"a\":2}],[{\"a\":3},{\"a\":4}]]\r\n```"
 									}
 								]
 							},
@@ -59,7 +59,7 @@
 								"content": [
 									{
 										"kind": "code",
-										"text": "```ts\r\nchunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3) => [[{\"a\":1},{\"a\":2},{\"a\":3}],[{\"a\":4}]]\r\n```"
+										"text": "```ts\r\nchunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3)\r\n// => [[{\"a\":1},{\"a\":2},{\"a\":3}],[{\"a\":4}]]\r\n```"
 									}
 								]
 							}
@@ -145,7 +145,7 @@
 								"content": [
 									{
 										"kind": "text",
-										"text": "传入参数需要Array array参数错误时触发"
+										"text": "array参数需要Array array参数错误时触发"
 									}
 								]
 							},
@@ -552,6 +552,112 @@
 					"type": {
 						"type": "intrinsic",
 						"name": "void"
+					}
+				}
+			]
+		},
+		{
+			"id": 103,
+			"name": "fromPairs",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 104,
+					"name": "fromPairs",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "二维数组转化为对象"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "array参数需要Array array参数错误时触发"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "size参数需要Number size参数错误时触发"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nfromPairs([['a', 1], ['b', 2]]) => {a: 1, b: 2}\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "多余的成员会被舍弃\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nfromPairs([['a', 1], ['b', 2, 3]) => {a: 1, b: 2}\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 105,
+							"name": "array",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "数组"
+									}
+								]
+							},
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "unknown"
+							}
+						],
+						"name": "Record",
+						"qualifiedName": "Record",
+						"package": ".pnpm"
 					}
 				}
 			]
@@ -2895,6 +3001,124 @@
 			]
 		},
 		{
+			"id": 106,
+			"name": "unique",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 107,
+					"name": "unique",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "数组去重"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "array参数需要Array array参数错误时触发"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "key参数需要String key存在且不是字符串时触发"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\nunique([1, 2, 1]) => [1, 2]\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "数组对象去重\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\nunique([{id: 1, name: '1'}, {id: 2, name: '2'}, {id: 1, name: '1'}], 'id')\r\n// => [{id: 1, name: '1'}, {id: 2, name: '2'}]\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 108,
+							"name": "array",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "数组"
+									}
+								]
+							},
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							}
+						},
+						{
+							"id": 109,
+							"name": "key",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isOptional": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "指定数组对象需要对比的key"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "intrinsic",
+							"name": "any"
+						}
+					}
+				}
+			]
+		},
+		{
 			"id": 93,
 			"name": "upperFirst",
 			"kind": 64,
@@ -2998,6 +3222,7 @@
 				100,
 				82,
 				50,
+				103,
 				56,
 				7,
 				74,
@@ -3020,13 +3245,13 @@
 				59,
 				43,
 				63,
+				106,
 				93
 			],
 			"categories": [
 				{
 					"title": "Other",
 					"children": [
-						82,
 						50,
 						56,
 						7,
@@ -3054,10 +3279,18 @@
 					]
 				},
 				{
+					"title": "函数Function",
+					"children": [
+						82
+					]
+				},
+				{
 					"title": "数组Array",
 					"children": [
 						96,
-						100
+						100,
+						103,
+						106
 					]
 				}
 			]

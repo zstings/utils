@@ -11,6 +11,7 @@ import { isNumber, isBoolean } from '@/common'
  * @throws awit不是number awit存在但不是数字时触发
  * @throws leading不是boolean leading存在但不是boolean时触发
  * @throws trailing不是boolean trailing存在但不是boolean时触发
+ * @category 函数Function
  * @example
  * ```ts
  * debounce(function () { ... })

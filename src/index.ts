@@ -32,7 +32,9 @@ export {
   debounce,
   upperFirst,
   chunk,
-  compact
+  compact,
+  fromPairs,
+  unique
 } from './modules'
 
 // export {
