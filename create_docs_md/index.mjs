@@ -133,7 +133,7 @@ data.children.forEach(item => {
     parameters($)
   }
   // td.ts
-  if (td) str += `#### td.ts\n::: info\n${td}\n:::\n`
+  if (td) str += `#### td.ts\n::: info\n\`${td}\`\n:::\n`
   // 返回
   if (signatures?.comment?.blockTags) {
     const arr = signatures?.comment?.blockTags

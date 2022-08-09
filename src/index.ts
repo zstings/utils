@@ -36,7 +36,9 @@ export {
   compact,
   fromPairs,
   unique,
-  throttle
+  throttle,
+  getRandom,
+  toNumber
 } from './modules'
 
 // export {

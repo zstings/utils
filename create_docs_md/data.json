@@ -1041,6 +1041,113 @@
 			]
 		},
 		{
+			"id": 125,
+			"name": "getRandom",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 126,
+					"name": "getRandom",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "均衡获取指定范围的随机整数"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "随机整数"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "均衡获取0或者1的数\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetRandom()\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "text",
+										"text": "均衡获取1或者10的数\r\n"
+									},
+									{
+										"kind": "code",
+										"text": "```ts\r\ngetRandom(1, 10)\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"parameters": [
+						{
+							"id": 127,
+							"name": "min",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "范围最小整数"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"defaultValue": "0"
+						},
+						{
+							"id": 128,
+							"name": "max",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "范围最大整数"
+									}
+								]
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"defaultValue": "1"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				}
+			]
+		},
+		{
 			"id": 81,
 			"name": "getTimeStamp",
 			"kind": 64,
@@ -3377,6 +3484,112 @@
 			]
 		},
 		{
+			"id": 129,
+			"name": "toNumber",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {},
+			"signatures": [
+				{
+					"id": 130,
+					"name": "toNumber",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "转换为数字"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "返回数字"
+									}
+								]
+							},
+							{
+								"tag": "@throws",
+								"content": [
+									{
+										"kind": "text",
+										"text": "无法转换为数字"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\ntoNumber('1') // 1\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\ntoNumber('1.2') // 1.2\r\n```"
+									}
+								]
+							},
+							{
+								"tag": "@example",
+								"content": [
+									{
+										"kind": "code",
+										"text": "```ts\r\ntoNumber('a123') // error => a123无法转换为数字\r\n```"
+									}
+								]
+							}
+						]
+					},
+					"typeParameter": [
+						{
+							"id": 131,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {}
+						}
+					],
+					"parameters": [
+						{
+							"id": 132,
+							"name": "value",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "任意值"
+									}
+								]
+							},
+							"type": {
+								"type": "reference",
+								"id": 131,
+								"name": "T"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				}
+			]
+		},
+		{
 			"id": 109,
 			"name": "unique",
 			"kind": 64,
@@ -3611,6 +3824,7 @@
 				59,
 				7,
 				77,
+				125,
 				81,
 				57,
 				49,
@@ -3632,6 +3846,7 @@
 				46,
 				66,
 				113,
+				129,
 				109,
 				96
 			],
@@ -3663,6 +3878,7 @@
 						53,
 						59,
 						7,
+						125,
 						57,
 						49,
 						40,
@@ -3681,7 +3897,8 @@
 					"title": "数字Number",
 					"children": [
 						37,
-						62
+						62,
+						129
 					]
 				},
 				{
