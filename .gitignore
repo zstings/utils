@@ -14,6 +14,7 @@ dist-ssr
 dist
 doc
 *.local
+create_docs_md/data.json
 
 # Editor directories and files
 .vscode/*

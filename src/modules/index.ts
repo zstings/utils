@@ -1,5 +1,5 @@
 export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom } from './util'
-export { padInt, toNumber } from './number'
+export { padInt, toNumber, toFixed } from './number'
 export { getTimeStamp, getFormatDateTime } from './date'
 export { debounce, throttle } from './function'
 export { upperFirst } from './string'

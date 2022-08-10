@@ -38,7 +38,8 @@ export {
   unique,
   throttle,
   getRandom,
-  toNumber
+  toNumber,
+  toFixed
 } from './modules'
 
 // export {
