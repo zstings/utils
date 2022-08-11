@@ -15,6 +15,7 @@ dist
 doc
 *.local
 create_docs_md/data.json
+testcdn
 
 # Editor directories and files
 .vscode/*
