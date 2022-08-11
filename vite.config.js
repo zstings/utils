@@ -3,7 +3,6 @@ import { resolve } from 'path'
 import { name } from './package.json'
 
 export default defineConfig({
-  plugins: [],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

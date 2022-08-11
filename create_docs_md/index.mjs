@@ -166,7 +166,7 @@ data.children.forEach(item => {
   //   link: `/${signatures?.name}`
   // })
   // 写入
-  fs.writeFileSync(`./doc_vs/docs/${signatures?.name}.md`, str)
+  fs.writeFileSync(`./docsvite/${signatures?.name}.md`, str)
 })
 
 function createMenu() {
@@ -196,4 +196,4 @@ function categoriesSort(categories) {
   return sortArr
 }
 
-fs.writeFileSync(`./doc_vs/docs/.vitepress/menu.js`, 'export default \n' + JSON.stringify(createMenu()))
+fs.writeFileSync(`./docsvite/.vitepress/menu.js`, 'export default \n' + JSON.stringify(createMenu()))
