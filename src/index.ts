@@ -3,9 +3,9 @@
 
 // export { default as returnstr } from "./returnStr";
 export {
+  getDataType,
   isArray,
   isPhone,
-  getDataType,
   isLocation,
   isObject,
   isDate,
@@ -19,6 +19,14 @@ export {
   isBoolean,
   isEmptyObject
 } from './common'
+
+export {
+  detectDeviceType,
+  isAndroid,
+  isDesktop,
+  isIOS,
+  isMobile
+} from './device'
 
 export {
   phoneEncrypt,
@@ -39,7 +47,8 @@ export {
   throttle,
   getRandom,
   toNumber,
-  toFixed
+  toFixed,
+  getMonthNum
 } from './modules'
 
 // export {
