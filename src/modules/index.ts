@@ -1,4 +1,4 @@
-export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom } from './util'
+export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom, deepClone } from './util'
 export { padInt, toNumber, toFixed } from './number'
 export { getTimeStamp, getFormatDateTime, getMonthNum } from './date'
 export { debounce, throttle } from './function'

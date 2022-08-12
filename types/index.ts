@@ -1,3 +1,9 @@
+export type ObjectData = { [key: string]: any }
+
+export type ArrayData = any[]
+
+export type DeepCopy = (origin: ObjectData | ArrayData) => ObjectData | ArrayData
+
 export type IsPhone = (str: string | number) => boolean
 
 export type PhoneEncrypt = (value: string | number) => string

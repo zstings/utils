@@ -13,7 +13,9 @@
  * detectDeviceType() // => 'Desktop'
  * ```
  */
-export function detectDeviceType () { return /Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'; };
+export function detectDeviceType() {
+  return /Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
+}
 
 /**
  * 是否是移动端
@@ -90,4 +92,3 @@ export function isIOS() {
 export function isDesktop() {
   return detectDeviceType() === 'Desktop'
 }
-

@@ -1,3 +1,0 @@
-import { ScrollTo } from '@types'
-
-

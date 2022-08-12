@@ -44,7 +44,8 @@ export {
   getRandom,
   toNumber,
   toFixed,
-  getMonthNum
+  getMonthNum,
+  deepClone
 } from './modules'
 
 // export {
