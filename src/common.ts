@@ -305,3 +305,39 @@ export function isEmptyObject(object: Record<string, unknown>): boolean {
   if (!isObject(object)) throw '传入参数不是Object'
   return !Object.keys(object).length
 }
+
+/**
+ * 检查字符串是否包含中文
+ * @param value 字符串
+ * @returns true | false
+ * @category 工具Util
+ * @example
+ * ```ts
+ * isIncludeChinese() // => false
+ * ```
+ * @example
+ * ```ts
+ * isIncludeChinese('你好') // => true
+ * ```
+ */
+export function isIncludeChinese(value: string): boolean {
+  return /\p{sc=Han}/gu.test(value)
+}
+
+/**
+ * 是否是dom
+ * @param tarage dom
+ * @returns true | false
+ * @category 工具Util
+ * @example
+ * ```ts
+ * isDom() // => false
+ * ```
+ * @example
+ * ```ts
+ * isDom(document.querySelector('head')) // => true
+ * ```
+ */
+export function isDom(tarage: Element): boolean {
+  return getDataType(tarage).includes('Element')
+}

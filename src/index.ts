@@ -17,16 +17,12 @@ export {
   isSymbol,
   isNumber,
   isBoolean,
-  isEmptyObject
+  isEmptyObject,
+  isIncludeChinese,
+  isDom
 } from './common'
 
-export {
-  detectDeviceType,
-  isAndroid,
-  isDesktop,
-  isIOS,
-  isMobile
-} from './device'
+export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile } from './device'
 
 export {
   phoneEncrypt,
