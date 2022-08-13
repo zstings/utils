@@ -1,22 +1,20 @@
 ## deepClone :tada: :100: 
 深度复制
 #### 参数 
-- origin `ObjectData | ArrayData` 对象或者数组
- 
-- hash `WeakMap<object, any> = ...`  
+- source `T`  
 #### td.ts
 ::: info
-`deepClone(origin: ObjectData | ArrayData, hash?: WeakMap<object, any>): any`
+`deepClone<T>(source: T): T`
 :::
 #### 返回 
-- `any` 
+- `T` 
 ::: tip
 深度复制后的对象或者数组
 :::
 #### 实例 
 ```ts
-deepCopy([1,23, [1]]) // => [1,23, [1]]
+deepClone([1,23, [1]]) // => [1,23, [1]]
 ```
 ```ts
-deepCopy({a: [1], b: () => {}}) // => {a: [1], b: () => {}}
+deepClone({a: [1], b: () => {}}) // => {a: [1], b: () => {}}
 ```
