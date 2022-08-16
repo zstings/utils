@@ -106,7 +106,61 @@ export const getFormatDateTime: GetFormatDateTime = (value = Date.now(), format 
 export function getMonthNum(year?: number, month?: number): number {
   const _year = year ? year : new Date().getFullYear()
   const _month = month ? month : new Date().getMonth() + 1
-  var days = new Date(_year, _month, 0)
+  const days = new Date(_year, _month, 0)
   if (isNaN(days.getTime())) throw 'Invalid Date'
   return days.getDate()
+}
+
+/**
+ * 获取距离指定时间之前
+ * @param endTime 目标时间戳
+ * @param startTime 开始时间戳, 默认当前
+ * @returns 年|月|天|小时|分钟|秒 之前
+ * @category 时间Date
+ * @example
+ * ```ts
+ * howLongAgo(1660644035390) // => '4分钟前'
+ * ```
+ * @example
+ * 获取指定月份的天数
+ * ```ts
+ * howLongAgo(1660644418571) // => '5秒前'
+ * ```
+ */
+export function howLongAgo(endTime: number, startTime = Date.now()) {
+  const date = startTime - endTime
+  if (date <= 0) throw 'startTime 必须大于 endTime'
+  const dater = [
+    {
+      num: 31536000000,
+      lab: '年'
+    },
+    {
+      num: 2592000000,
+      lab: '月'
+    },
+    {
+      num: 86400000,
+      lab: '天'
+    },
+    {
+      num: 3600000,
+      lab: '小时'
+    },
+    {
+      num: 60000,
+      lab: '分钟'
+    },
+    {
+      num: 1000,
+      lab: '秒'
+    }
+  ]
+  for (let i = 0; i < dater.length; i++) {
+    const dates = Math.floor(date / dater[i].num)
+    if (dates >= 1) {
+      return `${dates}${dater[i].lab}前`
+    }
+  }
+  return 0
 }

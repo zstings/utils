@@ -15,7 +15,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'tingsUtils',
       format: ['es', 'cjs'],
-      fileName: (format) => `${name}.${format}.js`
+      fileName: format => `${name}.${format}.js`
     }
   }
 })
