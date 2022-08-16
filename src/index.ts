@@ -46,7 +46,8 @@ export {
   toFixed,
   getMonthNum,
   deepClone,
-  createData
+  createData,
+  howLongAgo
 } from './modules'
 
 // export {

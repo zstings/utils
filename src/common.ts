@@ -341,3 +341,7 @@ export function isIncludeChinese(value: string): boolean {
 export function isDom(tarage: Element): boolean {
   return getDataType(tarage).includes('Element')
 }
+
+export function isNullOrUndefined(value: any): boolean {
+  return ['Null', 'Undefined'].includes(getDataType(value))
+}

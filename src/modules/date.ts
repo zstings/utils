@@ -1,5 +1,5 @@
 import { GetTimeStamp, GetFormatDateTime } from '@types'
-import { getDataType } from '@/common'
+import { getDataType, isNumber, isString, isNullOrUndefined } from '@/common'
 import { padInt } from '@/modules/number'
 
 /**
@@ -127,8 +127,20 @@ export function getMonthNum(year?: number, month?: number): number {
  * howLongAgo(1660644418571) // => '5秒前'
  * ```
  */
-export function howLongAgo(endTime: number, startTime = Date.now()) {
-  const date = startTime - endTime
+export function howLongAgo(endTime: number | string, startTime?: number | string) {
+  if (!(isNumber(endTime) || isString(endTime))) throw `endTime 只接受 number | string`
+  if (isString(endTime) && isNaN(new Date(endTime).getTime())) throw `endTime 无法转换为时间`
+  if (!isNullOrUndefined(startTime)) {
+    if (!(isNumber(startTime) || isString(startTime))) throw `startTime 只接受 number | string`
+    if (isString(startTime) && isNaN(new Date(startTime as string).getTime())) throw `startTime 无法转换为时间`
+  }
+  const _endTime = isString(endTime) ? new Date(endTime).getTime() : (endTime as number)
+  const _startTime = isNullOrUndefined(startTime)
+    ? Date.now()
+    : isString(startTime)
+    ? new Date(startTime as string).getTime()
+    : (startTime as number)
+  const date = _startTime - _endTime
   if (date <= 0) throw 'startTime 必须大于 endTime'
   const dater = [
     {
@@ -162,5 +174,5 @@ export function howLongAgo(endTime: number, startTime = Date.now()) {
       return `${dates}${dater[i].lab}前`
     }
   }
-  return 0
+  return ''
 }
