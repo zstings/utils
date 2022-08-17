@@ -18,7 +18,7 @@ import { padInt } from '@/modules/number'
  * @example
  * 获取当前的时间戳，单位秒(s)
  * ```ts
- * getTimeStamp('', 's') // 1659334598129
+ * getTimeStamp('', 's') // 1660700890
  * ```
  * @example
  * 获取 2022-10-12 的时间戳
@@ -91,6 +91,7 @@ export const getFormatDateTime: GetFormatDateTime = (value = Date.now(), format 
  * @param year 年份, 默认当前年
  * @param month 月份, 默认当前月
  * @returns 天数
+ * @throws Invalid Date 传入值无法转为Date时触发
  * @category 时间Date
  * @example
  * 获取当前月份的天数
@@ -113,18 +114,30 @@ export function getMonthNum(year?: number, month?: number): number {
 
 /**
  * 获取距离指定时间之前
- * @param endTime 目标时间戳
- * @param startTime 开始时间戳, 默认当前
+ * @param endTime 目标时间戳或者格式化的时间字符
+ * @param startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
  * @returns 年|月|天|小时|分钟|秒 之前
+ * @throws 无法转换为时间 传入值无法转为Date时触发
+ * @throws 只接受 number | string 传入值不是 number | string时触发
  * @category 时间Date
  * @example
  * ```ts
  * howLongAgo(1660644035390) // => '4分钟前'
  * ```
  * @example
- * 获取指定月份的天数
  * ```ts
  * howLongAgo(1660644418571) // => '5秒前'
+ * ```
+ * @example
+ * 支持格式化的时间字符
+ * ```ts
+ * howLongAgo('2022-08-17 09: 12: 00') // => '10分钟前'
+ * ```
+ * @example
+ * 指定起始时间
+ * ```ts
+ * howLongAgo('2022-08-17 09: 12: 00', '2022-08-17 09: 15: 00')
+ * // => '3分钟前'
  * ```
  */
 export function howLongAgo(endTime: number | string, startTime?: number | string) {
