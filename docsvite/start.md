@@ -36,7 +36,10 @@ tingsUtils.getDataType([]) // => Array
 ## 使用CDN
 cdn导入
 ```html
-<script src="https://cdn.jsdelivr.net/npm/tings-utils@0.0.24/dist/tings-utils.umd.min.js"></script>
+<!-- 指定版本 -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/tings-utils@0.0.25/dist/tings-utils.umd.min.js"></script> -->
+<!-- 默认最新版 -->
+<script src="https://cdn.jsdelivr.net/npm/tings-utils/dist/tings-utils.umd.min.js"></script>
 <script>
   tingsUtils.getDataType([]) // Array
 </script>
@@ -44,7 +47,7 @@ cdn导入
 cdn 使用模块导入
 ```html
 <script type="module">
-  import {getDataType} from 'https://cdn.jsdelivr.net/npm/tings-utils@0.0.24/dist/tings-utils.es.min.js'
+  import {getDataType} from 'https://cdn.jsdelivr.net/npm/tings-utils/dist/tings-utils.es.min.js'
   getDataType([]) // Array
 </script>
 ```
@@ -53,7 +56,7 @@ cdn 使用模块导入-importmap模式
 <script type="importmap">
   {
     "imports": {
-      "tings-utils": "https://cdn.jsdelivr.net/npm/tings-utils@0.0.24/dist/tings-utils.es.min.js"
+      "tings-utils": "https://cdn.jsdelivr.net/npm/tings-utils/dist/tings-utils.es.min.js"
     }
   }
 </script>
