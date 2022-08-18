@@ -37,7 +37,7 @@ import * as TPS from '../types'
  * ```
  */
 export const getDataType: TPS.GetDataType = function (value) {
-  return Object.prototype.toString.call(value).slice(8, -1)
+  return Object.prototype.toString.call(value).slice(8, -1).toLocaleLowerCase()
 }
 
 /**
