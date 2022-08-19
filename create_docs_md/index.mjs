@@ -188,7 +188,16 @@ function createMenu() {
   })
 }
 function categoriesSort(categories) {
-  const sort = ['字符串String', '数字Number', '数组Array', '对象Object', '函数Function', '时间Date', '设备Device', '工具Util']
+  const sort = [
+    '字符串String',
+    '数字Number',
+    '数组Array',
+    '对象Object',
+    '函数Function',
+    '时间Date',
+    '设备Device',
+    '工具Util'
+  ]
   const sortArr = []
   sort.forEach(item => {
     sortArr.push(categories.find(el => el.title == item))
