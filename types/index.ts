@@ -40,3 +40,7 @@ export type Debounce = (
 ) => any
 
 export type UpperFirst = (str: any) => string
+
+export type Omit = (object: Record<string, any>, paths: string[]) => Record<string, any>
+
+export type Assign = (target: Record<string, any>, ...sources: Record<string, any>[]) => Record<string, any>

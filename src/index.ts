@@ -43,8 +43,7 @@ export { upperFirst } from './string'
 export { chunk, compact, fromPairs, unique } from '@/array'
 
 // 对象相关
-export { createData } from '@/object'
+export { createData, omit, assign, assignMin } from '@/object'
 
 // 工具相关
 export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom, deepClone } from '@/util'
-

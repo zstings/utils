@@ -1,3 +1,7 @@
+import { deepClone } from '@/util'
+import { Omit, Assign } from '@types'
+import { isEmptyObject } from '@/verify'
+
 /**
  * 指定深度或者广度的对象
  * @param deep 深度
@@ -34,4 +38,62 @@ export function createData(deep = 1, breadth = 0) {
     }
   }
   return data
+}
+
+/**
+ * 删除指定对象的指定属性
+ * @param object 指定对象
+ * @param keys 指定属性
+ * @returns 新的对象
+ * @category 对象Object
+ * @example
+ * ```ts
+ * omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {b: 2}
+ * ```
+ */
+export const omit: Omit = (object, keys = []) => {
+  const _object = deepClone(object)
+  Object.keys(_object).forEach(item => {
+    if (keys.includes(item)) delete _object[item]
+  })
+  return _object
+}
+omit({ a: 1 }, ['b'])
+
+/**
+ * 合并对象
+ * @param target 目标对象，被合并的对象
+ * @param sources 源对象，可以多个
+ * @returns 目标对象
+ * @category 对象Object
+ * @example
+ * 对象合并效果与Object.assign一致
+ * ```ts
+ * assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
+ * ```
+ */
+export const assign: Assign = (target, ...sources) => {
+  if (isEmptyObject(target)) return {}
+  return Object.assign(target, ...sources)
+}
+
+/**
+ * 最小合并对象
+ * @param target 目标对象，被合并的对象
+ * @param sources 源对象，可以多个
+ * @returns 目标对象
+ * @category 对象Object
+ * @example
+ * 最小合并对象，只会合并源对象原有的属性，其他忽略
+ * ```ts
+ * assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
+ * ```
+ */
+export const assignMin: Assign = (target, ...sources) => {
+  if (isEmptyObject(target)) return {}
+  const _object = Object.assign({}, ...sources)
+  Object.keys(target).forEach(item => {
+    target[item] = _object[item]
+  })
+  return target
 }
