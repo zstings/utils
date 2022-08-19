@@ -1,5 +1,5 @@
 import { PhoneEncrypt } from '@types'
-import { isPhone } from '@/common'
+import { isPhone } from '@/verify'
 
 /**
  * 对手机号进行加密处理

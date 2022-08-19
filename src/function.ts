@@ -1,5 +1,5 @@
 import { Debounce } from '@types'
-import { isNumber, isBoolean } from '@/common'
+import { isNumber, isBoolean } from '@/verify'
 
 /**
  * 防抖

@@ -1,5 +1,5 @@
 import { PadInt } from '@types'
-import { isBoolean } from '@/common'
+import { isBoolean } from '@/verify'
 
 /**
  * 数字补0

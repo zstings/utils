@@ -1,5 +1,5 @@
 import { GetUrlParam } from '@types'
-import { isLocation } from '@/common'
+import { isLocation } from '@/verify'
 
 /**
  * 获取url上的参数

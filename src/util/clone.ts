@@ -1,4 +1,4 @@
-import { isArray, isObject } from '@/common'
+import { isArray, isObject } from '@/verify'
 /**
  * 深度复制
  * @param origin 对象或者数组

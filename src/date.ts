@@ -1,6 +1,7 @@
+import { padInt } from '@/number'
+import { getDataType } from '@/common'
 import { GetTimeStamp, GetFormatDateTime } from '@types'
-import { getDataType, isNumber, isString, isNullOrUndefined } from '@/common'
-import { padInt } from '@/modules/number'
+import { isNumber, isString, isNullOrUndefined } from '@/verify'
 
 /**
  * 获取时间戳

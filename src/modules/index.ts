@@ -1,7 +1,0 @@
-export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom, deepClone } from './util'
-export { padInt, toNumber, toFixed } from './number'
-export { getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo } from './date'
-export { debounce, throttle } from './function'
-export { upperFirst } from './string'
-export { chunk, compact, fromPairs, unique } from './array'
-export { createData } from './object'

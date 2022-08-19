@@ -1,4 +1,4 @@
-import { isArray, isNumber, isString } from '@/common'
+import { isArray, isNumber, isString } from '@/verify'
 
 /**
  * 移除所有 falsey 值的数组

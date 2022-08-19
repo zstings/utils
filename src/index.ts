@@ -1,9 +1,11 @@
 // import { version } from '../package.json'
 // export { version };
-
 // export { default as returnstr } from "./returnStr";
+
+// 公共
+export { getDataType } from './common'
+// 验证相关
 export {
-  getDataType,
   isArray,
   isPhone,
   isLocation,
@@ -20,36 +22,29 @@ export {
   isEmptyObject,
   isIncludeChinese,
   isDom
-} from './common'
+} from '@/verify'
 
+// 设备相关
 export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile } from './device'
 
-export {
-  phoneEncrypt,
-  getUrlParam,
-  downloadFile,
-  getUUID,
-  gbkToUtf8,
-  padInt,
-  scrollTo,
-  getFormatDateTime,
-  getTimeStamp,
-  debounce,
-  upperFirst,
-  chunk,
-  compact,
-  fromPairs,
-  unique,
-  throttle,
-  getRandom,
-  toNumber,
-  toFixed,
-  getMonthNum,
-  deepClone,
-  createData,
-  howLongAgo
-} from './modules'
+// 数字相关
+export { padInt, toNumber, toFixed } from '@/number'
 
-// export {
-//   phoneEncry
-// } from './modules'
+// 时间相关
+export { getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo } from './date'
+
+// 函数相关
+export { debounce, throttle } from './function'
+
+// 字符串相关
+export { upperFirst } from './string'
+
+// 数组相关
+export { chunk, compact, fromPairs, unique } from '@/array'
+
+// 对象相关
+export { createData } from '@/object'
+
+// 工具相关
+export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom, deepClone } from '@/util'
+
