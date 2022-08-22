@@ -1,3 +1,5 @@
+import { isArray } from './verify'
+
 /**
  * 获取设备类型
  * @return "Mobile" | "Desktop"

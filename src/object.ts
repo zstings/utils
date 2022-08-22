@@ -1,6 +1,6 @@
 import { deepClone } from '@/util'
-import { Omit, Assign } from '@types'
-import { isEmptyObject } from '@/verify'
+import { Omit, Assign, ArrObjSum } from '@types'
+import { isArrObj, isEmptyObject } from '@/verify'
 
 /**
  * 指定深度或者广度的对象
@@ -96,4 +96,29 @@ export const assignMin: Assign = (target, ...sources) => {
     target[item] = _object[item]
   })
   return target
+}
+
+/**
+ * 数组对象key值求和
+ * @param object 目标对象
+ * @param keys 需要求和的key数组
+ * @returns 求和后的对象
+ * @category 对象Object
+ * @example
+ * ```ts
+ * arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
+ * // => {id: 3, age: 30}
+ * ```
+ */
+export const arrObjSum: ArrObjSum = (object, keys) => {
+  if (!isArrObj(object)) throw 'object 必须是数组对象'
+  const _keys = keys.map((item: any) => {
+    return {
+      [item]: object.reduce((start: any, end: any) => {
+        const value = start + Number(end[item])
+        return isNaN(value) ? 0 : value
+      }, 0)
+    }
+  })
+  return _keys
 }

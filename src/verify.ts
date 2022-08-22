@@ -1,5 +1,5 @@
 import * as TPS from '../types'
-import {getDataType} from '@/common'
+import { getDataType } from '@/common'
 
 /**
  * 判断是否为手机号
@@ -320,4 +320,24 @@ export function isDom(tarage: Element): boolean {
  */
 export function isNullOrUndefined(value: any): boolean {
   return ['Null', 'Undefined'].includes(getDataType(value))
+}
+
+/**
+ * 是否是数组对象
+ * @return true | false
+ * @category 数组Array
+ * @example
+ * ```ts
+ * isArrObj([{}]) // => true
+ * ```
+ * @example
+ * ```ts
+ * isArrObj([]) // => false
+ * ```
+ */
+export function isArrObj(object: any) {
+  if (!isArray(object)) return false
+  return object.every((item: any) => {
+    return isObject(item)
+  })
 }

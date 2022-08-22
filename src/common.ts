@@ -39,4 +39,3 @@ import * as TPS from '../types'
 export const getDataType: TPS.GetDataType = function (value) {
   return Object.prototype.toString.call(value).slice(8, -1)
 }
-
