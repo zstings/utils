@@ -110,15 +110,28 @@ export const assignMin: Assign = (target, ...sources) => {
  * // => {id: 3, age: 30}
  * ```
  */
-export const arrObjSum: ArrObjSum = (object, keys) => {
+type ArrS<T extends Record<string, any>, K extends keyof T> = (a: T, b: K) => Record<K, number>[]
+// export const arrObjSum: ArrS = (object, keys) => {
+export function arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]) {
   if (!isArrObj(object)) throw 'object 必须是数组对象'
-  const _keys = keys.map((item: any) => {
-    return {
-      [item]: object.reduce((start: any, end: any) => {
-        const value = start + Number(end[item])
-        return isNaN(value) ? 0 : value
-      }, 0)
-    }
+  // const _object = keys.reduce((start, end) => (start[end] = 0, start), {})
+  const _object: Record<string, any> = {}
+  keys.forEach(item => {
+    _object[item] = object.reduce((start: number, end: <K>T) => {
+      const value = start + Number(end[item])
+      return isNaN(value) ? 0 : value
+    }, 0)
   })
-  return _keys
+  // const _keys = keys.map(item => {
+  //   return {
+  //     [item]: object.reduce((start: number, end: <K>T) => {
+  //       const value = start + Number(end[item])
+  //       return isNaN(value) ? 0 : value
+  //     }, 0)
+  //   }
+  // })
+  return a
 }
+
+const arr = arrObjSum([{ a: 1 }], ['a'])
+console.log(arr)
