@@ -48,4 +48,14 @@ export { chunk, compact, fromPairs, unique } from '@/array'
 export { createData, omit, assign, assignMin, arrObjSum } from '@/object'
 
 // 工具相关
-export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom, deepClone } from '@/util'
+export {
+  downloadFile,
+  gbkToUtf8,
+  getUUID,
+  getUrlParam,
+  scrollTo,
+  phoneEncrypt,
+  getRandom,
+  deepClone,
+  getUrlQuery
+} from '@/util'
