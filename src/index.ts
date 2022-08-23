@@ -21,7 +21,9 @@ export {
   isBoolean,
   isEmptyObject,
   isIncludeChinese,
-  isDom
+  isDom,
+  isArrObj,
+  isNullOrUndefined
 } from '@/verify'
 
 // 设备相关
