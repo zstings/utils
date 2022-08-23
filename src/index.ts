@@ -31,7 +31,7 @@ export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile } from './devic
 export { padInt, toNumber, toFixed } from '@/number'
 
 // 时间相关
-export { getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo } from './date'
+export { getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo, getDataSection } from './date'
 
 // 函数相关
 export { debounce, throttle } from './function'
@@ -43,7 +43,7 @@ export { upperFirst } from './string'
 export { chunk, compact, fromPairs, unique } from '@/array'
 
 // 对象相关
-export { createData, omit, assign, assignMin } from '@/object'
+export { createData, omit, assign, assignMin, arrObjSum } from '@/object'
 
 // 工具相关
 export { downloadFile, gbkToUtf8, getUUID, getUrlParam, scrollTo, phoneEncrypt, getRandom, deepClone } from '@/util'

@@ -1,7 +1,7 @@
 import { padInt } from '@/number'
 import { getDataType } from '@/common'
 import { GetTimeStamp, GetFormatDateTime } from '@types'
-import { isNumber, isString, isNullOrUndefined } from '@/verify'
+import { isNumber, isString, isNullOrUndefined, isObject, isDate } from '@/verify'
 
 /**
  * 获取时间戳
@@ -189,4 +189,45 @@ export function howLongAgo(endTime: number | string, startTime?: number | string
     }
   }
   return ''
+}
+
+/**
+ * 获取时间区间
+ * @param day 间隔天数，默认0，表示今天
+ * @param option 选项
+ * @param option.start 起始时间，支持Date|Number|String， 默认今天
+ * @returns 数组 [起始时间, 结束时间]
+ * @throws day 必须是数字
+ * @throws option 必须是对象
+ * @throws option.start 必须是Date|Number|String
+ * @category 时间Date
+ * @example
+ * ```ts
+ * getDataSection() // => ['2022-08-22', '2022-08-23']
+ * ```
+ * @example
+ * 近7天时间区间
+ * ```ts
+ * getDataSection(7) // => ['2022-08-16', '2022-08-23']
+ * ```
+ * @example
+ * 近30天时间区间
+ * ```ts
+ * getDataSection(30) // => ['2022-07-24', '2022-08-23']
+ * ```
+ * @example
+ * 指定起始时间
+ * ```ts
+ * getDataSection(1, '2022-08-17') // => ['2022-08-16', '2022-08-17']
+ * // => '3分钟前'
+ * ```
+ */
+export function getDataSection(day = 0, option = { start: Date.now() }) {
+  if (!isNumber(day)) throw 'day 必须是数字'
+  if (!isObject(option)) throw 'option 必须是对象'
+  const { start = Date.now() } = option
+  if (!(isDate(start) || isNumber(start) || isString(start))) throw 'option.start 必须是Date|Number|String'
+  const _startTime = isNumber(start) || isString(start) ? new Date(start).getTime() : start
+  const _endTime = _startTime - day * 8.64e7
+  return [getFormatDateTime(_endTime, 'YYYY-MM-DD'), getFormatDateTime(_startTime, 'YYYY-MM-DD')]
 }

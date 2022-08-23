@@ -1,5 +1,5 @@
 import { deepClone } from '@/util'
-import { Omit, Assign, ArrObjSum } from '@types'
+import { Omit, Assign } from '@types'
 import { isArrObj, isEmptyObject } from '@/verify'
 
 /**
@@ -110,28 +110,14 @@ export const assignMin: Assign = (target, ...sources) => {
  * // => {id: 3, age: 30}
  * ```
  */
-type ArrS<T extends Record<string, any>, K extends keyof T> = (a: T, b: K) => Record<K, number>[]
-// export const arrObjSum: ArrS = (object, keys) => {
 export function arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]) {
   if (!isArrObj(object)) throw 'object 必须是数组对象'
-  // const _object = keys.reduce((start, end) => (start[end] = 0, start), {})
-  const _object: Record<string, any> = {}
+  const _object = {} as Record<K, number>
   keys.forEach(item => {
-    _object[item] = object.reduce((start: number, end: <K>T) => {
+    _object[item] = object.reduce((start: number, end) => {
       const value = start + Number(end[item])
       return isNaN(value) ? 0 : value
     }, 0)
   })
-  // const _keys = keys.map(item => {
-  //   return {
-  //     [item]: object.reduce((start: number, end: <K>T) => {
-  //       const value = start + Number(end[item])
-  //       return isNaN(value) ? 0 : value
-  //     }, 0)
-  //   }
-  // })
-  return a
+  return _object
 }
-
-const arr = arrObjSum([{ a: 1 }], ['a'])
-console.log(arr)
