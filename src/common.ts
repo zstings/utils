@@ -1,4 +1,4 @@
-import * as TPS from '../types'
+import * as TPS from '@types'
 
 /**
  * 获取数据类型

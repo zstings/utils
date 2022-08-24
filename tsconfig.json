@@ -9,6 +9,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationDir": "./dist/types",
+    "outDir": "./dist/types",
     "typeRoots": [
       "node_modules/@types"
     ],

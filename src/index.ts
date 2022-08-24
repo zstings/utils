@@ -27,19 +27,19 @@ export {
 } from '@/verify'
 
 // 设备相关
-export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile } from './device'
+export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile } from '@/device'
 
 // 数字相关
 export { padInt, toNumber, toFixed } from '@/number'
 
 // 时间相关
-export { getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo, getDataSection } from './date'
+export { getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo, getDataSection } from '@/date'
 
 // 函数相关
-export { debounce, throttle } from './function'
+export { debounce, throttle } from '@/function'
 
 // 字符串相关
-export { upperFirst } from './string'
+export { upperFirst } from '@/string'
 
 // 数组相关
 export { chunk, compact, fromPairs, unique } from '@/array'
