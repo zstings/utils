@@ -193,7 +193,7 @@ export function howLongAgo(endTime: number | string, startTime?: number | string
 
 /**
  * 获取时间区间
- * @param day 间隔天数，默认0，表示今天
+ * @param day 间隔天数，默认1，表示今天
  * @param option 选项
  * @param option.start 起始时间，支持Date|Number|String， 默认今天
  * @returns 数组 [起始时间, 结束时间]
@@ -203,31 +203,31 @@ export function howLongAgo(endTime: number | string, startTime?: number | string
  * @category 时间Date
  * @example
  * ```ts
- * getDataSection() // => ['2022-08-22', '2022-08-23']
+ * getDataSection() // => ['2022-08-23', '2022-08-23']
  * ```
  * @example
  * 近7天时间区间
  * ```ts
- * getDataSection(7) // => ['2022-08-16', '2022-08-23']
+ * getDataSection(7) // => ['2022-08-17', '2022-08-23']
  * ```
  * @example
  * 近30天时间区间
  * ```ts
- * getDataSection(30) // => ['2022-07-24', '2022-08-23']
+ * getDataSection(30) // => ['2022-07-28', '2022-08-26']
  * ```
  * @example
  * 指定起始时间
  * ```ts
- * getDataSection(1, '2022-08-17') // => ['2022-08-16', '2022-08-17']
+ * getDataSection(7, {start: '2022-08-17'}) // => ['2022-08-11', '2022-08-17']
  * // => '3分钟前'
  * ```
  */
-export function getDataSection(day = 0, option = { start: Date.now() }) {
+export function getDataSection(day = 1, option = { start: Date.now() }) {
   if (!isNumber(day)) throw 'day 必须是数字'
   if (!isObject(option)) throw 'option 必须是对象'
   const { start = Date.now() } = option
   if (!(isDate(start) || isNumber(start) || isString(start))) throw 'option.start 必须是Date|Number|String'
   const _startTime = isNumber(start) || isString(start) ? new Date(start).getTime() : start
-  const _endTime = _startTime - day * 8.64e7
+  const _endTime = _startTime - ((day || 1) - 1) * 8.64e7
   return [getFormatDateTime(_endTime, 'YYYY-MM-DD'), getFormatDateTime(_startTime, 'YYYY-MM-DD')]
 }
