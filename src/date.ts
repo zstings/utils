@@ -4,6 +4,62 @@ import { GetTimeStamp, GetFormatDateTime } from '@types'
 import { isNumber, isString, isNullOrUndefined, isObject, isDate } from '@/verify'
 
 /**
+ * 获取时间对象
+ * @param time 时间戳|格式化后的时间字符|时间对象
+ * @returns 时间对象
+ * @throws Invalid Date 传入值无法转为Date时触发
+ * @category 时间Date
+ * @example
+ * 获取当前的时间对象
+ * ```ts
+ * day()
+ * // => Mon Aug 29 2022 17:56:41 GMT+0800 (中国标准时间)
+ * ```
+ * @example
+ * 支持时间戳
+ * ```ts
+ * day(1318781876406)
+ * // => Mon Oct 17 2011 00:17:56 GMT+0800 (中国标准时间)
+ * ```
+ * @example
+ * 支持格式化的时间字符
+ * ```ts
+ * day('2018-04-04T16:00:00.000Z')
+ * // => Thu Apr 05 2018 00:00:00 GMT+0800 (中国标准时间)
+ *
+ * day('2022-12-12')
+ * // => Mon Dec 12 2022 08:00:00 GMT+0800 (中国标准时间)
+ *
+ * day('2022-12-12 23:45')
+ * // => Mon Dec 12 2022 23:45:00 GMT+0800 (中国标准时间)
+ * ```
+ * @example
+ * 支持Date对象
+ * ```ts
+ * day(Date.now())
+ * // => day:1 Mon Aug 29 2022 18:02:32 GMT+0800 (中国标准时间)
+ * ```
+ * @example
+ * 对于非0的falsey值，等同于 new Date()
+ * ```
+ * day(null) == day()
+ * day(undefined) == day()
+ * day(false) == day()
+ * day('') == day()
+ * ```
+ * @example
+ * 传入参数无法转换为时间对象会报错
+ * ```
+ * day('aaa') // throw 'Invalid Date'
+ * ```
+ */
+export function day(time: number | string | Date): Date {
+  const _time = time || time === 0 ? new Date(time) : new Date()
+  if (_time.toString() === 'Invalid Date') throw 'Invalid Date'
+  return _time
+}
+
+/**
  * 获取时间戳
  * @param value 时间对象或者格式化后的时间
  * @param unit 返回格式,支持毫秒或者秒,默认毫秒
