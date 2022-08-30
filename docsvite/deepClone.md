@@ -1,7 +1,7 @@
 ## deepClone :tada: :100: 
 深度复制
 #### 参数 
-- source `T`  
+- **source** `T`  
 #### td.ts
 ::: info
 `deepClone<T>(source: T): T`

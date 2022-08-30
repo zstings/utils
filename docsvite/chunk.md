@@ -1,9 +1,9 @@
 ## chunk :tada: :100: 
 按长度拆分数组
 #### 参数 
-- array `any[]` 数组
+- **array** `any[]` 数组
  
-- size `number = 1` 长度 默认1
+- **size** `number = 1` 长度 默认1
  
 #### td.ts
 ::: info

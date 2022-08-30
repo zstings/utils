@@ -1,9 +1,9 @@
 ## getUrlParam :tada: :100: 
 获取url上的参数
 #### 参数 
-- name `string` 参数名，必填
+- **name** `string` 参数名，必填
  
-- url? `string | Location` url地址，为空时是window.location， 非必填
+- **url?** `string | Location` url地址，为空时是window.location， 非必填
  
 #### td.ts
 ::: info

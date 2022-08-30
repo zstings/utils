@@ -1,9 +1,9 @@
 ## arrObjSum :tada: :100: 
 数组对象key值求和
 #### 参数 
-- object `T[]` 目标对象
+- **object** `T[]` 目标对象
  
-- keys `K[]` 需要求和的key数组
+- **keys** `K[]` 需要求和的key数组
  
 #### td.ts
 ::: info

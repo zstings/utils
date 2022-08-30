@@ -1,11 +1,11 @@
 ## toFixed :tada: :100: 
 数字保留小数位
 #### 参数 
-- value `number` 数字
+- **value** `number` 数字
  
-- num `number = 2` 保留的小数位
+- **num** `number = 2` 保留的小数位
  
-- isRound `boolean = true` 是否需要四舍五入
+- **isRound** `boolean = true` 是否需要四舍五入
  
 #### td.ts
 ::: info

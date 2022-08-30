@@ -1,9 +1,9 @@
 ## downloadFile :tada: :100: 
 文件下载
 #### 参数 
-- name `string` 文件名
+- **name** `string` 文件名
  
-- blob `Blob` 文件blob数据
+- **blob** `Blob` 文件blob数据
  
 #### td.ts
 ::: info

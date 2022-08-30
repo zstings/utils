@@ -1,7 +1,7 @@
 ## upperFirst :tada: :100: 
 首字母大写
 #### 参数 
-- str `any` 传入参数, 如果参数不是字符串，会先调用toString方法
+- **str** `any` 传入参数, 如果参数不是字符串，会先调用toString方法
  
 #### td.ts
 ::: info

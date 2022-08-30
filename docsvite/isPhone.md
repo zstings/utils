@@ -1,7 +1,7 @@
 ## isPhone :tada: :100: 
 判断是否为手机号
 #### 参数 
-- str `string | number`  
+- **str** `string | number`  
 #### td.ts
 ::: info
 `isPhone(str: string | number): boolean`

@@ -1,9 +1,9 @@
 ## getMonthNum :tada: :100: 
 获取指定月的天数
 #### 参数 
-- year? `number` 年份, 默认当前年
+- **year?** `number` 年份, 默认当前年
  
-- month? `number` 月份, 默认当前月
+- **month?** `number` 月份, 默认当前月
  
 #### td.ts
 ::: info

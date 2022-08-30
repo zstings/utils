@@ -1,9 +1,9 @@
 ## padInt :tada: :100: 
 数字补0
 #### 参数 
-- value `string | number` 数字或者字符串的数字
+- **value** `string | number` 数字或者字符串的数字
  
-- len? `number` 补充的长度， 默认2
+- **len?** `number` 补充的长度， 默认2
  
 #### td.ts
 ::: info

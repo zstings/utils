@@ -1,7 +1,7 @@
 ## isDate :tada: :100: 
 判断是否为Date
 #### 参数 
-- value `any` 任意值
+- **value** `any` 任意值
  
 #### td.ts
 ::: info

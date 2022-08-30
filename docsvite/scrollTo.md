@@ -1,17 +1,17 @@
 ## scrollTo :tada: :100: 
 滚动至···
 #### 参数 
-- option? `{ direction?: "top" | "left"; dom?: HTMLElement; num?: number; rate?: number }` 可选的对象
+- **option?** `{ direction?: "top" | "left"; dom?: HTMLElement; num?: number; rate?: number }` 可选的对象
  
-	- direction? `"top" | "left"` 滚动的方向，默认 'top', 支持 'top' | 'left'
+	- **direction?** `"top" | "left"` 滚动的方向，默认 'top', 支持 'top' | 'left'
  
-	- dom? `HTMLElement` 滚动的目标元素，默认 document.scrollingElement
+	- **dom?** `HTMLElement` 滚动的目标元素，默认 document.scrollingElement
  
-	- num? `number` 滚动的目标值，默认 0
+	- **num?** `number` 滚动的目标值，默认 0
  
-	- rate? `number` 滚动的步长，默认 4
+	- **rate?** `number` 滚动的步长，默认 4
  
-- callback? `() => void` 滚动结束的回调函数
+- **callback?** `() => void` 滚动结束的回调函数
  
 #### td.ts
 ::: info

@@ -1,7 +1,7 @@
 ## isNullOrUndefined :tada: :100: 
 是否是null|undefined
 #### 参数 
-- value `any` 任意值
+- **value** `any` 任意值
  
 #### td.ts
 ::: info

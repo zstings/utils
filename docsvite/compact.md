@@ -1,7 +1,7 @@
 ## compact :tada: :100: 
 移除所有 falsey 值的数组
 #### 参数 
-- array `any[]` 数组
+- **array** `any[]` 数组
  
 #### td.ts
 ::: info

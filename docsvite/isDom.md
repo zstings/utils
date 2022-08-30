@@ -1,7 +1,7 @@
 ## isDom :tada: :100: 
 是否是dom
 #### 参数 
-- tarage `Element` dom
+- **tarage** `Element` dom
  
 #### td.ts
 ::: info

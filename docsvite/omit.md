@@ -1,9 +1,9 @@
 ## omit :tada: :100: 
 删除指定对象的指定属性
 #### 参数 
-- object `Record<string, any>` 指定对象
+- **object** `Record<string, any>` 指定对象
  
-- paths `string[]`  
+- **paths** `string[]`  
 #### td.ts
 ::: info
 `omit(object: Record<string, any>, paths: string[]): Record<string, any>`

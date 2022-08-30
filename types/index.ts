@@ -29,9 +29,7 @@ export type ScrollTo = (
   callback?: () => void
 ) => void
 
-export type GetFormatDateTime = (value?: Date | number, format?: string) => string
-
-export type GetTimeStamp = (value?: Date | string, unit?: 'ms' | 's') => number
+export declare type Times = number | string | Date | (string | number)[]
 
 export type Debounce = (
   func: (...params: any[]) => any,

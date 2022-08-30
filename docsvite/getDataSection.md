@@ -1,15 +1,19 @@
 ## getDataSection :tada: :100: 
 获取时间区间
 #### 参数 
-- day `number = 1` 间隔天数，默认1，表示今天
+- **day** `number = 1` 间隔天数，默认1，表示今天
  
-- option `{ start: number } = ...` 选项
+- **option** `{ format?: string; start?: string | number | Date | (string | number)[]; timeStamp?: boolean } = ...` 选项
  
-	- start `number` 起始时间，支持Date|Number|String， 默认今天
+	- **format?** `string` 时间格式， 默认YYYY-MM-DD
+ 
+	- **start?** `string | number | Date | (string | number)[]` 起始时间， 默认今天
+ 
+	- **timeStamp?** `boolean` 是否时间戳，默认false， 为true时，忽略 format
  
 #### td.ts
 ::: info
-`getDataSection(day?: number, option?: { start: number }): string[]`
+`getDataSection(day?: number, option?: { format?: string; start?: string | number | Date | (string | number)[]; timeStamp?: boolean }): (number | string)[]`
 :::
 #### 返回 
 ::: tip
@@ -23,7 +27,13 @@ day 必须是数字
 option 必须是对象
 :::
 ::: danger
-option.start 必须是Date|Number|String
+option.start 必须可以被转化为Date
+:::
+::: danger
+option.format 必须是字符串
+:::
+::: danger
+option.timeStamp 必须是布尔值
 :::
 #### 实例 
 ```ts

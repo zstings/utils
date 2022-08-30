@@ -1,7 +1,7 @@
 ## getUrlQuery :tada: :100: 
 获取url上的参数
 #### 参数 
-- url? `Location | URL`  
+- **url?** `Location | URL`  
 #### td.ts
 ::: info
 `getUrlQuery(url?: Location | URL): Record<string, any>`

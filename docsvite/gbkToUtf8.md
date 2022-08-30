@@ -1,7 +1,7 @@
 ## gbkToUtf8 :tada: :100: 
 gbk 转 utf-8
 #### 参数 
-- value `ArrayBuffer` ArrayBuffer
+- **value** `ArrayBuffer` ArrayBuffer
  
 #### td.ts
 ::: info

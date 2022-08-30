@@ -1,13 +1,13 @@
 ## howLongAgo :tada: :100: 
 获取距离指定时间之前
 #### 参数 
-- endTime `string | number` 目标时间戳或者格式化的时间字符
+- **endTime** `string | number | Date | (string | number)[] = ...` 目标时间戳或者格式化的时间字符
  
-- startTime? `string | number` 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
+- **startTime** `string | number | Date | (string | number)[] = ...` 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
  
 #### td.ts
 ::: info
-`howLongAgo(endTime: string | number, startTime?: string | number): string`
+`howLongAgo(endTime?: string | number | Date | (string | number)[], startTime?: string | number | Date | (string | number)[]): string`
 :::
 #### 返回 
 - `string` 

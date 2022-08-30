@@ -1,7 +1,7 @@
 ## phoneEncrypt :tada: :100: 
 对手机号进行加密处理
 #### 参数 
-- value `string | number` 手机号：支持字符串或者数字
+- **value** `string | number` 手机号：支持字符串或者数字
  
 #### td.ts
 ::: info

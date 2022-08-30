@@ -1,9 +1,9 @@
 ## unique :tada: :100: 
 数组去重
 #### 参数 
-- array `any[]` 数组
+- **array** `any[]` 数组
  
-- key? `string` 指定数组对象需要对比的key
+- **key?** `string` 指定数组对象需要对比的key
  
 #### td.ts
 ::: info

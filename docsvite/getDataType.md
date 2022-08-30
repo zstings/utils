@@ -1,7 +1,7 @@
 ## getDataType :tada: :100: 
 获取数据类型
 #### 参数 
-- value `any` 任意值
+- **value** `any` 任意值
  
 #### td.ts
 ::: info

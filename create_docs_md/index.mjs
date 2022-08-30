@@ -80,7 +80,7 @@ function parameters($) {
         return ite
       })
       const comment = $(item).children('.tsd-comment.tsd-typography')?.text() || ''
-      str += `${gk || ''}- ${title[0]} \`${title[1]}\` ${comment} \n`
+      str += `${gk || ''}- **${title[0]}** \`${title[1]}\` ${comment} \n`
       const children = $(item).find('.tsd-parameter')
       if (children.length > 0) fil(children, '\t')
     })

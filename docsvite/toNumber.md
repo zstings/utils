@@ -1,7 +1,7 @@
 ## toNumber :tada: :100: 
 转换为数字
 #### 参数 
-- value `T` 任意值
+- **value** `T` 任意值
  
 #### td.ts
 ::: info

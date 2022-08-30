@@ -1,9 +1,9 @@
 ## assign :tada: :100: 
 合并对象
 #### 参数 
-- target `Record<string, any>` 目标对象，被合并的对象
+- **target** `Record<string, any>` 目标对象，被合并的对象
  
-- Rest ...sources `Record<string, any>[]` 源对象，可以多个
+- **Rest ...sources** `Record<string, any>[]` 源对象，可以多个
  
 #### td.ts
 ::: info

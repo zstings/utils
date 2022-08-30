@@ -1,13 +1,12 @@
 ## getFormatDateTime :tada: :100: 
 获取指定格式的时间
 #### 参数 
-- value? `number | Date` 时间对象或者时间戳
- 
-- format? `string` 返回格式 默认 YYYY-MM-DD hh:mm:ss
+- **time** `string | number | Date | (string | number)[] = ...`  
+- **format** `string = 'YYYY-MM-DD hh:mm:ss'` 返回格式 默认 YYYY-MM-DD hh:mm:ss
  
 #### td.ts
 ::: info
-`getFormatDateTime(value?: number | Date, format?: string): string`
+`getFormatDateTime(time?: string | number | Date | (string | number)[], format?: string): string`
 :::
 #### 返回 
 - `string` 

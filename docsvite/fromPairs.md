@@ -1,7 +1,7 @@
 ## fromPairs :tada: :100: 
 二维数组转化为对象
 #### 参数 
-- array `any[]` 数组
+- **array** `any[]` 数组
  
 #### td.ts
 ::: info

@@ -1,13 +1,13 @@
 ## getTimeStamp :tada: :100: 
 获取时间戳
 #### 参数 
-- value? `string | Date` 时间对象或者格式化后的时间
+- **time** `string | number | Date | (string | number)[] = ...` 时间戳|格式化后的时间字符|时间对象
  
-- unit? `"ms" | "s"` 返回格式,支持毫秒或者秒,默认毫秒
+- **unit** `string = 'ms'` 返回格式,支持毫秒或者秒,默认毫秒
  
 #### td.ts
 ::: info
-`getTimeStamp(value?: string | Date, unit?: "ms" | "s"): number`
+`getTimeStamp(time?: string | number | Date | (string | number)[], unit?: string): number`
 :::
 #### 返回 
 - `number` 
@@ -16,10 +16,7 @@
 :::
 #### 异常 
 ::: danger
-Invalid Date 传入值无法转为Date时触发
-:::
-::: danger
-参数错误 传入值不是字符串或者Date时触发
+Invalid Date 参数time无法转为Date时触发
 :::
 #### 实例 
 获取当前的时间戳

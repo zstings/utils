@@ -1,9 +1,9 @@
 ## getRandom :tada: :100: 
 均衡获取指定范围的随机整数
 #### 参数 
-- min `number = 0` 范围最小整数
+- **min** `number = 0` 范围最小整数
  
-- max `number = 1` 范围最大整数
+- **max** `number = 1` 范围最大整数
  
 #### td.ts
 ::: info

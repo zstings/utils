@@ -1,7 +1,7 @@
 ## isIncludeChinese :tada: :100: 
 检查字符串是否包含中文
 #### 参数 
-- value `string` 字符串
+- **value** `string` 字符串
  
 #### td.ts
 ::: info

@@ -1,7 +1,7 @@
 ## isEmptyObject :tada: :100: 
 判断对象是否是空对象
 #### 参数 
-- object `Record<string, unknown>` 对象
+- **object** `Record<string, unknown>` 对象
  
 #### td.ts
 ::: info

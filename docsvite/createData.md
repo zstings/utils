@@ -1,9 +1,9 @@
 ## createData :tada: :100: 
 指定深度或者广度的对象
 #### 参数 
-- deep `number = 1` 深度
+- **deep** `number = 1` 深度
  
-- breadth `number = 0` 广度
+- **breadth** `number = 0` 广度
  
 #### td.ts
 ::: info

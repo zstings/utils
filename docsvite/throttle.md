@@ -1,11 +1,11 @@
 ## throttle :tada: :100: 
 节流
 #### 参数 
-- func `(...params: any[]) => any` 函数
+- **func** `(...params: any[]) => any` 函数
  
-- wait `number = 500` 延迟时间 默认 500毫秒
+- **wait** `number = 500` 延迟时间 默认 500毫秒
  
-- immediate `boolean = false` 是否立即执行
+- **immediate** `boolean = false` 是否立即执行
  
 #### td.ts
 ::: info
