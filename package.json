@@ -1,6 +1,6 @@
 {
   "name": "tings-utils",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "license": "MIT",
   "author": "tings",
   "files": [
@@ -50,11 +50,11 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
+    "tsc-alias": "^1.7.0",
     "typedoc": "^0.23.11",
-    "typescript": "^4.8.2",
+    "typescript": "^4.8.3",
     "vite": "^3.0.9",
-    "vitepress": "1.0.0-alpha.12",
-    "tsc-alias": "^1.7.0"
+    "vitepress": "1.0.0-alpha.12"
   },
   "homepage": "https://github.com/qinzhongting/tings-utils#readme",
   "repository": {

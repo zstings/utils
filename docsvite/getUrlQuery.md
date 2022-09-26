@@ -1,13 +1,13 @@
 ## getUrlQuery :tada: :100: 
 获取url上的参数
 #### 参数 
-- **url?** `Location | URL`  
+- **url** `Location | URL = window.location`  
 #### td.ts
 ::: info
-`getUrlQuery(url?: Location | URL): Record<string, any>`
+`getUrlQuery(url?: Location | URL): { [k: string]: T }`
 :::
 #### 返回 
-- `Record` 
+- `映射` 
 ::: tip
 由参数组成的对象
 :::

@@ -341,3 +341,25 @@ export function isArrObj(object: any) {
     return isObject(item)
   })
 }
+
+/**
+ * 是否是json字符串
+ * @return true | false
+ * @category 工具Util
+ * @example
+ * ```ts
+ * isJsonString('{"a":1}') // => true
+ * ```
+ * @example
+ * ```ts
+ * isJsonString(1) // => false
+ * ```
+ */
+export function isJsonString(str: string) {
+  try {
+    JSON.parse(str)
+    return true
+  } catch (err) {
+    return false
+  }
+}

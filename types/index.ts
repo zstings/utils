@@ -43,4 +43,4 @@ export type Omit = (object: Record<string, any>, paths: string[]) => Record<stri
 
 export type Assign = (target: Record<string, any>, ...sources: Record<string, any>[]) => Record<string, any>
 
-export type GetUrlQuery = (url?: Location | URL) => Record<string, any>
+// export type GetUrlQuery = (url?: Location | URL) => Record<string, any>
