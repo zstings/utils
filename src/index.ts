@@ -27,7 +27,7 @@ export {
 } from '@/verify'
 
 // 设备相关
-export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile } from '@/device'
+export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile, isQQ, isWeixin, isWeixinMini, isWin } from '@/device'
 
 // 数字相关
 export { padInt, toNumber, toFixed } from '@/number'

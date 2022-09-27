@@ -1,5 +1,5 @@
 ## isDesktop :tada: :100: 
-是否是桌面端访问
+是否是桌面端
 #### td.ts
 ::: info
 `isDesktop(): boolean`
