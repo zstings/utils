@@ -130,16 +130,3 @@ export function qsParse(query = '', decode = true) {
   }
   return queryObj
 }
-
-export function getWx() {
-  return 123
-}
-
-export function getHref() {
-  return location.href
-}
-
-export function sdl() {
-  console.log(123)
-  return qsParse('a=12&c=1234')
-}
