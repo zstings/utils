@@ -57,7 +57,7 @@ export const getUrlParam: GetUrlParam = (name, url = window.location) => {
 export const getUrlQuery = (url: Location | URL = window.location) => {
   if (isString(url)) url = new URL(url as unknown as string)
   const urlSearch = url.search.substring(1)
-  const urlHash = url.hash.slice(location.hash.indexOf('?') + 1)
+  const urlHash = url.hash.indexOf('?') >= 0 ? url.hash.slice(url.hash.indexOf('?') + 1) : ''
   const searchArr = qsParse(urlSearch)
   const hashArr = qsParse(urlHash)
   return Object.assign(searchArr, hashArr)
