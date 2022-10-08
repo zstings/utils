@@ -1,5 +1,5 @@
 import { padInt } from '@/number'
-import { isNumber, isString, isObject, isBoolean } from '@/verify'
+import { isNumber, isString, isObject, isBoolean, isArray } from '@/verify'
 
 /**
  * 获取时间对象
@@ -65,7 +65,12 @@ import { isNumber, isString, isObject, isBoolean } from '@/verify'
  */
 
 export function days(time: number | string | Date | (string | number)[] = new Date()): Date {
-  const _time = time || time === 0 ? (typeof time == 'object' ? new Date(...(time as [])) : new Date(time)) : new Date()
+  const _time =
+    time || time === 0
+      ? isArray(time)
+        ? new Date(...(time as []))
+        : new Date(time as number | string | Date)
+      : new Date()
   if (_time.toString() === 'Invalid Date') throw 'Invalid Date'
   return _time
 }
