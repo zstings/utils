@@ -39,7 +39,7 @@ export { days, getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo, getData
 export { debounce, throttle } from '@/function'
 
 // 字符串相关
-export { upperFirst } from '@/string'
+export { upperFirst, byteSize, removeHTML } from '@/string'
 
 // 数组相关
 export { chunk, compact, fromPairs, unique } from '@/array'
