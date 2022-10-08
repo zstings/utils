@@ -9,8 +9,18 @@
 <body>
   <script src="../dist/tings-utils.umd.js"></script>
   <script>
-    const {removeHTML} = tingsUtils
+    const {removeHTML, randomRgba, extendHex, rgbToHex} = tingsUtils
     console.log(removeHTML(true))
+    const a = randomRgba()
+    document.body.style.backgroundColor = `rgba(${a})`
+    console.log(a)
+    console.log(extendHex('#0033ff33'))
+    console.log(extendHex('#0033ff'))
+    console.log(extendHex('#0033ffFF'))
+    console.log(extendHex('#003'))
+    console.log(extendHex('#0034'))
+    console.log(rgbToHex('170,187,255'))
+    console.log(rgbToHex('170,187,255, 0.91'))
   </script>
 </body>
 </html>

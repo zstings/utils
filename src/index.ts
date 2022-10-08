@@ -52,3 +52,6 @@ export { getUrlParam, getUrlQuery, qsParse, qsStringify } from '@/url'
 
 // 工具相关
 export { downloadFile, gbkToUtf8, getUUID, scrollTo, phoneEncrypt, getRandom, deepClone } from '@/util'
+
+// 颜色相关
+export { randomHex, randomRgba, hexToRgb, rgbToHex, extendHex, shrinkHex, isHex, isRgba } from '@/color'

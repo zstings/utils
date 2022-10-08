@@ -197,6 +197,7 @@ function categoriesSort(categories) {
     '时间Date',
     '设备Device',
     'URL',
+    '颜色Color',
     '工具Util'
   ]
   const sortArr = []
