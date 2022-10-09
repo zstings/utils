@@ -1,4 +1,4 @@
-import { isString } from '@/verify'
+import { isNumber, isString } from '@/verify'
 
 /**
  * 首字母大写
@@ -77,4 +77,41 @@ export function byteSize(str: any): number {
 export function removeHTML(str: any): string {
   const _str = isString(str) ? str : str.toString()
   return _str.replace(/<[^>]+>/g, '').replace(/&[\s\S]+?;/g, '')
+}
+
+/**
+ * 移除字符串中的html标签
+ * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
+ * @param start 开始下标
+ * @param length 长度
+ * @param mask 掩码字符 默认*
+ * @returns 字符串
+ * @category 字符串String
+ * @example
+ * ```ts
+ * mask('123456') // => '******'
+ * ```
+ * @example
+ * 设置开始位置
+ * ```ts
+ * mask('123456', 2) // => '12****'
+ * ```
+ * @example
+ * 设置长度
+ * ```ts
+ * mask('123456', 2, 3) // => '12***6'
+ * ```
+ * @example
+ * 修改掩码字符
+ * ```ts
+ * mask('123456', 2, 3, '.') // => '12...6'
+ * ```
+ */
+export function mask(str: string, start = 0, length?: number, mask = '*'): string {
+  const _str = isString(str) ? str : str.toString()
+  if (!isNumber(start)) throw 'start 必须是数字'
+  if ((length || length == 0) && !isNumber(length)) throw 'length 必须是数字'
+  if (!isString(mask)) throw 'mask 必须是字符串'
+  const val = length || length == 0 ? _str.slice(start, length + start) : _str.slice(start)
+  return _str.replace(val, mask.padEnd(val.length, mask))
 }
