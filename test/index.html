@@ -7,9 +7,10 @@
   <title>Document</title>
 </head>
 <body>
+  <audio id="player" src="http://101.43.182.210:2333/bili/av22590813_1.m4a?x-cos-traffic-limit=819200" controls="controls" autoplay="autoplay" style="width: 100%; outline: medium;"></audio>
   <script src="../dist/tings-utils.umd.js"></script>
   <script>
-    const {removeHTML, randomRgba, extendHex, rgbToHex} = tingsUtils
+    const {removeHTML, randomRgba, extendHex, rgbToHex, mask, phoneEncrypt} = tingsUtils
     console.log(removeHTML(true))
     const a = randomRgba()
     document.body.style.backgroundColor = `rgba(${a})`
@@ -21,6 +22,15 @@
     console.log(extendHex('#0034'))
     console.log(rgbToHex('170,187,255'))
     console.log(rgbToHex('170,187,255, 0.91'))
+
+    console.log(mask('123456'))
+    console.log(mask('123456', 2))
+    console.log(mask('123456', 2, 3))
+    console.log(mask('123456', 2, 3, '.'))
+    console.log(mask('13300001111', 3, 4))
+
+    console.log(phoneEncrypt('13300001111', 3, 4))
+    console.log(phoneEncrypt(13300002345, 3, 4))
   </script>
 </body>
 </html>
