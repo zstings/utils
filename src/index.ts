@@ -30,7 +30,7 @@ export {
 export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile, isQQ, isWeixin, isWeixinMini, isWin } from '@/device'
 
 // 数字相关
-export { padInt, toNumber, toFixed } from '@/number'
+export { padInt, toNumber, toFixed, isInt } from '@/number'
 
 // 时间相关
 export { days, getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo, getDataSection } from '@/date'
