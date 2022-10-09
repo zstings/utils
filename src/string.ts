@@ -80,7 +80,8 @@ export function removeHTML(str: any): string {
 }
 
 /**
- * 移除字符串中的html标签
+ * 字符串替换
+ * 使用指定的掩码字符替换start~length之间的所有字符
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
  * @param start 开始下标
  * @param length 长度
