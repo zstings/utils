@@ -87,6 +87,9 @@ export function removeHTML(str: any): string {
  * @param length 长度
  * @param mask 掩码字符 默认*
  * @returns 字符串
+ * @throws start 必须是数字  start不是数字时触发
+ * @throws length 必须是数字 length存在且不是数字时触发
+ * @throws mask 必须是字符串 mask不是字符串时触发
  * @category 字符串String
  * @example
  * ```ts
