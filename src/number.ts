@@ -84,3 +84,21 @@ export function toFixed(value: number, num = 2, isRound = true): number {
   if (isRound) return parseFloat(_val.toFixed(num))
   return parseFloat(_val.toFixed(num + 1).slice(0, -1))
 }
+
+/**
+ * 是否为整数
+ * @param value 检查的值
+ * @return true | false
+ * @category 数字Number
+ * @example
+ * ```ts
+ * isInt(1) // => true
+ * ```
+ * @example
+ * ```ts
+ * isInt(1.21) // => false
+ * ```
+ */
+export function isInt(value: any): boolean {
+  return Number.isInteger(value)
+}
