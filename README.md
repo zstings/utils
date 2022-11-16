@@ -66,3 +66,17 @@ cdn 使用模块导入-importmap模式
   console.log(getDataType([])) // Array
 </script>
 ```
+
+
+## 在deno中使用
+使用deno提供的cdn
+```ts
+import {byteSize} from "https://esm.sh/tings-utils";
+console.log(byteSize('hello')); // 5
+```
+deno也可以使用npm模式
+```ts
+// import {byteSize} from "npm:tings-utils@0.3.1"; 指定版本
+import {byteSize} from "npm:tings-utils";
+console.log(byteSize('hello')); // 5
+```

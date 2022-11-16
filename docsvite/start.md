@@ -1,5 +1,5 @@
 ## 前言
-本节将帮助您从头开始在项目中安装使用 tings-utils。如果还没有可使用的项目，请自行使用vuecli、vite2等工具创建，如果您准备就绪了，请从步骤 1 开始。
+本节将帮助您从头开始在项目中安装使用 tings-utils。
 ::: warning 警告
 警告: tings-utils目前处于早期试用状态， 尽管它已经适合开箱即用，但仍然不推荐在正式项目中使用。
 :::
@@ -64,4 +64,17 @@ cdn 使用模块导入-importmap模式
   import {getDataType} from 'tings-utils'
   console.log(getDataType([])) // Array
 </script>
+```
+
+## 在deno中使用
+使用deno提供的cdn
+```ts
+import {byteSize} from "https://esm.sh/tings-utils";
+console.log(byteSize('hello')); // 5
+```
+deno也可以使用npm模式
+```ts
+// import {byteSize} from "npm:tings-utils@0.3.1"; 指定版本
+import {byteSize} from "npm:tings-utils";
+console.log(byteSize('hello')); // 5
 ```
