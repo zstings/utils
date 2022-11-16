@@ -1,6 +1,8 @@
 ## mask :tada: :100: 
 字符串替换
+::: info
 使用指定的掩码字符替换start~length之间的所有字符
+:::
 #### 参数 
 - **str** `string` 传入参数, 如果参数不是字符串，会先调用toString方法
  

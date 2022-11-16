@@ -126,7 +126,13 @@ data.children.forEach(item => {
   // 标题
   if (signatures?.name) str += `## ${signatures?.name} :tada: :100: \n`
   // 描述
-  if (signatures?.comment?.summary?.[0]?.text) str += signatures?.comment?.summary?.[0]?.text + '\n'
+  if (signatures?.comment?.summary?.[0]?.text) {
+    const summaryArr = signatures?.comment?.summary?.[0]?.text.split('\r\n')
+    str += summaryArr[0] + '\n'
+    if (summaryArr[1]) {
+      str += `::: info\n${summaryArr[1]}\n:::\n`
+    }
+  }
   // 参数
   if (signatures?.parameters) {
     str += '#### 参数 \n'
@@ -179,7 +185,7 @@ function createMenu() {
       const datas = data.children.filter(itx => itx.id == ite)[0]
 
       return {
-        text: `${datas.name}\n${datas.signatures?.[0].comment?.summary?.[0]?.text}`,
+        text: `${datas.name}\n${datas.signatures?.[0].comment?.summary?.[0]?.text.split('\r\n')[0]}`,
         link: `/${datas.name}`
       }
     })
