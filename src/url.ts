@@ -2,6 +2,33 @@ import { GetUrlParam } from '@types'
 import { isJsonString, isLocation, isString } from '@/verify'
 
 /**
+ * 是否是url
+ * @param url 需要验证的内容，类型：string
+ * @returns Boolean
+ * @throws 参数必须是string 参数不是string时触发
+ * @category URL
+ * @example
+ * ```ts
+ * isURL('https://a.b.c')
+ * // => true
+ * ```
+ * @example
+ * ```ts
+ * isURL('123')
+ * // => false
+ * ```
+ */
+export function isURL(url: string): boolean {
+  if (!isString(url)) throw '参数必须是string'
+  try {
+    const _url = new URL(url)
+    return !!_url.href
+  } catch (err) {
+    return false
+  }
+}
+
+/**
  * 获取url上的参数
  * @param name 参数名，必填
  * @param url url地址，为空时是window.location， 非必填
