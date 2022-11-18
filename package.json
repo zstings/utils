@@ -1,19 +1,20 @@
 {
-  "name": "tings-utils",
-  "version": "0.3.1",
+  "name": "@zstings/utils",
+  "uname": "utils",
+  "version": "0.4.0",
   "license": "MIT",
-  "author": "tings",
+  "author": "@zstings",
   "files": [
     "dist"
   ],
   "type": "module",
-  "main": "./dist/tings-utils.umd.js",
-  "module": "./dist/tings-utils.es.js",
+  "main": "./dist/utils.umd.js",
+  "module": "./dist/utils.es.js",
   "types": "./dist/types/src/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/tings-utils.es.js",
-      "require": "./dist/tings-utils.umd.js",
+      "import": "./dist/utils.es.js",
+      "require": "./dist/utils.umd.js",
       "types": "./dist/types/src/index.d.ts"
     }
   },
@@ -30,17 +31,10 @@
   "keywords": [
     "tings",
     "utils",
-    "js-utils",
     "jsutils",
-    "ts-utils",
     "tsutils",
-    "ts-tools",
-    "tstools",
-    "js-tools",
-    "jstools",
-    "工具函数",
-    "js工具",
-    "ts工具"
+    "js工具函数",
+    "ts工具函数"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.43.0",
@@ -56,9 +50,13 @@
     "vite": "^3.2.4",
     "vitepress": "1.0.0-alpha.29"
   },
-  "homepage": "https://github.com/qinzhongting/tings-utils#readme",
+  "homepage": "https://github.com/zstings/utils#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qinzhongting/tings-utils.git"
+    "url": "git+https://github.com/zstings/utils.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import { name } from './package.json'
+import { uname } from './package.json'
 
 export default defineConfig({
   resolve: {
@@ -13,9 +13,9 @@ export default defineConfig({
     assetsDir: '',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'tingsUtils',
+      name: 'utils',
       format: ['es', 'cjs'],
-      fileName: format => `${name}.${format}.js`
+      fileName: format => `${uname}.${format}.js`
     }
   }
 })

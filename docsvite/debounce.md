@@ -5,7 +5,7 @@
  
 - **awit?** `number` 延迟时间 默认 500毫秒
  
-- **option?** `{ leading?: boolean; trailing?: boolean }` 可选的对象
+- **option?** `{     leading?: boolean;     trailing?: boolean; }` 可选的对象
  
 	- **leading?** `boolean` 前置边缘执行，默认 false
  
@@ -13,7 +13,7 @@
  
 #### td.ts
 ::: info
-`debounce(func: ((...params: any[]) => any), awit?: number, option?: { leading?: boolean; trailing?: boolean }): any`
+`debounce(func: ((...params: any[]) => any), awit?: number, option?: {     leading?: boolean;     trailing?: boolean; }): any`
 :::
 #### 异常 
 ::: danger

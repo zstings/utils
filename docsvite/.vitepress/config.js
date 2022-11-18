@@ -12,12 +12,12 @@ const sidebar = [
 ]
 sidebar.push(...em)
 export default {
-  title: 'tings-utils',
-  description: 'JS & TS utils.',
-  base: '/tings-utils/',
+  title: '@zstings/utils',
+  description: 'javascript & typescript utils.',
+  base: '/utils/',
   outDir: '../docs',
   head: [
-    ['link', { rel: 'stylesheet', href: '/tings-utils/styles/index.css' }]
+    ['link', { rel: 'stylesheet', href: '/utils/styles/index.css' }]
   ],
   markdown: {
     theme: 'material-palenight',
@@ -25,7 +25,7 @@ export default {
   },
   themeConfig: {
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/qinzhongting/tings-utils/' }
+      { icon: 'github', link: 'https://github.com/zstings/utils/' }
     ],
     algolia: {
     },

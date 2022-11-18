@@ -4,7 +4,7 @@
 - **url** `Location | URL = window.location`  
 #### td.ts
 ::: info
-`getUrlQuery(url?: Location | URL): { [k: string]: T }`
+`getUrlQuery(url?: Location | URL): {     [k: string]: T; }`
 :::
 #### 返回 
 - `映射` 

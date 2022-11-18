@@ -1,7 +1,7 @@
 ## scrollTo :tada: :100: 
 滚动至···
 #### 参数 
-- **option?** `{ direction?: "top" | "left"; dom?: HTMLElement; num?: number; rate?: number }` 可选的对象
+- **option?** `{     direction?: "top" | "left";     dom?: HTMLElement;     num?: number;     rate?: number; }` 可选的对象
  
 	- **direction?** `"top" | "left"` 滚动的方向，默认 'top', 支持 'top' | 'left'
  
@@ -15,7 +15,7 @@
  
 #### td.ts
 ::: info
-`scrollTo(option?: { direction?: "top" | "left"; dom?: HTMLElement; num?: number; rate?: number }, callback?: (() => void)): void`
+`scrollTo(option?: {     direction?: "top" | "left";     dom?: HTMLElement;     num?: number;     rate?: number; }, callback?: (() => void)): void`
 :::
 #### 实例 
 回到顶部

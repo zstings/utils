@@ -3,16 +3,16 @@
 layout: home
 
 hero:
-  name:  🐤 tings-utils
-  text:  JS & TS utils
-  tagline: 欢迎 - 这是一个常用的前端工具函数集合，支持js与ts的项目使用。
+  name:  '@zstings/utils'
+  text:  javascript & typescript
+  tagline: 欢迎 - 这是一个常用的前端工具函数集合，支持javascript与typescript的项目使用。
   actions:
     - theme: brand
       text: 👉立即开始
       link: /start
     - theme: alt
       text:  👆 在 github 上查看
-      link: https://github.com/qinzhongting/tings-utils/
+      link: https://github.com/zstings/utils
 
 features:
 

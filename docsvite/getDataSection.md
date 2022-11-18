@@ -3,7 +3,7 @@
 #### 参数 
 - **day** `number = 1` 间隔天数，默认1，表示今天
  
-- **option** `{ format?: string; start?: string | number | Date | (string | number)[]; timeStamp?: boolean } = ...` 选项
+- **option** `{     format?: string;     start?: string | number | Date | (string | number)[];     timeStamp?: boolean; } = ...` 选项
  
 	- **format?** `string` 时间格式， 默认YYYY-MM-DD
  
@@ -13,7 +13,7 @@
  
 #### td.ts
 ::: info
-`getDataSection(day?: number, option?: { format?: string; start?: string | number | Date | (string | number)[]; timeStamp?: boolean }): (number | string)[]`
+`getDataSection(day?: number, option?: {     format?: string;     start?: string | number | Date | (string | number)[];     timeStamp?: boolean; }): (number | string)[]`
 :::
 #### 返回 
 ::: tip
