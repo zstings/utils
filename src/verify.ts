@@ -61,7 +61,7 @@ export const isObject: TPS.ToIsTypes = value => value !== null && getDataType(va
  * 判断是否为Location
  * @param value 任意值
  * @return true | false
- * @category 工具Util
+ * @category URL
  * @example
  * 验证通过
  * ```ts
@@ -79,7 +79,7 @@ export const isLocation: TPS.ToIsTypes = value => getDataType(value) === 'Locati
  * 判断是否为Map
  * @param value 任意值
  * @return true | false
- * @category 工具Util
+ * @category 对象Object
  * @example
  * 验证通过
  * ```ts
@@ -97,7 +97,7 @@ export const isMap: TPS.ToIsTypes = value => getDataType(value) === 'Map'
  * 判断是否为Set
  * @param value 任意值
  * @return true | false
- * @category 工具Util
+ * @category 对象Object
  * @example
  * 验证通过
  * ```ts
@@ -169,7 +169,7 @@ export const isString: TPS.ToIsTypes = value => getDataType(value) === 'String'
  * 判断是否为Symbol
  * @param value 任意值
  * @return true | false
- * @category 工具Util
+ * @category 对象Object
  * @example
  * 验证通过
  * ```ts

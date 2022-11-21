@@ -1,5 +1,5 @@
 import { toFixed } from './number'
-import { getRandom } from './util'
+import { random } from './util'
 import { isString } from './verify'
 
 /**
@@ -15,7 +15,7 @@ export function randomHex(): string {
   const hexs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
   let hex = '#'
   for (let i = 0; i < 6; i++) {
-    hex += hexs[getRandom(0, 15)]
+    hex += hexs[random(0, 15)]
   }
   return hex
 }
@@ -30,7 +30,7 @@ export function randomHex(): string {
  * ```
  */
 export function randomRgba(): string {
-  return `${getRandom(0, 255)}, ${getRandom(0, 255)}, ${getRandom(0, 255)}, ${toFixed(getRandom(0, 100) / 100)}`
+  return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`
 }
 
 /**
