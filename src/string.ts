@@ -76,7 +76,12 @@ export function byteSize(str: any): number {
  */
 export function removeHTML(str: any): string {
   const _str = isString(str) ? str : str.toString()
-  return _str.replace(/<[^>]+>/g, '').replace(/&[\s\S]+?;/g, '')
+  const escapeReg =
+    /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi
+  return _str
+    .replace(/<[^>]+>/g, '')
+    .replace(escapeReg, '')
+    .trim()
 }
 
 /**

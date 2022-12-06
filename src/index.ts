@@ -36,7 +36,7 @@ export { padInt, toNumber, toFixed, isInt } from '@/number'
 export { days, getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo, getDataSection } from '@/date'
 
 // 函数相关
-export { debounce, throttle } from '@/function'
+export { debounce, throttle, once } from '@/function'
 
 // 字符串相关
 export { upperFirst, byteSize, removeHTML, mask } from '@/string'
