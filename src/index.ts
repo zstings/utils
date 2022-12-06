@@ -3,7 +3,7 @@
 // export { default as returnstr } from "./returnStr";
 
 // 公共
-export { getDataType } from './common'
+export { typeOf } from './common'
 // 验证相关
 export {
   isArray,

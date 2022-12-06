@@ -58,7 +58,6 @@ export const omit: Omit = (object, keys = []) => {
   })
   return _object
 }
-omit({ a: 1 }, ['b'])
 
 /**
  * 合并对象

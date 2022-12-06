@@ -1,5 +1,3 @@
-import * as TPS from '@types'
-
 /**
  * 获取数据类型
  * @param value 任意值
@@ -8,34 +6,34 @@ import * as TPS from '@types'
  * @example
  * 数字
  * ```ts
- * getDataType(12) => 'Number'
+ * typeOf(12) => 'Number'
  * ```
  * @example
  * 字符串
  * ```ts
- * getDataType('12') => 'String'
+ * typeOf('12') => 'String'
  * ```
  * @example
  * 布尔
  * ```ts
- * getDataType(true) => 'Boolean'
+ * typeOf(true) => 'Boolean'
  * ```
  * @example
  * 函数
  * ```ts
- * getDataType(functuin(){}) => 'Function'
+ * typeOf(functuin(){}) => 'Function'
  * ```
  * @example
  * 对象
  * ```ts
- * getDataType({}) => 'Object'
+ * typeOf({}) => 'Object'
  * ```
  * @example
  * 数组
  * ```ts
- * getDataType([]) => 'Array'
+ * typeOf([]) => 'Array'
  * ```
  */
-export const getDataType: TPS.GetDataType = function (value) {
+export function typeOf(value: any): string {
   return Object.prototype.toString.call(value).slice(8, -1)
 }

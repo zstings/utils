@@ -1,5 +1,5 @@
 import * as TPS from '@types'
-import { getDataType } from '@/common'
+import { typeOf } from '@/common'
 
 /**
  * 判断是否为手机号
@@ -37,7 +37,7 @@ export const isPhone: TPS.IsPhone = function (value) {
  * isArray({}) => false
  * ```
  */
-export const isArray: TPS.ToIsTypes = value => getDataType(value) === 'Array'
+export const isArray: TPS.ToIsTypes = value => typeOf(value) === 'Array'
 
 /**
  * 判断是否为对象
@@ -55,7 +55,7 @@ export const isArray: TPS.ToIsTypes = value => getDataType(value) === 'Array'
  * isObject([]) => false
  * ```
  */
-export const isObject: TPS.ToIsTypes = value => value !== null && getDataType(value) === 'Object'
+export const isObject: TPS.ToIsTypes = value => value !== null && typeOf(value) === 'Object'
 
 /**
  * 判断是否为Location
@@ -73,7 +73,7 @@ export const isObject: TPS.ToIsTypes = value => value !== null && getDataType(va
  * isLocation(123) => false
  * ```
  */
-export const isLocation: TPS.ToIsTypes = value => getDataType(value) === 'Location'
+export const isLocation: TPS.ToIsTypes = value => typeOf(value) === 'Location'
 
 /**
  * 判断是否为Map
@@ -91,7 +91,7 @@ export const isLocation: TPS.ToIsTypes = value => getDataType(value) === 'Locati
  * isMap(123) => false
  * ```
  */
-export const isMap: TPS.ToIsTypes = value => getDataType(value) === 'Map'
+export const isMap: TPS.ToIsTypes = value => typeOf(value) === 'Map'
 
 /**
  * 判断是否为Set
@@ -109,7 +109,7 @@ export const isMap: TPS.ToIsTypes = value => getDataType(value) === 'Map'
  * isSet(123) => false
  * ```
  */
-export const isSet: TPS.ToIsTypes = value => getDataType(value) === 'Set'
+export const isSet: TPS.ToIsTypes = value => typeOf(value) === 'Set'
 
 /**
  * 判断是否为Date
@@ -127,7 +127,7 @@ export const isSet: TPS.ToIsTypes = value => getDataType(value) === 'Set'
  * isDate(123) => false
  * ```
  */
-export const isDate: TPS.ToIsTypes = value => getDataType(value) === 'Date'
+export const isDate: TPS.ToIsTypes = value => typeOf(value) === 'Date'
 
 /**
  * 判断是否为Function
@@ -145,7 +145,7 @@ export const isDate: TPS.ToIsTypes = value => getDataType(value) === 'Date'
  * isFunction(123) => false
  * ```
  */
-export const isFunction: TPS.ToIsTypes = value => getDataType(value) === 'Function'
+export const isFunction: TPS.ToIsTypes = value => typeOf(value) === 'Function'
 
 /**
  * 判断是否为字符串
@@ -163,7 +163,7 @@ export const isFunction: TPS.ToIsTypes = value => getDataType(value) === 'Functi
  * isString(123) => false
  * ```
  */
-export const isString: TPS.ToIsTypes = value => getDataType(value) === 'String'
+export const isString: TPS.ToIsTypes = value => typeOf(value) === 'String'
 
 /**
  * 判断是否为Symbol
@@ -181,7 +181,7 @@ export const isString: TPS.ToIsTypes = value => getDataType(value) === 'String'
  * isSymbol(Symbol) => false
  * ```
  */
-export const isSymbol: TPS.ToIsTypes = value => getDataType(value) === 'Symbol'
+export const isSymbol: TPS.ToIsTypes = value => typeOf(value) === 'Symbol'
 
 /**
  * 判断是否为数字
@@ -199,7 +199,7 @@ export const isSymbol: TPS.ToIsTypes = value => getDataType(value) === 'Symbol'
  * isNumber('123') => false
  * ```
  */
-export const isNumber: TPS.ToIsTypes = value => getDataType(value) === 'Number'
+export const isNumber: TPS.ToIsTypes = value => typeOf(value) === 'Number'
 
 /**
  * 判断是否为Boolean
@@ -218,7 +218,7 @@ export const isNumber: TPS.ToIsTypes = value => getDataType(value) === 'Number'
  * isBoolean(123) => false
  * ```
  */
-export const isBoolean: TPS.ToIsTypes = value => getDataType(value) === 'Boolean'
+export const isBoolean: TPS.ToIsTypes = value => typeOf(value) === 'Boolean'
 
 /**
  * 判断是否为Promise
@@ -242,7 +242,7 @@ export const isBoolean: TPS.ToIsTypes = value => getDataType(value) === 'Boolean
  * ```
  */
 export const isPromise: TPS.ToIsTypes = value => {
-  return getDataType(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch)
+  return typeOf(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch)
 }
 
 /**
@@ -300,7 +300,7 @@ export function isIncludeChinese(value: string): boolean {
  * ```
  */
 export function isDom(tarage: Element): boolean {
-  return getDataType(tarage).includes('Element')
+  return typeOf(tarage).includes('Element')
 }
 
 /**
@@ -319,7 +319,7 @@ export function isDom(tarage: Element): boolean {
  * ```
  */
 export function isNullOrUndefined(value: any): boolean {
-  return ['Null', 'Undefined'].includes(getDataType(value))
+  return ['Null', 'Undefined'].includes(typeOf(value))
 }
 
 /**

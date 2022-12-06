@@ -10,8 +10,6 @@ export type PhoneEncrypt = (value: string | number) => string
 
 export type PhoneEncry = (value: string | number, value2: string, value3?: string) => string
 
-export type GetDataType = (value: any) => string
-
 export type GetUrlParam = (name: string, url?: string | Location) => string | null
 
 export type DownloadFile = (name: string, blob: Blob) => void
