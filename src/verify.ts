@@ -1,4 +1,3 @@
-import * as TPS from '@types'
 import { typeOf } from '@/common'
 
 /**
@@ -17,7 +16,7 @@ import { typeOf } from '@/common'
  * isPhone(1330210152) => false
  * ```
  */
-export const isPhone: TPS.IsPhone = function (value) {
+export function isPhone(value: string | number): boolean {
   return /^1[3-9][\d]{9}$/.test(value.toString())
 }
 
@@ -37,7 +36,9 @@ export const isPhone: TPS.IsPhone = function (value) {
  * isArray({}) => false
  * ```
  */
-export const isArray: TPS.ToIsTypes = value => typeOf(value) === 'Array'
+export function isArray(value: any): boolean {
+  return typeOf(value) === 'Array'
+}
 
 /**
  * 判断是否为对象
@@ -55,7 +56,9 @@ export const isArray: TPS.ToIsTypes = value => typeOf(value) === 'Array'
  * isObject([]) => false
  * ```
  */
-export const isObject: TPS.ToIsTypes = value => value !== null && typeOf(value) === 'Object'
+export function isObject(value: any): boolean {
+  return value !== null && typeOf(value) === 'Object'
+}
 
 /**
  * 判断是否为Location
@@ -73,7 +76,9 @@ export const isObject: TPS.ToIsTypes = value => value !== null && typeOf(value) 
  * isLocation(123) => false
  * ```
  */
-export const isLocation: TPS.ToIsTypes = value => typeOf(value) === 'Location'
+export function isLocation(value: any): boolean {
+  return typeOf(value) === 'Location'
+}
 
 /**
  * 判断是否为Map
@@ -91,7 +96,9 @@ export const isLocation: TPS.ToIsTypes = value => typeOf(value) === 'Location'
  * isMap(123) => false
  * ```
  */
-export const isMap: TPS.ToIsTypes = value => typeOf(value) === 'Map'
+export function isMap(value: any): boolean {
+  return typeOf(value) === 'Map'
+}
 
 /**
  * 判断是否为Set
@@ -109,7 +116,9 @@ export const isMap: TPS.ToIsTypes = value => typeOf(value) === 'Map'
  * isSet(123) => false
  * ```
  */
-export const isSet: TPS.ToIsTypes = value => typeOf(value) === 'Set'
+export function isSet(value: any): boolean {
+  return typeOf(value) === 'Set'
+}
 
 /**
  * 判断是否为Date
@@ -127,7 +136,9 @@ export const isSet: TPS.ToIsTypes = value => typeOf(value) === 'Set'
  * isDate(123) => false
  * ```
  */
-export const isDate: TPS.ToIsTypes = value => typeOf(value) === 'Date'
+export function isDate(value: any): boolean {
+  return typeOf(value) === 'Date'
+}
 
 /**
  * 判断是否为Function
@@ -145,7 +156,9 @@ export const isDate: TPS.ToIsTypes = value => typeOf(value) === 'Date'
  * isFunction(123) => false
  * ```
  */
-export const isFunction: TPS.ToIsTypes = value => typeOf(value) === 'Function'
+export function isFunction(value: any): boolean {
+  return typeOf(value) === 'Function'
+}
 
 /**
  * 判断是否为字符串
@@ -163,7 +176,9 @@ export const isFunction: TPS.ToIsTypes = value => typeOf(value) === 'Function'
  * isString(123) => false
  * ```
  */
-export const isString: TPS.ToIsTypes = value => typeOf(value) === 'String'
+export function isString(value: any): boolean {
+  return typeOf(value) === 'String'
+}
 
 /**
  * 判断是否为Symbol
@@ -181,7 +196,9 @@ export const isString: TPS.ToIsTypes = value => typeOf(value) === 'String'
  * isSymbol(Symbol) => false
  * ```
  */
-export const isSymbol: TPS.ToIsTypes = value => typeOf(value) === 'Symbol'
+export function isSymbol(value: any): boolean {
+  return typeOf(value) === 'Symbol'
+}
 
 /**
  * 判断是否为数字
@@ -199,7 +216,9 @@ export const isSymbol: TPS.ToIsTypes = value => typeOf(value) === 'Symbol'
  * isNumber('123') => false
  * ```
  */
-export const isNumber: TPS.ToIsTypes = value => typeOf(value) === 'Number'
+export function isNumber(value: any): boolean {
+  return typeOf(value) === 'Number'
+}
 
 /**
  * 判断是否为Boolean
@@ -218,7 +237,9 @@ export const isNumber: TPS.ToIsTypes = value => typeOf(value) === 'Number'
  * isBoolean(123) => false
  * ```
  */
-export const isBoolean: TPS.ToIsTypes = value => typeOf(value) === 'Boolean'
+export function isBoolean(value: any): boolean {
+  return typeOf(value) === 'Boolean'
+}
 
 /**
  * 判断是否为Promise
@@ -241,7 +262,7 @@ export const isBoolean: TPS.ToIsTypes = value => typeOf(value) === 'Boolean'
  * isPromise(Promise) => false
  * ```
  */
-export const isPromise: TPS.ToIsTypes = value => {
+export function isPromise(value: any): boolean {
   return typeOf(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch)
 }
 

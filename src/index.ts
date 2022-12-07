@@ -48,7 +48,7 @@ export { chunk, compact, fromPairs, unique } from '@/array'
 export { createData, omit, assign, assignMin, arrObjSum } from '@/object'
 
 // url相关
-export { getUrlParam, getUrlQuery, qsParse, qsStringify, isURL } from '@/url'
+export { getUrlParam, getUrlQuery, qsParse, qsStringify, isURL, setUrlQuery, reviseUrlQuery } from '@/url'
 
 // 工具相关
 export { downloadFile, gbkToUtf8, getUUID, scrollTo, phoneEncrypt, random, deepClone } from '@/util'

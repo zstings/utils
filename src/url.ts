@@ -1,5 +1,5 @@
-import { GetUrlParam } from '@types'
-import { isJsonString, isLocation, isString } from '@/verify'
+import { isJsonString, isNullOrUndefined, isObject, isString } from '@/verify'
+import { typeOf } from './common'
 
 /**
  * 是否是url
@@ -31,7 +31,7 @@ export function isURL(url: string): boolean {
 /**
  * 获取url上的参数
  * @param name 参数名，必填
- * @param url url地址，为空时是window.location， 非必填
+ * @param url url地址，为空时是window.location.href， 非必填
  * @returns 符合的值或者null
  * @category URL
  * @example
@@ -51,8 +51,10 @@ export function isURL(url: string): boolean {
  * getUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'
  * ```
  */
-export const getUrlParam: GetUrlParam = (name, url = window.location) => {
-  const urlPar = isLocation(url) ? window.location : new URL(url as string)
+export function getUrlParam(name: string, url: string = window.location.href): string | null {
+  // 检查url值是否有效
+  if (!isURL(url)) throw 'url 参数错误，不是有效的'
+  const urlPar = new URL(url)
   // 构造一个含有目标参数的正则表达式对象
   const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
   // 匹配目标参数
@@ -66,34 +68,57 @@ export const getUrlParam: GetUrlParam = (name, url = window.location) => {
 
 /**
  * 获取url上的参数
+ * @param option 可选的对象
+ * @param option.url url地址，默认window.location， 非必填
+ * @param option.type 类型，默认all， 非必填, 可选值：all, query, hash
  * @returns 由参数组成的对象
  * @category URL
  * @example
  * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
  * 不传值时，默认从window.location中取值
  * ```ts
- * getUrlQuery() => {id：'a',b:'33'}
- * // => window.location: https://a.b.com/?id=a&b=33
+ * getUrlQuery() => {a：'1',b:'2'}
+ * // => window.location: https://a.b.com/?a=1&b=2
  * ```
  * @example
- * 从第二个参数的url上取值
+ * 从参数的url上取值
  * ```ts
- * getUrlQuery('https://a.b.com/?id=b') // => {id: 'b'}
+ * getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'}) // => {id: '1', b: '2', c: '3'}
+ * ```
+ * @example
+ * 从参数的url上取值,只在search中取值
+ * ```ts
+ * getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'search'}) // => {id: '1', b: '2'}
+ * ```
+ * @example
+ * 从参数的url上取值,只在hash中取值
+ * ```ts
+ * getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}) // => {c: '3', b: '4'}
  * ```
  */
-export const getUrlQuery = (url: Location | URL = window.location) => {
-  if (isString(url)) url = new URL(url as unknown as string)
-  const urlSearch = url.search.substring(1)
-  const urlHash = url.hash.indexOf('?') >= 0 ? url.hash.slice(url.hash.indexOf('?') + 1) : ''
-  const searchArr = qsParse(urlSearch)
-  const hashArr = qsParse(urlHash)
+export const getUrlQuery = (
+  option: { url?: string; type?: 'search' | 'hash' | 'all' } = {
+    url: window.location.href,
+    type: 'all'
+  }
+) => {
+  // 检查参数类型
+  if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象， 但是收到 ${typeOf(option)}`
+  // 检查参数属性是否存在，不存在设置默认值
+  if (!option.url) option.url = window.location.href
+  if (!option.type) option.type = 'all'
+  // 检查参数属性值类型
+  if (!isURL(option.url)) throw `url 参数错误，不是有效的`
+  if (!isString(option.type) || ['search', 'hash', 'all'].includes(option.type))
+    throw `type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'`
+  // 获取参数对象
+  const { url, type } = option
+  const urlStr: URL = new URL(url)
+  const urlSearch = urlStr.search.substring(1)
+  const urlHash = urlStr.hash.indexOf('?') >= 0 ? urlStr.hash.slice(urlStr.hash.indexOf('?') + 1) : ''
+  const searchArr = type == 'hash' ? {} : qsParse(urlSearch)
+  const hashArr = type == 'search' ? {} : qsParse(urlHash)
   return Object.assign(searchArr, hashArr)
-  // const searchArr = urlSearch.split('&')
-  // const searcObj: Record<string, any> = {}
-  // searchArr.forEach(item => {
-  //   const resultItem = item.split('=')
-  //   searcObj[resultItem[0]] = resultItem[1]
-  // })
 }
 
 /**
@@ -156,4 +181,82 @@ export function qsParse(query = '', decode = true) {
     })
   }
   return queryObj
+}
+
+/**
+ * 修改url上的参数
+ * @param option.search 对象 用于修改search部分的数据， 非必填
+ * @param option.hash 对象 用于修改hash部分的数据， 非必填
+ * @param url url地址，默认window.location.href， 非必填
+ * @returns 修改后的url地址
+ * @category URL
+ * @example
+ * 修改search中的值
+ * ```ts
+ * reviseUrlQuery({search: {a: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
+ * // => 'http://a.b.com/?a=2&b=3#/index/?c=3&b=4'
+ * ```
+ * @example
+ * 修改hash中的值
+ * ```ts
+ * reviseUrlQuery({hash: {c: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
+ * // => 'http://a.b.com/?a=1&b=2#/index/?c=2&b=3'
+ * ```
+ * @example
+ * 修改search、hash中的值
+ * ```ts
+ * reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
+ * // => 'http://a.b.com/?a=5&b=6#/index/?c=7&b=8'
+ * ```
+ */
+export function reviseUrlQuery(
+  option: { search?: Record<string, any>; hash?: Record<string, any> },
+  url: string = window.location.href
+): string {
+  // 检查参数类型
+  if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象`
+  // 检查参数属性存在但不是对象
+  if (option.search || !isObject(option.search)) throw `search 参数错误， 应该传入一个对象`
+  if (option.search || !isObject(option.hash)) throw `search 参数错误， 应该传入一个对象`
+  // 检查url值是否有效
+  if (!isURL(url)) throw 'url 参数错误，不是有效的'
+  // 修改参数的实现逻辑
+  const { origin, pathname } = new URL(url)
+  let { search, hash } = new URL(url)
+  if (option.search) {
+    const arr = getUrlQuery({ url, type: 'search' })
+    const searchStr = qsStringify(Object.assign({}, option.search, arr))
+    search = searchStr ? '?' + searchStr : ''
+  }
+  if (option.hash) {
+    const arr = getUrlQuery({ url, type: 'hash' })
+    const hashStr = Object.assign({}, option.hash, arr)
+    hash = hashStr ? (hash.split('?')[0] || '#') + '?' + hashStr : ''
+  }
+  return origin + pathname + search + hash
+}
+
+/**
+ * 设置浏览器地址栏url
+ * @param option 可选的对象
+ * @param url url地址，默认window.location， 非必填
+ * @param type 类型，默认pushState， 非必填, 可选值：pushState, replaceState
+ * @category URL
+ * @example
+ * 修改了浏览器页面的地址栏的url显示，默认会添加新的历史记录
+ * ```ts
+ * setUrlQuery('https://a.b.com/?a=1&b=2')
+ * ```
+ * @example
+ * 修改了浏览器页面的地址栏的url显示，当前的页面的历史记录替换掉，不会添加新的历史记录
+ * ```ts
+ * setUrlQuery('https://a.b.com/?a=1&b=2', type: 'replaceState')
+ * ```
+ */
+export function setUrlQuery(url: string, type: 'pushState' | 'replaceState' = 'pushState'): void {
+  // 检查url值是否有效
+  if (!isURL(url)) throw 'url 参数错误，不是有效的'
+  if (!isString(type) || ['pushState', 'replaceState'].includes(type))
+    throw `type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'`
+  window.history[type]('', '', url)
 }

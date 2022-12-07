@@ -4,17 +4,11 @@ export type ArrayData = any[]
 
 export type DeepCopy = (origin: ObjectData | ArrayData) => ObjectData | ArrayData
 
-export type IsPhone = (str: string | number) => boolean
-
 export type PhoneEncrypt = (value: string | number) => string
 
 export type PhoneEncry = (value: string | number, value2: string, value3?: string) => string
 
-export type GetUrlParam = (name: string, url?: string | Location) => string | null
-
 export type DownloadFile = (name: string, blob: Blob) => void
-
-export type ToIsTypes = (value: any) => boolean
 
 export type GetUUID = () => string
 
