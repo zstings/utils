@@ -7,30 +7,28 @@
   <title>Document</title>
 </head>
 <body>
-  <audio id="player" src="http://101.43.182.210:2333/bili/av22590813_1.m4a?x-cos-traffic-limit=819200" controls="controls" autoplay="autoplay" style="width: 100%; outline: medium;"></audio>
-  <script src="../dist/tings-utils.umd.js"></script>
+  <!-- <audio id="player" src="http://101.43.182.210:2333/bili/av22590813_1.m4a?x-cos-traffic-limit=819200" controls="controls" autoplay="autoplay" style="width: 100%; outline: medium;"></audio> -->
+  <script src="../dist/utils.umd.js"></script>
   <script>
-    const {removeHTML, randomRgba, extendHex, rgbToHex, mask, phoneEncrypt} = tingsUtils
-    console.log(removeHTML(true))
-    const a = randomRgba()
-    document.body.style.backgroundColor = `rgba(${a})`
-    console.log(a)
-    console.log(extendHex('#0033ff33'))
-    console.log(extendHex('#0033ff'))
-    console.log(extendHex('#0033ffFF'))
-    console.log(extendHex('#003'))
-    console.log(extendHex('#0034'))
-    console.log(rgbToHex('170,187,255'))
-    console.log(rgbToHex('170,187,255, 0.91'))
+    const {getUrlQuery, reviseUrlQuery, qsStringify, setUrlQuery} = utils
+    console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'search'}))
+    console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}))
+    console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'}))
+    console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4&d=67'}))
 
-    console.log(mask('123456'))
-    console.log(mask('123456', 2))
-    console.log(mask('123456', 2, 3))
-    console.log(mask('123456', 2, 3, '.'))
-    console.log(mask('13300001111', 3, 4))
 
-    console.log(phoneEncrypt('13300001111', 3, 4))
-    console.log(phoneEncrypt(13300002345, 3, 4))
+    console.log(reviseUrlQuery({search: {a: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
+    console.log(reviseUrlQuery({hash: {c: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
+    console.log(reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
+
+    // const s = reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
+    // setUrlQuery(s)
+    // console.log(qsStringify({a: 1, b: 2, c: {a: 1}}))
+    // console.log(qsStringify({a: 1, b: 2, c: {a: 1}}, true))
+    // console.log(qsStringify({a: '2', b: '3'}))
+    // console.log(reviseUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4&d=67'}))
+    
+
   </script>
 </body>
 </html>

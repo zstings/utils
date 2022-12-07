@@ -1,10 +1,15 @@
 ## getUrlQuery :tada: :100: 
 获取url上的参数
 #### 参数 
-- **url** `Location | URL = window.location`  
+- **option** `{     type?: "search" | "hash" | "all";     url?: string; } = ...` 可选的对象
+ 
+	- **type?** `"search" | "hash" | "all"` 类型，默认all， 非必填, 可选值：all, query, hash
+ 
+	- **url?** `string` url地址，默认window.location， 非必填
+ 
 #### td.ts
 ::: info
-`getUrlQuery(url?: Location | URL): {     [k: string]: T; }`
+`getUrlQuery(option?: {     type?: "search" | "hash" | "all";     url?: string; }): {     [k: string]: T; }`
 :::
 #### 返回 
 - `映射` 
@@ -18,12 +23,24 @@
 
 
 ```ts
-getUrlQuery() => {id：'a',b:'33'}
-// => window.location: https://a.b.com/?id=a&b=33
+getUrlQuery() => {a：'1',b:'2'}
+// => window.location: https://a.b.com/?a=1&b=2
 ```
-从第二个参数的url上取值
+从参数的url上取值
 
 
 ```ts
-getUrlQuery('https://a.b.com/?id=b') // => {id: 'b'}
+getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'}) // => {id: '1', b: '2', c: '3'}
+```
+从参数的url上取值,只在search中取值
+
+
+```ts
+getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'search'}) // => {id: '1', b: '2'}
+```
+从参数的url上取值,只在hash中取值
+
+
+```ts
+getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}) // => {c: '3', b: '4'}
 ```

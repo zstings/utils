@@ -3,14 +3,14 @@
 #### 参数 
 - **name** `string` 参数名，必填
  
-- **url?** `string | Location` url地址，为空时是window.location， 非必填
+- **url** `string = window.location.href` url地址，为空时是window.location.href， 非必填
  
 #### td.ts
 ::: info
-`getUrlParam(name: string, url?: string | Location): null | string`
+`getUrlParam(name: string, url?: string): string | null`
 :::
 #### 返回 
-- `null | string` 
+- `string | null` 
 ::: tip
 符合的值或者null
 :::

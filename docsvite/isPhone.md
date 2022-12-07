@@ -1,10 +1,11 @@
 ## isPhone :tada: :100: 
 判断是否为手机号
 #### 参数 
-- **str** `string | number`  
+- **value** `string | number` 任意值
+ 
 #### td.ts
 ::: info
-`isPhone(str: string | number): boolean`
+`isPhone(value: string | number): boolean`
 :::
 #### 返回 
 - `boolean` 

@@ -1,4 +1,4 @@
-import { isJsonString, isNullOrUndefined, isObject, isString } from '@/verify'
+import { isJsonString, isNullOrUndefined, isObject, isString, isBasicType } from '@/verify'
 import { typeOf } from './common'
 
 /**
@@ -83,7 +83,7 @@ export function getUrlParam(name: string, url: string = window.location.href): s
  * @example
  * 从参数的url上取值
  * ```ts
- * getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'}) // => {id: '1', b: '2', c: '3'}
+ * getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'}) // => {a: '1', b: '2', c: '3'}
  * ```
  * @example
  * 从参数的url上取值,只在search中取值
@@ -109,7 +109,7 @@ export const getUrlQuery = (
   if (!option.type) option.type = 'all'
   // 检查参数属性值类型
   if (!isURL(option.url)) throw `url 参数错误，不是有效的`
-  if (!isString(option.type) || ['search', 'hash', 'all'].includes(option.type))
+  if (!isString(option.type) || !['search', 'hash', 'all'].includes(option.type))
     throw `type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'`
   // 获取参数对象
   const { url, type } = option
@@ -118,7 +118,7 @@ export const getUrlQuery = (
   const urlHash = urlStr.hash.indexOf('?') >= 0 ? urlStr.hash.slice(urlStr.hash.indexOf('?') + 1) : ''
   const searchArr = type == 'hash' ? {} : qsParse(urlSearch)
   const hashArr = type == 'search' ? {} : qsParse(urlHash)
-  return Object.assign(searchArr, hashArr)
+  return Object.assign({}, searchArr, hashArr, searchArr)
 }
 
 /**
@@ -145,8 +145,11 @@ export const getUrlQuery = (
  * ```
  */
 export function qsStringify(query: Record<string, any> = {}, decode = false): string {
+  query = JSON.parse(JSON.stringify(query))
   const queryObj = new URLSearchParams()
-  Object.keys(query).forEach(item => queryObj.set(item, JSON.stringify(query[item])))
+  Object.keys(query).forEach(item =>
+    queryObj.set(item, isBasicType(query[item]) ? query[item] : JSON.stringify(query[item]))
+  )
   return decode ? decodeURIComponent(queryObj.toString()) : queryObj.toString()
 }
 
@@ -216,8 +219,8 @@ export function reviseUrlQuery(
   // 检查参数类型
   if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象`
   // 检查参数属性存在但不是对象
-  if (option.search || !isObject(option.search)) throw `search 参数错误， 应该传入一个对象`
-  if (option.search || !isObject(option.hash)) throw `search 参数错误， 应该传入一个对象`
+  if (option.search && !isObject(option.search)) throw `search 参数错误， 应该传入一个对象`
+  if (option.hash && !isObject(option.hash)) throw `hash 参数错误， 应该传入一个对象`
   // 检查url值是否有效
   if (!isURL(url)) throw 'url 参数错误，不是有效的'
   // 修改参数的实现逻辑
@@ -225,12 +228,12 @@ export function reviseUrlQuery(
   let { search, hash } = new URL(url)
   if (option.search) {
     const arr = getUrlQuery({ url, type: 'search' })
-    const searchStr = qsStringify(Object.assign({}, option.search, arr))
+    const searchStr = qsStringify(Object.assign({}, arr, option.search))
     search = searchStr ? '?' + searchStr : ''
   }
   if (option.hash) {
     const arr = getUrlQuery({ url, type: 'hash' })
-    const hashStr = Object.assign({}, option.hash, arr)
+    const hashStr = qsStringify(Object.assign({}, arr, option.hash))
     hash = hashStr ? (hash.split('?')[0] || '#') + '?' + hashStr : ''
   }
   return origin + pathname + search + hash
@@ -256,7 +259,7 @@ export function reviseUrlQuery(
 export function setUrlQuery(url: string, type: 'pushState' | 'replaceState' = 'pushState'): void {
   // 检查url值是否有效
   if (!isURL(url)) throw 'url 参数错误，不是有效的'
-  if (!isString(type) || ['pushState', 'replaceState'].includes(type))
+  if (!isString(type) || !['pushState', 'replaceState'].includes(type))
     throw `type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'`
   window.history[type]('', '', url)
 }
