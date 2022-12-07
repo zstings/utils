@@ -133,7 +133,7 @@ export const isDate: TPS.ToIsTypes = value => typeOf(value) === 'Date'
  * 判断是否为Function
  * @param value 任意值
  * @return true | false
- * @category 工具Util
+ * @category 函数Function
  * @example
  * 验证通过
  * ```ts
@@ -289,7 +289,7 @@ export function isIncludeChinese(value: string): boolean {
  * 是否是dom
  * @param tarage dom
  * @returns true | false
- * @category 工具Util
+ * @category 浏览器Dom
  * @example
  * ```ts
  * isDom() // => false

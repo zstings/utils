@@ -12,7 +12,7 @@ specifiers:
   typedoc: ^0.23.21
   typescript: ^4.9.3
   vite: ^3.2.4
-  vitepress: 1.0.0-alpha.29
+  vitepress: 1.0.0-alpha.30
 
 devDependencies:
   '@typescript-eslint/eslint-plugin': 5.43.0_wze2rj5tow7zwqpgbdx2buoy3m
@@ -26,7 +26,7 @@ devDependencies:
   typedoc: 0.23.21_typescript@4.9.3
   typescript: 4.9.3
   vite: 3.2.4
-  vitepress: 1.0.0-alpha.29
+  vitepress: 1.0.0-alpha.30
 
 packages:
 
@@ -1759,6 +1759,7 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    deprecated: Please use @jridgewell/sourcemap-codec instead
     dev: true
 
   /strip-ansi/6.0.1:
@@ -1898,8 +1899,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/1.0.0-alpha.29:
-    resolution: {integrity: sha512-oaRaeMLcN9M3Bxz97fFVF6Gzm3Aqtb0CijTt5TOW0XPzNPuKA0YpFnsmS97gdKmA+VztM6itRJ8K7JJuU0VS3g==}
+  /vitepress/1.0.0-alpha.30:
+    resolution: {integrity: sha512-CjIqKkGAuvoP2IWBFIbYWyiMSHSGYvjPy7eDkdftawguv5a8w4AjM95VV4Lhyacev4AFcgK23FViibRluBMePw==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.3.0

@@ -55,3 +55,6 @@ export { downloadFile, gbkToUtf8, getUUID, scrollTo, phoneEncrypt, random, deepC
 
 // 颜色相关
 export { randomHex, randomRgba, hexToRgb, rgbToHex, extendHex, shrinkHex, isHex, isRgba } from '@/color'
+
+// dom相关
+export { launchFullscreen, exitFullscreen } from '@/dom'

@@ -204,6 +204,7 @@ function categoriesSort(categories) {
     '设备Device',
     'URL',
     '颜色Color',
+    '浏览器Dom',
     '工具Util'
   ]
   const sortArr = []

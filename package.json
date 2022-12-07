@@ -48,7 +48,7 @@
     "typedoc": "^0.23.21",
     "typescript": "^4.9.3",
     "vite": "^3.2.4",
-    "vitepress": "1.0.0-alpha.29"
+    "vitepress": "1.0.0-alpha.30"
   },
   "homepage": "https://github.com/zstings/utils#readme",
   "repository": {
