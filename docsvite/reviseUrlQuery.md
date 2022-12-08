@@ -12,6 +12,19 @@
 ::: info
 `reviseUrlQuery(option: {     hash?: Record<string, any>;     search?: Record<string, any>; }, url?: string): string`
 :::
+#### 异常 
+::: danger
+参数错误， 应该传入一个对象 option不是对象时触发
+:::
+::: danger
+search 参数错误， 应该传入一个对象 option不是对象时触发
+:::
+::: danger
+hash 参数错误， 应该传入一个对象 option不是对象时触发
+:::
+::: danger
+url 参数错误，不是有效的
+:::
 #### 返回 
 - `string` 
 ::: tip

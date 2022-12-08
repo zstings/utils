@@ -9,6 +9,10 @@
 ::: info
 `getUrlParam(name: string, url?: string): string | null`
 :::
+#### 异常 
+::: danger
+url 参数错误，不是有效的
+:::
 #### 返回 
 - `string | null` 
 ::: tip
@@ -17,11 +21,11 @@
 #### 实例 
 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
 
-不传值时，默认从window.location中取值
+不传值时，默认从window.location.href中取值
 
 
 ```ts
-getUrlParam('id') => 'a' // window.location: https://a.b.com/?id=a
+getUrlParam('id') => 'a' // window.location.href: https://a.b.com/?id=a
 ```
 从第二个参数的url上取值
 

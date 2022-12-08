@@ -9,6 +9,13 @@
 ::: info
 `setUrlQuery(url: string, type?: "pushState" | "replaceState"): void`
 :::
+#### 异常 
+::: danger
+url 参数错误，不是有效的
+:::
+::: danger
+type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'
+:::
 #### 实例 
 修改了浏览器页面的地址栏的url显示，默认会添加新的历史记录
 
