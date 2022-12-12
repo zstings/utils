@@ -92,7 +92,7 @@ export const assignMin: Assign = (target, ...sources) => {
   if (isEmptyObject(target)) return {}
   const _object = Object.assign({}, ...sources)
   Object.keys(target).forEach(item => {
-    target[item] = _object[item]
+    target[item] = _object[item] || target[item]
   })
   return target
 }
