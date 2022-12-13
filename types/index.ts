@@ -4,22 +4,9 @@ export type ArrayData = any[]
 
 export type DeepCopy = (origin: ObjectData | ArrayData) => ObjectData | ArrayData
 
-export type PhoneEncrypt = (value: string | number) => string
-
 export type PhoneEncry = (value: string | number, value2: string, value3?: string) => string
 
-export type DownloadFile = (name: string, blob: Blob) => void
-
-export type GetUUID = () => string
-
-export type GbkToUtf8 = (value: ArrayBuffer) => object | string
-
 export type PadInt = (value: string | number, len?: number) => string
-
-export type ScrollTo = (
-  option?: { rate?: number; num?: number; direction?: 'top' | 'left'; dom?: HTMLElement },
-  callback?: () => void
-) => void
 
 export declare type Times = number | string | Date | (string | number)[]
 
