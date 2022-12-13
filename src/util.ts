@@ -282,3 +282,39 @@ export function deepClonex<T>(x: T): T {
 
   return root as any
 }
+
+/**
+ * 复制文本内容
+ * 优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
+ * @param value 需要复制的字符串
+ * @returns Promise
+ * @category 工具Util
+ * @example
+ * ```ts
+ * await copy('hello')
+ * ```
+ */
+export function copy(value: string) {
+  return new Promise<void>((resolve, reject) => {
+    navigator.clipboard
+      .writeText(value)
+      .then(() => {
+        resolve()
+      })
+      .catch(() => {
+        const textarea = document.createElement('textarea')
+        textarea.style.position = 'absolute'
+        textarea.style.left = '-9999px'
+        textarea.value = value
+        document.body.append(textarea)
+        textarea.select()
+        const isc = document.execCommand('copy')
+        if (isc) {
+          resolve()
+        } else {
+          reject()
+        }
+        textarea.remove()
+      })
+  })
+}

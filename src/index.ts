@@ -51,7 +51,7 @@ export { createData, omit, assign, assignMin, arrObjSum } from '@/object'
 export { getUrlParam, getUrlQuery, qsParse, qsStringify, isURL, setUrlQuery, reviseUrlQuery } from '@/url'
 
 // 工具相关
-export { downloadFile, gbkToUtf8, getUUID, scrollTo, phoneEncrypt, random, deepClone } from '@/util'
+export { downloadFile, gbkToUtf8, getUUID, scrollTo, phoneEncrypt, random, deepClone, copy } from '@/util'
 
 // 颜色相关
 export { randomHex, randomRgba, hexToRgb, rgbToHex, extendHex, shrinkHex, isHex, isRgba } from '@/color'
