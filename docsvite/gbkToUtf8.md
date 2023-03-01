@@ -5,10 +5,10 @@ gbk 转 utf-8
  
 #### td.ts
 ::: info
-`gbkToUtf8(value: ArrayBuffer): string | object`
+`gbkToUtf8(value: ArrayBuffer): object | string`
 :::
 #### 返回 
-- `string | object` 
+- `object | string` 
 ::: tip
 可以被JSON.parse转化时返回js对象，否则返回字符串
 :::
