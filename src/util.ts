@@ -197,6 +197,18 @@ export function downloadFile(name: string, blob: Blob): void {
  * ```
  */
 export function deepClone<T extends Array<T> | any>(source: T): T {
+  if (typeof source == 'object') {
+    const cloneTarget: T = (Array.isArray(source) ? [] : {}) as T
+    for (const key in source) {
+      cloneTarget[key] = deepClone(source[key])
+    }
+    return cloneTarget
+  } else {
+    return source
+  }
+}
+
+export function deepClonet<T extends Array<T> | any>(source: T): T {
   if (!(isArray(source) || isObject(source))) return source
   const root: Record<string, never> = {}
   // 栈
