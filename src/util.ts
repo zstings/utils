@@ -307,24 +307,31 @@ export function deepClonex<T>(x: T): T {
  * ```
  */
 export function copy(value: string) {
-  return new Promise<void>(async (resolve, reject) => {
-    try {
-      await navigator.clipboard.writeText(value)
-      resolve()
-    } catch(err) {
-      const textarea = document.createElement('textarea')
-      textarea.style.position = 'absolute'
-      textarea.style.left = '-9999px'
-      textarea.value = value
-      document.body.append(textarea)
-      textarea.select()
-      const isc = document.execCommand('copy')
-      if (isc) {
-        resolve()
-      } else {
-        reject()
-      }
-      textarea.remove()
+  return new Promise<void>((resolve, reject) => {
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(value)
+        .then(() => resolve())
+        .catch(() => {
+          execCommandCopy(value, resolve, reject)
+        })
+    } else {
+      execCommandCopy(value, resolve, reject)
     }
   })
+  function execCommandCopy(
+    code: string,
+    resolve: (value: void | PromiseLike<void>) => void,
+    reject: (reason?: any) => void
+  ) {
+    const input = document.createElement('input')
+    document.body.appendChild(input)
+    input.setAttribute('readonly', 'readonly')
+    input.setAttribute('value', code)
+    input.select()
+    input.setSelectionRange(0, code.length)
+    const isc = document.execCommand('copy')
+    input.remove()
+    isc ? resolve() : reject('execCommand error')
+  }
 }
