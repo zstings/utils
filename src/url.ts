@@ -148,14 +148,23 @@ export const getUrlQuery = (
  * ```
  */
 export function qsStringify(query: Record<string, any> = {}, decode = false): string {
-  const queryObj = new URLSearchParams()
-  Object.keys(query).forEach(item =>
-    queryObj.set(
-      item,
-      isBasicType(query[item]) ? (query[item] == null ? '' : query[item]) : JSON.stringify(query[item])
-    )
-  )
-  return decode ? decodeURIComponent(queryObj.toString()) : queryObj.toString()
+  // 缓存Object.keys(query)的结果，避免重复调用
+  const keys = Object.keys(query)
+  // 使用数组和join方法代替URLSearchParams对象，减少内存占用和转换开销
+  const queryArr = []
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    const value = query[key]
+    // 使用三元运算符代替if语句，简化代码逻辑
+    const encodedValue = isBasicType(value)
+      ? value == null
+        ? ''
+        : encodeURIComponent(value)
+      : encodeURIComponent(JSON.stringify(value))
+    queryArr.push(key + '=' + encodedValue)
+  }
+  // 根据decode参数决定是否解码
+  return decode ? decodeURIComponent(queryArr.join('&')) : queryArr.join('&')
 }
 
 /**
