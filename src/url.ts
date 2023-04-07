@@ -148,7 +148,6 @@ export const getUrlQuery = (
  * ```
  */
 export function qsStringify(query: Record<string, any> = {}, decode = false): string {
-  query = JSON.parse(JSON.stringify(query))
   const queryObj = new URLSearchParams()
   Object.keys(query).forEach(item =>
     queryObj.set(
