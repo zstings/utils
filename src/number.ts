@@ -45,9 +45,8 @@ export const padInt: PadInt = (value, len = 2) => {
  * ```
  */
 export function toNumber<T>(value: T): number {
-  const num = Number(value)
-  if (isNaN(num)) throw `${value}无法转换为数字`
-  return num
+  if (isNaN(Number(value))) throw `${value}无法转换为数字`
+  return Number(value)
 }
 
 /**
