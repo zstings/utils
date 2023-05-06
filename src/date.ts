@@ -63,7 +63,6 @@ import { isNumber, isString, isObject, isBoolean, isArray } from '@/verify'
  * days('aaa') // throw 'Invalid Date'
  * ```
  */
-
 export function days(time: number | string | Date | (string | number)[] = new Date()): Date {
   const _time =
     time || time === 0
@@ -85,27 +84,27 @@ export function days(time: number | string | Date | (string | number)[] = new Da
  * @example
  * 获取当前的时间戳
  * ```ts
- * getTimeStamp() // 1659334598129
+ * timeStamp() // 1659334598129
  * ```
  * @example
  * 获取当前的时间戳，单位秒(s)
  * ```ts
- * getTimeStamp('', 's') // 1660700890
+ * timeStamp('', 's') // 1660700890
  * ```
  * @example
  * 获取 2022-10-12 的时间戳
  * ```ts
- * getTimeStamp('2022-10-12') // 1665504000000
+ * timeStamp('2022-10-12') // 1665504000000
  * ```
  * @example
  * 获取 2022-10-12 的时间戳, 以秒返回
  * ```ts
- * getTimeStamp('2022-10-12', 's') // 1665504000
+ * timeStamp('2022-10-12', 's') // 1665504000
  * ```
  */
-export function getTimeStamp(time: number | string | Date | (string | number)[] = new Date(), unit = 'ms'): number {
-  const timeStamp = days(time).getTime()
-  return unit == 's' ? Math.trunc(timeStamp / 1000) : timeStamp
+export function timeStamp(time: number | string | Date | (string | number)[] = new Date(), unit = 'ms'): number {
+  const ts = days(time).getTime()
+  return unit == 's' ? (ts / 1000) | 0 : ts
 }
 
 /**
@@ -117,38 +116,51 @@ export function getTimeStamp(time: number | string | Date | (string | number)[] 
  * @example
  * 获取当前的日期
  * ```ts
- * getFormatDateTime() // '2022-07-30 12:41:26'
+ * formats() // '2022-07-30 12:41:26'
  * ```
  * @example
  * 获取当前时间的年月
  * ```ts
- * getFormatDateTime(Date.now(), 'YYYY-MM') // '2022-07'
+ * formats(Date.now(), 'YYYY-MM') // '2022-07'
+ * formats(Date.now(), 'YYYY年MM月') // '2022年07月'
  * ```
  * @example
  * 获取具体日期的时间格式
  * ```ts
  * const date = new Date('2022/10/10 10:00:00')
- * getFormatDateTime(date, 'YYYY-MM-DD') // '2022-10-10'
+ * formats(date, 'YYYY-MM-DD') // '2022-10-10'
  * ```
  */
-export function getFormatDateTime(
+export function formats(
   time: number | string | Date | (string | number)[] = new Date(),
   format = 'YYYY-MM-DD hh:mm:ss'
 ): string {
   const date = days(time)
-  const year = padInt(date.getFullYear())
-  const month = padInt(date.getMonth() + 1)
-  const day = padInt(date.getDate())
-  const hour = padInt(date.getHours())
-  const minute = padInt(date.getMinutes())
-  const second = padInt(date.getSeconds())
+  const YYYY = padInt(date.getFullYear())
+  const YY = YYYY.toString().substring(2)
+  const MM = padInt(date.getMonth() + 1)
+  const M = padInt(date.getMonth() + 1, 1)
+  const DD = padInt(date.getDate())
+  const D = padInt(date.getDate(), 1)
+  const hh = padInt(date.getHours())
+  const h = padInt(date.getHours(), 1)
+  const mm = padInt(date.getMinutes())
+  const m = padInt(date.getMinutes(), 1)
+  const ss = padInt(date.getSeconds())
+  const s = padInt(date.getSeconds(), 1)
   return format
-    .replace('YYYY', year)
-    .replace('MM', month)
-    .replace('DD', day)
-    .replace('hh', hour)
-    .replace('mm', minute)
-    .replace('ss', second)
+    .replace(/YYYY/i, YYYY)
+    .replace(/YY/i, YY)
+    .replace(/MM/i, MM)
+    .replace(/M/i, M)
+    .replace(/DD/i, DD)
+    .replace(/D/i, D)
+    .replace(/hh/i, hh)
+    .replace(/h/i, h)
+    .replace(/mm/i, mm)
+    .replace(/m/i, m)
+    .replace(/ss/i, ss)
+    .replace(/s/i, s)
 }
 
 /**
@@ -288,17 +300,17 @@ export function getDataSection(
   option: {
     start?: number | string | Date | (string | number)[]
     format?: string
-    timeStamp?: boolean
-  } = { start: new Date(), format: 'YYYY-MM-DD', timeStamp: false }
+    timestamp?: boolean
+  } = { start: new Date(), format: 'YYYY-MM-DD', timestamp: false }
 ): (number | string)[] {
   if (!isNumber(day)) throw 'day 必须是数字'
   if (!isObject(option)) throw 'option 必须是对象'
-  const { start = new Date(), format = 'YYYY-MM-DD', timeStamp = false } = option
+  const { start = new Date(), format = 'YYYY-MM-DD', timestamp = false } = option
   if (!isString(format)) throw 'option.format 必须是字符串'
-  if (!isBoolean(timeStamp)) throw 'option.timeStamp 必须是布尔值'
+  if (!isBoolean(timestamp)) throw 'option.timestamp 必须是布尔值'
   const _startTime = days(start).getTime()
   const _endTime = _startTime - ((day || 1) - 1) * 8.64e7
-  if (timeStamp) return [getTimeStamp(_endTime, format), getTimeStamp(_startTime, format)]
-  return [getFormatDateTime(_endTime, format), getFormatDateTime(_startTime, format)]
+  if (timestamp) return [timeStamp(_endTime, format), timeStamp(_startTime, format)]
+  return [formats(_endTime, format), formats(_startTime, format)]
 }
 // 'YYYY-MM-DD hh:mm:ss' | 'YYYY-MM-DD hh:mm' | 'YYYY-MM-DD hh' | 'YYYY-MM-DD' | 'YYYY-MM'

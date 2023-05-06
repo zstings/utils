@@ -33,7 +33,7 @@ export { detectDeviceType, isAndroid, isDesktop, isIOS, isMobile, isQQ, isWeixin
 export { padInt, toNumber, toFixed, isInt } from '@/number'
 
 // 时间相关
-export { days, getTimeStamp, getFormatDateTime, getMonthNum, howLongAgo, getDataSection } from '@/date'
+export { days, timeStamp, formats, getMonthNum, howLongAgo, getDataSection } from '@/date'
 
 // 函数相关
 export { debounce, throttle, once } from '@/function'
