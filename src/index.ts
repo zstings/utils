@@ -1,6 +1,5 @@
-// import { version } from '../package.json'
-// export { version };
-// export { default as returnstr } from "./returnStr";
+import { version } from '../package.json'
+export { version }
 
 // 公共
 export { typeOf } from './common'

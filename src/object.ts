@@ -1,5 +1,4 @@
 import { deepClone } from '@/util'
-import { Omit, Assign } from '@types'
 import { isArrObj, isEmptyObject } from '@/verify'
 
 /**
@@ -51,7 +50,7 @@ export function createData(deep = 1, breadth = 0) {
  * omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {b: 2}
  * ```
  */
-export const omit: Omit = (object, keys = []) => {
+export function omit(object: Record<string, any>, keys: string[] = []): Record<string, any> {
   const _object = deepClone(object)
   Object.keys(_object).forEach(item => {
     if (keys.includes(item)) delete _object[item]
@@ -71,7 +70,7 @@ export const omit: Omit = (object, keys = []) => {
  * assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
  * ```
  */
-export const assign: Assign = (target, ...sources) => {
+export function assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any> {
   if (isEmptyObject(target)) return {}
   return Object.assign(target, ...sources)
 }
@@ -88,7 +87,7 @@ export const assign: Assign = (target, ...sources) => {
  * assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
  * ```
  */
-export const assignMin: Assign = (target, ...sources) => {
+export function assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any> {
   if (isEmptyObject(target)) return {}
   const _object = Object.assign({}, ...sources)
   Object.keys(target).forEach(item => {
@@ -109,7 +108,10 @@ export const assignMin: Assign = (target, ...sources) => {
  * // => {id: 3, age: 30}
  * ```
  */
-export function arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]) {
+export function arrObjSum<T extends Record<string, any>, K extends keyof T>(
+  object: T[],
+  keys: K[]
+): Record<string, any> {
   if (!isArrObj(object)) throw 'object 必须是数组对象'
   const _object = {} as Record<K, number>
   keys.forEach(item => {

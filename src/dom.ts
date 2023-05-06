@@ -1,5 +1,3 @@
-// import { isNumber, isString } from '@/verify'
-
 /**
  * 指定dom节点全屏
  * @param el 指定的dom节点，不指定默认指向document.body

@@ -1,4 +1,3 @@
-import { Debounce } from '@types'
 import { isNumber, isBoolean } from '@/verify'
 
 /**
@@ -37,7 +36,11 @@ import { isNumber, isBoolean } from '@/verify'
  * getlist: debounce(function () { ... })
  * ```
  */
-export const debounce: Debounce = function (func, awit = 500, option = { leading: false, trailing: true }) {
+export function debounce(
+  func: (...params: any[]) => any,
+  awit = 500,
+  option: { leading?: boolean; trailing?: boolean } = { leading: false, trailing: true }
+): any {
   const { leading = false, trailing = true } = option
   let _leading = leading
   let timeout = 0

@@ -1,4 +1,3 @@
-import { PadInt } from '@types'
 import { isBoolean } from '@/verify'
 
 /**
@@ -20,7 +19,7 @@ import { isBoolean } from '@/verify'
  * padInt(12, 3) => '012'
  * ```
  */
-export const padInt: PadInt = (value, len = 2) => {
+export function padInt(value: string | number, len = 2): string {
   if (isNaN(Number(value))) throw '不是一个合法的数字'
   return Number(value).toString().padStart(len, '0')
 }

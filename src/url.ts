@@ -99,12 +99,12 @@ export function getUrlParam(name: string, url: string = window.location.href): s
  * getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}) // => {c: '3', b: '4'}
  * ```
  */
-export const getUrlQuery = (
+export function getUrlQuery(
   option: { url?: string; type?: 'search' | 'hash' | 'all' } = {
     url: window.location.href,
     type: 'all'
   }
-) => {
+): Record<string, any> {
   // 检查参数类型
   if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象`
   // 检查参数属性是否存在，不存在设置默认值
