@@ -173,15 +173,15 @@ export function formats(
  * @example
  * 获取当前月份的天数
  * ```ts
- * getMonthNum() // => 31
+ * getMonthDays() // => 31
  * ```
  * @example
  * 获取指定月份的天数
  * ```ts
- * getMonthNum(2022, 1) // => 31
+ * getMonthDays(2022, 1) // => 31
  * ```
  */
-export function getMonthNum(year?: number, month?: number): number {
+export function getMonthDays(year?: number, month?: number): number {
   const _year = year ? year : new Date().getFullYear()
   const _month = month ? month : new Date().getMonth() + 1
   const days = new Date(_year, _month, 0)
@@ -292,7 +292,6 @@ export function howLongAgo(
  * 指定起始时间
  * ```ts
  * getDataSection(7, {start: '2022-08-17'}) // => ['2022-08-11', '2022-08-17']
- * // => '3分钟前'
  * ```
  */
 export function getDataSection(
