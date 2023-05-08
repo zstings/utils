@@ -40,19 +40,49 @@
   <script type="module">
     import * as utils from './src/index'
     require.config({ paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs' }});
-    require(["vs/editor/editor.main"], () => {
-      const value =  localStorage.getItem('code') || ''
+    require(["vs/editor/editor.main"], async () => {
+      // const modules = import.meta.glob('./dist/types/src/index.d.ts', { as: 'raw', eager: true })
+      // console.log(modules['./dist/types/src/index.d.ts'])
+      // monaco.languages.typescript.javascriptDefaults.addExtraLib(modules['./dist/types/src/index.d.ts'], './dist/types/src/index.d.ts');
+      // monaco.editor.createModel(modules['./dist/types/src/index.d.ts'], "typescript", monaco.Uri.parse('/dist/types/src/index.d.ts'));
+
+      // const modules = import.meta.glob('./dist/types/src/array.d.ts', { as: 'raw', eager: true })
+      // const aa = modules['./dist/types/src/array.d.ts'].replaceAll('export declare function ', '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
+      // console.log(aa)
+
+      const modules = import.meta.glob(['./src/*.ts', '!./src/index.ts'], { as: 'raw', eager: true })
+      let modulesStr = ''
+      Object.keys(modules).forEach(path => {
+        modulesStr += modules[path].replaceAll('export function', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
+      })
+      // validation settings
+      monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+        noSemanticValidation: true,
+        noSyntaxValidation: false,
+      });
+      // compiler options
+      monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+        target: monaco.languages.typescript.ScriptTarget.ES2015,
+        allowNonTsExtensions: true,
+      });
+      // extra libraries
+      const libSource = `declare const utils = {${modulesStr}}`
+      const libUri = "ts:filename/utils.d.ts";
+      monaco.languages.typescript.typescriptDefaults.addExtraLib(libSource, libUri);
+      monaco.editor.createModel(libSource, "typescript", monaco.Uri.parse(libUri));
+
+      const value =  localStorage.getItem('code') || `// 可直接使用utils访问所有函数,点击运行后在控制台（f12）可以看到结果\n// const {formats} = utils\n// console.log(formats('', 'YY年M月'))`
       window.myEditor = monaco.editor.create(document.getElementById('container'), {
         value,
-        language: 'javascript',
+        language: 'typescript',
+      });
+      window.myEditor.onDidChangeModelContent(() => {  
+        localStorage.setItem('code', window.myEditor.getValue())
       });
     });
     document.querySelector('button').onclick = () => {
       eval(window.myEditor.getValue())
     }
-    document.querySelector('#container').addEventListener('keyup', () => {
-      localStorage.setItem('code', window.myEditor.getValue())
-    })
   </script>
 </body>
 </html>
