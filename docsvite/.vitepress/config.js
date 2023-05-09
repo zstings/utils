@@ -12,7 +12,7 @@ const sidebar = [
 ]
 sidebar.push(...em)
 export default {
-  title: '@zstings/utils',
+  title: '@zstings/utils v0.6.0',
   description: 'javascript & typescript utils.',
   base: '/utils/',
   outDir: '../docs',

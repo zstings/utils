@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>utils</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      /* background-color: #1e1e1e; */
+    }
+    button {
+      padding: 5px 25px;
+    }
+    #container {
+      width: 100%;
+      height: 100%;
+      margin-top: 34px;
+    }
+    #run {
+      width: 100vw;
+      height: calc(100vh - 34px);
+    }
+    button {
+      background: transparent;
+      width: 0;
+      height: 0;
+      border: 10px solid #000;
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: #89d185;
+      border-right-color: transparent;
+      padding: 0;
+      font-size: 0;
+      position: absolute;
+      top: 7px;
+      right: 12px;
+      cursor: pointer;
+    }
+    .btns {
+      background-color: #323233;
+      height: 34px;
+      position: fixed;
+      top: 0;
+      left: 0px;
+      width: 100%;
+      box-shadow: 1px 2px 3px #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="run">
+    <div id="container"></div>
+    <div class="btns">
+      <button title="运行">运行</button>
+    </div>
+  </div>
+  <!-- <script type="module" src="/dev/index.ts"></script> -->
+  <script>
+    var require = { paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs' } }
+  </script>
+  <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+  <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/editor/editor.main.nls.js"></script>
+  <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/editor/editor.main.js"></script>
+  <script type="module">
+    import * as utils from 'https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.0/dist/utils.es.js'
+    require.config({ paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs' }});
+    require(["vs/editor/editor.main"], async () => {
+      // const funsFileRe = await fetch('https://cdn.jsdelivr.net/npm/@zstings/utils/dist/types/src/index.d.ts').then(res => res.text())
+      // const funsFile = funsFile.match(/'\.\/\w+';/g).map(item => item.match(/\w+/)[0])
+      const funsFile = ['common', 'verify', 'device', 'number', 'date', 'function', 'string', 'array', 'object', 'url', 'util', 'color', 'dom']
+      let modulesStr = ''
+      for (let i = 0; i < funsFile.length; i++) {
+        const res = await fetch(`https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.0/dist/types/src/${funsFile[i]}.d.ts`).then(res => res.text())
+        modulesStr += res.replaceAll('export declare function ', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
+      }
+      // validation settings
+      monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+        noSemanticValidation: true,
+        noSyntaxValidation: false,
+      });
+      // compiler options
+      monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+        target: monaco.languages.typescript.ScriptTarget.ES2015,
+        allowNonTsExtensions: true,
+      });
+      // extra libraries
+      const libSource = `declare const utils = {${modulesStr}}`
+      const libUri = "ts:filename/utils.d.ts";
+      monaco.languages.typescript.typescriptDefaults.addExtraLib(libSource, libUri);
+      monaco.editor.createModel(libSource, "typescript", monaco.Uri.parse(libUri));
+
+      const value =  localStorage.getItem('code') || `/*\n * 可直接使用utils访问所有函数\n * 点击运行(右上角绿色三角按钮)后在控制台（f12）可以看到结果\n */\nconst {formats} = utils\nconsole.log(formats('', 'YY年M月'))`
+      window.myEditor = monaco.editor.create(document.getElementById('container'), {
+        value,
+        theme: "vs-dark",
+        automaticLayout: true,
+        roundedSelection: false,
+        scrollBeyondLastLine: false,
+        language: 'typescript',
+      });
+      window.myEditor.onDidChangeModelContent(() => {  
+        localStorage.setItem('code', window.myEditor.getValue())
+      });
+    });
+    document.querySelector('button').onclick = () => {
+      eval(window.myEditor.getValue())
+    }
+  </script>
+</body>
+</html>

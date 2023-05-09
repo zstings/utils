@@ -4,12 +4,15 @@ layout: home
 
 hero:
   name:  '@zstings/utils'
-  text:  javascript & typescript
-  tagline: 欢迎 - 这是一个常用的前端工具函数集合，支持javascript与typescript的项目使用。
+  text:  支持 JS or TS
+  tagline: 一个常用的前端工具函数集合
   actions:
     - theme: brand
       text: 👉立即开始
       link: /start
+    - theme: brand
+      text: 👉在演练场中尝试一下
+      link: /playground.html
     - theme: alt
       text:  👆 在 github 上查看
       link: https://github.com/zstings/utils

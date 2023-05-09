@@ -118,6 +118,15 @@ function returnsTypes(types) {
 let str = ''
 // let menu = []
 data.children.forEach(item => {
+  // if (item.name == 'version') {
+  //   // 标题
+  //   str += `## ${item.name} :tada: :100: \n`
+  //   // 描述
+  //   str += '获取utils版本号' + '\n'
+  //   str += '当前版本：' + item.defaultValue + '\n'
+  //   fs.writeFileSync(`./docsvite/${item.name}.md`, str)
+  //   return
+  // }
   str = ''
   const signatures = item.signatures?.[0] || []
   const dom = createFile(_pathname + `/doc/functions/${signatures?.name}.html`)

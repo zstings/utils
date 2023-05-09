@@ -3,9 +3,9 @@
 #### 参数 
 - **func** `(...params: any[]) => any` 函数
  
-- **awit?** `number` 延迟时间 默认 500毫秒
+- **awit** `number = 500` 延迟时间 默认 500毫秒
  
-- **option?** `{     leading?: boolean;     trailing?: boolean; }` 可选的对象
+- **option** `{     leading?: boolean;     trailing?: boolean; } = ...` 可选的对象
  
 	- **leading?** `boolean` 前置边缘执行，默认 false
  

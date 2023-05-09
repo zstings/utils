@@ -9,7 +9,7 @@
  
 #### td.ts
 ::: info
-`getUrlQuery(option?: {     type?: "search" | "hash" | "all";     url?: string; }): {     [k: string]: any; }`
+`getUrlQuery(option?: {     type?: "search" | "hash" | "all";     url?: string; }): Record<string, any>`
 :::
 #### 异常 
 ::: danger
@@ -22,7 +22,7 @@ url参数错误，不是有效的  url不是有效链接时触发
 type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'
 :::
 #### 返回 
-- `映射` 
+- `Record` 
 ::: tip
 由参数组成的对象
 :::

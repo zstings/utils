@@ -1,8 +1,5 @@
-import { version } from '../package.json'
-export { version }
-
 // 公共
-export { typeOf } from './common'
+export { typeOf, version } from './common'
 // 验证相关
 export {
   isArray,

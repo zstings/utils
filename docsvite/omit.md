@@ -3,10 +3,11 @@
 #### 参数 
 - **object** `Record<string, any>` 指定对象
  
-- **paths** `string[]`  
+- **keys** `string[] = []` 指定属性
+ 
 #### td.ts
 ::: info
-`omit(object: Record<string, any>, paths: string[]): Record<string, any>`
+`omit(object: Record<string, any>, keys?: string[]): Record<string, any>`
 :::
 #### 返回 
 - `Record` 

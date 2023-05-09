@@ -1,3 +1,4 @@
+import { version as ver } from '../package.json'
 /**
  * 获取数据类型
  * @param value 任意值
@@ -36,4 +37,13 @@
  */
 export function typeOf(value: any): string {
   return Object.prototype.toString.call(value).slice(8, -1)
+}
+
+/**
+ * 获取版本号
+ * @return 版本号
+ * @category 工具Util
+ */
+export function version(): string {
+  return ver
 }

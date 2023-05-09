@@ -3,17 +3,16 @@
 #### 参数 
 - **day** `number = 1` 间隔天数，默认1，表示今天
  
-- **option** `{     format?: string;     start?: string | number | Date | (string | number)[];     timeStamp?: boolean; } = ...` 选项
+- **option** `{     format?: string;     start?: string | number | Date | (string | number)[];     timestamp?: boolean; } = ...` 选项
  
 	- **format?** `string` 时间格式， 默认YYYY-MM-DD
  
 	- **start?** `string | number | Date | (string | number)[]` 起始时间， 默认今天
  
-	- **timeStamp?** `boolean` 是否时间戳，默认false， 为true时，忽略 format
- 
+	- **timestamp?** `boolean`  
 #### td.ts
 ::: info
-`getDataSection(day?: number, option?: {     format?: string;     start?: string | number | Date | (string | number)[];     timeStamp?: boolean; }): (number | string)[]`
+`getDataSection(day?: number, option?: {     format?: string;     start?: string | number | Date | (string | number)[];     timestamp?: boolean; }): (number | string)[]`
 :::
 #### 返回 
 ::: tip
@@ -56,5 +55,4 @@ getDataSection(30) // => ['2022-07-28', '2022-08-26']
 
 ```ts
 getDataSection(7, {start: '2022-08-17'}) // => ['2022-08-11', '2022-08-17']
-// => '3分钟前'
 ```
