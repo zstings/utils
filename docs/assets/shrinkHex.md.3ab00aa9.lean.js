@@ -1,0 +1,1 @@
+import{_ as a,c as s,o as e,O as t}from"./chunks/framework.8ce0948f.js";const b=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"shrinkHex.md","filePath":"shrinkHex.md"}'),n={name:"shrinkHex.md"},l=t("",15),o=[l];function r(i,c,p,d,h,u){return e(),s("div",null,o)}const k=a(n,[["render",r]]);export{b as __pageData,k as default};

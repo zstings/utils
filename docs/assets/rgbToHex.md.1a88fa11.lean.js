@@ -1,1 +1,0 @@
-import{_ as a,c as s,o as e,O as t}from"./chunks/framework.d7e37bdc.js";const g=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"rgbToHex.md","filePath":"rgbToHex.md"}'),o={name:"rgbToHex.md"},l=t("",15),n=[l];function r(c,i,p,d,b,h){return e(),s("div",null,n)}const m=a(o,[["render",r]]);export{g as __pageData,m as default};

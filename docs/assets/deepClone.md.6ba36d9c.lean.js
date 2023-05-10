@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as e,O as l}from"./chunks/framework.d7e37bdc.js";const y=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"deepClone.md","filePath":"deepClone.md"}'),o={name:"deepClone.md"},n=l("",12),t=[n];function p(c,r,i,d,C,h){return e(),a("div",null,t)}const A=s(o,[["render",p]]);export{y as __pageData,A as default};

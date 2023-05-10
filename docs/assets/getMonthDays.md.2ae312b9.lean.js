@@ -1,0 +1,1 @@
+import{_ as a,c as e,o as s,O as t}from"./chunks/framework.8ce0948f.js";const b=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"getMonthDays.md","filePath":"getMonthDays.md"}'),o={name:"getMonthDays.md"},n=t("",16),l=[n];function r(c,i,p,d,h,u){return s(),e("div",null,l)}const y=a(o,[["render",r]]);export{b as __pageData,y as default};

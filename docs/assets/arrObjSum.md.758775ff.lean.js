@@ -1,0 +1,1 @@
+import{_ as s,c as a,o,O as l}from"./chunks/framework.8ce0948f.js";const C=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"arrObjSum.md","filePath":"arrObjSum.md"}'),n={name:"arrObjSum.md"},e=l("",11),t=[e];function p(r,c,i,d,y,D){return o(),a("div",null,t)}const u=s(n,[["render",p]]);export{C as __pageData,u as default};

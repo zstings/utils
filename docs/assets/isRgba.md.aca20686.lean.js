@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as e,O as l}from"./chunks/framework.8ce0948f.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"isRgba.md","filePath":"isRgba.md"}'),n={name:"isRgba.md"},t=l("",17),o=[t];function p(i,r,c,d,b,u){return e(),a("div",null,o)}const y=s(n,[["render",p]]);export{m as __pageData,y as default};

@@ -1,1 +1,0 @@
-import{_ as a,c as e,o as t,O as s}from"./chunks/framework.d7e37bdc.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"randomHex.md","filePath":"randomHex.md"}'),o={name:"randomHex.md"},n=s("",9),r=[n];function l(d,c,i,p,m,h){return t(),e("div",null,r)}const b=a(o,[["render",l]]);export{u as __pageData,b as default};

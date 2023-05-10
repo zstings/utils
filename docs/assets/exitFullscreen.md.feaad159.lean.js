@@ -1,1 +1,0 @@
-import{_ as e,c as a,o as t,O as s}from"./chunks/framework.d7e37bdc.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"exitFullscreen.md","filePath":"exitFullscreen.md"}'),l={name:"exitFullscreen.md"},n=s("",8),c=[n];function r(i,o,d,p,u,h){return t(),a("div",null,c)}const b=e(l,[["render",r]]);export{m as __pageData,b as default};

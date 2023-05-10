@@ -1,0 +1,1 @@
+import{_ as a,c as e,o as i,O as s}from"./chunks/framework.8ce0948f.js";const _=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"isWeixinMini.md","filePath":"isWeixinMini.md"}'),n={name:"isWeixinMini.md"},t=s("",12),l=[t];function o(c,r,p,d,u,h){return i(),e("div",null,l)}const b=a(n,[["render",o]]);export{_ as __pageData,b as default};

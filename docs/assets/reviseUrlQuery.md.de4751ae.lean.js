@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as l,O as n}from"./chunks/framework.d7e37bdc.js";const h=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"reviseUrlQuery.md","filePath":"reviseUrlQuery.md"}'),o={name:"reviseUrlQuery.md"},p=n("",21),e=[p];function t(r,c,i,D,y,F){return l(),a("div",null,e)}const u=s(o,[["render",t]]);export{h as __pageData,u as default};
