@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`extendHex(hex: string): string`
+`extendHex(hex): string`
 :::
 #### 返回 
 - `string` 

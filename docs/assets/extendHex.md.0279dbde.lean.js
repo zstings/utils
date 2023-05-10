@@ -1,0 +1,1 @@
+import{_ as e,c as a,o as s,O as t}from"./chunks/framework.d7e37bdc.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"extendHex.md","filePath":"extendHex.md"}'),n={name:"extendHex.md"},l=t("",14),o=[l];function c(r,i,d,p,h,u){return s(),a("div",null,o)}const b=e(n,[["render",c]]);export{m as __pageData,b as default};

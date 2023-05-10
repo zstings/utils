@@ -1,11 +1,11 @@
 ## once :tada: :100: 
 只调用一次的函数
 #### 参数 
-- **func** `(...params: any[]) => any` 函数
+- **func** `(...params) => any` 函数
  
 #### td.ts
 ::: info
-`once(func: ((...params: any[]) => any)): ((this: unknown, ...args: any[]) => void)`
+`once(func): ((this, ...args) => void)`
 :::
 #### 实例 
 ```ts

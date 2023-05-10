@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`upperFirst(str: any): string`
+`upperFirst(str): string`
 :::
 #### 返回 
 - `string` 

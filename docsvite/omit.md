@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`omit(object: Record<string, any>, keys?: string[]): Record<string, any>`
+`omit(object, keys?): Record<string, any>`
 :::
 #### 返回 
 - `Record` 

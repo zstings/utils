@@ -4,7 +4,7 @@
 - **object** `any`  
 #### td.ts
 ::: info
-`isArrObj(object: any): any`
+`isArrObj(object): any`
 :::
 #### 返回 
 - `any` 

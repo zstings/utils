@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`unique(array: any[], key?: string): any[]`
+`unique(array, key?): any[]`
 :::
 #### 返回 
 ::: tip

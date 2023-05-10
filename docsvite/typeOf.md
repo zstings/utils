@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`typeOf(value: any): string`
+`typeOf(value): string`
 :::
 #### 返回 
 - `string` 

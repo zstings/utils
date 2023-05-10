@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isPhone(value: string | number): boolean`
+`isPhone(value): boolean`
 :::
 #### 返回 
 - `boolean` 

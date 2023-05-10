@@ -1,0 +1,1 @@
+import{_ as a,c as s,o as e,O as o}from"./chunks/framework.d7e37bdc.js";const A=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"isBoolean.md","filePath":"isBoolean.md"}'),l={name:"isBoolean.md"},n=o("",14),t=[n];function p(r,c,i,d,u,h){return e(),s("div",null,t)}const b=a(l,[["render",p]]);export{A as __pageData,b as default};

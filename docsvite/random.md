@@ -10,7 +10,7 @@
  
 #### td.ts
 ::: info
-`random(min?: number, max?: number): number`
+`random(min?, max?): number`
 :::
 #### 返回 
 - `number` 

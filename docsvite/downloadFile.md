@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`downloadFile(name: string, blob: Blob): void`
+`downloadFile(name, blob): void`
 :::
 #### 实例 
 ```ts

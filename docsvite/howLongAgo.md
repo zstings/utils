@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`howLongAgo(endTime?: string | number | Date | (string | number)[], startTime?: string | number | Date | (string | number)[]): string`
+`howLongAgo(endTime?, startTime?): string`
 :::
 #### 返回 
 - `string` 

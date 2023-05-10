@@ -9,7 +9,7 @@
  
 #### td.ts
 ::: info
-`toFixed(value: number, num?: number, isRound?: boolean): number`
+`toFixed(value, num?, isRound?): number`
 :::
 #### 返回 
 - `number` 

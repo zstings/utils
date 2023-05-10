@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`rgbToHex(rgba: string): string`
+`rgbToHex(rgba): string`
 :::
 #### 返回 
 - `string` 

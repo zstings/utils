@@ -10,7 +10,7 @@
  
 #### td.ts
 ::: info
-`reviseUrlQuery(option: {     hash?: Record<string, any>;     search?: Record<string, any>; }, url?: string): string`
+`reviseUrlQuery(option, url?): string`
 :::
 #### 异常 
 ::: danger

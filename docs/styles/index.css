@@ -1,12 +1,17 @@
-#app .link-text {
+/* 侧边栏 */
+.VPSidebarItem .VPLink .text {
   white-space: pre-line;
-  font-size: 10px;
+  font-size: 12px;
   display: block;
-  /* zoom: 0.8; */
+  line-height: 18px;
 }
-#app .link-text:first-line {
+.VPSidebarItem .VPLink .text:first-line {
   font-size: 14px;
-  /* font-size: 17.5px; */
+  color: #333;
+}
+.VPSidebarItem.is-active .VPLink .text:first-line,
+.VPSidebarItem .VPLink .text:hover:first-line {
+  color: inherit;
 }
 
 #app .custom-block-title {
@@ -30,13 +35,3 @@ li code {
   font-size: 12px!important;
   zoom: 0.9;
 }
-
-/* .VPHomeHero .text {
-  max-width: initial!important;
-  font-size: 46px;
-}
-.VPHomeHero .tagline {
-  line-height: 22px;
-  font-size: 20px;
-  max-width: initial!important;
-} */

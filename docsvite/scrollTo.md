@@ -15,7 +15,7 @@
  
 #### td.ts
 ::: info
-`scrollTo(option?: {     direction?: "top" | "left";     dom?: HTMLElement;     num?: number;     rate?: number; }, callback?: (() => void)): void`
+`scrollTo(option?, callback?): void`
 :::
 #### 实例 
 回到顶部

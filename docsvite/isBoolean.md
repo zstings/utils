@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isBoolean(value: any): boolean`
+`isBoolean(value): boolean`
 :::
 #### 返回 
 - `boolean` 

@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`setUrlQuery(url: string, type?: "pushState" | "replaceState"): void`
+`setUrlQuery(url, type?): void`
 :::
 #### 异常 
 ::: danger
@@ -27,5 +27,5 @@ setUrlQuery('https://a.b.com/?a=1&b=2')
 
 
 ```ts
-setUrlQuery('https://a.b.com/?a=1&b=2', type: 'replaceState')
+setUrlQuery('https://a.b.com/?a=1&b=2', 'replaceState')
 ```

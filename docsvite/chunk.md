@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`chunk(array: any[], size?: number): any[]`
+`chunk(array, size?): any[]`
 :::
 #### 返回 
 ::: tip

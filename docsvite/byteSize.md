@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`byteSize(str: any): number`
+`byteSize(str): number`
 :::
 #### 返回 
 - `number` 

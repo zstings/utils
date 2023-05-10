@@ -6,7 +6,7 @@
  
 #### td.ts
 ::: info
-`formats(time?: string | number | Date | (string | number)[], format?: string): string`
+`formats(time?, format?): string`
 :::
 #### 返回 
 - `string` 

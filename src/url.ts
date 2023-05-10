@@ -273,7 +273,7 @@ export function reviseUrlQuery(
  * @example
  * 修改了浏览器页面的地址栏的url显示，当前的页面的历史记录替换掉，不会添加新的历史记录
  * ```ts
- * setUrlQuery('https://a.b.com/?a=1&b=2', type: 'replaceState')
+ * setUrlQuery('https://a.b.com/?a=1&b=2', 'replaceState')
  * ```
  */
 export function setUrlQuery(url: string, type: 'pushState' | 'replaceState' = 'pushState'): void {

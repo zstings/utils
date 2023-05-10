@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isIncludeChinese(value: string): boolean`
+`isIncludeChinese(value): boolean`
 :::
 #### 返回 
 - `boolean` 

@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`removeHTML(str: any): string`
+`removeHTML(str): string`
 :::
 #### 返回 
 - `string` 

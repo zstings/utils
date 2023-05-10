@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`toNumber<T>(value: T): number`
+`toNumber<T>(value): number`
 :::
 #### 返回 
 - `number` 

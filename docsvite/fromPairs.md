@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`fromPairs(array: any[]): Record<string, unknown>`
+`fromPairs(array): Record<string, unknown>`
 :::
 #### 返回 
 - `Record` 

@@ -12,7 +12,7 @@
 	- **timestamp?** `boolean`  
 #### td.ts
 ::: info
-`getDataSection(day?: number, option?: {     format?: string;     start?: string | number | Date | (string | number)[];     timestamp?: boolean; }): (number | string)[]`
+`getDataSection(day?, option?): (number | string)[]`
 :::
 #### 返回 
 ::: tip

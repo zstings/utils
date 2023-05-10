@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isDom(tarage: Element): boolean`
+`isDom(tarage): boolean`
 :::
 #### 返回 
 - `boolean` 

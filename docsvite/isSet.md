@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isSet(value: any): boolean`
+`isSet(value): boolean`
 :::
 #### 返回 
 - `boolean` 

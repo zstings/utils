@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isPromise(value: any): boolean`
+`isPromise(value): boolean`
 :::
 #### 返回 
 - `boolean` 

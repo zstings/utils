@@ -14,24 +14,25 @@ sidebar.push(...em)
 export default {
   title: '@zstings/utils v0.6.0',
   description: 'javascript & typescript utils.',
-  base: '/utils/',
+  // base: '/utils/',
   outDir: '../docs',
   head: [
-    ['link', { rel: 'stylesheet', href: '/utils/styles/index.css' }]
+    ['link', { rel: 'stylesheet', href: '/styles/index.css' }]
   ],
   markdown: {
-    theme: 'material-palenight',
+    theme: 'material-theme-palenight',
     lineNumbers: true
   },
   themeConfig: {
     socialLinks: [
       { icon: 'github', link: 'https://github.com/zstings/utils/' }
     ],
-    algolia: {
-    },
-    // logo: '/logo.svg',
+    // algolia: {
+    // },
+    logo: '/logo.svg',
     nav: [
-      { text: "home", link: "/" }
+      { text: "home", link: "/" },
+      { text: "playground", link: "/playground",target: '_blank', rel: 'noreferrer' }
     ],
     sidebar,
     docFooter: {

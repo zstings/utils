@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isEmptyObject(object: Record<string, unknown>): boolean`
+`isEmptyObject(object): boolean`
 :::
 #### 返回 
 - `boolean` 

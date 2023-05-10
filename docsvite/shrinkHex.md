@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`shrinkHex(hex: string): string`
+`shrinkHex(hex): string`
 :::
 #### 返回 
 - `string` 

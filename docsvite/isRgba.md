@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isRgba(rgba: string): boolean`
+`isRgba(rgba): boolean`
 :::
 #### 返回 
 - `boolean` 

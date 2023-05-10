@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isLocation(value: any): boolean`
+`isLocation(value): boolean`
 :::
 #### 返回 
 - `boolean` 

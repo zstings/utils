@@ -5,7 +5,7 @@ gbk 转 utf-8
  
 #### td.ts
 ::: info
-`gbkToUtf8(value: ArrayBuffer): object | string`
+`gbkToUtf8(value): object | string`
 :::
 #### 返回 
 - `object | string` 

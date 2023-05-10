@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`phoneEncrypt(value: string | number): string`
+`phoneEncrypt(value): string`
 :::
 #### 返回 
 - `string` 

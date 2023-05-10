@@ -1,7 +1,7 @@
 ## debounce :tada: :100: 
 防抖
 #### 参数 
-- **func** `(...params: any[]) => any` 函数
+- **func** `(...params) => any` 函数
  
 - **awit** `number = 500` 延迟时间 默认 500毫秒
  
@@ -13,7 +13,7 @@
  
 #### td.ts
 ::: info
-`debounce(func: ((...params: any[]) => any), awit?: number, option?: {     leading?: boolean;     trailing?: boolean; }): any`
+`debounce(func, awit?, option?): any`
 :::
 #### 异常 
 ::: danger

@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`arrObjSum<T, K>(object: T[], keys: K[]): Record<string, any>`
+`arrObjSum<T, K>(object, keys): Record<string, any>`
 :::
 #### 返回 
 - `Record` 

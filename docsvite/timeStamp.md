@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`timeStamp(time?: string | number | Date | (string | number)[], unit?: string): number`
+`timeStamp(time?, unit?): number`
 :::
 #### 返回 
 - `number` 

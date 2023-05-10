@@ -9,7 +9,7 @@
  
 #### td.ts
 ::: info
-`getUrlQuery(option?: {     type?: "search" | "hash" | "all";     url?: string; }): Record<string, any>`
+`getUrlQuery(option?): Record<string, any>`
 :::
 #### 异常 
 ::: danger

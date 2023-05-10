@@ -5,7 +5,7 @@
 - **decode** `boolean = true`  
 #### td.ts
 ::: info
-`qsParse(query?: string, decode?: boolean): {     [k: string]: any; }`
+`qsParse(query?, decode?): {     [k: string]: any; }`
 :::
 #### 返回 
 - `映射` 

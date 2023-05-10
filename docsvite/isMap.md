@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isMap(value: any): boolean`
+`isMap(value): boolean`
 :::
 #### 返回 
 - `boolean` 

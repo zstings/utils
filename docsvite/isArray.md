@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isArray(value: any): boolean`
+`isArray(value): boolean`
 :::
 #### 返回 
 - `boolean` 

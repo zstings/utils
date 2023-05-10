@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isNullOrUndefined(value: any): boolean`
+`isNullOrUndefined(value): boolean`
 :::
 #### 返回 
 - `boolean` 

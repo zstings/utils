@@ -4,7 +4,7 @@
 - **source** `T`  
 #### td.ts
 ::: info
-`deepClone<T>(source: T): T`
+`deepClone<T>(source): T`
 :::
 #### 返回 
 - `T` 

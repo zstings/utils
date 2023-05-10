@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`launchFullscreen(el?: HTMLElement): void`
+`launchFullscreen(el?): void`
 :::
 #### 异常 
 ::: danger

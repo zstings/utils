@@ -1,7 +1,7 @@
 ## throttle :tada: :100: 
 节流
 #### 参数 
-- **func** `(...params: any[]) => any` 函数
+- **func** `(...params) => any` 函数
  
 - **wait** `number = 500` 延迟时间 默认 500毫秒
  
@@ -9,7 +9,7 @@
  
 #### td.ts
 ::: info
-`throttle(func: ((...params: any[]) => any), wait?: number, immediate?: boolean): ((this: unknown, ...args: any[]) => void)`
+`throttle(func, wait?, immediate?): ((this, ...args) => void)`
 :::
 #### 异常 
 ::: danger

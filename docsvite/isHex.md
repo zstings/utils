@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isHex(hex: string): boolean`
+`isHex(hex): boolean`
 :::
 #### 返回 
 - `boolean` 

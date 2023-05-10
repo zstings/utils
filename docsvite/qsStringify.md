@@ -5,7 +5,7 @@
 - **decode** `boolean = false`  
 #### td.ts
 ::: info
-`qsStringify(query?: Record<string, any>, decode?: boolean): string`
+`qsStringify(query?, decode?): string`
 :::
 #### 返回 
 - `string` 

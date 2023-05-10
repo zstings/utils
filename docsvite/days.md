@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`days(time?: string | number | Date | (string | number)[]): Date`
+`days(time?): Date`
 :::
 #### 返回 
 - `Date` 

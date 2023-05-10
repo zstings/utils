@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`isURL(url: string): boolean`
+`isURL(url): boolean`
 :::
 #### 返回 
 - `boolean` 

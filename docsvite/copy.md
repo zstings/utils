@@ -8,7 +8,7 @@
  
 #### td.ts
 ::: info
-`copy(value: string): Promise<void>`
+`copy(value): Promise<void>`
 :::
 #### 返回 
 - `Promise` 

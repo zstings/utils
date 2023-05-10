@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`getMonthDays(year?: number, month?: number): number`
+`getMonthDays(year?, month?): number`
 :::
 #### 返回 
 - `number` 

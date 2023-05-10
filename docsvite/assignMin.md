@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>`
+`assignMin(target, ...sources): Record<string, any>`
 :::
 #### 返回 
 - `Record` 

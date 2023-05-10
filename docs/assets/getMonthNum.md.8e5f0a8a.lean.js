@@ -1,0 +1,1 @@
+import{_ as a,c as e,o as t,O as s}from"./chunks/framework.d7e37bdc.js";const b=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"getMonthNum.md","filePath":"getMonthNum.md"}'),n={name:"getMonthNum.md"},o=s("",16),l=[o];function r(c,i,p,d,u,h){return t(),e("div",null,l)}const g=a(n,[["render",r]]);export{b as __pageData,g as default};

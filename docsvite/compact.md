@@ -5,7 +5,7 @@
  
 #### td.ts
 ::: info
-`compact(array: any[]): any[]`
+`compact(array): any[]`
 :::
 #### 返回 
 ::: tip

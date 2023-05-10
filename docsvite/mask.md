@@ -14,7 +14,7 @@
  
 #### td.ts
 ::: info
-`mask(str: string, start?: number, length?: number, mask?: string): string`
+`mask(str, start?, length?, mask?): string`
 :::
 #### 返回 
 - `string` 

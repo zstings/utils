@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`createData(deep?: number, breadth?: number): {     data?: any;     [key: number]: any; }`
+`createData(deep?, breadth?): {     data?: any;     [key: number]: any; }`
 :::
 #### 返回 
 - `映射` 

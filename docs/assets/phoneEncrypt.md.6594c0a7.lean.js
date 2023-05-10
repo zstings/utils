@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as e,O as n}from"./chunks/framework.d7e37bdc.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"phoneEncrypt.md","filePath":"phoneEncrypt.md"}'),l={name:"phoneEncrypt.md"},o=n("",15),t=[o];function p(r,c,i,d,h,y){return e(),a("div",null,t)}const D=s(l,[["render",p]]);export{m as __pageData,D as default};

@@ -1,7 +1,10 @@
 ## 前言
 本节将帮助您从头开始在项目中安装使用 @zstings/utils。
+
+⏹️在演练场中尝试一下： <a href="/playground.html" target="_blank" rel="noreferrer">➡️playground</a>
+<!-- <pathname:///playground.html> -->
 <!-- ::: warning 警告
-警告: @zstings/utils目前处于早期试用状态， 尽管它已经适合开箱即用，但仍然不推荐在正式项目中使用。
+@zstings/utils目前处于早期试用状态， 尽管它已经适合开箱即用，但仍然不推荐在正式项目中使用。
 ::: -->
 
 ## 第1步：安装

@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`getUrlParam(name: string, url?: string): string | null`
+`getUrlParam(name, url?): string | null`
 :::
 #### 异常 
 ::: danger

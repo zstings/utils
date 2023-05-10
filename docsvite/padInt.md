@@ -7,7 +7,7 @@
  
 #### td.ts
 ::: info
-`padInt(value: string | number, len?: number): string`
+`padInt(value, len?): string`
 :::
 #### 返回 
 - `string` 
