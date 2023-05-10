@@ -224,3 +224,16 @@ function categoriesSort(categories) {
 }
 
 fs.writeFileSync(`./docsvite/.vitepress/menu.js`, 'export default \n' + JSON.stringify(createMenu()))
+
+
+console.log('写入在线运行时的类型文件')
+const dts = fs.readdirSync(_pathname + `/dist/types/src/`).filter(item => item != 'index.d.ts')
+let modulesStr = ''
+for (let i = 0; i < dts.length; i++) {
+  const res = createFile(_pathname + `/dist/types/src/${dts[i]}`)
+  modulesStr += res.replaceAll('export declare function ', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
+}
+fs.writeFileSync(`./docsvite/public/index.d.ts`, modulesStr)
+console.log('完成写入在线运行时的类型文件')
+
+

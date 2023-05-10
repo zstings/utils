@@ -68,6 +68,8 @@
     import * as utils from 'https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.0/dist/utils.es.js'
     require.config({ paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs' }});
     require(["vs/editor/editor.main"], async () => {
+      const modulesStr = await fetch(`./index.d.ts`).then(res => res.text())
+      /* 或者远程cdn的d.ts
       // const funsFileRe = await fetch('https://cdn.jsdelivr.net/npm/@zstings/utils/dist/types/src/index.d.ts').then(res => res.text())
       // const funsFile = funsFile.match(/'\.\/\w+';/g).map(item => item.match(/\w+/)[0])
       const funsFile = ['common', 'verify', 'device', 'number', 'date', 'function', 'string', 'array', 'object', 'url', 'util', 'color', 'dom']
@@ -76,6 +78,7 @@
         const res = await fetch(`https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.0/dist/types/src/${funsFile[i]}.d.ts`).then(res => res.text())
         modulesStr += res.replaceAll('export declare function ', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
       }
+      */
       // validation settings
       monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
         noSemanticValidation: true,
@@ -92,7 +95,7 @@
       monaco.languages.typescript.typescriptDefaults.addExtraLib(libSource, libUri);
       monaco.editor.createModel(libSource, "typescript", monaco.Uri.parse(libUri));
 
-      const value =  localStorage.getItem('code') || `/*\n * 可直接使用utils访问所有函数\n * 点击运行(右上角绿色三角按钮)后在控制台（f12）可以看到结果\n */\nconst {formats} = utils\nconsole.log(formats('', 'YY年M月'))`
+      const value =  localStorage.getItem('code') || `/*\n * 可直接使用utils访问所有函数\n * 点击运行(右上角绿色三角按钮)后在控制台（f12）可以看到结果\n */\nconst {formats} = utils\nconsole.log(formats('', 'YYYY-MM-DD'))`
       window.myEditor = monaco.editor.create(document.getElementById('container'), {
         value,
         theme: "vs-dark",
