@@ -324,14 +324,14 @@ export function copy(value: string) {
     resolve: (value: void | PromiseLike<void>) => void,
     reject: (reason?: any) => void
   ) {
-    const input = document.createElement('input')
-    document.body.appendChild(input)
-    input.setAttribute('readonly', 'readonly')
-    input.setAttribute('value', code)
-    input.select()
-    input.setSelectionRange(0, code.length)
+    const textarea = document.createElement('textarea')
+    document.body.appendChild(textarea)
+    textarea.setAttribute('readonly', 'readonly')
+    textarea.innerHTML = code
+    textarea.select()
+    textarea.setSelectionRange(0, code.length)
     const isc = document.execCommand('copy')
-    input.remove()
+    textarea.remove()
     isc ? resolve() : reject('execCommand error')
   }
 }
