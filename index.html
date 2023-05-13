@@ -98,7 +98,7 @@
       monaco.languages.typescript.typescriptDefaults.addExtraLib(libSource, libUri);
       monaco.editor.createModel(libSource, "typescript", monaco.Uri.parse(libUri));
 
-      const value =  localStorage.getItem('code') || `/*\n * 可直接使用utils访问所有函数\n * 点击运行(右上角绿色三角按钮)后在控制台（f12）可以看到结果\n */\nconst {formats} = utils\nconsole.log(formats('', 'YY年M月'))`
+      const value =  localStorage.getItem('code') || `/*\n * 可直接使用utils访问所有函数\n * 点击运行(右上角绿色三角按钮)后在控制台（f12）可以看到结果\n */\nconst {formats} = utils\nconsole.log(formats('', 'YYYY年MM月DD日'))`
       window.myEditor = monaco.editor.create(document.getElementById('container'), {
         value,
         theme: "vs-dark",
