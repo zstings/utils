@@ -335,3 +335,23 @@ export function copy(value: string) {
     isc ? resolve() : reject('execCommand error')
   }
 }
+
+/**
+ * base64转blob
+ * @param base64 base64
+ * @param type 文件类型
+ * @returns Blob
+ * @category 工具Util
+ * @example
+ * ```ts
+ * base64ToBlob()
+ * ```
+ */
+export function base64ToBlob(base64: string, type: string): Blob {
+  // 'image/png'
+  const bstr = window.atob(base64.replace(`data:${type};base64,`, ''))
+  let n = bstr.length
+  const u8arr = new Uint8Array(n)
+  while (n--) u8arr[n] = bstr.charCodeAt(n)
+  return new Blob([u8arr], { type })
+}
