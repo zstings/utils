@@ -347,11 +347,12 @@ export function copy(value: string) {
  * base64ToBlob()
  * ```
  */
-export function base64ToBlob(base64: string, type: string): Blob {
+export function base64ToBlob(base64: string, type?: string): Blob {
   // 'image/png'
-  const bstr = window.atob(base64.replace(`data:${type};base64,`, ''))
-  let n = bstr.length
+  const base64Str = window.atob(base64.replace(/data:([\s\S]+);base64,/, ''))
+  const base64Type = type || base64.match(/data:([\s\S]+);base64,/)?.[1] || 'text/plain'
+  let n = base64Str.length
   const u8arr = new Uint8Array(n)
-  while (n--) u8arr[n] = bstr.charCodeAt(n)
-  return new Blob([u8arr], { type })
+  while (n--) u8arr[n] = base64Str.charCodeAt(n)
+  return new Blob([u8arr], { type: base64Type })
 }
