@@ -13,14 +13,20 @@
 由参数组成的对象
 :::
 #### 实例 
-支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
-
-不传值时，默认从window.location中取值
-
-
 ```ts
 qsStringify({a: 1, b: 2})
 // => 'a=1&b=2'
+```
+如果传入内容是undefined或者null，这个参数会被丢弃
+
+如果你想空参数，可以使用 
+`''`
+
+
+
+```ts
+qsStringify({a: 1, b: undefined, c: null})
+// => 'a=1&b=2&c=%7B%22a%22%3A1%7D'
 ```
 ```ts
 qsStringify({a: 1, b: 2, c: {a: 1}})

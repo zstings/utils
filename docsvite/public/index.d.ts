@@ -1193,11 +1193,17 @@ getUrlQuery(option?: {
  * @category URL
  * @example
 * eg:
- * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
- * 不传值时，默认从window.location中取值
  * ```ts
  * qsStringify({a: 1, b: 2})
  * // => 'a=1&b=2'
+ * ```
+ * @example
+* eg:
+ * 如果传入内容是undefined或者null，这个参数会被丢弃
+ * 如果你想空参数，可以使用 `''`
+ * ```ts
+ * qsStringify({a: 1, b: undefined, c: null})
+ * // => 'a=1&b=2&c=%7B%22a%22%3A1%7D'
  * ```
  * @example
 * eg:
@@ -1297,7 +1303,7 @@ reviseUrlQuery(option: {
 * eg:
  * 修改了浏览器页面的地址栏的url显示，当前的页面的历史记录替换掉，不会添加新的历史记录
  * ```ts
- * setUrlQuery('https://a.b.com/?a=1&b=2', type: 'replaceState')
+ * setUrlQuery('https://a.b.com/?a=1&b=2', 'replaceState')
  * ```
  */
 setUrlQuery(url: string, type?: 'pushState' | 'replaceState'): void;
@@ -1467,6 +1473,19 @@ deepClonex<T>(x: T): T;
  * ```
  */
 copy(value: string): Promise<void>;
+/**
+ * base64转blob
+ * @param base64 base64
+ * @param type 文件类型
+ * @returns Blob
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * base64ToBlob()
+ * ```
+ */
+base64ToBlob(base64: string, type?: string): Blob;
 /**
  * 判断是否为手机号
  * @param value 任意值

@@ -65,7 +65,7 @@
   <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/editor/editor.main.nls.js"></script>
   <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/editor/editor.main.js"></script>
   <script type="module">
-    import * as utils from 'https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.0/dist/utils.es.js'
+    import * as utils from 'https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.1/dist/utils.es.js'
     require.config({ paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs' }});
     require(["vs/editor/editor.main"], async () => {
       const modulesStr = await fetch(`./index.d.ts`).then(res => res.text())
@@ -75,7 +75,7 @@
       const funsFile = ['common', 'verify', 'device', 'number', 'date', 'function', 'string', 'array', 'object', 'url', 'util', 'color', 'dom']
       let modulesStr = ''
       for (let i = 0; i < funsFile.length; i++) {
-        const res = await fetch(`https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.0/dist/types/src/${funsFile[i]}.d.ts`).then(res => res.text())
+        const res = await fetch(`https://cdn.jsdelivr.net/npm/@zstings/utils@0.6.1/dist/types/src/${funsFile[i]}.d.ts`).then(res => res.text())
         modulesStr += res.replaceAll('export declare function ', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
       }
       */
