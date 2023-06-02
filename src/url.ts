@@ -129,11 +129,16 @@ export function getUrlQuery(
  * @returns 由参数组成的对象
  * @category URL
  * @example
- * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
- * 不传值时，默认从window.location中取值
  * ```ts
  * qsStringify({a: 1, b: 2})
  * // => 'a=1&b=2'
+ * ```
+ * @example
+ * 如果传入内容是undefined或者null，这个参数会被丢弃
+ * 如果你想空参数，可以使用 `''`
+ * ```ts
+ * qsStringify({a: 1, b: undefined, c: null})
+ * // => 'a=1&b=2&c=%7B%22a%22%3A1%7D'
  * ```
  * @example
  * ```ts
@@ -155,12 +160,9 @@ export function qsStringify(query: Record<string, any> = {}, decode = false): st
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i]
     const value = query[key]
+    if (isNullOrUndefined(value)) continue
     // 使用三元运算符代替if语句，简化代码逻辑
-    const encodedValue = isBasicType(value)
-      ? value == null
-        ? ''
-        : encodeURIComponent(value)
-      : encodeURIComponent(JSON.stringify(value))
+    const encodedValue = isBasicType(value) ? encodeURIComponent(value) : encodeURIComponent(JSON.stringify(value))
     queryArr.push(key + '=' + encodedValue)
   }
   // 根据decode参数决定是否解码
