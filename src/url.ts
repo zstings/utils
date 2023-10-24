@@ -19,9 +19,10 @@ import { isJsonString, isNullOrUndefined, isObject, isString, isBasicType } from
  */
 export function isURL(url: string): boolean {
   if (!isString(url)) throw '参数必须是string'
+  if (URL.canParse) return URL.canParse(url)
   try {
-    const _url = new URL(url)
-    return !!_url.href
+    new URL(url)
+    return true
   } catch (err) {
     return false
   }
