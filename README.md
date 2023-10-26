@@ -40,7 +40,7 @@ cdn导入
 <!-- 指定版本 -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/@zstings/utils@0.4.0/dist/utils.umd.min.js"></script> -->
 <!-- 默认最新版 -->
-<script src="https://cdn.jsdelivr.net/npm/@zstings/utils@0.4.0/dist/utils.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@zstings/utils/dist/utils.umd.min.js"></script>
 <script>
   utils.getDataType([]) // Array
 </script>
