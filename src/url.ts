@@ -19,7 +19,7 @@ import { isJsonString, isNullOrUndefined, isObject, isString, isBasicType } from
  */
 export function isURL(url: string): boolean {
   if (!isString(url)) throw '参数必须是string'
-  if (URL.canParse) return URL.canParse(url)
+  // if (URL.canParse) return URL.canParse(url)
   try {
     new URL(url)
     return true
