@@ -89,9 +89,9 @@ export function assign(target: Record<string, any>, ...sources: Record<string, a
  */
 export function assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any> {
   if (isEmptyObject(target)) return {}
-  const _object = Object.assign({}, ...sources)
+  const _object = Object.assign({}, target, ...sources)
   Object.keys(target).forEach(item => {
-    target[item] = _object[item] || target[item]
+    target[item] = _object[item]
   })
   return target
 }
