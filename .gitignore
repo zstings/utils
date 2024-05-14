@@ -27,3 +27,4 @@ testcdn
 *.njsproj
 *.sln
 *.sw?
+docsvite/.vitepress/cache
