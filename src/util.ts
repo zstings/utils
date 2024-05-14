@@ -1,4 +1,4 @@
-import { isNumber, isPhone, isArray, isObject } from '@/verify'
+import { isNumber, isPhone } from '@/verify'
 import { mask } from '@/string'
 
 /**

@@ -1,7 +1,7 @@
 {
   "name": "@zstings/utils",
   "uname": "utils",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "license": "MIT",
   "author": "@zstings",
   "files": [
@@ -21,7 +21,7 @@
   "scripts": {
     "lint": "eslint --fix --ext .md .docsvite/aaa.md",
     "dev": "vite",
-    "build": "vite build && tsc && tsc-alias",
+    "build": "vite build && tsc && tsc-alias && node run.js",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docsvite",
     "docs:build": "vitepress build docsvite",

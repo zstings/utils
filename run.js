@@ -84,7 +84,7 @@ Object.keys(strObj).forEach(item => {
 })
 writeFile('./docsvite/functions.md', str)
 writeFile('./docsvite/.vitepress/menu.js', createdMenu(menu))
-console.log(str, menu)
+// console.log(str, menu)
 
 function categoriesSort(categories) {
   const sort = [
