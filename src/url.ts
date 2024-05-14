@@ -3,7 +3,7 @@ import { isJsonString, isNullOrUndefined, isObject, isString, isBasicType } from
 /**
  * 是否是url
  * @param url 需要验证的内容，类型：string
- * @returns Boolean
+ * @return Boolean
  * @throws 参数必须是string 参数不是string时触发
  * @category URL
  * @example
@@ -33,7 +33,7 @@ export function isURL(url: string): boolean {
  * @param name 参数名，必填
  * @param url url地址，为空时是window.location.href， 非必填
  * @throws url 参数错误，不是有效的
- * @returns 符合的值或者null
+ * @return 符合的值或者null
  * @category URL
  * @example
  * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
@@ -75,7 +75,7 @@ export function getUrlParam(name: string, url: string = window.location.href): s
  * @throws 参数错误， 应该传入一个对象 option不是对象时触发
  * @throws url参数错误，不是有效的  url不是有效链接时触发
  * @throws type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'
- * @returns 由参数组成的对象
+ * @return 由参数组成的对象
  * @category URL
  * @example
  * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
@@ -127,7 +127,7 @@ export function getUrlQuery(
 
 /**
  * 参数序列化-对象转字符
- * @returns 由参数组成的对象
+ * @return 由参数组成的对象
  * @category URL
  * @example
  * ```ts
@@ -172,7 +172,7 @@ export function qsStringify(query: Record<string, any> = {}, decode = false): st
 
 /**
  * 参数序列化-字符转对象
- * @returns 由参数组成的对象
+ * @return 由参数组成的对象
  * @category URL
  * @example
  * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
@@ -212,7 +212,7 @@ export function qsParse(query = '', decode = true): { [k: string]: any } {
  * @throws search 参数错误， 应该传入一个对象 option不是对象时触发
  * @throws hash 参数错误， 应该传入一个对象 option不是对象时触发
  * @throws url 参数错误，不是有效的
- * @returns 修改后的url地址
+ * @return 修改后的url地址
  * @category URL
  * @example
  * 修改search中的值
@@ -284,5 +284,9 @@ export function setUrlQuery(url: string, type: 'pushState' | 'replaceState' = 'p
   if (!isURL(url)) throw 'url 参数错误，不是有效的'
   if (!isString(type) || !['pushState', 'replaceState'].includes(type))
     throw `type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'`
-  window.history[type]('', '', url)
+  if (history.state && history.state.current) {
+    const pathname = new URL(url).pathname
+    history.state.current = pathname
+  }
+  window.history[type](history.state, '', url)
 }

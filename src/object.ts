@@ -5,7 +5,7 @@ import { isArrObj, isEmptyObject } from '@/verify'
  * 指定深度或者广度的对象
  * @param deep 深度
  * @param breadth 广度
- * @returns 对象
+ * @return 对象
  * @category 对象Object
  * @example
  * ```ts
@@ -43,7 +43,7 @@ export function createData(deep = 1, breadth = 0) {
  * 删除指定对象的指定属性
  * @param object 指定对象
  * @param keys 指定属性
- * @returns 新的对象
+ * @return 新的对象
  * @category 对象Object
  * @example
  * ```ts
@@ -62,7 +62,7 @@ export function omit(object: Record<string, any>, keys: string[] = []): Record<s
  * 合并对象
  * @param target 目标对象，被合并的对象
  * @param sources 源对象，可以多个
- * @returns 目标对象
+ * @return 目标对象
  * @category 对象Object
  * @example
  * 对象合并效果与Object.assign一致
@@ -79,7 +79,7 @@ export function assign(target: Record<string, any>, ...sources: Record<string, a
  * 最小合并对象
  * @param target 目标对象，被合并的对象
  * @param sources 源对象，可以多个
- * @returns 目标对象
+ * @return 目标对象
  * @category 对象Object
  * @example
  * 最小合并对象，只会合并源对象原有的属性，其他忽略
@@ -100,7 +100,7 @@ export function assignMin(target: Record<string, any>, ...sources: Record<string
  * 数组对象key值求和
  * @param object 目标对象
  * @param keys 需要求和的key数组
- * @returns 求和后的对象
+ * @return 求和后的对象
  * @category 对象Object
  * @example
  * ```ts

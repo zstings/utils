@@ -97,7 +97,7 @@ export function random(min = 0, max?: number): number {
 
 /**
  * 获取uuid
- * @returns uuid
+ * @return uuid
  * @category 工具Util
  * @example
  * 符合 RFC4122 版本 4 的 UUID。
@@ -185,7 +185,7 @@ export function downloadFile(name: string, blob: Blob): void {
 /**
  * 深度复制
  * @param origin 对象或者数组
- * @returns 深度复制后的对象或者数组
+ * @return 深度复制后的对象或者数组
  * @category 工具Util
  * @example
  * ```ts
@@ -208,6 +208,7 @@ export function deepClone<T extends Array<T> | any>(source: T): T {
   }
 }
 
+/*
 export function deepClonet<T extends Array<T> | any>(source: T): T {
   if (!(isArray(source) || isObject(source))) return source
   const root: Record<string, never> = {}
@@ -293,13 +294,13 @@ export function deepClonex<T>(x: T): T {
   }
 
   return root as any
-}
+}*/
 
 /**
  * 复制文本内容
  * 优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
  * @param value 需要复制的字符串
- * @returns Promise
+ * @return Promise
  * @category 工具Util
  * @example
  * ```ts
@@ -340,7 +341,7 @@ export function copy(value: string) {
  * base64转blob
  * @param base64 base64
  * @param type 文件类型
- * @returns Blob
+ * @return Blob
  * @category 工具Util
  * @example
  * ```ts

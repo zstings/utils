@@ -4,7 +4,7 @@ import { isString } from './verify'
 
 /**
  * 随机生成16进制色值
- * @returns 字符串
+ * @return 字符串
  * @category 颜色Color
  * @example
  * ```ts
@@ -22,7 +22,7 @@ export function randomHex(): string {
 
 /**
  * 随机生成RGBA色值
- * @returns 字符串
+ * @return 字符串
  * @category 颜色Color
  * @example
  * ```ts
@@ -36,7 +36,7 @@ export function randomRgba(): string {
 /**
  * 将3(4)位16进制色值转为6(8)位
  * @param hex 字符串
- * @returns 6位hex
+ * @return 6位hex
  * @throws 无法识别正确的hex hex参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -61,7 +61,7 @@ export function extendHex(hex: string): string {
 /**
  * 将6(8)位16进制色值转为3(4)位
  * @param hex 字符串
- * @returns 3位hex
+ * @return 3位hex
  * @throws 无法识别正确的hex hex参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -85,7 +85,7 @@ export function shrinkHex(hex: string): string {
 /**
  * 将16进制hex色值转为rgb(a)色值
  * @param hex 字符串
- * @returns 字符串
+ * @return 字符串
  * @throws 无法识别正确的hex hex参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -111,7 +111,7 @@ export function hexToRgb(hex: string): string {
 /**
  * 将rgb(a)色值转为16进制hex色值
  * @param rgba 字符串
- * @returns 字符串
+ * @return 字符串
  * @throws 无法识别正确的rgba rgba参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -144,7 +144,7 @@ export function rgbToHex(rgba: string): string {
 /**
  * 判断是否是16进制hex色值
  * @param hex 字符串
- * @returns true | false
+ * @return true | false
  * @category 颜色Color
  * @example
  * ```ts
@@ -179,7 +179,7 @@ export function isHex(hex: string): boolean {
 /**
  * 判断是否是16进制hex色值
  * @param rgba 字符串
- * @returns true | false
+ * @return true | false
  * @category 颜色Color
  * @example
  * ```ts

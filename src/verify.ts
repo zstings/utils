@@ -291,7 +291,7 @@ export function isEmptyObject(object: Record<string, unknown>): boolean {
 /**
  * 检查字符串是否包含中文
  * @param value 字符串
- * @returns true | false
+ * @return true | false
  * @category 工具Util
  * @example
  * ```ts
@@ -309,7 +309,7 @@ export function isIncludeChinese(value: string): boolean {
 /**
  * 是否是dom
  * @param tarage dom
- * @returns true | false
+ * @return true | false
  * @category 浏览器Dom
  * @example
  * ```ts
@@ -327,7 +327,7 @@ export function isDom(tarage: Element): boolean {
 /**
  * 是否是null|undefined
  * @param value 任意值
- * @returns true | false
+ * @return true | false
  * @category 工具Util
  * @example
  * ```ts

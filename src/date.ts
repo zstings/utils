@@ -4,7 +4,7 @@ import { isNumber, isString, isObject, isBoolean, isArray } from '@/verify'
 /**
  * 获取时间对象
  * @param time 时间戳|格式化后的时间字符|时间对象|可转化的时间数组
- * @returns 时间对象
+ * @return 时间对象
  * @throws Invalid Date 传入值无法转为Date时触发
  * @category 时间Date
  * @example
@@ -78,7 +78,7 @@ export function days(time: number | string | Date | (string | number)[] = new Da
  * 获取时间戳
  * @param time 时间戳|格式化后的时间字符|时间对象
  * @param unit 返回格式,支持毫秒或者秒,默认毫秒
- * @returns 时间戳
+ * @return 时间戳
  * @throws Invalid Date 参数time无法转为Date时触发
  * @category 时间Date
  * @example
@@ -111,7 +111,7 @@ export function timeStamp(time: number | string | Date | (string | number)[] = n
  * 获取指定格式的时间
  * @param value 时间对象或者时间戳
  * @param format 返回格式 默认 YYYY-MM-DD hh:mm:ss
- * @returns 指定格式的时间
+ * @return 指定格式的时间
  * @category 时间Date
  * @example
  * 获取当前的日期
@@ -167,7 +167,7 @@ export function formats(
  * 获取指定月的天数
  * @param year 年份, 默认当前年
  * @param month 月份, 默认当前月
- * @returns 天数
+ * @return 天数
  * @throws Invalid Date 传入值无法转为Date时触发
  * @category 时间Date
  * @example
@@ -193,7 +193,7 @@ export function getMonthDays(year?: number, month?: number): number {
  * 获取距离指定时间之前
  * @param endTime 目标时间戳或者格式化的时间字符
  * @param startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
- * @returns 年|月|天|小时|分钟|秒 之前
+ * @return 年|月|天|小时|分钟|秒 之前
  * @throws 无法转换为时间 传入值无法转为Date时触发
  * @throws 只接受 number | string 传入值不是 number | string时触发
  * @category 时间Date
@@ -267,7 +267,7 @@ export function howLongAgo(
  * @param option.start 起始时间， 默认今天
  * @param option.format 时间格式， 默认YYYY-MM-DD
  * @param option.timeStamp 是否时间戳，默认false， 为true时，忽略 format
- * @returns 数组 [起始时间, 结束时间]
+ * @return 数组 [起始时间, 结束时间]
  * @throws day 必须是数字
  * @throws option 必须是对象
  * @throws option.start 必须可以被转化为Date

@@ -17,5 +17,8 @@ export default defineConfig({
       format: ['es', 'cjs'],
       fileName: format => `${uname}.${format}.js`
     }
+  },
+  server: {
+    host: '0.0.0.0'
   }
 })

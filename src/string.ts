@@ -3,7 +3,7 @@ import { isNumber, isString } from '@/verify'
 /**
  * 首字母大写
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @returns 字符串
+ * @return 字符串
  * @category 字符串String
  * @example
  * ```ts
@@ -28,7 +28,7 @@ export function upperFirst(str: any): string {
 /**
  * 获取字符串的字节长度
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @returns 字符串
+ * @return 字符串
  * @category 字符串String
  * @example
  * ```ts
@@ -57,7 +57,7 @@ export function byteSize(str: any): number {
 /**
  * 移除字符串中的html标签
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @returns 字符串
+ * @return 字符串
  * @category 字符串String
  * @example
  * ```ts
@@ -91,7 +91,7 @@ export function removeHTML(str: any): string {
  * @param start 开始下标
  * @param length 长度
  * @param mask 掩码字符 默认*
- * @returns 字符串
+ * @return 字符串
  * @throws start 必须是数字  start不是数字时触发
  * @throws length 必须是数字 length存在且不是数字时触发
  * @throws mask 必须是字符串 mask不是字符串时触发
