@@ -78,7 +78,7 @@ fromPairs(array: any[]): Record<string, unknown>;
 unique(array: any[], key?: string): any[];
 /**
  * 随机生成16进制色值
- * @returns 字符串
+ * @return 字符串
  * @category 颜色Color
  * @example
 * eg:
@@ -89,7 +89,7 @@ unique(array: any[], key?: string): any[];
 randomHex(): string;
 /**
  * 随机生成RGBA色值
- * @returns 字符串
+ * @return 字符串
  * @category 颜色Color
  * @example
 * eg:
@@ -101,7 +101,7 @@ randomRgba(): string;
 /**
  * 将3(4)位16进制色值转为6(8)位
  * @param hex 字符串
- * @returns 6位hex
+ * @return 6位hex
  * @throws 无法识别正确的hex hex参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -119,7 +119,7 @@ extendHex(hex: string): string;
 /**
  * 将6(8)位16进制色值转为3(4)位
  * @param hex 字符串
- * @returns 3位hex
+ * @return 3位hex
  * @throws 无法识别正确的hex hex参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -138,7 +138,7 @@ shrinkHex(hex: string): string;
 /**
  * 将16进制hex色值转为rgb(a)色值
  * @param hex 字符串
- * @returns 字符串
+ * @return 字符串
  * @throws 无法识别正确的hex hex参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -157,7 +157,7 @@ hexToRgb(hex: string): string;
 /**
  * 将rgb(a)色值转为16进制hex色值
  * @param rgba 字符串
- * @returns 字符串
+ * @return 字符串
  * @throws 无法识别正确的rgba rgba参数不是正确的hex时触发
  * @category 颜色Color
  * @example
@@ -176,7 +176,7 @@ rgbToHex(rgba: string): string;
 /**
  * 判断是否是16进制hex色值
  * @param hex 字符串
- * @returns true | false
+ * @return true | false
  * @category 颜色Color
  * @example
 * eg:
@@ -212,7 +212,7 @@ isHex(hex: string): boolean;
 /**
  * 判断是否是16进制hex色值
  * @param rgba 字符串
- * @returns true | false
+ * @return true | false
  * @category 颜色Color
  * @example
 * eg:
@@ -291,7 +291,7 @@ version(): string;
 /**
  * 获取时间对象
  * @param time 时间戳|格式化后的时间字符|时间对象|可转化的时间数组
- * @returns 时间对象
+ * @return 时间对象
  * @throws Invalid Date 传入值无法转为Date时触发
  * @category 时间Date
  * @example
@@ -362,7 +362,7 @@ days(time?: number | string | Date | (string | number)[]): Date;
  * 获取时间戳
  * @param time 时间戳|格式化后的时间字符|时间对象
  * @param unit 返回格式,支持毫秒或者秒,默认毫秒
- * @returns 时间戳
+ * @return 时间戳
  * @throws Invalid Date 参数time无法转为Date时触发
  * @category 时间Date
  * @example
@@ -395,7 +395,7 @@ timeStamp(time?: number | string | Date | (string | number)[], unit?: string): n
  * 获取指定格式的时间
  * @param value 时间对象或者时间戳
  * @param format 返回格式 默认 YYYY-MM-DD hh:mm:ss
- * @returns 指定格式的时间
+ * @return 指定格式的时间
  * @category 时间Date
  * @example
 * eg:
@@ -423,7 +423,7 @@ formats(time?: number | string | Date | (string | number)[], format?: string): s
  * 获取指定月的天数
  * @param year 年份, 默认当前年
  * @param month 月份, 默认当前月
- * @returns 天数
+ * @return 天数
  * @throws Invalid Date 传入值无法转为Date时触发
  * @category 时间Date
  * @example
@@ -444,7 +444,7 @@ getMonthDays(year?: number, month?: number): number;
  * 获取距离指定时间之前
  * @param endTime 目标时间戳或者格式化的时间字符
  * @param startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
- * @returns 年|月|天|小时|分钟|秒 之前
+ * @return 年|月|天|小时|分钟|秒 之前
  * @throws 无法转换为时间 传入值无法转为Date时触发
  * @throws 只接受 number | string 传入值不是 number | string时触发
  * @category 时间Date
@@ -480,7 +480,7 @@ howLongAgo(endTime?: number | string | Date | (string | number)[], startTime?: n
  * @param option.start 起始时间， 默认今天
  * @param option.format 时间格式， 默认YYYY-MM-DD
  * @param option.timeStamp 是否时间戳，默认false， 为true时，忽略 format
- * @returns 数组 [起始时间, 结束时间]
+ * @return 数组 [起始时间, 结束时间]
  * @throws day 必须是数字
  * @throws option 必须是对象
  * @throws option.start 必须可以被转化为Date
@@ -901,7 +901,7 @@ isInt(value: any): boolean;
  * 指定深度或者广度的对象
  * @param deep 深度
  * @param breadth 广度
- * @returns 对象
+ * @return 对象
  * @category 对象Object
  * @example
 * eg:
@@ -933,7 +933,7 @@ createData(deep?: number, breadth?: number): {
  * 删除指定对象的指定属性
  * @param object 指定对象
  * @param keys 指定属性
- * @returns 新的对象
+ * @return 新的对象
  * @category 对象Object
  * @example
 * eg:
@@ -946,7 +946,7 @@ omit(object: Record<string, any>, keys?: string[]): Record<string, any>;
  * 合并对象
  * @param target 目标对象，被合并的对象
  * @param sources 源对象，可以多个
- * @returns 目标对象
+ * @return 目标对象
  * @category 对象Object
  * @example
 * eg:
@@ -960,7 +960,7 @@ assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<s
  * 最小合并对象
  * @param target 目标对象，被合并的对象
  * @param sources 源对象，可以多个
- * @returns 目标对象
+ * @return 目标对象
  * @category 对象Object
  * @example
 * eg:
@@ -974,7 +974,7 @@ assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Recor
  * 数组对象key值求和
  * @param object 目标对象
  * @param keys 需要求和的key数组
- * @returns 求和后的对象
+ * @return 求和后的对象
  * @category 对象Object
  * @example
 * eg:
@@ -987,7 +987,7 @@ arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K
 /**
  * 首字母大写
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @returns 字符串
+ * @return 字符串
  * @category 字符串String
  * @example
 * eg:
@@ -1011,7 +1011,7 @@ upperFirst(str: any): string;
 /**
  * 获取字符串的字节长度
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @returns 字符串
+ * @return 字符串
  * @category 字符串String
  * @example
 * eg:
@@ -1040,7 +1040,7 @@ byteSize(str: any): number;
 /**
  * 移除字符串中的html标签
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @returns 字符串
+ * @return 字符串
  * @category 字符串String
  * @example
 * eg:
@@ -1068,7 +1068,7 @@ removeHTML(str: any): string;
  * @param start 开始下标
  * @param length 长度
  * @param mask 掩码字符 默认*
- * @returns 字符串
+ * @return 字符串
  * @throws start 必须是数字  start不是数字时触发
  * @throws length 必须是数字 length存在且不是数字时触发
  * @throws mask 必须是字符串 mask不是字符串时触发
@@ -1101,7 +1101,7 @@ mask(str: string, start?: number, length?: number, mask?: string): string;
 /**
  * 是否是url
  * @param url 需要验证的内容，类型：string
- * @returns Boolean
+ * @return Boolean
  * @throws 参数必须是string 参数不是string时触发
  * @category URL
  * @example
@@ -1123,7 +1123,7 @@ isURL(url: string): boolean;
  * @param name 参数名，必填
  * @param url url地址，为空时是window.location.href， 非必填
  * @throws url 参数错误，不是有效的
- * @returns 符合的值或者null
+ * @return 符合的值或者null
  * @category URL
  * @example
 * eg:
@@ -1154,7 +1154,7 @@ getUrlParam(name: string, url?: string): string | null;
  * @throws 参数错误， 应该传入一个对象 option不是对象时触发
  * @throws url参数错误，不是有效的  url不是有效链接时触发
  * @throws type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'
- * @returns 由参数组成的对象
+ * @return 由参数组成的对象
  * @category URL
  * @example
 * eg:
@@ -1189,7 +1189,7 @@ getUrlQuery(option?: {
 }): Record<string, any>;
 /**
  * 参数序列化-对象转字符
- * @returns 由参数组成的对象
+ * @return 由参数组成的对象
  * @category URL
  * @example
 * eg:
@@ -1222,7 +1222,7 @@ getUrlQuery(option?: {
 qsStringify(query?: Record<string, any>, decode?: boolean): string;
 /**
  * 参数序列化-字符转对象
- * @returns 由参数组成的对象
+ * @return 由参数组成的对象
  * @category URL
  * @example
 * eg:
@@ -1257,7 +1257,7 @@ qsParse(query?: string, decode?: boolean): {
  * @throws search 参数错误， 应该传入一个对象 option不是对象时触发
  * @throws hash 参数错误， 应该传入一个对象 option不是对象时触发
  * @throws url 参数错误，不是有效的
- * @returns 修改后的url地址
+ * @return 修改后的url地址
  * @category URL
  * @example
 * eg:
@@ -1382,7 +1382,7 @@ scrollTo(option?: {
 random(min?: number, max?: number): number;
 /**
  * 获取uuid
- * @returns uuid
+ * @return uuid
  * @category 工具Util
  * @example
 * eg:
@@ -1444,7 +1444,7 @@ downloadFile(name: string, blob: Blob): void;
 /**
  * 深度复制
  * @param origin 对象或者数组
- * @returns 深度复制后的对象或者数组
+ * @return 深度复制后的对象或者数组
  * @category 工具Util
  * @example
 * eg:
@@ -1458,13 +1458,11 @@ downloadFile(name: string, blob: Blob): void;
  * ```
  */
 deepClone<T extends Array<T> | any>(source: T): T;
-deepClonet<T extends Array<T> | any>(source: T): T;
-deepClonex<T>(x: T): T;
 /**
  * 复制文本内容
  * 优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
  * @param value 需要复制的字符串
- * @returns Promise
+ * @return Promise
  * @category 工具Util
  * @example
 * eg:
@@ -1477,7 +1475,7 @@ copy(value: string): Promise<void>;
  * base64转blob
  * @param base64 base64
  * @param type 文件类型
- * @returns Blob
+ * @return Blob
  * @category 工具Util
  * @example
 * eg:
@@ -1763,7 +1761,7 @@ isEmptyObject(object: Record<string, unknown>): boolean;
 /**
  * 检查字符串是否包含中文
  * @param value 字符串
- * @returns true | false
+ * @return true | false
  * @category 工具Util
  * @example
 * eg:
@@ -1780,7 +1778,7 @@ isIncludeChinese(value: string): boolean;
 /**
  * 是否是dom
  * @param tarage dom
- * @returns true | false
+ * @return true | false
  * @category 浏览器Dom
  * @example
 * eg:
@@ -1797,7 +1795,7 @@ isDom(tarage: Element): boolean;
 /**
  * 是否是null|undefined
  * @param value 任意值
- * @returns true | false
+ * @return true | false
  * @category 工具Util
  * @example
 * eg:

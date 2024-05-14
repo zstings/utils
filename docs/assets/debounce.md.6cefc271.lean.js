@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as n,O as l}from"./chunks/framework.8ce0948f.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"debounce.md","filePath":"debounce.md"}'),o={name:"debounce.md"},e=l("",20),p=[e];function t(c,r,i,d,y,D){return n(),a("div",null,p)}const C=s(o,[["render",t]]);export{u as __pageData,C as default};

@@ -22,8 +22,6 @@
     "lint": "eslint --fix --ext .md .docsvite/aaa.md",
     "dev": "vite",
     "build": "vite build && tsc && tsc-alias",
-    "doc": "typedoc --options ./typedoc.json",
-    "docs:json": "typedoc --json create_docs_md/data.json && node ./create_docs_md/index.mjs",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docsvite",
     "docs:build": "vitepress build docsvite",

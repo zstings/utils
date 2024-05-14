@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as e,O as t}from"./chunks/framework.8ce0948f.js";const b=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"getTimeStamp.md","filePath":"getTimeStamp.md"}'),n={name:"getTimeStamp.md"},l=t("",20),o=[l];function p(i,r,c,d,m,u){return e(),a("div",null,o)}const y=s(n,[["render",p]]);export{b as __pageData,y as default};

@@ -1,1 +1,0 @@
-import{_ as a,c as e,o as s,O as i}from"./chunks/framework.8ce0948f.js";const _=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"isWeixin.md","filePath":"isWeixin.md"}'),t={name:"isWeixin.md"},n=i("",12),l=[n];function o(c,r,p,d,u,h){return s(),e("div",null,l)}const b=a(t,[["render",o]]);export{_ as __pageData,b as default};

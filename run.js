@@ -138,3 +138,10 @@ function writeFile(path, cont) {
     console.log('内容已成功写入到文件！')
   })
 }
+
+console.log('写入在线运行时的类型文件')
+let modulesStr = content
+  .replaceAll('export declare function ', '')
+  .replace(/import[\s\S]+?\n/g, '')
+  .replaceAll('@example', '@example\n* eg:')
+fs.writeFileSync(`./docsvite/public/index.d.ts`, modulesStr)

@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as e,O as n}from"./chunks/framework.8ce0948f.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"howLongAgo.md","filePath":"howLongAgo.md"}'),o={name:"howLongAgo.md"},l=n("",19),t=[l];function p(r,i,c,d,h,u){return e(),a("div",null,t)}const b=s(o,[["render",p]]);export{m as __pageData,b as default};

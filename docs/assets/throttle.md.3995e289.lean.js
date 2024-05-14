@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as e,O as l}from"./chunks/framework.8ce0948f.js";const C=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"throttle.md","filePath":"throttle.md"}'),n={name:"throttle.md"},t=l("",17),o=[t];function p(r,c,i,d,y,h){return e(),a("div",null,o)}const D=s(n,[["render",p]]);export{C as __pageData,D as default};
