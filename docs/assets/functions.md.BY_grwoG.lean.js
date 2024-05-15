@@ -1,1 +1,0 @@
-import{_ as a,c as s,o as l,a1 as e}from"./chunks/framework.-J00gsGU.js";const y=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"functions.md","filePath":"functions.md"}'),n={name:"functions.md"},o=e("",610),p=[o];function t(r,c,i,d,u,h){return l(),s("div",null,p)}const m=a(n,[["render",t]]);export{y as __pageData,m as default};

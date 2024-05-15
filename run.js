@@ -33,7 +33,7 @@ function readTSFiles(dir) {
 // 调用函数开始读取
 readTSFiles(srcDir)
 
-const arr = content.match(/\/\*\*[\s\S]+?\/\*\*/g).map(it => {
+const arr = content.match(/\/\*\*[\s\S]+?\): .*;/g).map(it => {
   const items = it.replace(/\/\*\*|\*\/|\*/g, '').split('export declare function ')
   items[0] = items[0].split('\n')
   return items
@@ -65,17 +65,17 @@ arr.forEach(aitx => {
       } else if (strArr[5].includes('#### 示例')) {
         strArr[5] += itx + '\n'
       } else {
-        if (!strArr[1].includes(f2)) strArr[1] = `## ${f2} :tada: :100:\n`
-        strArr[1] += `${itx}\n`
+        if (!strArr[1]) strArr[1] = [`## ${f2} :tada: :100:\n`]
+        strArr[1].push(`${itx}\n\n`)
       }
     }
   })
   menu.push({
     name: strArr[0],
     link: '/functions#' + f2.toLocaleLowerCase(),
-    text: f2 + '\n' + strArr[1].replace(`## ${f2} :tada: :100:\n`, '').replace('\n', '')
+    text: f2 + '\n' + strArr[1][1].replace(`\n\n`, '')
   })
-  strArr[1] += `#### 类型说明\n::: info\n\`${f1}\`\n:::\n`
+  strArr[1] = strArr[1].join('') + `#### 类型说明\n::: info\n\`${f1}\`\n:::\n`
   strObj[strArr[0]] = (strObj[strArr[0]] || '') + strArr.slice(1).join('')
 })
 
