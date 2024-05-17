@@ -148,7 +148,7 @@ shrinkHex(hex: string): string;
  * ```
  * @example
 * eg:
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * hexToRgb('#aabbcc8d') // => '170,187,204,0.55'
  * ```
@@ -185,25 +185,25 @@ rgbToHex(rgba: string): string;
  * ```
  * @example
 * eg:
- * // 支持3位
+ * 支持3位
  * ```ts
  * isHex('#abc') // => true
  * ```
  * @example
 * eg:
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isHex('#aabbcc8d') // => true
  * ```
  * @example
 * eg:
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isHex('#df') // => false
  * ```
  * @example
 * eg:
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isHex('#adg') // => false
  * ```
@@ -221,19 +221,19 @@ isHex(hex: string): boolean;
  * ```
  * @example
 * eg:
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isRgba('170,187,255,0.91') // => true
  * ```
  * @example
 * eg:
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isRgba('170,187,266,0.91') // => false
  * ```
  * @example
 * eg:
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isRgba('170,187,256,2') // => false
  * ```
@@ -1049,7 +1049,7 @@ byteSize(str: any): number;
  * ```
  * @example
 * eg:
- * // 转义符也会被去除
+ * 转义符也会被去除
  * ```ts
  * removeHTML('<p>这是<em>一个</em>段落。&nbsp;</p>') // => 这是一个段落。
  * ```
