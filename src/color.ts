@@ -93,7 +93,7 @@ export function shrinkHex(hex: string): string {
  * hexToRgb('#aabbcc') // => '170,187,204'
  * ```
  * @example
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * hexToRgb('#aabbcc8d') // => '170,187,204,0.55'
  * ```
@@ -151,22 +151,22 @@ export function rgbToHex(rgba: string): string {
  * isHex('#aabbcc') // => true
  * ```
  * @example
- * // 支持3位
+ * 支持3位
  * ```ts
  * isHex('#abc') // => true
  * ```
  * @example
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isHex('#aabbcc8d') // => true
  * ```
  * @example
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isHex('#df') // => false
  * ```
  * @example
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isHex('#adg') // => false
  * ```
@@ -186,17 +186,17 @@ export function isHex(hex: string): boolean {
  * isRgba('170,187,255') // => true
  * ```
  * @example
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isRgba('170,187,255,0.91') // => true
  * ```
  * @example
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isRgba('170,187,266,0.91') // => false
  * ```
  * @example
- * // 支持透明度
+ * 支持透明度
  * ```ts
  * isRgba('170,187,256,2') // => false
  * ```

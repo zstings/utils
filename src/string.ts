@@ -64,7 +64,7 @@ export function byteSize(str: any): number {
  * removeHTML('<p>这是<em>一个</em>段落。</p>') // => 这是一个段落。
  * ```
  * @example
- * // 转义符也会被去除
+ * 转义符也会被去除
  * ```ts
  * removeHTML('<p>这是<em>一个</em>段落。&nbsp;</p>') // => 这是一个段落。
  * ```
