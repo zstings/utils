@@ -330,7 +330,7 @@ export function copy(value: string) {
     textarea.setAttribute('readonly', 'readonly')
     textarea.innerHTML = code
     textarea.select()
-    textarea.setSelectionRange(0, code.length)
+    textarea.setSelectionRange(0, textarea.innerHTML.length)
     const isc = document.execCommand('copy')
     textarea.remove()
     isc ? resolve() : reject('execCommand error')
