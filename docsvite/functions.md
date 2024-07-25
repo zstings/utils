@@ -1590,6 +1590,25 @@ createData(2, 2)
 }
 }
 ```
+## omit :tada: :100:
+删除指定对象的指定属性
+
+#### 类型说明
+::: info
+`omit(object: Record<string, any>, keys?: string[]): Record<string, any>;`
+:::
+#### 参数
+- object 指定对象
+- keys 指定属性
+#### 返回
+- `Record<string, any>`
+::: tip
+新的对象
+:::
+#### 示例 
+```ts
+omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {b: 2}
+```
 ## assign :tada: :100:
 合并对象
 
@@ -2090,6 +2109,54 @@ qsParse('a=1&b=2&c={"a":1}')
 ```ts
 qsParse('a=1&b=2&c={"a":1}', false)
 // => { a:1, b:2, c: '{ a: 1 }' }
+```
+## reviseUrlQuery :tada: :100:
+修改url上的参数
+
+#### 类型说明
+::: info
+`reviseUrlQuery(option: {
+    search?: Record<string, any>;
+    hash?: Record<string, any>;
+}, url?: string): string;`
+:::
+#### 参数
+- option.search 对象 用于修改search部分的数据， 非必填
+- option.hash 对象 用于修改hash部分的数据， 非必填
+- url url地址，默认window.location.href， 非必填
+#### 返回
+- `string`
+::: tip
+修改后的url地址
+:::
+#### 异常
+::: danger
+参数错误， 应该传入一个对象 option不是对象时触发
+:::
+::: danger
+search 参数错误， 应该传入一个对象 option不是对象时触发
+:::
+::: danger
+hash 参数错误， 应该传入一个对象 option不是对象时触发
+:::
+::: danger
+url 参数错误，不是有效的
+:::
+#### 示例 
+修改search中的值
+```ts
+reviseUrlQuery({search: {a: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
+// => 'http://a.b.com/?a=2&b=3#/index/?c=3&b=4'
+```
+修改hash中的值
+```ts
+reviseUrlQuery({hash: {c: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
+// => 'http://a.b.com/?a=1&b=2#/index/?c=2&b=3'
+```
+修改search、hash中的值
+```ts
+reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
+// => 'http://a.b.com/?a=5&b=6#/index/?c=7&b=8'
 ```
 ## setUrlQuery :tada: :100:
 设置浏览器地址栏url

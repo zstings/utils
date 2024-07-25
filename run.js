@@ -33,7 +33,7 @@ function readTSFiles(dir) {
 // 调用函数开始读取
 readTSFiles(srcDir)
 
-const arr = content.match(/\/\*\*[\s\S]+?\): .*;/g).map(it => {
+const arr = content.replaceAll('/**', '@@/**').split('@@').slice(1).map(it => {
   const items = it.replace(/\/\*\*|\*\/|\*/g, '').split('export declare function ')
   items[0] = items[0].split('\n')
   return items
