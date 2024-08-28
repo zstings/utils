@@ -1,4 +1,4 @@
-import { isRgba } from '@/color/isRgba'
+import isRgba from "@/color/isRgba"
 
 /**
  * 将rgb(a)色值转为16进制hex色值
@@ -16,7 +16,7 @@ import { isRgba } from '@/color/isRgba'
  * rgbToHex('170,187,255,0.91') // => '#aabbffe8'
  * ```
  */
-export function rgbToHex(rgba: string): string {
+export default function rgbToHex(rgba: string): string {
   if (!isRgba(rgba)) throw '无法识别正确的rgba'
   return (
     '#' +

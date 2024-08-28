@@ -1,4 +1,4 @@
-import { isArray } from '@/verify'
+import isArray from "@/verify/isArray"
 
 /**
  * 二维数组转化为对象
@@ -17,7 +17,7 @@ import { isArray } from '@/verify'
  * fromPairs([['a', 1], ['b', 2, 3]) => {a: 1, b: 2}
  * ```
  */
-export function fromPairs(array: any[]): Record<string, unknown> {
+export default function fromPairs(array: any[]): Record<string, unknown> {
   if (!isArray(array)) throw `array传入参数需要Array`
   return Object.fromEntries(new Map(array))
 }

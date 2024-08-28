@@ -1,4 +1,4 @@
-import { isString } from '@/verify'
+import isString from "@/verify/isString"
 
 /**
  * 判断是否是16进制hex色值
@@ -25,7 +25,7 @@ import { isString } from '@/verify'
  * isRgba('170,187,256,2') // => false
  * ```
  */
-export function isRgba(rgba: string): boolean {
+export default function isRgba(rgba: string): boolean {
   if (rgba && !isString(rgba)) return false
   return rgba.split(',').every((s, i) => {
     if (i == 3) return Number(s) * 255 >= 0 && Number(s) * 255 <= 255

@@ -1,4 +1,5 @@
-import { isArray, isNumber } from '@/verify'
+import isArray from "@/verify/isArray"
+import isNumber from "@/verify/isNumber"
 
 /**
  * 按长度拆分数组
@@ -19,7 +20,7 @@ import { isArray, isNumber } from '@/verify'
  * // => [[{"a":1},{"a":2},{"a":3}],[{"a":4}]]
  * ```
  */
-export function chunk(array: any[], size = 1): any[] {
+export default function chunk(array: any[], size = 1): any[] {
   if (!isArray(array)) throw `array参数需要Array`
   if (!isNumber(size)) throw `size参数需要Number`
   const arr = []

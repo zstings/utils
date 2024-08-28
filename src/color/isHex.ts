@@ -1,4 +1,4 @@
-import { isString } from '@/verify'
+import isString from "@/verify/isString"
 
 /**
  * 判断是否是16进制hex色值
@@ -30,7 +30,7 @@ import { isString } from '@/verify'
  * isHex('#adg') // => false
  * ```
  */
-export function isHex(hex: string): boolean {
+export default function isHex(hex: string): boolean {
   if (hex && !isString(hex)) return false
   return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex)
 }

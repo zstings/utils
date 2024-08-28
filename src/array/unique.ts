@@ -1,4 +1,5 @@
-import { isArray, isString } from '@/verify'
+import isArray from "@/verify/isArray"
+import isString from "@/verify/isString"
 
 /**
  * 数组去重
@@ -19,7 +20,7 @@ import { isArray, isString } from '@/verify'
  * // => [{id: 1, name: '1'}, {id: 2, name: '2'}]
  * ```
  */
-export function unique(array: any[], key?: string): any[] {
+export default function unique(array: any[], key?: string): any[] {
   if (!isArray(array)) throw `array传入参数需要Array`
   if (key && !isString(key)) throw `key传入参数需要String`
   if (key) {

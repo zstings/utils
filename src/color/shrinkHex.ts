@@ -1,4 +1,4 @@
-import { isHex } from '@/color/isHex'
+import isHex from "@/color/isHex"
 
 /**
  * 将6(8)位16进制色值转为3(4)位
@@ -16,7 +16,7 @@ import { isHex } from '@/color/isHex'
  * shrinkHex('#0037ff') // => '#0037ff'
  * ```
  */
-export function shrinkHex(hex: string): string {
+export default function shrinkHex(hex: string): string {
   if (!isHex(hex)) throw '无法识别正确的hex'
   if (hex.length < 6) return hex
   const _hex = hex.substring(1).match(/[0-9a-f]{2}/gi) || []

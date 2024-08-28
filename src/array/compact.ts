@@ -1,4 +1,4 @@
-import { isArray } from '@/verify'
+import isArray from "@/verify/isArray"
 
 /**
  * 移除所有 falsey 值的数组
@@ -12,7 +12,7 @@ import { isArray } from '@/verify'
  * compact([1, 0, false, 2, NaN, 3, null]) => [1, 2, 3]
  * ```
  */
-export function compact(array: any[]): any[] {
+export default function compact(array: any[]): any[] {
   if (!isArray(array)) throw `array参数需要Array`
   return array.filter(item => !!item)
 }

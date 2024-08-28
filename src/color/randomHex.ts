@@ -1,4 +1,4 @@
-import { random } from '@/util'
+import random from "@/util/random"
 
 /**
  * 随机生成16进制色值
@@ -9,7 +9,7 @@ import { random } from '@/util'
  * randomHex() // => '#cf65dd'
  * ```
  */
-export function randomHex(): string {
+export default function randomHex(): string {
   const hexs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
   let hex = '#'
   for (let i = 0; i < 6; i++) {
