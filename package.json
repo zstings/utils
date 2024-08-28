@@ -36,18 +36,17 @@
     "ts工具函数"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
-    "cheerio": "1.0.0-rc.12",
-    "eslint": "^9.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "prettier": "^3.2.5",
-    "tsc-alias": "^1.8.9",
-    "typedoc": "^0.25.13",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11",
-    "vitepress": "1.1.4"
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3",
+    "tsc-alias": "^1.8.10",
+    "typedoc": "^0.26.6",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vitepress": "1.3.4"
   },
   "homepage": "https://github.com/zstings/utils#readme",
   "repository": {
