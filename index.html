@@ -78,7 +78,6 @@
       // console.log(aa)
 
       const modules = import.meta.glob(['./src/**/*.ts', '!./src/index.ts'], { query: '?raw', eager: true })
-      console.log(modules)
       let modulesStr = ''
       Object.keys(modules).forEach(path => {
         modulesStr += modules[path].default.replaceAll('export default function', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
