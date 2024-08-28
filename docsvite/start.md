@@ -2,7 +2,7 @@
 
 本节将帮助您从头开始在项目中安装使用 @zstings/utils。
 
-⏹️在演练场中尝试一下： <a href="/utils/playground.html" target="_blank" rel="noreferrer">➡️playground</a>
+👉 在演练场中尝试一下： <a href="/utils/playground.html" target="_blank" rel="noreferrer">playground</a>
 
 <!-- <pathname:///playground.html> -->
 <!-- ::: warning 警告
@@ -13,23 +13,24 @@
 
 终端进入到您的项目根目录
 
-使用 npm 安装
+::: code-group
 
-```shell
-> npm install @zstings/utils
+```sh [npm]
+$ npm install @zstings/utils
 ```
 
-使用 yarn 安装
-
-```shell
-> yarn add @zstings/utils
+```sh [pnpm]
+$ pnpm add @zstings/utils
 ```
 
-使用 pnpm 安装 （推荐）
-
-```shell
-> pnpm add @zstings/utils
+```sh [yarn]
+$ yarn add @zstings/utils
 ```
+
+```sh [bun]
+$ bun add @zstings/utils
+```
+:::
 
 ## 第2步：导入
 

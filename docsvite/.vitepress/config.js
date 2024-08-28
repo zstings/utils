@@ -18,10 +18,6 @@ export default {
   base: '/utils/',
   outDir: '../docs',
   head: [['link', { rel: 'stylesheet', href: '/utils/styles/index.css' }]],
-  markdown: {
-    theme: 'material-theme-palenight',
-    lineNumbers: true
-  },
   themeConfig: {
     socialLinks: [{ icon: 'github', link: 'https://github.com/zstings/utils/' }],
     // algolia: {
