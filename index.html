@@ -77,10 +77,11 @@
       // const aa = modules['./dist/types/src/array.d.ts'].replaceAll('export declare function ', '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
       // console.log(aa)
 
-      const modules = import.meta.glob(['./src/*.ts', '!./src/index.ts'], { as: 'raw', eager: true })
+      const modules = import.meta.glob(['./src/**/*.ts', '!./src/index.ts'], { query: '?raw', eager: true })
+      console.log(modules)
       let modulesStr = ''
       Object.keys(modules).forEach(path => {
-        modulesStr += modules[path].replaceAll('export function', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
+        modulesStr += modules[path].default.replaceAll('export default function', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
       })
       // validation settings
       monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
