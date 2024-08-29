@@ -1,4 +1,5 @@
 import isArray from "@/verify/isArray"
+import isInt from "@/verify/isInt"
 import isNumber from "@/verify/isNumber"
 
 /**
@@ -7,7 +8,7 @@ import isNumber from "@/verify/isNumber"
  * @param size 长度 默认1
  * @return 新的数组
  * @throws array参数需要Array array参数错误时触发
- * @throws size参数需要Number size参数错误时触发
+ * @throws 请检查size参数，必须符合大于0的整数 size参数错误时触发
  * @category 数组Array
  * @example
  * ```ts
@@ -22,7 +23,7 @@ import isNumber from "@/verify/isNumber"
  */
 export default function chunk(array: any[], size = 1): any[] {
   if (!isArray(array)) throw `array参数需要Array`
-  if (!isNumber(size)) throw `size参数需要Number`
+  if (!isNumber(size) || !isInt(size) || size <= 0) throw `请检查size参数，必须符合大于0的整数`
   const arr = []
   const count = Math.ceil(array.length / size)
   for (let i = 0; i < count; i++) {

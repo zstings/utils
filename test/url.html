@@ -11,7 +11,7 @@
   <script src="../dist/utils.umd.js"></script>
   <script src="https://lib.baomitu.com/qs/latest/qs.min.js"></script>
   <script>
-    const {getUrlQuery, reviseUrlQuery, qsStringify, setUrlQuery, qsParse} = utils
+    const {getUrlQuery, reviseUrlQuery, qsStringify, setUrlQuery, qsParse, chunk} = utils
     console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'search'}))
     console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}))
     console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'}))
@@ -21,6 +21,8 @@
     console.log(reviseUrlQuery({search: {a: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
     console.log(reviseUrlQuery({hash: {c: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
     console.log(reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
+
+    console.log(chunk([1, 2, 3, 4, 5], 2.5))
 
     // const s = reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
     // setUrlQuery(s)
