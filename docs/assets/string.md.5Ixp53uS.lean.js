@@ -1,0 +1,1 @@
+import{_ as s,c as i,o as a,a2 as h}from"./chunks/framework.z5ZeylWJ.js";const y=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"string.md","filePath":"string.md"}'),t={name:"string.md"},k=h("",93),n=[k];function l(p,e,r,d,F,g){return a(),i("div",null,n)}const o=s(t,[["render",l]]);export{y as __pageData,o as default};

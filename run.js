@@ -81,9 +81,10 @@ tsPaths.forEach(aitx => {
       }
     }
   })
+  // console.log(f2, strArr[0], '---')
   menu.push({
     name: strArr[0],
-    link: '/functions#' + f2.toLocaleLowerCase(),
+    link: '/' + strArr[0].replace(/\p{sc=Han}/gu, '').toLocaleLowerCase() + '#' + f2.toLocaleLowerCase(),
     text: f2 + '\n' + strArr[1][1].replace(`\n\n`, '')
   })
   strArr[1] = strArr[1].join('') + `#### 类型说明\n::: info\n\`${f1}\`\n:::\n`
@@ -94,9 +95,9 @@ tsPaths.forEach(aitx => {
 })
 
 Object.keys(strObj).forEach(item => {
-  str += '## ' + item + '\n' + strObj[item]
+  writeFile('./docsvite/'+ item.replace(/\p{sc=Han}/gu, '').toLocaleLowerCase() +'.md', '## ' + item + '\n' + strObj[item], '')
 })
-writeFile('./docsvite/functions.md', str, '文档正文内容写入完成')
+console.log('文档正文内容写入完成')
 writeFile('./docsvite/.vitepress/menu.js', createdMenu(menu), '菜单内容写入完成')
 
 function createdMenu(menu) {
@@ -122,13 +123,8 @@ function createdMenu(menu) {
 
 // 将文本内容写入文件
 function writeFile(path, cont, msg = '内容已成功写入到文件！') {
-  fs.writeFile(path, cont, err => {
-    if (err) {
-      console.error('写入文件时出错：', err)
-      return
-    }
-    console.log(msg)
-  })
+  fs.writeFileSync(path, cont)
+  msg && console.log(msg)
 }
 // console.log(allDts)
 console.log('写入在线运行时的类型文件')
