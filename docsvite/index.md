@@ -27,18 +27,8 @@ features:
   details: 🥦支持es模块导入，按需使用
 - icon: 🚗
   title: 🚗 playground
-  details: ☘️支持在线运行、编辑、查看结果
-# - icon: 🖥️
-#   title: 🖥️ 后端 - BackEnd
-#   details: ⬜Node + ⬛Express + 🐬MySQL
-# - icon: 🧊
-#   title: 🧊 部署 - Deploy
-#   details: 🥦Nginx....
-# - icon: 📦
-#   title: 📦 数据库 - DataBase
-#   details: 🐬MySQL 🍃SQLite
-# - icon: 🕸️
-#   title: 🕸️ 爬虫 - Seventeen-A 
-#   details: 🐍Python + 🍃SQLite
-
+  details: 支持在线运行、编辑、查看结果
+- icon: 💿
+  title: 💿 源码
+  details: 对于不需要引入整个工具库的项目，提供了源码，方便查看、复制源码直接使用
 ---
