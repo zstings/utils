@@ -90,7 +90,7 @@
           allowNonTsExtensions: true
         })
         // extra libraries
-        const libSource = `declare const utils = {${modulesStr}}`
+        const libSource = modulesStr
         const libUri = 'ts:filename/utils.d.ts'
         monaco.languages.typescript.typescriptDefaults.addExtraLib(libSource, libUri)
         monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri))

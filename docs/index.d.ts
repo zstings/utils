@@ -1,17 +1,4 @@
-/**
- * 移除所有 falsey 值的数组
- * @param array 数组
- * @return 新的数组
- * @throws array参数需要Array array参数错误时触发
- * @category 数组Array
- * @example
-* eg:
- * falsey => 0 | false | null | undefined | NaN
- * ```ts
- * compact([1, 0, false, 2, NaN, 3, null]) => [1, 2, 3]
- * ```
- */
-compact(array: any[]): any[];
+declare const utils = {
 /**
  * 按长度拆分数组
  * @param array 数组
@@ -34,6 +21,22 @@ compact(array: any[]): any[];
  * ```
  */
 chunk(array: any[], size?: number): any[];
+
+/**
+ * 移除所有 falsey 值的数组
+ * @param array 数组
+ * @return 新的数组
+ * @throws array参数需要Array array参数错误时触发
+ * @category 数组Array
+ * @example
+* eg:
+ * falsey => 0 | false | null | undefined | NaN
+ * ```ts
+ * compact([1, 0, false, 2, NaN, 3, null]) => [1, 2, 3]
+ * ```
+ */
+compact(array: any[]): any[];
+
 /**
  * 二维数组转化为对象
  * @param array 数组
@@ -54,6 +57,7 @@ chunk(array: any[], size?: number): any[];
  * ```
  */
 fromPairs(array: any[]): Record<string, unknown>;
+
 /**
  * 数组去重
  * @param array 数组
@@ -76,28 +80,7 @@ fromPairs(array: any[]): Record<string, unknown>;
  * ```
  */
 unique(array: any[], key?: string): any[];
-/**
- * 随机生成16进制色值
- * @return 字符串
- * @category 颜色Color
- * @example
-* eg:
- * ```ts
- * randomHex() // => '#cf65dd'
- * ```
- */
-randomHex(): string;
-/**
- * 随机生成RGBA色值
- * @return 字符串
- * @category 颜色Color
- * @example
-* eg:
- * ```ts
- * randomRgba() // => '#cf65dd'
- * ```
- */
-randomRgba(): string;
+
 /**
  * 将3(4)位16进制色值转为6(8)位
  * @param hex 字符串
@@ -116,25 +99,7 @@ randomRgba(): string;
  * ```
  */
 extendHex(hex: string): string;
-/**
- * 将6(8)位16进制色值转为3(4)位
- * @param hex 字符串
- * @return 3位hex
- * @throws 无法识别正确的hex hex参数不是正确的hex时触发
- * @category 颜色Color
- * @example
-* eg:
- * ```ts
- * shrinkHex('#0033ff') // => '#03f'
- * ```
- * @example
-* eg:
- * // 无法转化的原样输出
- * ```ts
- * shrinkHex('#0037ff') // => '#0037ff'
- * ```
- */
-shrinkHex(hex: string): string;
+
 /**
  * 将16进制hex色值转为rgb(a)色值
  * @param hex 字符串
@@ -154,25 +119,7 @@ shrinkHex(hex: string): string;
  * ```
  */
 hexToRgb(hex: string): string;
-/**
- * 将rgb(a)色值转为16进制hex色值
- * @param rgba 字符串
- * @return 字符串
- * @throws 无法识别正确的rgba rgba参数不是正确的hex时触发
- * @category 颜色Color
- * @example
-* eg:
- * ```ts
- * rgbToHex('170,187,255') // => '#aabbff'
- * ```
- * @example
-* eg:
- * // 支持透明度
- * ```ts
- * rgbToHex('170,187,255,0.91') // => '#aabbffe8'
- * ```
- */
-rgbToHex(rgba: string): string;
+
 /**
  * 判断是否是16进制hex色值
  * @param hex 字符串
@@ -209,6 +156,7 @@ rgbToHex(rgba: string): string;
  * ```
  */
 isHex(hex: string): boolean;
+
 /**
  * 判断是否是16进制hex色值
  * @param rgba 字符串
@@ -239,6 +187,71 @@ isHex(hex: string): boolean;
  * ```
  */
 isRgba(rgba: string): boolean;
+
+/**
+ * 随机生成16进制色值
+ * @return 字符串
+ * @category 颜色Color
+ * @example
+* eg:
+ * ```ts
+ * randomHex() // => '#cf65dd'
+ * ```
+ */
+randomHex(): string;
+
+/**
+ * 随机生成RGBA色值
+ * @return 字符串
+ * @category 颜色Color
+ * @example
+* eg:
+ * ```ts
+ * randomRgba() // => '#cf65dd'
+ * ```
+ */
+randomRgba(): string;
+
+/**
+ * 将rgb(a)色值转为16进制hex色值
+ * @param rgba 字符串
+ * @return 字符串
+ * @throws 无法识别正确的rgba rgba参数不是正确的hex时触发
+ * @category 颜色Color
+ * @example
+* eg:
+ * ```ts
+ * rgbToHex('170,187,255') // => '#aabbff'
+ * ```
+ * @example
+* eg:
+ * // 支持透明度
+ * ```ts
+ * rgbToHex('170,187,255,0.91') // => '#aabbffe8'
+ * ```
+ */
+rgbToHex(rgba: string): string;
+
+/**
+ * 将6(8)位16进制色值转为3(4)位
+ * @param hex 字符串
+ * @return 3位hex
+ * @throws 无法识别正确的hex hex参数不是正确的hex时触发
+ * @category 颜色Color
+ * @example
+* eg:
+ * ```ts
+ * shrinkHex('#0033ff') // => '#03f'
+ * ```
+ * @example
+* eg:
+ * // 无法转化的原样输出
+ * ```ts
+ * shrinkHex('#0037ff') // => '#0037ff'
+ * ```
+ */
+shrinkHex(hex: string): string;
+
 /**
  * 获取数据类型
  * @param value 任意值
@@ -282,12 +295,14 @@ isRgba(rgba: string): boolean;
  * ```
  */
 typeOf(value: any): string;
+
 /**
  * 获取版本号
  * @return 版本号
  * @category 工具Util
  */
 version(): string;
+
 /**
  * 获取时间对象
  * @param time 时间戳|格式化后的时间字符|时间对象|可转化的时间数组
@@ -358,39 +373,7 @@ version(): string;
  * ```
  */
 days(time?: number | string | Date | (string | number)[]): Date;
-/**
- * 获取时间戳
- * @param time 时间戳|格式化后的时间字符|时间对象
- * @param unit 返回格式,支持毫秒或者秒,默认毫秒
- * @return 时间戳
- * @throws Invalid Date 参数time无法转为Date时触发
- * @category 时间Date
- * @example
-* eg:
- * 获取当前的时间戳
- * ```ts
- * timeStamp() // 1659334598129
- * ```
- * @example
-* eg:
- * 获取当前的时间戳，单位秒(s)
- * ```ts
- * timeStamp('', 's') // 1660700890
- * ```
- * @example
-* eg:
- * 获取 2022-10-12 的时间戳
- * ```ts
- * timeStamp('2022-10-12') // 1665504000000
- * ```
- * @example
-* eg:
- * 获取 2022-10-12 的时间戳, 以秒返回
- * ```ts
- * timeStamp('2022-10-12', 's') // 1665504000
- * ```
- */
-timeStamp(time?: number | string | Date | (string | number)[], unit?: string): number;
+
 /**
  * 获取指定格式的时间
  * @param value 时间对象或者时间戳
@@ -419,60 +402,7 @@ timeStamp(time?: number | string | Date | (string | number)[], unit?: string): n
  * ```
  */
 formats(time?: number | string | Date | (string | number)[], format?: string): string;
-/**
- * 获取指定月的天数
- * @param year 年份, 默认当前年
- * @param month 月份, 默认当前月
- * @return 天数
- * @throws Invalid Date 传入值无法转为Date时触发
- * @category 时间Date
- * @example
-* eg:
- * 获取当前月份的天数
- * ```ts
- * getMonthDays() // => 31
- * ```
- * @example
-* eg:
- * 获取指定月份的天数
- * ```ts
- * getMonthDays(2022, 1) // => 31
- * ```
- */
-getMonthDays(year?: number, month?: number): number;
-/**
- * 获取距离指定时间之前
- * @param endTime 目标时间戳或者格式化的时间字符
- * @param startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
- * @return 年|月|天|小时|分钟|秒 之前
- * @throws 无法转换为时间 传入值无法转为Date时触发
- * @throws 只接受 number | string 传入值不是 number | string时触发
- * @category 时间Date
- * @example
-* eg:
- * ```ts
- * howLongAgo(1660644035390) // => '4分钟前'
- * ```
- * @example
-* eg:
- * ```ts
- * howLongAgo(1660644418571) // => '5秒前'
- * ```
- * @example
-* eg:
- * 支持格式化的时间字符
- * ```ts
- * howLongAgo('2022-08-17 09: 12: 00') // => '10分钟前'
- * ```
- * @example
-* eg:
- * 指定起始时间
- * ```ts
- * howLongAgo('2022-08-17 09: 12: 00', '2022-08-17 09: 15: 00')
- * // => '3分钟前'
- * ```
- */
-howLongAgo(endTime?: number | string | Date | (string | number)[], startTime?: number | string | Date | (string | number)[]): string;
+
 /**
  * 获取时间区间
  * @param day 间隔天数，默认1，表示今天
@@ -516,6 +446,97 @@ getDataSection(day?: number, option?: {
     format?: string;
     timestamp?: boolean;
 }): (number | string)[];
+
+/**
+ * 获取指定月的天数
+ * @param year 年份, 默认当前年
+ * @param month 月份, 默认当前月
+ * @return 天数
+ * @throws Invalid Date 传入值无法转为Date时触发
+ * @category 时间Date
+ * @example
+* eg:
+ * 获取当前月份的天数
+ * ```ts
+ * getMonthDays() // => 31
+ * ```
+ * @example
+* eg:
+ * 获取指定月份的天数
+ * ```ts
+ * getMonthDays(2022, 1) // => 31
+ * ```
+ */
+getMonthDays(year?: number, month?: number): number;
+
+/**
+ * 获取距离指定时间之前
+ * @param endTime 目标时间戳或者格式化的时间字符
+ * @param startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
+ * @return 年|月|天|小时|分钟|秒 之前
+ * @throws 无法转换为时间 传入值无法转为Date时触发
+ * @throws 只接受 number | string 传入值不是 number | string时触发
+ * @category 时间Date
+ * @example
+* eg:
+ * ```ts
+ * howLongAgo(1660644035390) // => '4分钟前'
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * howLongAgo(1660644418571) // => '5秒前'
+ * ```
+ * @example
+* eg:
+ * 支持格式化的时间字符
+ * ```ts
+ * howLongAgo('2022-08-17 09: 12: 00') // => '10分钟前'
+ * ```
+ * @example
+* eg:
+ * 指定起始时间
+ * ```ts
+ * howLongAgo('2022-08-17 09: 12: 00', '2022-08-17 09: 15: 00')
+ * // => '3分钟前'
+ * ```
+ */
+howLongAgo(endTime?: number | string | Date | (string | number)[], startTime?: number | string | Date | (string | number)[]): string;
+
+/**
+ * 获取时间戳
+ * @param time 时间戳|格式化后的时间字符|时间对象
+ * @param unit 返回格式,支持毫秒或者秒,默认毫秒
+ * @return 时间戳
+ * @throws Invalid Date 参数time无法转为Date时触发
+ * @category 时间Date
+ * @example
+* eg:
+ * 获取当前的时间戳
+ * ```ts
+ * timeStamp() // 1659334598129
+ * ```
+ * @example
+* eg:
+ * 获取当前的时间戳，单位秒(s)
+ * ```ts
+ * timeStamp('', 's') // 1660700890
+ * ```
+ * @example
+* eg:
+ * 获取 2022-10-12 的时间戳
+ * ```ts
+ * timeStamp('2022-10-12') // 1665504000000
+ * ```
+ * @example
+* eg:
+ * 获取 2022-10-12 的时间戳, 以秒返回
+ * ```ts
+ * timeStamp('2022-10-12', 's') // 1665504000
+ * ```
+ */
+timeStamp(time?: number | string | Date | (string | number)[], unit?: string): number;
+
 /**
  * 获取设备类型
  * @return "Mobile" | "Desktop"
@@ -534,24 +555,7 @@ getDataSection(day?: number, option?: {
  * ```
  */
 detectDeviceType(): "Mobile" | "Desktop";
-/**
- * 是否是移动端
- * @return true | false
- * @category 设备Device
- * @example
-* eg:
- * 移动端访问
- * ```ts
- * isMobile() // => true
- * ```
- * @example
-* eg:
- * 桌面端访问
- * ```ts
- * isMobile() // => false
- * ```
- */
-isMobile(): boolean;
+
 /**
  * 是否是安卓系统
  * @return true | false
@@ -570,24 +574,7 @@ isMobile(): boolean;
  * ```
  */
 isAndroid(): boolean;
-/**
- * 是否是ios系统
- * @return true | false
- * @category 设备Device
- * @example
-* eg:
- * ios访问
- * ```ts
- * isIOS() // => true
- * ```
- * @example
-* eg:
- * 桌面或者安卓访问
- * ```ts
- * isIOS() // => false
- * ```
- */
-isIOS(): boolean;
+
 /**
  * 是否是桌面端
  * @return true | false
@@ -606,24 +593,45 @@ isIOS(): boolean;
  * ```
  */
 isDesktop(): boolean;
+
 /**
- * 是否是微信环境
+ * 是否是ios系统
  * @return true | false
  * @category 设备Device
  * @example
 * eg:
- * 微信中端访问
+ * ios访问
  * ```ts
- * isWeixin() // => true
+ * isIOS() // => true
  * ```
  * @example
 * eg:
- * 非微信访问
+ * 桌面或者安卓访问
  * ```ts
- * isWeixin() // => false
+ * isIOS() // => false
  * ```
  */
-isWeixin(): boolean;
+isIOS(): boolean;
+
+/**
+ * 是否是移动端
+ * @return true | false
+ * @category 设备Device
+ * @example
+* eg:
+ * 移动端访问
+ * ```ts
+ * isMobile() // => true
+ * ```
+ * @example
+* eg:
+ * 桌面端访问
+ * ```ts
+ * isMobile() // => false
+ * ```
+ */
+isMobile(): boolean;
+
 /**
  * 是否是QQ环境
  * @return true | false
@@ -642,6 +650,26 @@ isWeixin(): boolean;
  * ```
  */
 isQQ(): boolean;
+
+/**
+ * 是否是微信环境
+ * @return true | false
+ * @category 设备Device
+ * @example
+* eg:
+ * 微信中端访问
+ * ```ts
+ * isWeixin() // => true
+ * ```
+ * @example
+* eg:
+ * 非微信访问
+ * ```ts
+ * isWeixin() // => false
+ * ```
+ */
+isWeixin(): boolean;
+
 /**
  * 是否是微信小程序环境
  * @return true | false
@@ -660,6 +688,7 @@ isQQ(): boolean;
  * ```
  */
 isWeixinMini(): boolean;
+
 /**
  * 是否是windows环境
  * @return true | false
@@ -678,6 +707,19 @@ isWeixinMini(): boolean;
  * ```
  */
 isWin(): boolean;
+
+/**
+ * 退出全屏
+ * @throws 浏览器不支持全屏操作
+ * @category 浏览器Dom
+ * @example
+* eg:
+ * ```ts
+ * exitFullscreen()
+ * ```
+ */
+exitFullscreen(): void;
+
 /**
  * 指定dom节点全屏
  * @param el 指定的dom节点，不指定默认指向document.body
@@ -695,17 +737,7 @@ isWin(): boolean;
  * ```
  */
 launchFullscreen(el?: HTMLElement): void;
-/**
- * 退出全屏
- * @throws 浏览器不支持全屏操作
- * @category 浏览器Dom
- * @example
-* eg:
- * ```ts
- * exitFullscreen()
- * ```
- */
-exitFullscreen(): void;
+
 /**
  * 防抖
  * @param func 函数
@@ -751,6 +783,25 @@ debounce(func: (...params: any[]) => any, awit?: number, option?: {
     leading?: boolean;
     trailing?: boolean;
 }): any;
+
+/**
+ * 只调用一次的函数
+ * @param func 函数
+ * @category 函数Function
+ * @example
+* eg:
+ * ```ts
+ * once(function () { ... })
+ * ```
+ * @example
+* eg:
+ * 在vue2中使用
+ * ```ts
+ * getlist: once(function () { ... })
+ * ```
+ */
+once(func: (...params: any[]) => any): (this: unknown, ...args: any[]) => void;
+
 /**
  * 节流
  * @param func 函数
@@ -784,23 +835,7 @@ debounce(func: (...params: any[]) => any, awit?: number, option?: {
  * ```
  */
 throttle(func: (...params: any[]) => any, wait?: number, immediate?: boolean): (this: unknown, ...args: any[]) => void;
-/**
- * 只调用一次的函数
- * @param func 函数
- * @category 函数Function
- * @example
-* eg:
- * ```ts
- * once(function () { ... })
- * ```
- * @example
-* eg:
- * 在vue2中使用
- * ```ts
- * getlist: once(function () { ... })
- * ```
- */
-once(func: (...params: any[]) => any): (this: unknown, ...args: any[]) => void;
+
 /**
  * 数字补0
  * @param value 数字或者字符串的数字
@@ -824,29 +859,7 @@ once(func: (...params: any[]) => any): (this: unknown, ...args: any[]) => void;
  * ```
  */
 padInt(value: string | number, len?: number): string;
-/**
- * 转换为数字
- * @param value 任意值
- * @return 返回数字
- * @throws 无法转换为数字
- * @category 数字Number
- * @example
-* eg:
- * ```ts
- * toNumber('1') // 1
- * ```
- * @example
-* eg:
- * ```ts
- * toNumber('1.2') // 1.2
- * ```
- * @example
-* eg:
- * ```ts
- * toNumber('a123') // error => a123无法转换为数字
- * ```
- */
-toNumber<T>(value: T): number;
+
 /**
  * 数字保留小数位
  * @param value 数字
@@ -880,23 +893,76 @@ toNumber<T>(value: T): number;
  * ```
  */
 toFixed(value: number, num?: number, isRound?: boolean): number;
+
 /**
- * 是否为整数
- * @param value 检查的值
- * @return true | false
+ * 转换为数字
+ * @param value 任意值
+ * @return 返回数字
+ * @throws 无法转换为数字
  * @category 数字Number
  * @example
 * eg:
  * ```ts
- * isInt(1) // => true
+ * toNumber('1') // 1
  * ```
  * @example
 * eg:
  * ```ts
- * isInt(1.21) // => false
+ * toNumber('1.2') // 1.2
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * toNumber('a123') // error => a123无法转换为数字
  * ```
  */
-isInt(value: any): boolean;
+toNumber<T>(value: T): number;
+
+/**
+ * 数组对象key值求和
+ * @param object 目标对象
+ * @param keys 需要求和的key数组
+ * @return 求和后的对象
+ * @category 对象Object
+ * @example
+* eg:
+ * ```ts
+ * arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
+ * // => {id: 3, age: 30}
+ * ```
+ */
+arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]): Record<string, any>;
+
+/**
+ * 合并对象
+ * @param target 目标对象，被合并的对象
+ * @param sources 源对象，可以多个
+ * @return 目标对象
+ * @category 对象Object
+ * @example
+* eg:
+ * 对象合并效果与Object.assign一致
+ * ```ts
+ * assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
+ * ```
+ */
+assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;
+
+/**
+ * 最小合并对象
+ * @param target 目标对象，被合并的对象
+ * @param sources 源对象，可以多个
+ * @return 目标对象
+ * @category 对象Object
+ * @example
+* eg:
+ * 最小合并对象，只会合并源对象原有的属性，其他忽略
+ * ```ts
+ * assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
+ * ```
+ */
+assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;
+
 /**
  * 指定深度或者广度的对象
  * @param deep 深度
@@ -929,6 +995,7 @@ createData(deep?: number, breadth?: number): {
     [key: number]: any;
     data?: any;
 };
+
 /**
  * 删除指定对象的指定属性
  * @param object 指定对象
@@ -942,72 +1009,7 @@ createData(deep?: number, breadth?: number): {
  * ```
  */
 omit(object: Record<string, any>, keys?: string[]): Record<string, any>;
-/**
- * 合并对象
- * @param target 目标对象，被合并的对象
- * @param sources 源对象，可以多个
- * @return 目标对象
- * @category 对象Object
- * @example
-* eg:
- * 对象合并效果与Object.assign一致
- * ```ts
- * assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
- * ```
- */
-assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;
-/**
- * 最小合并对象
- * @param target 目标对象，被合并的对象
- * @param sources 源对象，可以多个
- * @return 目标对象
- * @category 对象Object
- * @example
-* eg:
- * 最小合并对象，只会合并源对象原有的属性，其他忽略
- * ```ts
- * assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
- * ```
- */
-assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;
-/**
- * 数组对象key值求和
- * @param object 目标对象
- * @param keys 需要求和的key数组
- * @return 求和后的对象
- * @category 对象Object
- * @example
-* eg:
- * ```ts
- * arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
- * // => {id: 3, age: 30}
- * ```
- */
-arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]): Record<string, any>;
-/**
- * 首字母大写
- * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @return 字符串
- * @category 字符串String
- * @example
-* eg:
- * ```ts
- * upperFirst('fred') // 'Fred'
- * ```
- * @example
-* eg:
- * 自定义时间
- * ```ts
- * upperFirst('FRED') // 'FRED'
- * ```
- * @example
-* eg:
- * 参数不是字符串，会先调用toString方法
- * ```ts
- * upperFirst(true) // 'True'
- * ```
- */
-upperFirst(str: any): string;
+
 /**
  * 获取字符串的字节长度
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
@@ -1037,30 +1039,7 @@ upperFirst(str: any): string;
  * ```
  */
 byteSize(str: any): number;
-/**
- * 移除字符串中的html标签
- * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @return 字符串
- * @category 字符串String
- * @example
-* eg:
- * ```ts
- * removeHTML('<p>这是<em>一个</em>段落。</p>') // => 这是一个段落。
- * ```
- * @example
-* eg:
- * 转义符也会被去除
- * ```ts
- * removeHTML('<p>这是<em>一个</em>段落。&nbsp;</p>') // => 这是一个段落。
- * ```
- * @example
-* eg:
- * 参数不是字符串，会先调用toString方法
- * ```ts
- * removeHTML(true) // 'true'
- * ```
- */
-removeHTML(str: any): string;
+
 /**
  * 字符串替换
  * 使用指定的掩码字符替换start~length之间的所有字符
@@ -1098,26 +1077,57 @@ removeHTML(str: any): string;
  * ```
  */
 mask(str: string, start?: number, length?: number, mask?: string): string;
+
 /**
- * 是否是url
- * @param url 需要验证的内容，类型：string
- * @return Boolean
- * @throws 参数必须是string 参数不是string时触发
- * @category URL
+ * 移除字符串中的html标签
+ * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
+ * @return 字符串
+ * @category 字符串String
  * @example
 * eg:
  * ```ts
- * isURL('https://a.b.c')
- * // => true
+ * removeHTML('<p>这是<em>一个</em>段落。</p>') // => 这是一个段落。
  * ```
  * @example
 * eg:
+ * 转义符也会被去除
  * ```ts
- * isURL('123')
- * // => false
+ * removeHTML('<p>这是<em>一个</em>段落。&nbsp;</p>') // => 这是一个段落。
+ * ```
+ * @example
+* eg:
+ * 参数不是字符串，会先调用toString方法
+ * ```ts
+ * removeHTML(true) // 'true'
  * ```
  */
-isURL(url: string): boolean;
+removeHTML(str: any): string;
+
+/**
+ * 首字母大写
+ * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
+ * @return 字符串
+ * @category 字符串String
+ * @example
+* eg:
+ * ```ts
+ * upperFirst('fred') // 'Fred'
+ * ```
+ * @example
+* eg:
+ * 自定义时间
+ * ```ts
+ * upperFirst('FRED') // 'FRED'
+ * ```
+ * @example
+* eg:
+ * 参数不是字符串，会先调用toString方法
+ * ```ts
+ * upperFirst(true) // 'True'
+ * ```
+ */
+upperFirst(str: any): string;
+
 /**
  * 获取url上的参数
  * @param name 参数名，必填
@@ -1146,6 +1156,7 @@ isURL(url: string): boolean;
  * ```
  */
 getUrlParam(name: string, url?: string): string | null;
+
 /**
  * 获取url上的参数
  * @param option 可选的对象
@@ -1187,6 +1198,57 @@ getUrlQuery(option?: {
     url?: string;
     type?: 'search' | 'hash' | 'all';
 }): Record<string, any>;
+
+/**
+ * 是否是url
+ * @param url 需要验证的内容，类型：string
+ * @return Boolean
+ * @throws 参数必须是string 参数不是string时触发
+ * @category URL
+ * @example
+* eg:
+ * ```ts
+ * isURL('https://a.b.c')
+ * // => true
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * isURL('123')
+ * // => false
+ * ```
+ */
+isURL(url: string): boolean;
+
+/**
+ * 参数序列化-字符转对象
+ * @return 由参数组成的对象
+ * @category URL
+ * @example
+* eg:
+ * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
+ * 不传值时，默认从window.location中取值
+ * ```ts
+ * qsParse('a=1&b=2')
+ * // => 'a=1&b=2'
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * qsParse('a=1&b=2&c={"a":1}')
+ * // => { a:1, b:2, c: { a :1 } }
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * qsParse('a=1&b=2&c={"a":1}', false)
+ * // => { a:1, b:2, c: '{ a: 1 }' }
+ * ```
+ */
+qsParse(query?: string, decode?: boolean): {
+    [k: string]: any;
+};
+
 /**
  * 参数序列化-对象转字符
  * @return 由参数组成的对象
@@ -1220,34 +1282,7 @@ getUrlQuery(option?: {
  * ```
  */
 qsStringify(query?: Record<string, any>, decode?: boolean): string;
-/**
- * 参数序列化-字符转对象
- * @return 由参数组成的对象
- * @category URL
- * @example
-* eg:
- * 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
- * 不传值时，默认从window.location中取值
- * ```ts
- * qsParse('a=1&b=2')
- * // => 'a=1&b=2'
- * ```
- * @example
-* eg:
- * ```ts
- * qsParse('a=1&b=2&c={"a":1}')
- * // => { a:1, b:2, c: { a :1 } }
- * ```
- * @example
-* eg:
- * ```ts
- * qsParse('a=1&b=2&c={"a":1}', false)
- * // => { a:1, b:2, c: '{ a: 1 }' }
- * ```
- */
-qsParse(query?: string, decode?: boolean): {
-    [k: string]: any;
-};
+
 /**
  * 修改url上的参数
  * @param option.search 对象 用于修改search部分的数据， 非必填
@@ -1285,6 +1320,7 @@ reviseUrlQuery(option: {
     search?: Record<string, any>;
     hash?: Record<string, any>;
 }, url?: string): string;
+
 /**
  * 设置浏览器地址栏url
  * @param option 可选的对象
@@ -1307,6 +1343,146 @@ reviseUrlQuery(option: {
  * ```
  */
 setUrlQuery(url: string, type?: 'pushState' | 'replaceState'): void;
+
+/**
+ * base64转blob
+ * @param base64 base64
+ * @param type 文件类型
+ * @return Blob
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * base64ToBlob()
+ * ```
+ */
+base64ToBlob(base64: string, type?: string): Blob;
+
+/**
+ * 复制文本内容
+ * 优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
+ * @param value 需要复制的字符串
+ * @return Promise
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * await copy('hello')
+ * ```
+ */
+copy(value: string): Promise<void>;
+
+/**
+ * 深度复制
+ * @param origin 对象或者数组
+ * @return 深度复制后的对象或者数组
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * deepClone([1,23, [1]]) // => [1,23, [1]]
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * deepClone({a: [1], b: () => {}}) // => {a: [1], b: () => {}}
+ * ```
+ */
+deepClone<T extends Array<T> | any>(source: T): T;
+
+/**
+ * 文件下载
+ * @param name 文件名
+ * @param blob 文件blob数据
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * const res = await fetch('https://a.b.com/').then(res => res.blob())
+ * downloadFile('a.jpg', res)
+ * ```
+ */
+downloadFile(name: string, blob: Blob): void;
+
+/**
+ * gbk 转 utf-8
+ * @param value ArrayBuffer
+ * @return 可以被JSON.parse转化时返回js对象，否则返回字符串
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * const res = await fetch('https://a.b.com/').then(res => res.arrayBuffer())
+ * gbkToUtf8(res)
+ * ```
+ */
+gbkToUtf8(value: ArrayBuffer): object | string;
+
+/**
+ * 获取uuid
+ * @return uuid
+ * @category 工具Util
+ * @example
+* eg:
+ * 符合 RFC4122 版本 4 的 UUID。
+ * ```ts
+ * getUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'
+ * ```
+ */
+getUUID(): string;
+
+/**
+ * 对手机号进行加密处理
+ * @param value 手机号：支持字符串或者数字
+ * @return 字符串 返回经过加密后的字符串
+ * @throws 异常 手机号格式不正确
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * phoneEncrypt(13300001111) => '133****1111'
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * phoneEncrypt('13300001111') => '133****1111'
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * phoneEncrypt('1330000') => throw '手机号格式不正确'
+ * ```
+ */
+phoneEncrypt(value: string | number): string;
+
+/**
+ * 均衡获取指定范围的随机整数
+ * 返回一个min 和 max之间的随机整数。如果你没有参数，那么将返回0和1之间的整数。如果你只传递一个参数，那么将返回0和这个参数之间的整数。
+ * @param min 范围最小整数
+ * @param max 范围最大整数
+ * @return 随机整数
+ * @category 工具Util
+ * @example
+* eg:
+ * 均衡获取0或者1的数
+ * ```ts
+ * random()
+ * ```
+ * @example
+* eg:
+ * 均衡获取0或者5的数
+ * ```ts
+ * random(5)
+ * ```
+ * @example
+* eg:
+ * 均衡获取1或者10的数
+ * ```ts
+ * random(1, 10)
+ * ```
+ */
+random(min?: number, max?: number): number;
+
 /**
  * 滚动至···
  * @param option 可选的对象
@@ -1353,156 +1529,7 @@ scrollTo(option?: {
     direction?: 'top' | 'left';
     dom?: HTMLElement;
 }, callback?: () => void): void;
-/**
- * 均衡获取指定范围的随机整数
- * 返回一个min 和 max之间的随机整数。如果你没有参数，那么将返回0和1之间的整数。如果你只传递一个参数，那么将返回0和这个参数之间的整数。
- * @param min 范围最小整数
- * @param max 范围最大整数
- * @return 随机整数
- * @category 工具Util
- * @example
-* eg:
- * 均衡获取0或者1的数
- * ```ts
- * random()
- * ```
- * @example
-* eg:
- * 均衡获取0或者5的数
- * ```ts
- * random(5)
- * ```
- * @example
-* eg:
- * 均衡获取1或者10的数
- * ```ts
- * random(1, 10)
- * ```
- */
-random(min?: number, max?: number): number;
-/**
- * 获取uuid
- * @return uuid
- * @category 工具Util
- * @example
-* eg:
- * 符合 RFC4122 版本 4 的 UUID。
- * ```ts
- * getUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'
- * ```
- */
-getUUID(): string;
-/**
- * gbk 转 utf-8
- * @param value ArrayBuffer
- * @return 可以被JSON.parse转化时返回js对象，否则返回字符串
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * const res = await fetch('https://a.b.com/').then(res => res.arrayBuffer())
- * gbkToUtf8(res)
- * ```
- */
-gbkToUtf8(value: ArrayBuffer): object | string;
-/**
- * 对手机号进行加密处理
- * @param value 手机号：支持字符串或者数字
- * @return 字符串 返回经过加密后的字符串
- * @throws 异常 手机号格式不正确
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * phoneEncrypt(13300001111) => '133****1111'
- * ```
- * @example
-* eg:
- * ```ts
- * phoneEncrypt('13300001111') => '133****1111'
- * ```
- * @example
-* eg:
- * ```ts
- * phoneEncrypt('1330000') => throw '手机号格式不正确'
- * ```
- */
-phoneEncrypt(value: string | number): string;
-/**
- * 文件下载
- * @param name 文件名
- * @param blob 文件blob数据
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * const res = await fetch('https://a.b.com/').then(res => res.blob())
- * downloadFile('a.jpg', res)
- * ```
- */
-downloadFile(name: string, blob: Blob): void;
-/**
- * 深度复制
- * @param origin 对象或者数组
- * @return 深度复制后的对象或者数组
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * deepClone([1,23, [1]]) // => [1,23, [1]]
- * ```
- * @example
-* eg:
- * ```ts
- * deepClone({a: [1], b: () => {}}) // => {a: [1], b: () => {}}
- * ```
- */
-deepClone<T extends Array<T> | any>(source: T): T;
-/**
- * 复制文本内容
- * 优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
- * @param value 需要复制的字符串
- * @return Promise
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * await copy('hello')
- * ```
- */
-copy(value: string): Promise<void>;
-/**
- * base64转blob
- * @param base64 base64
- * @param type 文件类型
- * @return Blob
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * base64ToBlob()
- * ```
- */
-base64ToBlob(base64: string, type?: string): Blob;
-/**
- * 判断是否为手机号
- * @param value 任意值
- * @return true | false
- * @category 工具Util
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isPhone(13302101452) => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isPhone(1330210152) => false
- * ```
- */
-isPhone(value: string | number): boolean;
+
 /**
  * 判断是否为数组
  * @param value 任意值
@@ -1522,177 +1549,41 @@ isPhone(value: string | number): boolean;
  * ```
  */
 isArray(value: any): boolean;
+
 /**
- * 判断是否为对象
- * @param value 任意值
+ * 是否是数组对象
  * @return true | false
- * @category 对象Object
+ * @category 数组Array
  * @example
 * eg:
- * 验证通过
  * ```ts
- * isObject({}) => true
+ * isArrObj([{}]) // => true
  * ```
  * @example
 * eg:
- * 验证失败
  * ```ts
- * isObject([]) => false
+ * isArrObj([]) // => false
  * ```
  */
-isObject(value: any): boolean;
+isArrObj(object: any): any;
+
 /**
- * 判断是否为Location
- * @param value 任意值
+ * 是否是基本类型
  * @return true | false
- * @category URL
+ * @category 工具Util
  * @example
 * eg:
- * 验证通过
  * ```ts
- * isLocation(window.location) => true
+ * isBasicType('12') // => true
  * ```
  * @example
 * eg:
- * 验证失败
  * ```ts
- * isLocation(123) => false
+ * isBasicType([]) // => false
  * ```
  */
-isLocation(value: any): boolean;
-/**
- * 判断是否为Map
- * @param value 任意值
- * @return true | false
- * @category 对象Object
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isMap(new Map()) => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isMap(123) => false
- * ```
- */
-isMap(value: any): boolean;
-/**
- * 判断是否为Set
- * @param value 任意值
- * @return true | false
- * @category 对象Object
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isSet(new Set()) => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isSet(123) => false
- * ```
- */
-isSet(value: any): boolean;
-/**
- * 判断是否为Date
- * @param value 任意值
- * @return true | false
- * @category 时间Date
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isDate(new Date()) => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isDate(123) => false
- * ```
- */
-isDate(value: any): boolean;
-/**
- * 判断是否为Function
- * @param value 任意值
- * @return true | false
- * @category 函数Function
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isFunction(function(){}) => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isFunction(123) => false
- * ```
- */
-isFunction(value: any): boolean;
-/**
- * 判断是否为字符串
- * @param value 任意值
- * @return true | false
- * @category 字符串String
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isString('abc') => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isString(123) => false
- * ```
- */
-isString(value: any): boolean;
-/**
- * 判断是否为Symbol
- * @param value 任意值
- * @return true | false
- * @category 对象Object
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isSymbol(Symbol(1)) => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isSymbol(Symbol) => false
- * ```
- */
-isSymbol(value: any): boolean;
-/**
- * 判断是否为数字
- * @param value 任意值
- * @return true | false
- * @category 数字Number
- * @example
-* eg:
- * 验证通过
- * ```ts
- * isNumber(123) => true
- * ```
- * @example
-* eg:
- * 验证失败
- * ```ts
- * isNumber('123') => false
- * ```
- */
-isNumber(value: any): boolean;
+isBasicType(value: any): boolean;
+
 /**
  * 判断是否为Boolean
  * @param value 任意值
@@ -1713,6 +1604,258 @@ isNumber(value: any): boolean;
  * ```
  */
 isBoolean(value: any): boolean;
+
+/**
+ * 判断是否为Date
+ * @param value 任意值
+ * @return true | false
+ * @category 时间Date
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isDate(new Date()) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isDate(123) => false
+ * ```
+ */
+isDate(value: any): boolean;
+
+/**
+ * 是否是dom
+ * @param tarage dom
+ * @return true | false
+ * @category 浏览器Dom
+ * @example
+* eg:
+ * ```ts
+ * isDom() // => false
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * isDom(document.querySelector('head')) // => true
+ * ```
+ */
+isDom(tarage: Element): boolean;
+
+/**
+ * 判断对象是否是空对象
+ * @param object 对象
+ * @return true | false
+ * @throws 传入参数不是Object 传入参数不是Object时触发
+ * @category 对象Object
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isEmptyObject({}) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isEmptyObject({a: 1}) => false
+ * ```
+ */
+isEmptyObject(object: Record<string, unknown>): boolean;
+
+/**
+ * 判断是否为Function
+ * @param value 任意值
+ * @return true | false
+ * @category 函数Function
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isFunction(function(){}) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isFunction(123) => false
+ * ```
+ */
+isFunction(value: any): boolean;
+
+/**
+ * 检查字符串是否包含中文
+ * @param value 字符串
+ * @return true | false
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * isIncludeChinese() // => false
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * isIncludeChinese('你好') // => true
+ * ```
+ */
+isIncludeChinese(value: string): boolean;
+
+/**
+ * 是否为整数
+ * @param value 检查的值
+ * @return true | false
+ * @category 数字Number
+ * @example
+* eg:
+ * ```ts
+ * isInt(1) // => true
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * isInt(1.21) // => false
+ * ```
+ */
+isInt(value: any): boolean;
+
+/**
+ * 是否是json字符串
+ * @return true | false
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * isJsonString('{"a":1}') // => true
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * isJsonString(1) // => false
+ * ```
+ */
+isJsonString(str: string): boolean;
+
+/**
+ * 判断是否为Location
+ * @param value 任意值
+ * @return true | false
+ * @category URL
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isLocation(window.location) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isLocation(123) => false
+ * ```
+ */
+isLocation(value: any): boolean;
+
+/**
+ * 判断是否为Map
+ * @param value 任意值
+ * @return true | false
+ * @category 对象Object
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isMap(new Map()) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isMap(123) => false
+ * ```
+ */
+isMap(value: any): boolean;
+
+/**
+ * 是否是null|undefined
+ * @param value 任意值
+ * @return true | false
+ * @category 工具Util
+ * @example
+* eg:
+ * ```ts
+ * isNullOrUndefined(null) // => true
+ * isNullOrUndefined(undefined) // => true
+ * ```
+ * @example
+* eg:
+ * ```ts
+ * isNullOrUndefined(2) // => false
+ * ```
+ */
+isNullOrUndefined(value: any): boolean;
+
+/**
+ * 判断是否为数字
+ * @param value 任意值
+ * @return true | false
+ * @category 数字Number
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isNumber(123) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isNumber('123') => false
+ * ```
+ */
+isNumber(value: any): boolean;
+
+/**
+ * 判断是否为对象
+ * @param value 任意值
+ * @return true | false
+ * @category 对象Object
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isObject({}) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isObject([]) => false
+ * ```
+ */
+isObject(value: any): boolean;
+
+/**
+ * 判断是否为手机号
+ * @param value 任意值
+ * @return true | false
+ * @category 工具Util
+ * @example
+* eg:
+ * 验证通过
+ * ```ts
+ * isPhone(13302101452) => true
+ * ```
+ * @example
+* eg:
+ * 验证失败
+ * ```ts
+ * isPhone(1330210152) => false
+ * ```
+ */
+isPhone(value: string | number): boolean;
+
 /**
  * 判断是否为Promise
  * @param value 任意值
@@ -1738,123 +1881,66 @@ isBoolean(value: any): boolean;
  * ```
  */
 isPromise(value: any): boolean;
+
 /**
- * 判断对象是否是空对象
- * @param object 对象
+ * 判断是否为Set
+ * @param value 任意值
  * @return true | false
- * @throws 传入参数不是Object 传入参数不是Object时触发
  * @category 对象Object
  * @example
 * eg:
  * 验证通过
  * ```ts
- * isEmptyObject({}) => true
+ * isSet(new Set()) => true
  * ```
  * @example
 * eg:
  * 验证失败
  * ```ts
- * isEmptyObject({a: 1}) => false
+ * isSet(123) => false
  * ```
  */
-isEmptyObject(object: Record<string, unknown>): boolean;
+isSet(value: any): boolean;
+
 /**
- * 检查字符串是否包含中文
- * @param value 字符串
- * @return true | false
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * isIncludeChinese() // => false
- * ```
- * @example
-* eg:
- * ```ts
- * isIncludeChinese('你好') // => true
- * ```
- */
-isIncludeChinese(value: string): boolean;
-/**
- * 是否是dom
- * @param tarage dom
- * @return true | false
- * @category 浏览器Dom
- * @example
-* eg:
- * ```ts
- * isDom() // => false
- * ```
- * @example
-* eg:
- * ```ts
- * isDom(document.querySelector('head')) // => true
- * ```
- */
-isDom(tarage: Element): boolean;
-/**
- * 是否是null|undefined
+ * 判断是否为字符串
  * @param value 任意值
  * @return true | false
- * @category 工具Util
+ * @category 字符串String
  * @example
 * eg:
+ * 验证通过
  * ```ts
- * isNullOrUndefined(null) // => true
- * isNullOrUndefined(undefined) // => true
+ * isString('abc') => true
  * ```
  * @example
 * eg:
+ * 验证失败
  * ```ts
- * isNullOrUndefined(2) // => false
+ * isString(123) => false
  * ```
  */
-isNullOrUndefined(value: any): boolean;
+isString(value: any): boolean;
+
 /**
- * 是否是数组对象
+ * 判断是否为Symbol
+ * @param value 任意值
  * @return true | false
- * @category 数组Array
+ * @category 对象Object
  * @example
 * eg:
+ * 验证通过
  * ```ts
- * isArrObj([{}]) // => true
+ * isSymbol(Symbol(1)) => true
  * ```
  * @example
 * eg:
+ * 验证失败
  * ```ts
- * isArrObj([]) // => false
+ * isSymbol(Symbol) => false
  * ```
  */
-isArrObj(object: any): any;
-/**
- * 是否是json字符串
- * @return true | false
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * isJsonString('{"a":1}') // => true
- * ```
- * @example
-* eg:
- * ```ts
- * isJsonString(1) // => false
- * ```
- */
-isJsonString(str: string): boolean;
-/**
- * 是否是基本类型
- * @return true | false
- * @category 工具Util
- * @example
-* eg:
- * ```ts
- * isBasicType('12') // => true
- * ```
- * @example
-* eg:
- * ```ts
- * isBasicType([]) // => false
- * ```
- */
-isBasicType(value: any): boolean;
+isSymbol(value: any): boolean;
+
+
+}

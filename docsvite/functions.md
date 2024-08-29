@@ -1,33 +1,10 @@
 ## 数组Array
-## compact :tada: :100:
-移除所有 falsey 值的数组
-
-#### 类型说明
-::: info
-`compact(array: any[]): any[];`
-:::
-#### 参数
-- array 数组
-#### 返回
-- `any[]`
-::: tip
-新的数组
-:::
-#### 异常
-::: danger
-array参数需要Array array参数错误时触发
-:::
-#### 示例 
-falsey => 0 | false | null | undefined | NaN
-```ts
-compact([1, 0, false, 2, NaN, 3, null]) => [1, 2, 3]
-```
-## chunk :tada: :100:
+## chunk 
 按长度拆分数组
 
 #### 类型说明
 ::: info
-`chunk(array: any[], size?: number): any[];`
+`function chunk(array: any[], size?: number): any[];`
 :::
 #### 参数
 - array 数组
@@ -53,12 +30,92 @@ chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 2)
 chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3)
 // => [[{"a":1},{"a":2},{"a":3}],[{"a":4}]]
 ```
-## fromPairs :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isArray from "@/verify/isArray"
+import isNumber from "@/verify/isNumber"
+export default function chunk(array: any[], size = 1): any[] {
+  if (!isArray(array)) throw `array参数需要Array`
+  if (!isNumber(size)) throw `size参数需要Number`
+  const arr = []
+  const count = Math.ceil(array.length / size)
+  for (let i = 0; i < count; i++) {
+    arr.push(array.slice(i * size, i * size + size))
+  }
+  return arr
+}
+
+```
+
+```Js [JS版本]
+import isArray from "@/verify/isArray";
+import isNumber from "@/verify/isNumber";
+export default function chunk(array, size = 1) {
+    if (!isArray(array))
+        throw `array参数需要Array`;
+    if (!isNumber(size))
+        throw `size参数需要Number`;
+    const arr = [];
+    const count = Math.ceil(array.length / size);
+    for (let i = 0; i < count; i++) {
+        arr.push(array.slice(i * size, i * size + size));
+    }
+    return arr;
+}
+
+```
+:::
+## compact 
+移除所有 falsey 值的数组
+
+#### 类型说明
+::: info
+`function compact(array: any[]): any[];`
+:::
+#### 参数
+- array 数组
+#### 返回
+- `any[]`
+::: tip
+新的数组
+:::
+#### 异常
+::: danger
+array参数需要Array array参数错误时触发
+:::
+#### 示例 
+falsey => 0 | false | null | undefined | NaN
+```ts
+compact([1, 0, false, 2, NaN, 3, null]) => [1, 2, 3]
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isArray from "@/verify/isArray"
+export default function compact(array: any[]): any[] {
+  if (!isArray(array)) throw `array参数需要Array`
+  return array.filter(item => !!item)
+}
+
+```
+
+```Js [JS版本]
+import isArray from "@/verify/isArray";
+export default function compact(array) {
+    if (!isArray(array))
+        throw `array参数需要Array`;
+    return array.filter(item => !!item);
+}
+
+```
+:::
+## fromPairs 
 二维数组转化为对象
 
 #### 类型说明
 ::: info
-`fromPairs(array: any[]): Record<string, unknown>;`
+`function fromPairs(array: any[]): Record<string, unknown>;`
 :::
 #### 参数
 - array 数组
@@ -82,12 +139,33 @@ fromPairs([['a', 1], ['b', 2]]) => {a: 1, b: 2}
 ```ts
 fromPairs([['a', 1], ['b', 2, 3]) => {a: 1, b: 2}
 ```
-## unique :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isArray from "@/verify/isArray"
+export default function fromPairs(array: any[]): Record<string, unknown> {
+  if (!isArray(array)) throw `array传入参数需要Array`
+  return Object.fromEntries(new Map(array))
+}
+
+```
+
+```Js [JS版本]
+import isArray from "@/verify/isArray";
+export default function fromPairs(array) {
+    if (!isArray(array))
+        throw `array传入参数需要Array`;
+    return Object.fromEntries(new Map(array));
+}
+
+```
+:::
+## unique 
 数组去重
 
 #### 类型说明
 ::: info
-`unique(array: any[], key?: string): any[];`
+`function unique(array: any[], key?: string): any[];`
 :::
 #### 参数
 - array 数组
@@ -113,12 +191,53 @@ unique([1, 2, 1]) => [1, 2]
 unique([{id: 1, name: '1'}, {id: 2, name: '2'}, {id: 1, name: '1'}], 'id')
 // => [{id: 1, name: '1'}, {id: 2, name: '2'}]
 ```
-## isArray :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isArray from "@/verify/isArray"
+import isString from "@/verify/isString"
+export default function unique(array: any[], key?: string): any[] {
+  if (!isArray(array)) throw `array传入参数需要Array`
+  if (key && !isString(key)) throw `key传入参数需要String`
+  if (key) {
+    return array.reduce((x, y) => {
+      const isTr = x.some((el: any) => el[key] == y[key])
+      if (!isTr) x.push(y)
+      return x
+    }, [])
+  }
+  return [...new Set(array)]
+}
+
+```
+
+```Js [JS版本]
+import isArray from "@/verify/isArray";
+import isString from "@/verify/isString";
+export default function unique(array, key) {
+    if (!isArray(array))
+        throw `array传入参数需要Array`;
+    if (key && !isString(key))
+        throw `key传入参数需要String`;
+    if (key) {
+        return array.reduce((x, y) => {
+            const isTr = x.some((el) => el[key] == y[key]);
+            if (!isTr)
+                x.push(y);
+            return x;
+        }, []);
+    }
+    return [...new Set(array)];
+}
+
+```
+:::
+## isArray 
 判断是否为数组
 
 #### 类型说明
 ::: info
-`isArray(value: any): boolean;`
+`function isArray(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -136,12 +255,29 @@ isArray([]) => true
 ```ts
 isArray({}) => false
 ```
-## isArrObj :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isArray(value: any): boolean {
+  return typeOf(value) === 'Array'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isArray(value) {
+    return typeOf(value) === 'Array';
+}
+
+```
+:::
+## isArrObj 
 是否是数组对象
 
 #### 类型说明
 ::: info
-`isArrObj(object: any): any;`
+`function isArrObj(object: any): any;`
 :::
 #### 返回
 - `any`
@@ -155,45 +291,39 @@ isArrObj([{}]) // => true
 ```ts
 isArrObj([]) // => false
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isArray from '@/verify/isArray'
+import isObject from '@/verify/isObject'
+export default function isArrObj(object: any) {
+  if (!isArray(object)) return false
+  return object.every((item: any) => {
+    return isObject(item)
+  })
+}
+```
+
+```Js [JS版本]
+import isArray from '@/verify/isArray';
+import isObject from '@/verify/isObject';
+export default function isArrObj(object) {
+    if (!isArray(object))
+        return false;
+    return object.every((item) => {
+        return isObject(item);
+    });
+}
+
+```
+:::
 ## 颜色Color
-## randomHex :tada: :100:
-随机生成16进制色值
-
-#### 类型说明
-::: info
-`randomHex(): string;`
-:::
-#### 返回
-- `string`
-::: tip
-字符串
-:::
-#### 示例 
-```ts
-randomHex() // => '#cf65dd'
-```
-## randomRgba :tada: :100:
-随机生成RGBA色值
-
-#### 类型说明
-::: info
-`randomRgba(): string;`
-:::
-#### 返回
-- `string`
-::: tip
-字符串
-:::
-#### 示例 
-```ts
-randomRgba() // => '#cf65dd'
-```
-## extendHex :tada: :100:
+## extendHex 
 将3(4)位16进制色值转为6(8)位
 
 #### 类型说明
 ::: info
-`extendHex(hex: string): string;`
+`function extendHex(hex: string): string;`
 :::
 #### 参数
 - hex 字符串
@@ -213,38 +343,43 @@ extendHex('#03f') // => '#0033ff'
 ```ts
 extendHex('#03ff') // => '#0033ffff'
 ```
-## shrinkHex :tada: :100:
-将6(8)位16进制色值转为3(4)位
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isHex from "@/color/isHex"
+export default function extendHex(hex: string): string {
+  if (!isHex(hex)) throw '无法识别正确的hex'
+  if (hex.length > 6) return hex
+  return `#${hex
+    .substring(1)
+    .split('')
+    .map(item => (item += item))
+    .join('')}`
+}
+```
 
-#### 类型说明
-::: info
-`shrinkHex(hex: string): string;`
-:::
-#### 参数
-- hex 字符串
-#### 返回
-- `string`
-::: tip
-3位hex
-:::
-#### 异常
-::: danger
-无法识别正确的hex hex参数不是正确的hex时触发
-:::
-#### 示例 
-```ts
-shrinkHex('#0033ff') // => '#03f'
+```Js [JS版本]
+import isHex from "@/color/isHex";
+export default function extendHex(hex) {
+    if (!isHex(hex))
+        throw '无法识别正确的hex';
+    if (hex.length > 6)
+        return hex;
+    return `#${hex
+        .substring(1)
+        .split('')
+        .map(item => (item += item))
+        .join('')}`;
+}
+
 ```
-// 无法转化的原样输出
-```ts
-shrinkHex('#0037ff') // => '#0037ff'
-```
-## hexToRgb :tada: :100:
+:::
+## hexToRgb 
 将16进制hex色值转为rgb(a)色值
 
 #### 类型说明
 ::: info
-`hexToRgb(hex: string): string;`
+`function hexToRgb(hex: string): string;`
 :::
 #### 参数
 - hex 字符串
@@ -265,38 +400,47 @@ hexToRgb('#aabbcc') // => '170,187,204'
 ```ts
 hexToRgb('#aabbcc8d') // => '170,187,204,0.55'
 ```
-## rgbToHex :tada: :100:
-将rgb(a)色值转为16进制hex色值
+#### 源码
+::: code-group
+```Ts [TS版本]
+import toFixed from "@/number/toFixed"
+import extendHex from "@/color/extendHex"
+import isHex from "@/color/isHex"
+export default function hexToRgb(hex: string): string {
+  if (!isHex(hex)) throw '无法识别正确的hex'
+  let _hex = hex.substring(1)
+  if (_hex.length < 6) _hex = extendHex(hex).substring(1)
+  _hex = (_hex.match(/[0-9a-f]{2}/gi) || [])
+    .map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16)))
+    .join(',')
+  return _hex
+}
+```
 
-#### 类型说明
-::: info
-`rgbToHex(rgba: string): string;`
-:::
-#### 参数
-- rgba 字符串
-#### 返回
-- `string`
-::: tip
-字符串
-:::
-#### 异常
-::: danger
-无法识别正确的rgba rgba参数不是正确的hex时触发
-:::
-#### 示例 
-```ts
-rgbToHex('170,187,255') // => '#aabbff'
+```Js [JS版本]
+import toFixed from "@/number/toFixed";
+import extendHex from "@/color/extendHex";
+import isHex from "@/color/isHex";
+export default function hexToRgb(hex) {
+    if (!isHex(hex))
+        throw '无法识别正确的hex';
+    let _hex = hex.substring(1);
+    if (_hex.length < 6)
+        _hex = extendHex(hex).substring(1);
+    _hex = (_hex.match(/[0-9a-f]{2}/gi) || [])
+        .map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16)))
+        .join(',');
+    return _hex;
+}
+
 ```
-// 支持透明度
-```ts
-rgbToHex('170,187,255,0.91') // => '#aabbffe8'
-```
-## isHex :tada: :100:
+:::
+## isHex 
 判断是否是16进制hex色值
 
 #### 类型说明
 ::: info
-`isHex(hex: string): boolean;`
+`function isHex(hex: string): boolean;`
 :::
 #### 参数
 - hex 字符串
@@ -325,12 +469,32 @@ isHex('#df') // => false
 ```ts
 isHex('#adg') // => false
 ```
-## isRgba :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isString from "@/verify/isString"
+export default function isHex(hex: string): boolean {
+  if (hex && !isString(hex)) return false
+  return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex)
+}
+```
+
+```Js [JS版本]
+import isString from "@/verify/isString";
+export default function isHex(hex) {
+    if (hex && !isString(hex))
+        return false;
+    return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex);
+}
+
+```
+:::
+## isRgba 
 判断是否是16进制hex色值
 
 #### 类型说明
 ::: info
-`isRgba(rgba: string): boolean;`
+`function isRgba(rgba: string): boolean;`
 :::
 #### 参数
 - rgba 字符串
@@ -355,13 +519,241 @@ isRgba('170,187,266,0.91') // => false
 ```ts
 isRgba('170,187,256,2') // => false
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isString from "@/verify/isString"
+export default function isRgba(rgba: string): boolean {
+  if (rgba && !isString(rgba)) return false
+  return rgba.split(',').every((s, i) => {
+    if (i == 3) return Number(s) * 255 >= 0 && Number(s) * 255 <= 255
+    return Number(s) >= 0 && Number(s) <= 255
+  })
+}
+
+```
+
+```Js [JS版本]
+import isString from "@/verify/isString";
+export default function isRgba(rgba) {
+    if (rgba && !isString(rgba))
+        return false;
+    return rgba.split(',').every((s, i) => {
+        if (i == 3)
+            return Number(s) * 255 >= 0 && Number(s) * 255 <= 255;
+        return Number(s) >= 0 && Number(s) <= 255;
+    });
+}
+
+```
+:::
+## randomHex 
+随机生成16进制色值
+
+#### 类型说明
+::: info
+`function randomHex(): string;`
+:::
+#### 返回
+- `string`
+::: tip
+字符串
+:::
+#### 示例 
+```ts
+randomHex() // => '#cf65dd'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import random from "@/util/random"
+export default function randomHex(): string {
+  const hexs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+  let hex = '#'
+  for (let i = 0; i < 6; i++) {
+    hex += hexs[random(0, 15)]
+  }
+  return hex
+}
+```
+
+```Js [JS版本]
+import random from "@/util/random";
+export default function randomHex() {
+    const hexs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+    let hex = '#';
+    for (let i = 0; i < 6; i++) {
+        hex += hexs[random(0, 15)];
+    }
+    return hex;
+}
+
+```
+:::
+## randomRgba 
+随机生成RGBA色值
+
+#### 类型说明
+::: info
+`function randomRgba(): string;`
+:::
+#### 返回
+- `string`
+::: tip
+字符串
+:::
+#### 示例 
+```ts
+randomRgba() // => '#cf65dd'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import toFixed from "@/number/toFixed";
+import random from "@/util/random";
+export default function randomRgba(): string {
+  return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`
+}
+```
+
+```Js [JS版本]
+import toFixed from "@/number/toFixed";
+import random from "@/util/random";
+export default function randomRgba() {
+    return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`;
+}
+
+```
+:::
+## rgbToHex 
+将rgb(a)色值转为16进制hex色值
+
+#### 类型说明
+::: info
+`function rgbToHex(rgba: string): string;`
+:::
+#### 参数
+- rgba 字符串
+#### 返回
+- `string`
+::: tip
+字符串
+:::
+#### 异常
+::: danger
+无法识别正确的rgba rgba参数不是正确的hex时触发
+:::
+#### 示例 
+```ts
+rgbToHex('170,187,255') // => '#aabbff'
+```
+// 支持透明度
+```ts
+rgbToHex('170,187,255,0.91') // => '#aabbffe8'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isRgba from "@/color/isRgba"
+export default function rgbToHex(rgba: string): string {
+  if (!isRgba(rgba)) throw '无法识别正确的rgba'
+  return (
+    '#' +
+    rgba
+      .split(',')
+      .map((s, i) => {
+        if (i == 3)
+          return Math.round(Number(s) * 255)
+            .toString(16)
+            .padStart(2, '0')
+        return Number(s).toString(16).padStart(2, '0')
+      })
+      .join('')
+  )
+}
+
+```
+
+```Js [JS版本]
+import isRgba from "@/color/isRgba";
+export default function rgbToHex(rgba) {
+    if (!isRgba(rgba))
+        throw '无法识别正确的rgba';
+    return ('#' +
+        rgba
+            .split(',')
+            .map((s, i) => {
+            if (i == 3)
+                return Math.round(Number(s) * 255)
+                    .toString(16)
+                    .padStart(2, '0');
+            return Number(s).toString(16).padStart(2, '0');
+        })
+            .join(''));
+}
+
+```
+:::
+## shrinkHex 
+将6(8)位16进制色值转为3(4)位
+
+#### 类型说明
+::: info
+`function shrinkHex(hex: string): string;`
+:::
+#### 参数
+- hex 字符串
+#### 返回
+- `string`
+::: tip
+3位hex
+:::
+#### 异常
+::: danger
+无法识别正确的hex hex参数不是正确的hex时触发
+:::
+#### 示例 
+```ts
+shrinkHex('#0033ff') // => '#03f'
+```
+// 无法转化的原样输出
+```ts
+shrinkHex('#0037ff') // => '#0037ff'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isHex from "@/color/isHex"
+export default function shrinkHex(hex: string): string {
+  if (!isHex(hex)) throw '无法识别正确的hex'
+  if (hex.length < 6) return hex
+  const _hex = hex.substring(1).match(/[0-9a-f]{2}/gi) || []
+  const isTrue = _hex.every(item => item[0] == item[1])
+  return isTrue ? '#' + _hex.map(item => item[0]).join('') : hex
+}
+```
+
+```Js [JS版本]
+import isHex from "@/color/isHex";
+export default function shrinkHex(hex) {
+    if (!isHex(hex))
+        throw '无法识别正确的hex';
+    if (hex.length < 6)
+        return hex;
+    const _hex = hex.substring(1).match(/[0-9a-f]{2}/gi) || [];
+    const isTrue = _hex.every(item => item[0] == item[1]);
+    return isTrue ? '#' + _hex.map(item => item[0]).join('') : hex;
+}
+
+```
+:::
 ## 工具Util
-## typeOf :tada: :100:
+## typeOf 
 获取数据类型
 
 #### 类型说明
 ::: info
-`typeOf(value: any): string;`
+`function typeOf(value: any): string;`
 :::
 #### 参数
 - value 任意值
@@ -395,24 +787,499 @@ typeOf({}) => 'Object'
 ```ts
 typeOf([]) => 'Array'
 ```
-## version :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function typeOf(value: any): string {
+  return Object.prototype.toString.call(value).slice(8, -1)
+}
+```
+
+```Js [JS版本]
+export default function typeOf(value) {
+    return Object.prototype.toString.call(value).slice(8, -1);
+}
+
+```
+:::
+## version 
 获取版本号
 
 #### 类型说明
 ::: info
-`version(): string;`
+`function version(): string;`
 :::
 #### 返回
 - `string`
 ::: tip
 版本号
 :::
-## scrollTo :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import { version as ver } from '../../package.json'
+export default function version(): string {
+  return ver
+}
+```
+
+```Js [JS版本]
+import { version as ver } from '../../package.json';
+export default function version() {
+    return ver;
+}
+
+```
+:::
+## base64ToBlob 
+base64转blob
+
+#### 类型说明
+::: info
+`function base64ToBlob(base64: string, type?: string): Blob;`
+:::
+#### 参数
+- base64 base64
+- type 文件类型
+#### 返回
+- `Blob`
+::: tip
+Blob
+:::
+#### 示例 
+```ts
+base64ToBlob()
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function base64ToBlob(base64: string, type?: string): Blob {
+  // 'image/png'
+  const base64Str = window.atob(base64.replace(/data:([\s\S]+);base64,/, ''))
+  const base64Type = type || base64.match(/data:([\s\S]+);base64,/)?.[1] || 'text/plain'
+  let n = base64Str.length
+  const u8arr = new Uint8Array(n)
+  while (n--) u8arr[n] = base64Str.charCodeAt(n)
+  return new Blob([u8arr], { type: base64Type })
+}
+```
+
+```Js [JS版本]
+export default function base64ToBlob(base64, type) {
+    // 'image/png'
+    const base64Str = window.atob(base64.replace(/data:([\s\S]+);base64,/, ''));
+    const base64Type = type || base64.match(/data:([\s\S]+);base64,/)?.[1] || 'text/plain';
+    let n = base64Str.length;
+    const u8arr = new Uint8Array(n);
+    while (n--)
+        u8arr[n] = base64Str.charCodeAt(n);
+    return new Blob([u8arr], { type: base64Type });
+}
+
+```
+:::
+## copy 
+复制文本内容
+
+优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
+
+#### 类型说明
+::: info
+`function copy(value: string): Promise<void>;`
+:::
+#### 参数
+- value 需要复制的字符串
+#### 返回
+- `Promise<void>`
+::: tip
+Promise
+:::
+#### 示例 
+```ts
+await copy('hello')
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function copy(value: string) {
+  return new Promise<void>((resolve, reject) => {
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(value)
+        .then(() => resolve())
+        .catch(() => {
+          execCommandCopy(value, resolve, reject)
+        })
+    } else {
+      execCommandCopy(value, resolve, reject)
+    }
+  })
+  function execCommandCopy(
+    code: string,
+    resolve: (value: void | PromiseLike<void>) => void,
+    reject: (reason?: any) => void
+  ) {
+    const textarea = document.createElement('textarea')
+    document.body.appendChild(textarea)
+    textarea.setAttribute('readonly', 'readonly')
+    textarea.innerHTML = code
+    textarea.select()
+    textarea.setSelectionRange(0, textarea.innerHTML.length)
+    const isc = document.execCommand('copy')
+    textarea.remove()
+    isc ? resolve() : reject('execCommand error')
+  }
+}
+```
+
+```Js [JS版本]
+export default function copy(value) {
+    return new Promise((resolve, reject) => {
+        if (navigator.clipboard) {
+            navigator.clipboard
+                .writeText(value)
+                .then(() => resolve())
+                .catch(() => {
+                execCommandCopy(value, resolve, reject);
+            });
+        }
+        else {
+            execCommandCopy(value, resolve, reject);
+        }
+    });
+    function execCommandCopy(code, resolve, reject) {
+        const textarea = document.createElement('textarea');
+        document.body.appendChild(textarea);
+        textarea.setAttribute('readonly', 'readonly');
+        textarea.innerHTML = code;
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.innerHTML.length);
+        const isc = document.execCommand('copy');
+        textarea.remove();
+        isc ? resolve() : reject('execCommand error');
+    }
+}
+
+```
+:::
+## deepClone 
+深度复制
+
+#### 类型说明
+::: info
+`function deepClone<T extends Array<T> | any>(source: T): T;`
+:::
+#### 参数
+- origin 对象或者数组
+#### 返回
+- `T`
+::: tip
+深度复制后的对象或者数组
+:::
+#### 示例 
+```ts
+deepClone([1,23, [1]]) // => [1,23, [1]]
+```
+```ts
+deepClone({a: [1], b: () => {}}) // => {a: [1], b: () => {}}
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function deepClone<T extends Array<T> | any>(source: T): T {
+  if (typeof source == 'object') {
+    const cloneTarget: T = (Array.isArray(source) ? [] : {}) as T
+    for (const key in source) {
+      cloneTarget[key] = deepClone(source[key])
+    }
+    return cloneTarget
+  } else {
+    return source
+  }
+}
+```
+
+```Js [JS版本]
+export default function deepClone(source) {
+    if (typeof source == 'object') {
+        const cloneTarget = (Array.isArray(source) ? [] : {});
+        for (const key in source) {
+            cloneTarget[key] = deepClone(source[key]);
+        }
+        return cloneTarget;
+    }
+    else {
+        return source;
+    }
+}
+
+```
+:::
+## downloadFile 
+文件下载
+
+#### 类型说明
+::: info
+`function downloadFile(name: string, blob: Blob): void;`
+:::
+#### 参数
+- name 文件名
+- blob 文件blob数据
+#### 示例 
+```ts
+const res = await fetch('https://a.b.com/').then(res => res.blob())
+downloadFile('a.jpg', res)
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function downloadFile(name: string, blob: Blob): void {
+  const a = document.createElement('a')
+  const url = window.URL.createObjectURL(blob)
+  // 默认隐藏
+  a.style.display = 'none'
+  a.href = url
+  a.download = name
+  // 添加到 body 标签中
+  document.body.appendChild(a)
+  a.click()
+  window.URL.revokeObjectURL(url)
+  // 下载完成移除 a 标签
+  a.remove()
+}
+```
+
+```Js [JS版本]
+export default function downloadFile(name, blob) {
+    const a = document.createElement('a');
+    const url = window.URL.createObjectURL(blob);
+    // 默认隐藏
+    a.style.display = 'none';
+    a.href = url;
+    a.download = name;
+    // 添加到 body 标签中
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    // 下载完成移除 a 标签
+    a.remove();
+}
+
+```
+:::
+## gbkToUtf8 
+gbk 转 utf-8
+
+#### 类型说明
+::: info
+`function gbkToUtf8(value: ArrayBuffer): object | string;`
+:::
+#### 参数
+- value ArrayBuffer
+#### 返回
+- `object | string`
+::: tip
+可以被JSON.parse转化时返回js对象，否则返回字符串
+:::
+#### 示例 
+```ts
+const res = await fetch('https://a.b.com/').then(res => res.arrayBuffer())
+gbkToUtf8(res)
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function gbkToUtf8(value: ArrayBuffer): object | string {
+  try {
+    return JSON.parse(new TextDecoder('utf-8').decode(value))
+  } catch (err) {
+    return new TextDecoder('utf-8').decode(value)
+  }
+}
+```
+
+```Js [JS版本]
+export default function gbkToUtf8(value) {
+    try {
+        return JSON.parse(new TextDecoder('utf-8').decode(value));
+    }
+    catch (err) {
+        return new TextDecoder('utf-8').decode(value);
+    }
+}
+
+```
+:::
+## getUUID 
+获取uuid
+
+#### 类型说明
+::: info
+`function getUUID(): string;`
+:::
+#### 返回
+- `string`
+::: tip
+uuid
+:::
+#### 示例 
+符合 RFC4122 版本 4 的 UUID。
+```ts
+getUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function getUUID(): string {
+  const ysValue = String(1e7) + -1e3 + -4e3 + -8e3 + -1e11
+  return ysValue.replace(/[018]/g, c =>
+    (Number(c) ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (Number(c) / 4)))).toString(16)
+  )
+}
+```
+
+```Js [JS版本]
+export default function getUUID() {
+    const ysValue = String(1e7) + -1e3 + -4e3 + -8e3 + -1e11;
+    return ysValue.replace(/[018]/g, c => (Number(c) ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (Number(c) / 4)))).toString(16));
+}
+
+```
+:::
+## phoneEncrypt 
+对手机号进行加密处理
+
+#### 类型说明
+::: info
+`function phoneEncrypt(value: string | number): string;`
+:::
+#### 参数
+- value 手机号：支持字符串或者数字
+#### 返回
+- `string`
+::: tip
+字符串 返回经过加密后的字符串
+:::
+#### 异常
+::: danger
+异常 手机号格式不正确
+:::
+#### 示例 
+```ts
+phoneEncrypt(13300001111) => '1331111'
+```
+```ts
+phoneEncrypt('13300001111') => '1331111'
+```
+```ts
+phoneEncrypt('1330000') => throw '手机号格式不正确'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import mask from "@/string/mask"
+import isPhone from "@/verify/isPhone"
+export default function phoneEncrypt(value: string | number): string {
+  if (!isPhone(value)) throw '手机号格式不正确'
+  if (typeof value === 'number') value = value.toString()
+  return mask(value, 3, 4)
+}
+```
+
+```Js [JS版本]
+import mask from "@/string/mask";
+import isPhone from "@/verify/isPhone";
+export default function phoneEncrypt(value) {
+    if (!isPhone(value))
+        throw '手机号格式不正确';
+    if (typeof value === 'number')
+        value = value.toString();
+    return mask(value, 3, 4);
+}
+
+```
+:::
+## random 
+均衡获取指定范围的随机整数
+
+返回一个min 和 max之间的随机整数。如果你没有参数，那么将返回0和1之间的整数。如果你只传递一个参数，那么将返回0和这个参数之间的整数。
+
+#### 类型说明
+::: info
+`function random(min?: number, max?: number): number;`
+:::
+#### 参数
+- min 范围最小整数
+- max 范围最大整数
+#### 返回
+- `number`
+::: tip
+随机整数
+:::
+#### 示例 
+均衡获取0或者1的数
+```ts
+random()
+```
+均衡获取0或者5的数
+```ts
+random(5)
+```
+均衡获取1或者10的数
+```ts
+random(1, 10)
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isNumber from "@/verify/isNumber"
+export default function random(min = 0, max?: number): number {
+  if (!isNumber(min)) throw `min 必须整数`
+  if (max && !isNumber(max)) throw `max 必须整数`
+  if (min == null) {
+    min = 0
+    max = max || 1
+  } else if (max == null) {
+    max = min
+    min = 0
+  }
+  return Math.round(Math.random() * (max - min) + min)
+}
+```
+
+```Js [JS版本]
+import isNumber from "@/verify/isNumber";
+export default function random(min = 0, max) {
+    if (!isNumber(min))
+        throw `min 必须整数`;
+    if (max && !isNumber(max))
+        throw `max 必须整数`;
+    if (min == null) {
+        min = 0;
+        max = max || 1;
+    }
+    else if (max == null) {
+        max = min;
+        min = 0;
+    }
+    return Math.round(Math.random() * (max - min) + min);
+}
+
+```
+:::
+## scrollTo 
 滚动至···
 
 #### 类型说明
 ::: info
-`scrollTo(option?: {
+`function scrollTo(option?: {
     rate?: number;
     num?: number;
     direction?: 'top' | 'left';
@@ -447,204 +1314,102 @@ scrollTo({dom: document.querySelector('.box')})
 ```ts
 scrollTo({num: 100, dom: document.querySelector('.box')})
 ```
-## random :tada: :100:
-均衡获取指定范围的随机整数
+#### 源码
+::: code-group
+```Ts [TS版本]
 
-返回一个min 和 max之间的随机整数。如果你没有参数，那么将返回0和1之间的整数。如果你只传递一个参数，那么将返回0和这个参数之间的整数。
+export default function scrollTo(
+  option: { rate?: number; num?: number; direction?: 'top' | 'left'; dom?: HTMLElement } = {},
+  callback?: () => void
+): void {
+  let animat = 0
+  const { rate = 4, num = 0, direction = 'top', dom = document.scrollingElement } = option
+  const directions = { top: 'scrollTop', left: 'scrollLeft' }
+  let scrollVal = (dom as Element)[directions[direction] as 'scrollTop']
+  const animatRunFun = function () {
+    scrollVal = scrollVal + (num - scrollVal) / rate
+    // 临界判断，终止动画
+    if (Math.abs(scrollVal - num) <= 1) {
+      ;(dom as Element)[directions[direction] as 'scrollTop'] = num
+      cancelAnimationFrame(animat)
+      callback && callback()
+      return
+    }
+    ;(dom as Element)[directions[direction] as 'scrollTop'] = scrollVal
+    animat = requestAnimationFrame(animatRunFun)
+  }
+  animatRunFun()
+}
+```
 
-#### 类型说明
-::: info
-`random(min?: number, max?: number): number;`
-:::
-#### 参数
-- min 范围最小整数
-- max 范围最大整数
-#### 返回
-- `number`
-::: tip
-随机整数
-:::
-#### 示例 
-均衡获取0或者1的数
-```ts
-random()
-```
-均衡获取0或者5的数
-```ts
-random(5)
-```
-均衡获取1或者10的数
-```ts
-random(1, 10)
-```
-## getUUID :tada: :100:
-获取uuid
+```Js [JS版本]
+export default function scrollTo(option = {}, callback) {
+    let animat = 0;
+    const { rate = 4, num = 0, direction = 'top', dom = document.scrollingElement } = option;
+    const directions = { top: 'scrollTop', left: 'scrollLeft' };
+    let scrollVal = dom[directions[direction]];
+    const animatRunFun = function () {
+        scrollVal = scrollVal + (num - scrollVal) / rate;
+        // 临界判断，终止动画
+        if (Math.abs(scrollVal - num) <= 1) {
+            ;
+            dom[directions[direction]] = num;
+            cancelAnimationFrame(animat);
+            callback && callback();
+            return;
+        }
+        ;
+        dom[directions[direction]] = scrollVal;
+        animat = requestAnimationFrame(animatRunFun);
+    };
+    animatRunFun();
+}
 
-#### 类型说明
-::: info
-`getUUID(): string;`
-:::
-#### 返回
-- `string`
-::: tip
-uuid
-:::
-#### 示例 
-符合 RFC4122 版本 4 的 UUID。
-```ts
-getUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'
 ```
-## gbkToUtf8 :tada: :100:
-gbk 转 utf-8
-
-#### 类型说明
-::: info
-`gbkToUtf8(value: ArrayBuffer): object | string;`
 :::
-#### 参数
-- value ArrayBuffer
-#### 返回
-- `object | string`
-::: tip
-可以被JSON.parse转化时返回js对象，否则返回字符串
-:::
-#### 示例 
-```ts
-const res = await fetch('https://a.b.com/').then(res => res.arrayBuffer())
-gbkToUtf8(res)
-```
-## phoneEncrypt :tada: :100:
-对手机号进行加密处理
+## isBasicType 
+是否是基本类型
 
 #### 类型说明
 ::: info
-`phoneEncrypt(value: string | number): string;`
+`function isBasicType(value: any): boolean;`
 :::
-#### 参数
-- value 手机号：支持字符串或者数字
-#### 返回
-- `string`
-::: tip
-字符串 返回经过加密后的字符串
-:::
-#### 异常
-::: danger
-异常 手机号格式不正确
-:::
-#### 示例 
-```ts
-phoneEncrypt(13300001111) => '1331111'
-```
-```ts
-phoneEncrypt('13300001111') => '1331111'
-```
-```ts
-phoneEncrypt('1330000') => throw '手机号格式不正确'
-```
-## downloadFile :tada: :100:
-文件下载
-
-#### 类型说明
-::: info
-`downloadFile(name: string, blob: Blob): void;`
-:::
-#### 参数
-- name 文件名
-- blob 文件blob数据
-#### 示例 
-```ts
-const res = await fetch('https://a.b.com/').then(res => res.blob())
-downloadFile('a.jpg', res)
-```
-## deepClone :tada: :100:
-深度复制
-
-#### 类型说明
-::: info
-`deepClone<T extends Array<T> | any>(source: T): T;`
-:::
-#### 参数
-- origin 对象或者数组
-#### 返回
-- `T`
-::: tip
-深度复制后的对象或者数组
-:::
-#### 示例 
-```ts
-deepClone([1,23, [1]]) // => [1,23, [1]]
-```
-```ts
-deepClone({a: [1], b: () => {}}) // => {a: [1], b: () => {}}
-```
-## copy :tada: :100:
-复制文本内容
-
-优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
-
-#### 类型说明
-::: info
-`copy(value: string): Promise<void>;`
-:::
-#### 参数
-- value 需要复制的字符串
-#### 返回
-- `Promise<void>`
-::: tip
-Promise
-:::
-#### 示例 
-```ts
-await copy('hello')
-```
-## base64ToBlob :tada: :100:
-base64转blob
-
-#### 类型说明
-::: info
-`base64ToBlob(base64: string, type?: string): Blob;`
-:::
-#### 参数
-- base64 base64
-- type 文件类型
-#### 返回
-- `Blob`
-::: tip
-Blob
-:::
-#### 示例 
-```ts
-base64ToBlob()
-```
-## isPhone :tada: :100:
-判断是否为手机号
-
-#### 类型说明
-::: info
-`isPhone(value: string | number): boolean;`
-:::
-#### 参数
-- value 任意值
 #### 返回
 - `boolean`
 ::: tip
 true | false
 :::
 #### 示例 
-验证通过
 ```ts
-isPhone(13302101452) => true
+isBasicType('12') // => true
 ```
-验证失败
 ```ts
-isPhone(1330210152) => false
+isBasicType([]) // => false
 ```
-## isBoolean :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isBasicType(value: any): boolean {
+  return ['String', 'Number', 'Boolean', 'Null', 'Undefined'].includes(typeOf(value))
+}
+
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isBasicType(value) {
+    return ['String', 'Number', 'Boolean', 'Null', 'Undefined'].includes(typeOf(value));
+}
+
+```
+:::
+## isBoolean 
 判断是否为Boolean
 
 #### 类型说明
 ::: info
-`isBoolean(value: any): boolean;`
+`function isBoolean(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -663,12 +1428,190 @@ isBoolean(false) => true
 ```ts
 isBoolean(123) => false
 ```
-## isPromise :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isBoolean(value: any): boolean {
+  return typeOf(value) === 'Boolean'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isBoolean(value) {
+    return typeOf(value) === 'Boolean';
+}
+
+```
+:::
+## isIncludeChinese 
+检查字符串是否包含中文
+
+#### 类型说明
+::: info
+`function isIncludeChinese(value: string): boolean;`
+:::
+#### 参数
+- value 字符串
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+```ts
+isIncludeChinese() // => false
+```
+```ts
+isIncludeChinese('你好') // => true
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isIncludeChinese(value: string): boolean {
+  return /\p{sc=Han}/gu.test(value)
+}
+```
+
+```Js [JS版本]
+export default function isIncludeChinese(value) {
+    return /\p{sc=Han}/gu.test(value);
+}
+
+```
+:::
+## isJsonString 
+是否是json字符串
+
+#### 类型说明
+::: info
+`function isJsonString(str: string): boolean;`
+:::
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+```ts
+isJsonString('{"a":1}') // => true
+```
+```ts
+isJsonString(1) // => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isJsonString(str: string) {
+  try {
+    JSON.parse(str)
+    return true
+  } catch (err) {
+    return false
+  }
+}
+```
+
+```Js [JS版本]
+export default function isJsonString(str) {
+    try {
+        JSON.parse(str);
+        return true;
+    }
+    catch (err) {
+        return false;
+    }
+}
+
+```
+:::
+## isNullOrUndefined 
+是否是null|undefined
+
+#### 类型说明
+::: info
+`function isNullOrUndefined(value: any): boolean;`
+:::
+#### 参数
+- value 任意值
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+```ts
+isNullOrUndefined(null) // => true
+isNullOrUndefined(undefined) // => true
+```
+```ts
+isNullOrUndefined(2) // => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isNullOrUndefined(value: any): boolean {
+  return ['Null', 'Undefined'].includes(typeOf(value))
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isNullOrUndefined(value) {
+    return ['Null', 'Undefined'].includes(typeOf(value));
+}
+
+```
+:::
+## isPhone 
+判断是否为手机号
+
+#### 类型说明
+::: info
+`function isPhone(value: string | number): boolean;`
+:::
+#### 参数
+- value 任意值
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+验证通过
+```ts
+isPhone(13302101452) => true
+```
+验证失败
+```ts
+isPhone(1330210152) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isPhone(value: string | number): boolean {
+  return /^1[3-9][\d]{9}$/.test(value.toString())
+}
+```
+
+```Js [JS版本]
+export default function isPhone(value) {
+    return /^1[3-9][\d]{9}$/.test(value.toString());
+}
+
+```
+:::
+## isPromise 
 判断是否为Promise
 
 #### 类型说明
 ::: info
-`isPromise(value: any): boolean;`
+`function isPromise(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -690,94 +1633,32 @@ isPromise(Promise) => false
 ```ts
 isPromise(Promise) => false
 ```
-## isIncludeChinese :tada: :100:
-检查字符串是否包含中文
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+import isFunction from '@/verify/isFunction'
+export default function isPromise(value: any): boolean {
+  return typeOf(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch)
+}
+```
 
-#### 类型说明
-::: info
-`isIncludeChinese(value: string): boolean;`
-:::
-#### 参数
-- value 字符串
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-```ts
-isIncludeChinese() // => false
-```
-```ts
-isIncludeChinese('你好') // => true
-```
-## isNullOrUndefined :tada: :100:
-是否是null|undefined
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+import isFunction from '@/verify/isFunction';
+export default function isPromise(value) {
+    return typeOf(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch);
+}
 
-#### 类型说明
-::: info
-`isNullOrUndefined(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-```ts
-isNullOrUndefined(null) // => true
-isNullOrUndefined(undefined) // => true
 ```
-```ts
-isNullOrUndefined(2) // => false
-```
-## isJsonString :tada: :100:
-是否是json字符串
-
-#### 类型说明
-::: info
-`isJsonString(str: string): boolean;`
 :::
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-```ts
-isJsonString('{"a":1}') // => true
-```
-```ts
-isJsonString(1) // => false
-```
-## isBasicType :tada: :100:
-是否是基本类型
-
-#### 类型说明
-::: info
-`isBasicType(value: any): boolean;`
-:::
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-```ts
-isBasicType('12') // => true
-```
-```ts
-isBasicType([]) // => false
-```
 ## 时间Date
-## days :tada: :100:
+## days 
 获取时间对象
 
 #### 类型说明
 ::: info
-`days(time?: number | string | Date | (string | number)[]): Date;`
+`function days(time?: number | string | Date | (string | number)[]): Date;`
 :::
 #### 参数
 - time 时间戳|格式化后的时间字符|时间对象|可转化的时间数组
@@ -837,48 +1718,43 @@ days('') == days()
 ```ts
 days('aaa') // throw 'Invalid Date'
 ```
-## timeStamp :tada: :100:
-获取时间戳
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isArray from '@/verify/isArray'
+export default function days(time: number | string | Date | (string | number)[] = new Date()): Date {
+  const _time =
+    time || time === 0
+      ? isArray(time)
+        ? new Date(...(time as []))
+        : new Date(time as number | string | Date)
+      : new Date()
+  if (_time.toString() === 'Invalid Date') throw 'Invalid Date'
+  return _time
+}
+```
 
-#### 类型说明
-::: info
-`timeStamp(time?: number | string | Date | (string | number)[], unit?: string): number;`
+```Js [JS版本]
+import isArray from '@/verify/isArray';
+export default function days(time = new Date()) {
+    const _time = time || time === 0
+        ? isArray(time)
+            ? new Date(...time)
+            : new Date(time)
+        : new Date();
+    if (_time.toString() === 'Invalid Date')
+        throw 'Invalid Date';
+    return _time;
+}
+
+```
 :::
-#### 参数
-- time 时间戳|格式化后的时间字符|时间对象
-- unit 返回格式,支持毫秒或者秒,默认毫秒
-#### 返回
-- `number`
-::: tip
-时间戳
-:::
-#### 异常
-::: danger
-Invalid Date 参数time无法转为Date时触发
-:::
-#### 示例 
-获取当前的时间戳
-```ts
-timeStamp() // 1659334598129
-```
-获取当前的时间戳，单位秒(s)
-```ts
-timeStamp('', 's') // 1660700890
-```
-获取 2022-10-12 的时间戳
-```ts
-timeStamp('2022-10-12') // 1665504000000
-```
-获取 2022-10-12 的时间戳, 以秒返回
-```ts
-timeStamp('2022-10-12', 's') // 1665504000
-```
-## formats :tada: :100:
+## formats 
 获取指定格式的时间
 
 #### 类型说明
 ::: info
-`formats(time?: number | string | Date | (string | number)[], format?: string): string;`
+`function formats(time?: number | string | Date | (string | number)[], format?: string): string;`
 :::
 #### 参数
 - value 时间对象或者时间戳
@@ -903,78 +1779,84 @@ formats(Date.now(), 'YYYY年MM月') // '2022年07月'
 const date = new Date('2022/10/10 10:00:00')
 formats(date, 'YYYY-MM-DD') // '2022-10-10'
 ```
-## getMonthDays :tada: :100:
-获取指定月的天数
+#### 源码
+::: code-group
+```Ts [TS版本]
+import days from '@/date/days'
+import padInt from '@/number/padInt'
+export default function formats(
+  time: number | string | Date | (string | number)[] = new Date(),
+  format = 'YYYY-MM-DD hh:mm:ss'
+): string {
+  const date = days(time)
+  const YYYY = padInt(date.getFullYear())
+  const YY = YYYY.toString().substring(2)
+  const MM = padInt(date.getMonth() + 1)
+  const M = padInt(date.getMonth() + 1, 1)
+  const DD = padInt(date.getDate())
+  const D = padInt(date.getDate(), 1)
+  const hh = padInt(date.getHours())
+  const h = padInt(date.getHours(), 1)
+  const mm = padInt(date.getMinutes())
+  const m = padInt(date.getMinutes(), 1)
+  const ss = padInt(date.getSeconds())
+  const s = padInt(date.getSeconds(), 1)
+  return format
+    .replace('YYYY', YYYY)
+    .replace('YY', YY)
+    .replace('MM', MM)
+    .replace('M', M)
+    .replace('DD', DD)
+    .replace('D', D)
+    .replace('hh', hh)
+    .replace('h', h)
+    .replace('mm', mm)
+    .replace('m', m)
+    .replace('ss', ss)
+    .replace('s', s)
+}
+```
 
-#### 类型说明
-::: info
-`getMonthDays(year?: number, month?: number): number;`
-:::
-#### 参数
-- year 年份, 默认当前年
-- month 月份, 默认当前月
-#### 返回
-- `number`
-::: tip
-天数
-:::
-#### 异常
-::: danger
-Invalid Date 传入值无法转为Date时触发
-:::
-#### 示例 
-获取当前月份的天数
-```ts
-getMonthDays() // => 31
-```
-获取指定月份的天数
-```ts
-getMonthDays(2022, 1) // => 31
-```
-## howLongAgo :tada: :100:
-获取距离指定时间之前
+```Js [JS版本]
+import days from '@/date/days';
+import padInt from '@/number/padInt';
+export default function formats(time = new Date(), format = 'YYYY-MM-DD hh:mm:ss') {
+    const date = days(time);
+    const YYYY = padInt(date.getFullYear());
+    const YY = YYYY.toString().substring(2);
+    const MM = padInt(date.getMonth() + 1);
+    const M = padInt(date.getMonth() + 1, 1);
+    const DD = padInt(date.getDate());
+    const D = padInt(date.getDate(), 1);
+    const hh = padInt(date.getHours());
+    const h = padInt(date.getHours(), 1);
+    const mm = padInt(date.getMinutes());
+    const m = padInt(date.getMinutes(), 1);
+    const ss = padInt(date.getSeconds());
+    const s = padInt(date.getSeconds(), 1);
+    return format
+        .replace('YYYY', YYYY)
+        .replace('YY', YY)
+        .replace('MM', MM)
+        .replace('M', M)
+        .replace('DD', DD)
+        .replace('D', D)
+        .replace('hh', hh)
+        .replace('h', h)
+        .replace('mm', mm)
+        .replace('m', m)
+        .replace('ss', ss)
+        .replace('s', s);
+}
 
-#### 类型说明
-::: info
-`howLongAgo(endTime?: number | string | Date | (string | number)[], startTime?: number | string | Date | (string | number)[]): string;`
-:::
-#### 参数
-- endTime 目标时间戳或者格式化的时间字符
-- startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
-#### 返回
-- `string`
-::: tip
-年|月|天|小时|分钟|秒 之前
-:::
-#### 异常
-::: danger
-无法转换为时间 传入值无法转为Date时触发
-:::
-::: danger
-只接受 number | string 传入值不是 number | string时触发
-:::
-#### 示例 
-```ts
-howLongAgo(1660644035390) // => '4分钟前'
 ```
-```ts
-howLongAgo(1660644418571) // => '5秒前'
-```
-支持格式化的时间字符
-```ts
-howLongAgo('2022-08-17 09: 12: 00') // => '10分钟前'
-```
-指定起始时间
-```ts
-howLongAgo('2022-08-17 09: 12: 00', '2022-08-17 09: 15: 00')
-// => '3分钟前'
-```
-## getDataSection :tada: :100:
+:::
+## getDataSection 
 获取时间区间
 
 #### 类型说明
 ::: info
-`getDataSection(day?: number, option?: {
+`function getDataSection(day?: number, option?: {
     start?: number | string | Date | (string | number)[];
     format?: string;
     timestamp?: boolean;
@@ -1023,12 +1905,308 @@ getDataSection(30) // => ['2022-07-28', '2022-08-26']
 ```ts
 getDataSection(7, {start: '2022-08-17'}) // => ['2022-08-11', '2022-08-17']
 ```
-## isDate :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import days from '@/date/days'
+import isBoolean from '@/verify/isBoolean'
+import isNumber from '@/verify/isNumber'
+import isObject from '@/verify/isObject'
+import isString from '@/verify/isString'
+import formats from '@/date/formats'
+import timeStamp from '@/date/timeStamp'
+export default function getDataSection(
+  day = 1,
+  option: {
+    start?: number | string | Date | (string | number)[]
+    format?: string
+    timestamp?: boolean
+  } = { start: new Date(), format: 'YYYY-MM-DD', timestamp: false }
+): (number | string)[] {
+  if (!isNumber(day)) throw 'day 必须是数字'
+  if (!isObject(option)) throw 'option 必须是对象'
+  const { start = new Date(), format = 'YYYY-MM-DD', timestamp = false } = option
+  if (!isString(format)) throw 'option.format 必须是字符串'
+  if (!isBoolean(timestamp)) throw 'option.timestamp 必须是布尔值'
+  const _startTime = days(start).getTime()
+  const _endTime = _startTime - ((day || 1) - 1) * 8.64e7
+  if (timestamp) return [timeStamp(_endTime, format), timeStamp(_startTime, format)]
+  return [formats(_endTime, format), formats(_startTime, format)]
+}
+```
+
+```Js [JS版本]
+import days from '@/date/days';
+import isBoolean from '@/verify/isBoolean';
+import isNumber from '@/verify/isNumber';
+import isObject from '@/verify/isObject';
+import isString from '@/verify/isString';
+import formats from '@/date/formats';
+import timeStamp from '@/date/timeStamp';
+export default function getDataSection(day = 1, option = { start: new Date(), format: 'YYYY-MM-DD', timestamp: false }) {
+    if (!isNumber(day))
+        throw 'day 必须是数字';
+    if (!isObject(option))
+        throw 'option 必须是对象';
+    const { start = new Date(), format = 'YYYY-MM-DD', timestamp = false } = option;
+    if (!isString(format))
+        throw 'option.format 必须是字符串';
+    if (!isBoolean(timestamp))
+        throw 'option.timestamp 必须是布尔值';
+    const _startTime = days(start).getTime();
+    const _endTime = _startTime - ((day || 1) - 1) * 8.64e7;
+    if (timestamp)
+        return [timeStamp(_endTime, format), timeStamp(_startTime, format)];
+    return [formats(_endTime, format), formats(_startTime, format)];
+}
+
+```
+:::
+## getMonthDays 
+获取指定月的天数
+
+#### 类型说明
+::: info
+`function getMonthDays(year?: number, month?: number): number;`
+:::
+#### 参数
+- year 年份, 默认当前年
+- month 月份, 默认当前月
+#### 返回
+- `number`
+::: tip
+天数
+:::
+#### 异常
+::: danger
+Invalid Date 传入值无法转为Date时触发
+:::
+#### 示例 
+获取当前月份的天数
+```ts
+getMonthDays() // => 31
+```
+获取指定月份的天数
+```ts
+getMonthDays(2022, 1) // => 31
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function getMonthDays(year?: number, month?: number): number {
+  const _year = year ? year : new Date().getFullYear()
+  const _month = month ? month : new Date().getMonth() + 1
+  const days = new Date(_year, _month, 0)
+  if (isNaN(days.getTime())) throw 'Invalid Date'
+  return days.getDate()
+}
+```
+
+```Js [JS版本]
+export default function getMonthDays(year, month) {
+    const _year = year ? year : new Date().getFullYear();
+    const _month = month ? month : new Date().getMonth() + 1;
+    const days = new Date(_year, _month, 0);
+    if (isNaN(days.getTime()))
+        throw 'Invalid Date';
+    return days.getDate();
+}
+
+```
+:::
+## howLongAgo 
+获取距离指定时间之前
+
+#### 类型说明
+::: info
+`function howLongAgo(endTime?: number | string | Date | (string | number)[], startTime?: number | string | Date | (string | number)[]): string;`
+:::
+#### 参数
+- endTime 目标时间戳或者格式化的时间字符
+- startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
+#### 返回
+- `string`
+::: tip
+年|月|天|小时|分钟|秒 之前
+:::
+#### 异常
+::: danger
+无法转换为时间 传入值无法转为Date时触发
+:::
+::: danger
+只接受 number | string 传入值不是 number | string时触发
+:::
+#### 示例 
+```ts
+howLongAgo(1660644035390) // => '4分钟前'
+```
+```ts
+howLongAgo(1660644418571) // => '5秒前'
+```
+支持格式化的时间字符
+```ts
+howLongAgo('2022-08-17 09: 12: 00') // => '10分钟前'
+```
+指定起始时间
+```ts
+howLongAgo('2022-08-17 09: 12: 00', '2022-08-17 09: 15: 00')
+// => '3分钟前'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import days from '@/date/days'
+export default function howLongAgo(
+  endTime: number | string | Date | (string | number)[] = new Date(),
+  startTime: number | string | Date | (string | number)[] = new Date()
+) {
+  const _endTime = days(endTime).getTime()
+  const _startTime = days(startTime).getTime()
+  const date = _startTime - _endTime
+  if (date <= 0) throw 'startTime 必须大于 endTime'
+  const dater = [
+    {
+      num: 31536000000,
+      lab: '年'
+    },
+    {
+      num: 2592000000,
+      lab: '月'
+    },
+    {
+      num: 86400000,
+      lab: '天'
+    },
+    {
+      num: 3600000,
+      lab: '小时'
+    },
+    {
+      num: 60000,
+      lab: '分钟'
+    },
+    {
+      num: 1000,
+      lab: '秒'
+    }
+  ]
+  for (let i = 0; i < dater.length; i++) {
+    const dates = Math.floor(date / dater[i].num)
+    if (dates >= 1) {
+      return `${dates}${dater[i].lab}前`
+    }
+  }
+  return ''
+}
+```
+
+```Js [JS版本]
+import days from '@/date/days';
+export default function howLongAgo(endTime = new Date(), startTime = new Date()) {
+    const _endTime = days(endTime).getTime();
+    const _startTime = days(startTime).getTime();
+    const date = _startTime - _endTime;
+    if (date <= 0)
+        throw 'startTime 必须大于 endTime';
+    const dater = [
+        {
+            num: 31536000000,
+            lab: '年'
+        },
+        {
+            num: 2592000000,
+            lab: '月'
+        },
+        {
+            num: 86400000,
+            lab: '天'
+        },
+        {
+            num: 3600000,
+            lab: '小时'
+        },
+        {
+            num: 60000,
+            lab: '分钟'
+        },
+        {
+            num: 1000,
+            lab: '秒'
+        }
+    ];
+    for (let i = 0; i < dater.length; i++) {
+        const dates = Math.floor(date / dater[i].num);
+        if (dates >= 1) {
+            return `${dates}${dater[i].lab}前`;
+        }
+    }
+    return '';
+}
+
+```
+:::
+## timeStamp 
+获取时间戳
+
+#### 类型说明
+::: info
+`function timeStamp(time?: number | string | Date | (string | number)[], unit?: string): number;`
+:::
+#### 参数
+- time 时间戳|格式化后的时间字符|时间对象
+- unit 返回格式,支持毫秒或者秒,默认毫秒
+#### 返回
+- `number`
+::: tip
+时间戳
+:::
+#### 异常
+::: danger
+Invalid Date 参数time无法转为Date时触发
+:::
+#### 示例 
+获取当前的时间戳
+```ts
+timeStamp() // 1659334598129
+```
+获取当前的时间戳，单位秒(s)
+```ts
+timeStamp('', 's') // 1660700890
+```
+获取 2022-10-12 的时间戳
+```ts
+timeStamp('2022-10-12') // 1665504000000
+```
+获取 2022-10-12 的时间戳, 以秒返回
+```ts
+timeStamp('2022-10-12', 's') // 1665504000
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import days from '@/date/days'
+export default function timeStamp(time: number | string | Date | (string | number)[] = new Date(), unit = 'ms'): number {
+  const ts = days(time).getTime()
+  return unit == 's' ? (ts / 1000) | 0 : ts
+}
+```
+
+```Js [JS版本]
+import days from '@/date/days';
+export default function timeStamp(time = new Date(), unit = 'ms') {
+    const ts = days(time).getTime();
+    return unit == 's' ? (ts / 1000) | 0 : ts;
+}
+
+```
+:::
+## isDate 
 判断是否为Date
 
 #### 类型说明
 ::: info
-`isDate(value: any): boolean;`
+`function isDate(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -1046,13 +2224,30 @@ isDate(new Date()) => true
 ```ts
 isDate(123) => false
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isDate(value: any): boolean {
+  return typeOf(value) === 'Date'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isDate(value) {
+    return typeOf(value) === 'Date';
+}
+
+```
+:::
 ## 设备Device
-## detectDeviceType :tada: :100:
+## detectDeviceType 
 获取设备类型
 
 #### 类型说明
 ::: info
-`detectDeviceType(): "Mobile" | "Desktop";`
+`function detectDeviceType(): "Mobile" | "Desktop";`
 :::
 #### 返回
 - `"Mobile" | "Desktop"`
@@ -1068,33 +2263,28 @@ detectDeviceType() // => 'Mobile'
 ```ts
 detectDeviceType() // => 'Desktop'
 ```
-## isMobile :tada: :100:
-是否是移动端
+#### 源码
+::: code-group
+```Ts [TS版本]
 
-#### 类型说明
-::: info
-`isMobile(): boolean;`
-:::
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-移动端访问
-```ts
-isMobile() // => true
+export default function detectDeviceType() {
+  return /Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
+}
 ```
-桌面端访问
-```ts
-isMobile() // => false
+
+```Js [JS版本]
+export default function detectDeviceType() {
+    return /Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+}
+
 ```
-## isAndroid :tada: :100:
+:::
+## isAndroid 
 是否是安卓系统
 
 #### 类型说明
 ::: info
-`isAndroid(): boolean;`
+`function isAndroid(): boolean;`
 :::
 #### 返回
 - `boolean`
@@ -1110,33 +2300,29 @@ isAndroid() // => true
 ```ts
 isAndroid() // => false
 ```
-## isIOS :tada: :100:
-是否是ios系统
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isMobile from '@/device/isMobile'
+export default function isAndroid() {
+  return isMobile() && /Android/i.test(navigator.userAgent)
+}
+```
 
-#### 类型说明
-::: info
-`isIOS(): boolean;`
-:::
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-ios访问
-```ts
-isIOS() // => true
+```Js [JS版本]
+import isMobile from '@/device/isMobile';
+export default function isAndroid() {
+    return isMobile() && /Android/i.test(navigator.userAgent);
+}
+
 ```
-桌面或者安卓访问
-```ts
-isIOS() // => false
-```
-## isDesktop :tada: :100:
+:::
+## isDesktop 
 是否是桌面端
 
 #### 类型说明
 ::: info
-`isDesktop(): boolean;`
+`function isDesktop(): boolean;`
 :::
 #### 返回
 - `boolean`
@@ -1152,12 +2338,29 @@ isDesktop() // => true
 ```ts
 isDesktop() // => false
 ```
-## isWeixin :tada: :100:
-是否是微信环境
+#### 源码
+::: code-group
+```Ts [TS版本]
+import detectDeviceType from '@/device/detectDeviceType'
+export default function isDesktop() {
+  return detectDeviceType() === 'Desktop'
+}
+```
+
+```Js [JS版本]
+import detectDeviceType from '@/device/detectDeviceType';
+export default function isDesktop() {
+    return detectDeviceType() === 'Desktop';
+}
+
+```
+:::
+## isIOS 
+是否是ios系统
 
 #### 类型说明
 ::: info
-`isWeixin(): boolean;`
+`function isIOS(): boolean;`
 :::
 #### 返回
 - `boolean`
@@ -1165,20 +2368,77 @@ isDesktop() // => false
 true | false
 :::
 #### 示例 
-微信中端访问
+ios访问
 ```ts
-isWeixin() // => true
+isIOS() // => true
 ```
-非微信访问
+桌面或者安卓访问
 ```ts
-isWeixin() // => false
+isIOS() // => false
 ```
-## isQQ :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isMobile from '@/device/isMobile'
+import isAndroid from '@/device/isAndroid'
+export default function isIOS() {
+  return isMobile() && !isAndroid()
+}
+```
+
+```Js [JS版本]
+import isMobile from '@/device/isMobile';
+import isAndroid from '@/device/isAndroid';
+export default function isIOS() {
+    return isMobile() && !isAndroid();
+}
+
+```
+:::
+## isMobile 
+是否是移动端
+
+#### 类型说明
+::: info
+`function isMobile(): boolean;`
+:::
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+移动端访问
+```ts
+isMobile() // => true
+```
+桌面端访问
+```ts
+isMobile() // => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import detectDeviceType from '@/device/detectDeviceType'
+export default function isMobile() {
+  return detectDeviceType() === 'Mobile'
+}
+```
+
+```Js [JS版本]
+import detectDeviceType from '@/device/detectDeviceType';
+export default function isMobile() {
+    return detectDeviceType() === 'Mobile';
+}
+
+```
+:::
+## isQQ 
 是否是QQ环境
 
 #### 类型说明
 ::: info
-`isQQ(): boolean;`
+`function isQQ(): boolean;`
 :::
 #### 返回
 - `boolean`
@@ -1194,12 +2454,65 @@ isQQ() // => true
 ```ts
 isQQ() // => false
 ```
-## isWeixinMini :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isQQ() {
+  return /QQ\//i.test(navigator.userAgent)
+}
+```
+
+```Js [JS版本]
+export default function isQQ() {
+    return /QQ\//i.test(navigator.userAgent);
+}
+
+```
+:::
+## isWeixin 
+是否是微信环境
+
+#### 类型说明
+::: info
+`function isWeixin(): boolean;`
+:::
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+微信中端访问
+```ts
+isWeixin() // => true
+```
+非微信访问
+```ts
+isWeixin() // => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isWeixin() {
+  return /MicroMessenger\//i.test(navigator.userAgent)
+}
+```
+
+```Js [JS版本]
+export default function isWeixin() {
+    return /MicroMessenger\//i.test(navigator.userAgent);
+}
+
+```
+:::
+## isWeixinMini 
 是否是微信小程序环境
 
 #### 类型说明
 ::: info
-`isWeixinMini(): boolean;`
+`function isWeixinMini(): boolean;`
 :::
 #### 返回
 - `boolean`
@@ -1215,12 +2528,28 @@ isWeixinMini() // => true
 ```ts
 isWeixinMini() // => false
 ```
-## isWin :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isWeixinMini() {
+  return /miniProgram/i.test(navigator.userAgent)
+}
+```
+
+```Js [JS版本]
+export default function isWeixinMini() {
+    return /miniProgram/i.test(navigator.userAgent);
+}
+
+```
+:::
+## isWin 
 是否是windows环境
 
 #### 类型说明
 ::: info
-`isWin(): boolean;`
+`function isWin(): boolean;`
 :::
 #### 返回
 - `boolean`
@@ -1236,13 +2565,74 @@ isWin() // => true
 ```ts
 isWin() // => false
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isWin() {
+  return /Windows/i.test(navigator.userAgent)
+}
+
+```
+
+```Js [JS版本]
+export default function isWin() {
+    return /Windows/i.test(navigator.userAgent);
+}
+
+```
+:::
 ## 浏览器Dom
-## launchFullscreen :tada: :100:
+## exitFullscreen 
+退出全屏
+
+#### 类型说明
+::: info
+`function exitFullscreen(): void;`
+:::
+#### 异常
+::: danger
+浏览器不支持全屏操作
+:::
+#### 示例 
+```ts
+exitFullscreen()
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function exitFullscreen(): void {
+  const exitFullscreen =
+    document.exitFullscreen ||
+    (document as any).msExitFullscreen ||
+    (document as any).mozCancelFullScreen ||
+    (document as any).webkitExitFullscreen
+  if (!exitFullscreen) throw '浏览器不支持全屏操作'
+  exitFullscreen()
+}
+
+```
+
+```Js [JS版本]
+export default function exitFullscreen() {
+    const exitFullscreen = document.exitFullscreen ||
+        document.msExitFullscreen ||
+        document.mozCancelFullScreen ||
+        document.webkitExitFullscreen;
+    if (!exitFullscreen)
+        throw '浏览器不支持全屏操作';
+    exitFullscreen();
+}
+
+```
+:::
+## launchFullscreen 
 指定dom节点全屏
 
 #### 类型说明
 ::: info
-`launchFullscreen(el?: HTMLElement): void;`
+`function launchFullscreen(el?: HTMLElement): void;`
 :::
 #### 参数
 - el 指定的dom节点，不指定默认指向document.body
@@ -1257,27 +2647,41 @@ launchFullscreen()
 ```ts
 upperFirst(document.querySelector('a'))
 ```
-## exitFullscreen :tada: :100:
-退出全屏
+#### 源码
+::: code-group
+```Ts [TS版本]
 
-#### 类型说明
-::: info
-`exitFullscreen(): void;`
-:::
-#### 异常
-::: danger
-浏览器不支持全屏操作
-:::
-#### 示例 
-```ts
-exitFullscreen()
+export default function launchFullscreen(el: HTMLElement = document.body): void {
+  const requestFullscreen =
+    el.requestFullscreen ||
+    (el as any).mozRequestFullscreen ||
+    (el as any).msRequestFullscreen ||
+    (el as any).webkitRequestFullscreen
+  if (!requestFullscreen) throw '浏览器不支持全屏操作'
+  requestFullscreen()
+}
+
 ```
-## isDom :tada: :100:
+
+```Js [JS版本]
+export default function launchFullscreen(el = document.body) {
+    const requestFullscreen = el.requestFullscreen ||
+        el.mozRequestFullscreen ||
+        el.msRequestFullscreen ||
+        el.webkitRequestFullscreen;
+    if (!requestFullscreen)
+        throw '浏览器不支持全屏操作';
+    requestFullscreen();
+}
+
+```
+:::
+## isDom 
 是否是dom
 
 #### 类型说明
 ::: info
-`isDom(tarage: Element): boolean;`
+`function isDom(tarage: Element): boolean;`
 :::
 #### 参数
 - tarage dom
@@ -1293,13 +2697,30 @@ isDom() // => false
 ```ts
 isDom(document.querySelector('head')) // => true
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isDom(tarage: Element): boolean {
+  return typeOf(tarage).includes('Element')
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isDom(tarage) {
+    return typeOf(tarage).includes('Element');
+}
+
+```
+:::
 ## 函数Function
-## debounce :tada: :100:
+## debounce 
 防抖
 
 #### 类型说明
 ::: info
-`debounce(func: (...params: any[]) => any, awit?: number, option?: {
+`function debounce(func: (...params: any[]) => any, awit?: number, option?: {
     leading?: boolean;
     trailing?: boolean;
 }): any;`
@@ -1340,12 +2761,116 @@ debounce(function () { ... }, 500, {trailing: true})
 ```ts
 getlist: debounce(function () { ... })
 ```
-## throttle :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isBoolean from "@/verify/isBoolean"
+import isNumber from "@/verify/isNumber"
+export default function debounce(
+  func: (...params: any[]) => any,
+  awit = 500,
+  option: { leading?: boolean; trailing?: boolean } = { leading: false, trailing: true }
+): any {
+  const { leading = false, trailing = true } = option
+  let _leading = leading
+  let timeout = 0
+  if (awit && !isNumber(awit)) throw 'awit不是number'
+  if (!isBoolean(leading)) throw 'leading不是boolean'
+  if (!isBoolean(trailing)) throw 'trailing不是boolean'
+  return function (this: unknown, ...args: any[]) {
+    clearTimeout(timeout)
+    if (_leading) {
+      func.apply(this, args)
+      _leading = false
+    }
+    timeout = setTimeout(() => {
+      _leading = leading
+      trailing && func.apply(this, args)
+    }, awit)
+  }
+}
+
+```
+
+```Js [JS版本]
+import isBoolean from "@/verify/isBoolean";
+import isNumber from "@/verify/isNumber";
+export default function debounce(func, awit = 500, option = { leading: false, trailing: true }) {
+    const { leading = false, trailing = true } = option;
+    let _leading = leading;
+    let timeout = 0;
+    if (awit && !isNumber(awit))
+        throw 'awit不是number';
+    if (!isBoolean(leading))
+        throw 'leading不是boolean';
+    if (!isBoolean(trailing))
+        throw 'trailing不是boolean';
+    return function (...args) {
+        clearTimeout(timeout);
+        if (_leading) {
+            func.apply(this, args);
+            _leading = false;
+        }
+        timeout = setTimeout(() => {
+            _leading = leading;
+            trailing && func.apply(this, args);
+        }, awit);
+    };
+}
+
+```
+:::
+## once 
+只调用一次的函数
+
+#### 类型说明
+::: info
+`function once(func: (...params: any[]) => any): (this: unknown, ...args: any[]) => void;`
+:::
+#### 参数
+- func 函数
+#### 示例 
+```ts
+once(function () { ... })
+```
+在vue2中使用
+```ts
+getlist: once(function () { ... })
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function once(func: (...params: any[]) => any) {
+  let called = false
+  return function (this: unknown, ...args: any[]) {
+    if (!called) {
+      called = true
+      func.apply(this, args)
+    }
+  }
+}
+```
+
+```Js [JS版本]
+export default function once(func) {
+    let called = false;
+    return function (...args) {
+        if (!called) {
+            called = true;
+            func.apply(this, args);
+        }
+    };
+}
+
+```
+:::
+## throttle 
 节流
 
 #### 类型说明
 ::: info
-`throttle(func: (...params: any[]) => any, wait?: number, immediate?: boolean): (this: unknown, ...args: any[]) => void;`
+`function throttle(func: (...params: any[]) => any, wait?: number, immediate?: boolean): (this: unknown, ...args: any[]) => void;`
 :::
 #### 参数
 - func 函数
@@ -1374,29 +2899,64 @@ throttle(function () { ... }, 500, immediate: true)
 ```ts
 getlist: throttle(function () { ... })
 ```
-## once :tada: :100:
-只调用一次的函数
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isBoolean from "@/verify/isBoolean"
+import isNumber from "@/verify/isNumber"
+export default function throttle(func: (...params: any[]) => any, wait = 500, immediate = false) {
+  let timeout = 0
+  let _immediate = immediate
+  if (wait && !isNumber(wait)) throw 'wait不是number'
+  if (!isBoolean(immediate)) throw 'immediate不是boolean'
+  return function (this: unknown, ...args: any[]) {
+    if (_immediate) {
+      func.apply(this, args)
+      _immediate = false
+    }
+    if (!timeout) {
+      timeout = setTimeout(() => {
+        func.apply(this, args)
+        timeout = 0
+      }, wait)
+    }
+  }
+}
 
-#### 类型说明
-::: info
-`once(func: (...params: any[]) => any): (this: unknown, ...args: any[]) => void;`
+```
+
+```Js [JS版本]
+import isBoolean from "@/verify/isBoolean";
+import isNumber from "@/verify/isNumber";
+export default function throttle(func, wait = 500, immediate = false) {
+    let timeout = 0;
+    let _immediate = immediate;
+    if (wait && !isNumber(wait))
+        throw 'wait不是number';
+    if (!isBoolean(immediate))
+        throw 'immediate不是boolean';
+    return function (...args) {
+        if (_immediate) {
+            func.apply(this, args);
+            _immediate = false;
+        }
+        if (!timeout) {
+            timeout = setTimeout(() => {
+                func.apply(this, args);
+                timeout = 0;
+            }, wait);
+        }
+    };
+}
+
+```
 :::
-#### 参数
-- func 函数
-#### 示例 
-```ts
-once(function () { ... })
-```
-在vue2中使用
-```ts
-getlist: once(function () { ... })
-```
-## isFunction :tada: :100:
+## isFunction 
 判断是否为Function
 
 #### 类型说明
 ::: info
-`isFunction(value: any): boolean;`
+`function isFunction(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -1414,13 +2974,30 @@ isFunction(function(){}) => true
 ```ts
 isFunction(123) => false
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isFunction(value: any): boolean {
+  return typeOf(value) === 'Function'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isFunction(value) {
+    return typeOf(value) === 'Function';
+}
+
+```
+:::
 ## 数字Number
-## padInt :tada: :100:
+## padInt 
 数字补0
 
 #### 类型说明
 ::: info
-`padInt(value: string | number, len?: number): string;`
+`function padInt(value: string | number, len?: number): string;`
 :::
 #### 参数
 - value 数字或者字符串的数字
@@ -1440,40 +3017,31 @@ padInt(12) => '12'
 ```ts
 padInt(12, 3) => '012'
 ```
-## toNumber :tada: :100:
-转换为数字
+#### 源码
+::: code-group
+```Ts [TS版本]
 
-#### 类型说明
-::: info
-`toNumber<T>(value: T): number;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `number`
-::: tip
-返回数字
-:::
-#### 异常
-::: danger
-无法转换为数字
-:::
-#### 示例 
-```ts
-toNumber('1') // 1
+export default function padInt(value: string | number, len = 2): string {
+  if (isNaN(Number(value))) throw '不是一个合法的数字'
+  return Number(value).toString().padStart(len, '0')
+}
 ```
-```ts
-toNumber('1.2') // 1.2
+
+```Js [JS版本]
+export default function padInt(value, len = 2) {
+    if (isNaN(Number(value)))
+        throw '不是一个合法的数字';
+    return Number(value).toString().padStart(len, '0');
+}
+
 ```
-```ts
-toNumber('a123') // error => a123无法转换为数字
-```
-## toFixed :tada: :100:
+:::
+## toFixed 
 数字保留小数位
 
 #### 类型说明
 ::: info
-`toFixed(value: number, num?: number, isRound?: boolean): number;`
+`function toFixed(value: number, num?: number, isRound?: boolean): number;`
 :::
 #### 参数
 - value 数字
@@ -1506,12 +3074,86 @@ toFixed(1.238, 2) // 1.24
 ```ts
 toFixed(1.238, 2, false) // 1.23
 ```
-## isInt :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isBoolean from '@/verify/isBoolean'
+import toNumber from '@/number/toNumber'
+export default function toFixed(value: number, num = 2, isRound = true): number {
+  const _val = toNumber(value)
+  if (!isBoolean(isRound)) throw 'isRound不是boolean'
+  if (isRound) return parseFloat(_val.toFixed(num))
+  return parseFloat(_val.toFixed(num + 1).slice(0, -1))
+}
+```
+
+```Js [JS版本]
+import isBoolean from '@/verify/isBoolean';
+import toNumber from '@/number/toNumber';
+export default function toFixed(value, num = 2, isRound = true) {
+    const _val = toNumber(value);
+    if (!isBoolean(isRound))
+        throw 'isRound不是boolean';
+    if (isRound)
+        return parseFloat(_val.toFixed(num));
+    return parseFloat(_val.toFixed(num + 1).slice(0, -1));
+}
+
+```
+:::
+## toNumber 
+转换为数字
+
+#### 类型说明
+::: info
+`function toNumber<T>(value: T): number;`
+:::
+#### 参数
+- value 任意值
+#### 返回
+- `number`
+::: tip
+返回数字
+:::
+#### 异常
+::: danger
+无法转换为数字
+:::
+#### 示例 
+```ts
+toNumber('1') // 1
+```
+```ts
+toNumber('1.2') // 1.2
+```
+```ts
+toNumber('a123') // error => a123无法转换为数字
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function toNumber<T>(value: T): number {
+  if (isNaN(Number(value))) throw `${value}无法转换为数字`
+  return Number(value)
+}
+```
+
+```Js [JS版本]
+export default function toNumber(value) {
+    if (isNaN(Number(value)))
+        throw `${value}无法转换为数字`;
+    return Number(value);
+}
+
+```
+:::
+## isInt 
 是否为整数
 
 #### 类型说明
 ::: info
-`isInt(value: any): boolean;`
+`function isInt(value: any): boolean;`
 :::
 #### 参数
 - value 检查的值
@@ -1527,12 +3169,29 @@ isInt(1) // => true
 ```ts
 isInt(1.21) // => false
 ```
-## isNumber :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function isInt(value: any): boolean {
+  return Number.isInteger(value)
+}
+
+```
+
+```Js [JS版本]
+export default function isInt(value) {
+    return Number.isInteger(value);
+}
+
+```
+:::
+## isNumber 
 判断是否为数字
 
 #### 类型说明
 ::: info
-`isNumber(value: any): boolean;`
+`function isNumber(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -1550,13 +3209,175 @@ isNumber(123) => true
 ```ts
 isNumber('123') => false
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isNumber(value: any): boolean {
+  return typeOf(value) === 'Number'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isNumber(value) {
+    return typeOf(value) === 'Number';
+}
+
+```
+:::
 ## 对象Object
-## createData :tada: :100:
+## arrObjSum 
+数组对象key值求和
+
+#### 类型说明
+::: info
+`function arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]): Record<string, any>;`
+:::
+#### 参数
+- object 目标对象
+- keys 需要求和的key数组
+#### 返回
+- `Record<string, any>`
+::: tip
+求和后的对象
+:::
+#### 示例 
+```ts
+arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
+// => {id: 3, age: 30}
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isArrObj from "@/verify/isArrObj"
+export default function arrObjSum<T extends Record<string, any>, K extends keyof T>(
+  object: T[],
+  keys: K[]
+): Record<string, any> {
+  if (!isArrObj(object)) throw 'object 必须是数组对象'
+  const _object = {} as Record<K, number>
+  keys.forEach(item => {
+    _object[item] = object.reduce((start: number, end) => {
+      const value = start + Number(end[item])
+      return isNaN(value) ? 0 : value
+    }, 0)
+  })
+  return _object
+}
+```
+
+```Js [JS版本]
+import isArrObj from "@/verify/isArrObj";
+export default function arrObjSum(object, keys) {
+    if (!isArrObj(object))
+        throw 'object 必须是数组对象';
+    const _object = {};
+    keys.forEach(item => {
+        _object[item] = object.reduce((start, end) => {
+            const value = start + Number(end[item]);
+            return isNaN(value) ? 0 : value;
+        }, 0);
+    });
+    return _object;
+}
+
+```
+:::
+## assign 
+合并对象
+
+#### 类型说明
+::: info
+`function assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;`
+:::
+#### 参数
+- target 目标对象，被合并的对象
+- sources 源对象，可以多个
+#### 返回
+- `Record<string, any>`
+::: tip
+目标对象
+:::
+#### 示例 
+对象合并效果与Object.assign一致
+```ts
+assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isEmptyObject from "@/verify/isEmptyObject"
+export default function assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any> {
+  if (isEmptyObject(target)) return {}
+  return Object.assign(target, ...sources)
+}
+```
+
+```Js [JS版本]
+import isEmptyObject from "@/verify/isEmptyObject";
+export default function assign(target, ...sources) {
+    if (isEmptyObject(target))
+        return {};
+    return Object.assign(target, ...sources);
+}
+
+```
+:::
+## assignMin 
+最小合并对象
+
+#### 类型说明
+::: info
+`function assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;`
+:::
+#### 参数
+- target 目标对象，被合并的对象
+- sources 源对象，可以多个
+#### 返回
+- `Record<string, any>`
+::: tip
+目标对象
+:::
+#### 示例 
+最小合并对象，只会合并源对象原有的属性，其他忽略
+```ts
+assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isEmptyObject from "@/verify/isEmptyObject"
+export default function assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any> {
+  if (isEmptyObject(target)) return {}
+  const _object = Object.assign({}, target, ...sources)
+  Object.keys(target).forEach(item => {
+    target[item] = _object[item]
+  })
+  return target
+}
+```
+
+```Js [JS版本]
+import isEmptyObject from "@/verify/isEmptyObject";
+export default function assignMin(target, ...sources) {
+    if (isEmptyObject(target))
+        return {};
+    const _object = Object.assign({}, target, ...sources);
+    Object.keys(target).forEach(item => {
+        target[item] = _object[item];
+    });
+    return target;
+}
+
+```
+:::
+## createData 
 指定深度或者广度的对象
 
 #### 类型说明
 ::: info
-`createData(deep?: number, breadth?: number): {
+`function createData(deep?: number, breadth?: number): {
     [key: number]: any;
     data?: any;
 };`
@@ -1590,12 +3411,45 @@ createData(2, 2)
 }
 }
 ```
-## omit :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function createData(deep = 1, breadth = 0) {
+  const data: { data?: any; [key: number]: any } = {}
+  let temp = data
+  for (let i = 0; i < deep; i++) {
+    temp = temp['data'] = {}
+    for (let j = 0; j < breadth; j++) {
+      temp[j] = j
+    }
+  }
+  return data
+}
+
+```
+
+```Js [JS版本]
+export default function createData(deep = 1, breadth = 0) {
+    const data = {};
+    let temp = data;
+    for (let i = 0; i < deep; i++) {
+        temp = temp['data'] = {};
+        for (let j = 0; j < breadth; j++) {
+            temp[j] = j;
+        }
+    }
+    return data;
+}
+
+```
+:::
+## omit 
 删除指定对象的指定属性
 
 #### 类型说明
 ::: info
-`omit(object: Record<string, any>, keys?: string[]): Record<string, any>;`
+`function omit(object: Record<string, any>, keys?: string[]): Record<string, any>;`
 :::
 #### 参数
 - object 指定对象
@@ -1609,164 +3463,38 @@ createData(2, 2)
 ```ts
 omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {b: 2}
 ```
-## assign :tada: :100:
-合并对象
+#### 源码
+::: code-group
+```Ts [TS版本]
+import deepClone from "@/util/deepClone"
+export default function omit(object: Record<string, any>, keys: string[] = []): Record<string, any> {
+  const _object = deepClone(object)
+  Object.keys(_object).forEach(item => {
+    if (keys.includes(item)) delete _object[item]
+  })
+  return _object
+}
+```
 
-#### 类型说明
-::: info
-`assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;`
-:::
-#### 参数
-- target 目标对象，被合并的对象
-- sources 源对象，可以多个
-#### 返回
-- `Record<string, any>`
-::: tip
-目标对象
-:::
-#### 示例 
-对象合并效果与Object.assign一致
-```ts
-assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
-```
-## assignMin :tada: :100:
-最小合并对象
+```Js [JS版本]
+import deepClone from "@/util/deepClone";
+export default function omit(object, keys = []) {
+    const _object = deepClone(object);
+    Object.keys(_object).forEach(item => {
+        if (keys.includes(item))
+            delete _object[item];
+    });
+    return _object;
+}
 
-#### 类型说明
-::: info
-`assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;`
-:::
-#### 参数
-- target 目标对象，被合并的对象
-- sources 源对象，可以多个
-#### 返回
-- `Record<string, any>`
-::: tip
-目标对象
-:::
-#### 示例 
-最小合并对象，只会合并源对象原有的属性，其他忽略
-```ts
-assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
 ```
-## arrObjSum :tada: :100:
-数组对象key值求和
-
-#### 类型说明
-::: info
-`arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]): Record<string, any>;`
 :::
-#### 参数
-- object 目标对象
-- keys 需要求和的key数组
-#### 返回
-- `Record<string, any>`
-::: tip
-求和后的对象
-:::
-#### 示例 
-```ts
-arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
-// => {id: 3, age: 30}
-```
-## isObject :tada: :100:
-判断是否为对象
-
-#### 类型说明
-::: info
-`isObject(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isObject({}) => true
-```
-验证失败
-```ts
-isObject([]) => false
-```
-## isMap :tada: :100:
-判断是否为Map
-
-#### 类型说明
-::: info
-`isMap(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isMap(new Map()) => true
-```
-验证失败
-```ts
-isMap(123) => false
-```
-## isSet :tada: :100:
-判断是否为Set
-
-#### 类型说明
-::: info
-`isSet(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isSet(new Set()) => true
-```
-验证失败
-```ts
-isSet(123) => false
-```
-## isSymbol :tada: :100:
-判断是否为Symbol
-
-#### 类型说明
-::: info
-`isSymbol(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isSymbol(Symbol(1)) => true
-```
-验证失败
-```ts
-isSymbol(Symbol) => false
-```
-## isEmptyObject :tada: :100:
+## isEmptyObject 
 判断对象是否是空对象
 
 #### 类型说明
 ::: info
-`isEmptyObject(object: Record<string, unknown>): boolean;`
+`function isEmptyObject(object: Record<string, unknown>): boolean;`
 :::
 #### 参数
 - object 对象
@@ -1788,39 +3516,193 @@ isEmptyObject({}) => true
 ```ts
 isEmptyObject({a: 1}) => false
 ```
-## 字符串String
-## upperFirst :tada: :100:
-首字母大写
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isObject from '@/verify/isObject'
+export default function isEmptyObject(object: Record<string, unknown>): boolean {
+  if (!isObject(object)) throw '传入参数不是Object'
+  return !Object.keys(object).length
+}
+```
+
+```Js [JS版本]
+import isObject from '@/verify/isObject';
+export default function isEmptyObject(object) {
+    if (!isObject(object))
+        throw '传入参数不是Object';
+    return !Object.keys(object).length;
+}
+
+```
+:::
+## isMap 
+判断是否为Map
 
 #### 类型说明
 ::: info
-`upperFirst(str: any): string;`
+`function isMap(value: any): boolean;`
 :::
 #### 参数
-- str 传入参数, 如果参数不是字符串，会先调用toString方法
+- value 任意值
 #### 返回
-- `string`
+- `boolean`
 ::: tip
-字符串
+true | false
 :::
 #### 示例 
+验证通过
 ```ts
-upperFirst('fred') // 'Fred'
+isMap(new Map()) => true
 ```
-自定义时间
+验证失败
 ```ts
-upperFirst('FRED') // 'FRED'
+isMap(123) => false
 ```
-参数不是字符串，会先调用toString方法
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isMap(value: any): boolean {
+  return typeOf(value) === 'Map'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isMap(value) {
+    return typeOf(value) === 'Map';
+}
+
+```
+:::
+## isObject 
+判断是否为对象
+
+#### 类型说明
+::: info
+`function isObject(value: any): boolean;`
+:::
+#### 参数
+- value 任意值
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+验证通过
 ```ts
-upperFirst(true) // 'True'
+isObject({}) => true
 ```
-## byteSize :tada: :100:
+验证失败
+```ts
+isObject([]) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isObject(value: any): boolean {
+  return value !== null && typeOf(value) === 'Object'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isObject(value) {
+    return value !== null && typeOf(value) === 'Object';
+}
+
+```
+:::
+## isSet 
+判断是否为Set
+
+#### 类型说明
+::: info
+`function isSet(value: any): boolean;`
+:::
+#### 参数
+- value 任意值
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+验证通过
+```ts
+isSet(new Set()) => true
+```
+验证失败
+```ts
+isSet(123) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isSet(value: any): boolean {
+  return typeOf(value) === 'Set'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isSet(value) {
+    return typeOf(value) === 'Set';
+}
+
+```
+:::
+## isSymbol 
+判断是否为Symbol
+
+#### 类型说明
+::: info
+`function isSymbol(value: any): boolean;`
+:::
+#### 参数
+- value 任意值
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+验证通过
+```ts
+isSymbol(Symbol(1)) => true
+```
+验证失败
+```ts
+isSymbol(Symbol) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isSymbol(value: any): boolean {
+  return typeOf(value) === 'Symbol'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isSymbol(value) {
+    return typeOf(value) === 'Symbol';
+}
+
+```
+:::
+## 字符串String
+## byteSize 
 获取字符串的字节长度
 
 #### 类型说明
 ::: info
-`byteSize(str: any): number;`
+`function byteSize(str: any): number;`
 :::
 #### 参数
 - str 传入参数, 如果参数不是字符串，会先调用toString方法
@@ -1844,40 +3726,33 @@ byteSize('𠮷') // 4
 ```ts
 byteSize(true) // '4'
 ```
-## removeHTML :tada: :100:
-移除字符串中的html标签
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isString from "@/verify/isString"
+export default function byteSize(str: any): number {
+  const _str = isString(str) ? str : str.toString()
+  return new Blob([_str]).size
+}
+```
 
-#### 类型说明
-::: info
-`removeHTML(str: any): string;`
+```Js [JS版本]
+import isString from "@/verify/isString";
+export default function byteSize(str) {
+    const _str = isString(str) ? str : str.toString();
+    return new Blob([_str]).size;
+}
+
+```
 :::
-#### 参数
-- str 传入参数, 如果参数不是字符串，会先调用toString方法
-#### 返回
-- `string`
-::: tip
-字符串
-:::
-#### 示例 
-```ts
-removeHTML('<p>这是<em>一个</em>段落。</p>') // => 这是一个段落。
-```
-转义符也会被去除
-```ts
-removeHTML('<p>这是<em>一个</em>段落。&nbsp;</p>') // => 这是一个段落。
-```
-参数不是字符串，会先调用toString方法
-```ts
-removeHTML(true) // 'true'
-```
-## mask :tada: :100:
+## mask 
 字符串替换
 
 使用指定的掩码字符替换start~length之间的所有字符
 
 #### 类型说明
 ::: info
-`mask(str: string, start?: number, length?: number, mask?: string): string;`
+`function mask(str: string, start?: number, length?: number, mask?: string): string;`
 :::
 #### 参数
 - str 传入参数, 如果参数不是字符串，会先调用toString方法
@@ -1915,12 +3790,143 @@ mask('123456', 2, 3) // => '126'
 ```ts
 mask('123456', 2, 3, '.') // => '12...6'
 ```
-## isString :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isNumber from "@/verify/isNumber"
+import isString from "@/verify/isString"
+export default function mask(str: string, start = 0, length?: number, mask = '*'): string {
+  const _str = isString(str) ? str : str.toString()
+  if (!isNumber(start)) throw 'start 必须是数字'
+  if ((length || length == 0) && !isNumber(length)) throw 'length 必须是数字'
+  if (!isString(mask)) throw 'mask 必须是字符串'
+  const val = length || length == 0 ? _str.slice(start, length + start) : _str.slice(start)
+  return _str.replace(val, mask.padEnd(val.length, mask))
+}
+
+```
+
+```Js [JS版本]
+import isNumber from "@/verify/isNumber";
+import isString from "@/verify/isString";
+export default function mask(str, start = 0, length, mask = '*') {
+    const _str = isString(str) ? str : str.toString();
+    if (!isNumber(start))
+        throw 'start 必须是数字';
+    if ((length || length == 0) && !isNumber(length))
+        throw 'length 必须是数字';
+    if (!isString(mask))
+        throw 'mask 必须是字符串';
+    const val = length || length == 0 ? _str.slice(start, length + start) : _str.slice(start);
+    return _str.replace(val, mask.padEnd(val.length, mask));
+}
+
+```
+:::
+## removeHTML 
+移除字符串中的html标签
+
+#### 类型说明
+::: info
+`function removeHTML(str: any): string;`
+:::
+#### 参数
+- str 传入参数, 如果参数不是字符串，会先调用toString方法
+#### 返回
+- `string`
+::: tip
+字符串
+:::
+#### 示例 
+```ts
+removeHTML('<p>这是<em>一个</em>段落。</p>') // => 这是一个段落。
+```
+转义符也会被去除
+```ts
+removeHTML('<p>这是<em>一个</em>段落。&nbsp;</p>') // => 这是一个段落。
+```
+参数不是字符串，会先调用toString方法
+```ts
+removeHTML(true) // 'true'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isString from "@/verify/isString"
+export default function removeHTML(str: any): string {
+  const _str = isString(str) ? str : str.toString()
+  const escapeReg =
+    /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi
+  return _str
+    .replace(/<[^>]+>/g, '')
+    .replace(escapeReg, '')
+    .trim()
+}
+```
+
+```Js [JS版本]
+import isString from "@/verify/isString";
+export default function removeHTML(str) {
+    const _str = isString(str) ? str : str.toString();
+    const escapeReg = /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi;
+    return _str
+        .replace(/<[^>]+>/g, '')
+        .replace(escapeReg, '')
+        .trim();
+}
+
+```
+:::
+## upperFirst 
+首字母大写
+
+#### 类型说明
+::: info
+`function upperFirst(str: any): string;`
+:::
+#### 参数
+- str 传入参数, 如果参数不是字符串，会先调用toString方法
+#### 返回
+- `string`
+::: tip
+字符串
+:::
+#### 示例 
+```ts
+upperFirst('fred') // 'Fred'
+```
+自定义时间
+```ts
+upperFirst('FRED') // 'FRED'
+```
+参数不是字符串，会先调用toString方法
+```ts
+upperFirst(true) // 'True'
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+
+export default function upperFirst(str: any): string {
+  const _str = (str as string).toString()
+  return _str.replace(/(\w)/, $1 => $1.toLocaleUpperCase())
+}
+```
+
+```Js [JS版本]
+export default function upperFirst(str) {
+    const _str = str.toString();
+    return _str.replace(/(\w)/, $1 => $1.toLocaleUpperCase());
+}
+
+```
+:::
+## isString 
 判断是否为字符串
 
 #### 类型说明
 ::: info
-`isString(value: any): boolean;`
+`function isString(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -1938,40 +3944,30 @@ isString('abc') => true
 ```ts
 isString(123) => false
 ```
-## URL
-## isURL :tada: :100:
-是否是url
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isString(value: any): boolean {
+  return typeOf(value) === 'String'
+}
+```
 
-#### 类型说明
-::: info
-`isURL(url: string): boolean;`
-:::
-#### 参数
-- url 需要验证的内容，类型：string
-#### 返回
-- `boolean`
-::: tip
-Boolean
-:::
-#### 异常
-::: danger
-参数必须是string 参数不是string时触发
-:::
-#### 示例 
-```ts
-isURL('https://a.b.c')
-// => true
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isString(value) {
+    return typeOf(value) === 'String';
+}
+
 ```
-```ts
-isURL('123')
-// => false
-```
-## getUrlParam :tada: :100:
+:::
+## URL
+## getUrlParam 
 获取url上的参数
 
 #### 类型说明
 ::: info
-`getUrlParam(name: string, url?: string): string | null;`
+`function getUrlParam(name: string, url?: string): string | null;`
 :::
 #### 参数
 - name 参数名，必填
@@ -1999,12 +3995,54 @@ getUrlParam('id', 'https://a.b.com/?id=b') => 'b'
 ```ts
 getUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'
 ```
-## getUrlQuery :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isURL from "@/url/isURL"
+export default function getUrlParam(name: string, url: string = window.location.href): string | null {
+  // 检查url值是否有效
+  if (!isURL(url)) throw 'url 参数错误，不是有效的'
+  const urlPar = new URL(url)
+  // 构造一个含有目标参数的正则表达式对象
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  // 匹配目标参数
+  const r = urlPar.search.substring(1).match(reg)
+  const h = urlPar.hash.split('?')[1]?.match(reg)
+  // 返回参数
+  if (r != null) return decodeURIComponent(r[2])
+  if (h != null) return decodeURIComponent(h[2])
+  return null
+}
+```
+
+```Js [JS版本]
+import isURL from "@/url/isURL";
+export default function getUrlParam(name, url = window.location.href) {
+    // 检查url值是否有效
+    if (!isURL(url))
+        throw 'url 参数错误，不是有效的';
+    const urlPar = new URL(url);
+    // 构造一个含有目标参数的正则表达式对象
+    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+    // 匹配目标参数
+    const r = urlPar.search.substring(1).match(reg);
+    const h = urlPar.hash.split('?')[1]?.match(reg);
+    // 返回参数
+    if (r != null)
+        return decodeURIComponent(r[2]);
+    if (h != null)
+        return decodeURIComponent(h[2]);
+    return null;
+}
+
+```
+:::
+## getUrlQuery 
 获取url上的参数
 
 #### 类型说明
 ::: info
-`getUrlQuery(option?: {
+`function getUrlQuery(option?: {
     url?: string;
     type?: 'search' | 'hash' | 'all';
 }): Record<string, any>;`
@@ -2047,12 +4085,203 @@ getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'search'}) //
 ```ts
 getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}) // => {c: '3', b: '4'}
 ```
-## qsStringify :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isNullOrUndefined from "@/verify/isNullOrUndefined";
+import isObject from "@/verify/isObject";
+import isURL from "@/url/isURL";
+import isString from "@/verify/isString";
+import qsParse from "@/url/qsParse";
+export default function getUrlQuery(
+  option: { url?: string; type?: 'search' | 'hash' | 'all' } = {
+    url: window.location.href,
+    type: 'all'
+  }
+): Record<string, any> {
+  // 检查参数类型
+  if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象`
+  // 检查参数属性是否存在，不存在设置默认值
+  if (!option.url) option.url = window.location.href
+  if (!option.type) option.type = 'all'
+  // 检查参数属性值类型
+  if (!isURL(option.url)) throw `url 参数错误，不是有效的`
+  if (!isString(option.type) || !['search', 'hash', 'all'].includes(option.type))
+    throw `type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'`
+  // 获取参数对象
+  const { url, type } = option
+  const urlStr: URL = new URL(url)
+  const urlSearch = urlStr.search.substring(1)
+  const urlHash = urlStr.hash.indexOf('?') >= 0 ? urlStr.hash.slice(urlStr.hash.indexOf('?') + 1) : ''
+  const searchArr = type == 'hash' ? {} : qsParse(urlSearch)
+  const hashArr = type == 'search' ? {} : qsParse(urlHash)
+  return Object.assign({}, searchArr, hashArr, searchArr)
+}
+```
+
+```Js [JS版本]
+import isNullOrUndefined from "@/verify/isNullOrUndefined";
+import isObject from "@/verify/isObject";
+import isURL from "@/url/isURL";
+import isString from "@/verify/isString";
+import qsParse from "@/url/qsParse";
+export default function getUrlQuery(option = {
+    url: window.location.href,
+    type: 'all'
+}) {
+    // 检查参数类型
+    if (isNullOrUndefined(option) || !isObject(option))
+        throw `参数错误， 应该传入一个对象`;
+    // 检查参数属性是否存在，不存在设置默认值
+    if (!option.url)
+        option.url = window.location.href;
+    if (!option.type)
+        option.type = 'all';
+    // 检查参数属性值类型
+    if (!isURL(option.url))
+        throw `url 参数错误，不是有效的`;
+    if (!isString(option.type) || !['search', 'hash', 'all'].includes(option.type))
+        throw `type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'`;
+    // 获取参数对象
+    const { url, type } = option;
+    const urlStr = new URL(url);
+    const urlSearch = urlStr.search.substring(1);
+    const urlHash = urlStr.hash.indexOf('?') >= 0 ? urlStr.hash.slice(urlStr.hash.indexOf('?') + 1) : '';
+    const searchArr = type == 'hash' ? {} : qsParse(urlSearch);
+    const hashArr = type == 'search' ? {} : qsParse(urlHash);
+    return Object.assign({}, searchArr, hashArr, searchArr);
+}
+
+```
+:::
+## isURL 
+是否是url
+
+#### 类型说明
+::: info
+`function isURL(url: string): boolean;`
+:::
+#### 参数
+- url 需要验证的内容，类型：string
+#### 返回
+- `boolean`
+::: tip
+Boolean
+:::
+#### 异常
+::: danger
+参数必须是string 参数不是string时触发
+:::
+#### 示例 
+```ts
+isURL('https://a.b.c')
+// => true
+```
+```ts
+isURL('123')
+// => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isString from "@/verify/isString"
+export default function isURL(url: string): boolean {
+  if (!isString(url)) throw '参数必须是string'
+  // if (URL.canParse) return URL.canParse(url)
+  try {
+    new URL(url)
+    return true
+  } catch (err) {
+    return false
+  }
+}
+```
+
+```Js [JS版本]
+import isString from "@/verify/isString";
+export default function isURL(url) {
+    if (!isString(url))
+        throw '参数必须是string';
+    // if (URL.canParse) return URL.canParse(url)
+    try {
+        new URL(url);
+        return true;
+    }
+    catch (err) {
+        return false;
+    }
+}
+
+```
+:::
+## qsParse 
+参数序列化-字符转对象
+
+#### 类型说明
+::: info
+`function qsParse(query?: string, decode?: boolean): {
+    [k: string]: any;
+};`
+:::
+#### 返回
+- `{
+    [k: string]: any;
+}`
+::: tip
+由参数组成的对象
+:::
+#### 示例 
+支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
+不传值时，默认从window.location中取值
+```ts
+qsParse('a=1&b=2')
+// => 'a=1&b=2'
+```
+```ts
+qsParse('a=1&b=2&c={"a":1}')
+// => { a:1, b:2, c: { a :1 } }
+```
+```ts
+qsParse('a=1&b=2&c={"a":1}', false)
+// => { a:1, b:2, c: '{ a: 1 }' }
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isJsonString from "@/verify/isJsonString"
+export default function qsParse(query = '', decode = true): { [k: string]: any } {
+  const queryObj = JSON.parse(JSON.stringify(Object.fromEntries(new URLSearchParams(query) as any)))
+  if (decode) {
+    Object.keys(queryObj).forEach(key => {
+      if (isJsonString(queryObj[key]) && (queryObj[key].startsWith('{') || queryObj[key].startsWith('[')))
+        queryObj[key] = JSON.parse(queryObj[key])
+    })
+  }
+  return queryObj
+}
+```
+
+```Js [JS版本]
+import isJsonString from "@/verify/isJsonString";
+export default function qsParse(query = '', decode = true) {
+    const queryObj = JSON.parse(JSON.stringify(Object.fromEntries(new URLSearchParams(query))));
+    if (decode) {
+        Object.keys(queryObj).forEach(key => {
+            if (isJsonString(queryObj[key]) && (queryObj[key].startsWith('{') || queryObj[key].startsWith('[')))
+                queryObj[key] = JSON.parse(queryObj[key]);
+        });
+    }
+    return queryObj;
+}
+
+```
+:::
+## qsStringify 
 参数序列化-对象转字符
 
 #### 类型说明
 ::: info
-`qsStringify(query?: Record<string, any>, decode?: boolean): string;`
+`function qsStringify(query?: Record<string, any>, decode?: boolean): string;`
 :::
 #### 返回
 - `string`
@@ -2079,43 +4308,58 @@ qsStringify({a: 1, b: 2, c: {a: 1}})
 qsStringify({a: 1, b: 2, c: {a: 1}}, true)
 // => 'a=1&b=2&c={"a":1}'
 ```
-## qsParse :tada: :100:
-参数序列化-字符转对象
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isBasicType from "@/verify/isBasicType"
+import isNullOrUndefined from "@/verify/isNullOrUndefined"
+export default function qsStringify(query: Record<string, any> = {}, decode = false): string {
+  // 缓存Object.keys(query)的结果，避免重复调用
+  const keys = Object.keys(query)
+  // 使用数组和join方法代替URLSearchParams对象，减少内存占用和转换开销
+  const queryArr = []
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    const value = query[key]
+    if (isNullOrUndefined(value)) continue
+    // 使用三元运算符代替if语句，简化代码逻辑
+    const encodedValue = isBasicType(value) ? encodeURIComponent(value) : encodeURIComponent(JSON.stringify(value))
+    queryArr.push(key + '=' + encodedValue)
+  }
+  // 根据decode参数决定是否解码
+  return decode ? decodeURIComponent(queryArr.join('&')) : queryArr.join('&')
+}
+```
 
-#### 类型说明
-::: info
-`qsParse(query?: string, decode?: boolean): {
-    [k: string]: any;
-};`
+```Js [JS版本]
+import isBasicType from "@/verify/isBasicType";
+import isNullOrUndefined from "@/verify/isNullOrUndefined";
+export default function qsStringify(query = {}, decode = false) {
+    // 缓存Object.keys(query)的结果，避免重复调用
+    const keys = Object.keys(query);
+    // 使用数组和join方法代替URLSearchParams对象，减少内存占用和转换开销
+    const queryArr = [];
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = query[key];
+        if (isNullOrUndefined(value))
+            continue;
+        // 使用三元运算符代替if语句，简化代码逻辑
+        const encodedValue = isBasicType(value) ? encodeURIComponent(value) : encodeURIComponent(JSON.stringify(value));
+        queryArr.push(key + '=' + encodedValue);
+    }
+    // 根据decode参数决定是否解码
+    return decode ? decodeURIComponent(queryArr.join('&')) : queryArr.join('&');
+}
+
+```
 :::
-#### 返回
-- `{
-    [k: string]: any;
-}`
-::: tip
-由参数组成的对象
-:::
-#### 示例 
-支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
-不传值时，默认从window.location中取值
-```ts
-qsParse('a=1&b=2')
-// => 'a=1&b=2'
-```
-```ts
-qsParse('a=1&b=2&c={"a":1}')
-// => { a:1, b:2, c: { a :1 } }
-```
-```ts
-qsParse('a=1&b=2&c={"a":1}', false)
-// => { a:1, b:2, c: '{ a: 1 }' }
-```
-## reviseUrlQuery :tada: :100:
+## reviseUrlQuery 
 修改url上的参数
 
 #### 类型说明
 ::: info
-`reviseUrlQuery(option: {
+`function reviseUrlQuery(option: {
     search?: Record<string, any>;
     hash?: Record<string, any>;
 }, url?: string): string;`
@@ -2158,12 +4402,84 @@ reviseUrlQuery({hash: {c: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=
 reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
 // => 'http://a.b.com/?a=5&b=6#/index/?c=7&b=8'
 ```
-## setUrlQuery :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isNullOrUndefined from "@/verify/isNullOrUndefined";
+import isObject from "@/verify/isObject";
+import getUrlQuery from "@/url/getUrlQuery";
+import isURL from "@/url/isURL";
+import qsStringify from "@/url/qsStringify";
+export default function reviseUrlQuery(
+  option: { search?: Record<string, any>; hash?: Record<string, any> },
+  url: string = window.location.href
+): string {
+  // 检查参数类型
+  if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象`
+  // 检查参数属性存在但不是对象
+  if (option.search && !isObject(option.search)) throw `search 参数错误， 应该传入一个对象`
+  if (option.hash && !isObject(option.hash)) throw `hash 参数错误， 应该传入一个对象`
+  // 检查url值是否有效
+  if (!isURL(url)) throw 'url 参数错误，不是有效的'
+  // 修改参数的实现逻辑
+  const { origin, pathname } = new URL(url)
+  let { search, hash } = new URL(url)
+  if (option.search) {
+    const arr = getUrlQuery({ url, type: 'search' })
+    const searchStr = qsStringify(Object.assign({}, arr, option.search))
+    search = searchStr ? '?' + searchStr : ''
+  }
+  if (option.hash) {
+    const arr = getUrlQuery({ url, type: 'hash' })
+    const hashStr = qsStringify(Object.assign({}, arr, option.hash))
+    hash = hashStr ? (hash.split('?')[0] || '#') + '?' + hashStr : ''
+  }
+  return origin + pathname + search + hash
+}
+```
+
+```Js [JS版本]
+import isNullOrUndefined from "@/verify/isNullOrUndefined";
+import isObject from "@/verify/isObject";
+import getUrlQuery from "@/url/getUrlQuery";
+import isURL from "@/url/isURL";
+import qsStringify from "@/url/qsStringify";
+export default function reviseUrlQuery(option, url = window.location.href) {
+    // 检查参数类型
+    if (isNullOrUndefined(option) || !isObject(option))
+        throw `参数错误， 应该传入一个对象`;
+    // 检查参数属性存在但不是对象
+    if (option.search && !isObject(option.search))
+        throw `search 参数错误， 应该传入一个对象`;
+    if (option.hash && !isObject(option.hash))
+        throw `hash 参数错误， 应该传入一个对象`;
+    // 检查url值是否有效
+    if (!isURL(url))
+        throw 'url 参数错误，不是有效的';
+    // 修改参数的实现逻辑
+    const { origin, pathname } = new URL(url);
+    let { search, hash } = new URL(url);
+    if (option.search) {
+        const arr = getUrlQuery({ url, type: 'search' });
+        const searchStr = qsStringify(Object.assign({}, arr, option.search));
+        search = searchStr ? '?' + searchStr : '';
+    }
+    if (option.hash) {
+        const arr = getUrlQuery({ url, type: 'hash' });
+        const hashStr = qsStringify(Object.assign({}, arr, option.hash));
+        hash = hashStr ? (hash.split('?')[0] || '#') + '?' + hashStr : '';
+    }
+    return origin + pathname + search + hash;
+}
+
+```
+:::
+## setUrlQuery 
 设置浏览器地址栏url
 
 #### 类型说明
 ::: info
-`setUrlQuery(url: string, type?: 'pushState' | 'replaceState'): void;`
+`function setUrlQuery(url: string, type?: 'pushState' | 'replaceState'): void;`
 :::
 #### 参数
 - option 可选的对象
@@ -2185,12 +4501,49 @@ setUrlQuery('https://a.b.com/?a=1&b=2')
 ```ts
 setUrlQuery('https://a.b.com/?a=1&b=2', 'replaceState')
 ```
-## isLocation :tada: :100:
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isString from "@/verify/isString"
+import isURL from "@/url/isURL"
+export default function setUrlQuery(url: string, type: 'pushState' | 'replaceState' = 'pushState'): void {
+  // 检查url值是否有效
+  if (!isURL(url)) throw 'url 参数错误，不是有效的'
+  if (!isString(type) || !['pushState', 'replaceState'].includes(type))
+    throw `type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'`
+  if (history.state && history.state.current) {
+    const pathname = new URL(url).pathname
+    history.state.current = pathname
+  }
+  window.history[type](history.state, '', url)
+}
+
+```
+
+```Js [JS版本]
+import isString from "@/verify/isString";
+import isURL from "@/url/isURL";
+export default function setUrlQuery(url, type = 'pushState') {
+    // 检查url值是否有效
+    if (!isURL(url))
+        throw 'url 参数错误，不是有效的';
+    if (!isString(type) || !['pushState', 'replaceState'].includes(type))
+        throw `type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'`;
+    if (history.state && history.state.current) {
+        const pathname = new URL(url).pathname;
+        history.state.current = pathname;
+    }
+    window.history[type](history.state, '', url);
+}
+
+```
+:::
+## isLocation 
 判断是否为Location
 
 #### 类型说明
 ::: info
-`isLocation(value: any): boolean;`
+`function isLocation(value: any): boolean;`
 :::
 #### 参数
 - value 任意值
@@ -2208,3 +4561,20 @@ isLocation(window.location) => true
 ```ts
 isLocation(123) => false
 ```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isLocation(value: any): boolean {
+  return typeOf(value) === 'Location'
+}
+```
+
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isLocation(value) {
+    return typeOf(value) === 'Location';
+}
+
+```
+:::

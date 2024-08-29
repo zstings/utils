@@ -9,6 +9,9 @@
   font-size: 14px;
   color: #333;
 }
+.dark .VPSidebarItem .VPLink .text:first-line {
+  color: #fffff5db;
+}
 .VPSidebarItem.is-active .VPLink .text:first-line,
 .VPSidebarItem .VPLink .text:hover:first-line {
   color: inherit;
@@ -37,6 +40,7 @@
 .dark .VPSidebar::-webkit-scrollbar {
   background-color: #2c2c2c;
 }
+
 
 li code {
   font-size: 12px !important;

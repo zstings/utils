@@ -1,12 +1,12 @@
+// const fs = require('fs')
+// const path = require('path')
+// import url from 'url'
 import fs from 'fs'
 import path from 'path'
-import typescript from 'typescript'
 
 const srcDir = './dist/types/src'
 
-let tsPaths = []
-
-let allDts = ''
+let content = ''
 
 // 递归函数，获取目录下所有.ts文件的内容
 function readTSFiles(dir) {
@@ -16,48 +16,37 @@ function readTSFiles(dir) {
   // 遍历目录中的文件和子目录
   files.forEach(file => {
     const filePath = path.join(dir, file)
-    const stats = fs.statSync(filePath)  
+    const stats = fs.statSync(filePath)
+
     // 如果是目录，递归调用该函数
     if (stats.isDirectory()) {
       readTSFiles(filePath)
     } else {
       // 如果是.ts文件，读取内容并输出
       if (path.extname(filePath) == '.ts' && !filePath.includes('index.d.ts')) {
-        const sourcePath = filePath.replace('.d.ts', '.ts').replace('dist\\types\\', '')
-        const [dtsContent, dtsFnContent] = fs.readFileSync(filePath, 'utf8').replace(/\/\*\*|\*\/|\*/g, '').split('export default ')
-        const sourceContent = fs.readFileSync(sourcePath, 'utf8')
-        const sourceContentTs = sourceContent.replace(/\/\*\*[\s\S]+\*\//, '')
-        const sourceContentJs = typescript.transpileModule(sourceContentTs, {
-          compilerOptions: {
-            module: typescript.ModuleKind.ESNext,
-            target: typescript.ScriptTarget.ESNext,
-          },
-        }).outputText;
-        tsPaths.push({
-          dtsContent: dtsContent.split('\n'),
-          dtsFnContent,
-          sourceContentTs,
-          sourceContentJs
-        })
-        allDts += fs.readFileSync(filePath, 'utf8') + '\n'
-        // if (filePath.includes('chunk.d.ts')) {
-        // }
+        content += fs.readFileSync(filePath, 'utf8')
       }
     }
   })
 }
 
-// 调用函数开始读取-写入ts数据到tsPaths
+// 调用函数开始读取
 readTSFiles(srcDir)
+
+const arr = content.replaceAll('/**', '@@/**').split('@@').slice(1).map(it => {
+  const items = it.replace(/\/\*\*|\*\/|\*/g, '').split('export declare function ')
+  items[0] = items[0].split('\n')
+  return items
+})
 
 let str = ''
 let strObj = {}
 let menu = []
-tsPaths.forEach(aitx => {
+arr.forEach(aitx => {
   const strArr = ['', '', '', '', '', '']
-  const [f1, f2, f3] = aitx.dtsFnContent.match(/function (\w+)[\s\S]*\([\s\S]*\): ([\s\S]+)?;/)
+  const [f1, f2, f3] = aitx[1].match(/(\w+)[\s\S]*\([\s\S]*\): ([\s\S]+)?;/)
 
-  aitx.dtsContent.forEach(itx => {
+  aitx[0].forEach(itx => {
     itx = itx.trim()
     if (itx) {
       if (itx.includes('@param')) {
@@ -76,7 +65,7 @@ tsPaths.forEach(aitx => {
       } else if (strArr[5].includes('#### 示例')) {
         strArr[5] += itx + '\n'
       } else {
-        if (!strArr[1]) strArr[1] = [`## ${f2} \n`]
+        if (!strArr[1]) strArr[1] = [`## ${f2} :tada: :100:\n`]
         strArr[1].push(`${itx}\n\n`)
       }
     }
@@ -87,17 +76,36 @@ tsPaths.forEach(aitx => {
     text: f2 + '\n' + strArr[1][1].replace(`\n\n`, '')
   })
   strArr[1] = strArr[1].join('') + `#### 类型说明\n::: info\n\`${f1}\`\n:::\n`
-  strArr.push(`#### 源码\n::: code-group\n\`\`\`Ts [TS版本]\n${aitx.sourceContentTs.replace(/(\n\s*\n)+/g, '\n')}\n\`\`\`\n\n\`\`\`Js [JS版本]\n${aitx.sourceContentJs}\n\`\`\`\n:::\n`)
-  // console.log(aitx.sourceContentTs.replace(/(\n\s*\n)+/g, '\n'))
-  // console.log(strArr)
   strObj[strArr[0]] = (strObj[strArr[0]] || '') + strArr.slice(1).join('')
 })
 
 Object.keys(strObj).forEach(item => {
   str += '## ' + item + '\n' + strObj[item]
 })
-writeFile('./docsvite/functions.md', str, '文档正文内容写入完成')
-writeFile('./docsvite/.vitepress/menu.js', createdMenu(menu), '菜单内容写入完成')
+writeFile('./docsvite/functions.md', str)
+writeFile('./docsvite/.vitepress/menu.js', createdMenu(menu))
+// console.log(str, menu)
+
+function categoriesSort(categories) {
+  const sort = [
+    '字符串String',
+    '数字Number',
+    '数组Array',
+    '对象Object',
+    '函数Function',
+    '时间Date',
+    '设备Device',
+    'URL',
+    '颜色Color',
+    '浏览器Dom',
+    '工具Util'
+  ]
+  const sortArr = []
+  sort.forEach(item => {
+    sortArr.push(categories.find(el => el.title == item))
+  })
+  return sortArr
+}
 
 function createdMenu(menu) {
   return (
@@ -121,16 +129,19 @@ function createdMenu(menu) {
 }
 
 // 将文本内容写入文件
-function writeFile(path, cont, msg = '内容已成功写入到文件！') {
+function writeFile(path, cont) {
   fs.writeFile(path, cont, err => {
     if (err) {
       console.error('写入文件时出错：', err)
       return
     }
-    console.log(msg)
+    console.log('内容已成功写入到文件！')
   })
 }
-// console.log(allDts)
+
 console.log('写入在线运行时的类型文件')
-let modulesStr = ('declare const utils = {\n' + allDts + '\n}').replaceAll('export default function ', '').replaceAll('@example', '@example\n* eg:')
+let modulesStr = content
+  .replaceAll('export declare function ', '')
+  .replace(/import[\s\S]+?\n/g, '')
+  .replaceAll('@example', '@example\n* eg:')
 fs.writeFileSync(`./docsvite/public/index.d.ts`, modulesStr)
