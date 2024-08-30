@@ -21,7 +21,7 @@
  *          "1": 1
  *      }
  *   }
- *}
+ * }
  * ```
  */
 export default function createData(deep = 1, breadth = 0) {

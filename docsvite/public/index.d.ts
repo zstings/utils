@@ -345,10 +345,8 @@ version(): string;
  * ```ts
  * days('2018-04-04T16:00:00.000Z')
  * // => Thu Apr 05 2018 00:00:00 GMT+0800 (中国标准时间)
- *
  * days('2022-12-12')
  * // => Mon Dec 12 2022 08:00:00 GMT+0800 (中国标准时间)
- *
  * days('2022-12-12 23:45')
  * // => Mon Dec 12 2022 23:45:00 GMT+0800 (中国标准时间)
  * ```
@@ -1004,7 +1002,7 @@ assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Recor
  *          "1": 1
  *      }
  *   }
- *}
+ * }
  * ```
  */
 createData(deep?: number, breadth?: number): {

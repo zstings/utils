@@ -424,10 +424,10 @@ export default function getUUID() {
 :::
 #### 示例 
 ```ts
-phoneEncrypt(13300001111) => '1331111'
+phoneEncrypt(13300001111) => '133****1111'
 ```
 ```ts
-phoneEncrypt('13300001111') => '1331111'
+phoneEncrypt('13300001111') => '133****1111'
 ```
 ```ts
 phoneEncrypt('1330000') => throw '手机号格式不正确'
