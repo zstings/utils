@@ -21,6 +21,7 @@ import isIncludeChinese from '@/verify/isIncludeChinese'
 import isDom from '@/verify/isDom'
 import isArrObj from '@/verify/isArrObj'
 import isNullOrUndefined from '@/verify/isNullOrUndefined'
+import isEqual from '@/verify/isEqual'
 export {
   isArray,
   isPhone,
@@ -39,7 +40,8 @@ export {
   isIncludeChinese,
   isDom,
   isArrObj,
-  isNullOrUndefined
+  isNullOrUndefined,
+  isEqual
 }
 
 // 设备相关

@@ -8,10 +8,10 @@
 </head>
 <body>
   <!-- <audio id="player" src="http://101.43.182.210:2333/bili/av22590813_1.m4a?x-cos-traffic-limit=819200" controls="controls" autoplay="autoplay" style="width: 100%; outline: medium;"></audio> -->
-  <script src="../dist/utils.umd.js"></script>
-  <script src="https://lib.baomitu.com/qs/latest/qs.min.js"></script>
-  <script>
-    const {getUrlQuery, reviseUrlQuery, qsStringify, setUrlQuery, qsParse, chunk} = utils
+  <!-- <script src="../dist/utils.umd.js"></script> -->
+  <!-- <script src="https://lib.baomitu.com/qs/latest/qs.min.js"></script> -->
+  <script type="module">
+    import {getUrlQuery, reviseUrlQuery, qsStringify, setUrlQuery, qsParse, unique} from '/src/index.ts'
     console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'search'}))
     console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}))
     console.log(getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'}))
@@ -22,7 +22,7 @@
     console.log(reviseUrlQuery({hash: {c: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
     console.log(reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4'))
 
-    console.log(chunk([1, 2, 3, 4, 5], 2.5))
+    console.log(unique([{ user: { id: 1 } }, { user: { id: 2 } }, { user: { id: 1 } }], 'user'))
 
     // const s = reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
     // setUrlQuery(s)

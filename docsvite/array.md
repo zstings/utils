@@ -19,7 +19,7 @@
 array参数需要Array array参数错误时触发
 :::
 ::: danger
-size参数需要Number size参数错误时触发
+请检查size参数，必须符合大于0的整数 size参数错误时触发
 :::
 #### 示例 
 ```ts
@@ -34,10 +34,11 @@ chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3)
 ::: code-group
 ```Ts [TS版本]
 import isArray from "@/verify/isArray"
+import isInt from "@/verify/isInt"
 import isNumber from "@/verify/isNumber"
 export default function chunk(array: any[], size = 1): any[] {
   if (!isArray(array)) throw `array参数需要Array`
-  if (!isNumber(size)) throw `size参数需要Number`
+  if (!isNumber(size) || !isInt(size) || size <= 0) throw `请检查size参数，必须符合大于0的整数`
   const arr = []
   const count = Math.ceil(array.length / size)
   for (let i = 0; i < count; i++) {
@@ -50,12 +51,13 @@ export default function chunk(array: any[], size = 1): any[] {
 
 ```Js [JS版本]
 import isArray from "@/verify/isArray";
+import isInt from "@/verify/isInt";
 import isNumber from "@/verify/isNumber";
 export default function chunk(array, size = 1) {
     if (!isArray(array))
         throw `array参数需要Array`;
-    if (!isNumber(size))
-        throw `size参数需要Number`;
+    if (!isNumber(size) || !isInt(size) || size <= 0)
+        throw `请检查size参数，必须符合大于0的整数`;
     const arr = [];
     const count = Math.ceil(array.length / size);
     for (let i = 0; i < count; i++) {
@@ -165,11 +167,16 @@ export default function fromPairs(array) {
 
 #### 类型说明
 ::: info
-`function unique(array: any[], key?: string): any[];`
+`function unique(array: any[], option?: {
+    key?: string;
+    deep?: boolean;
+}): any[];`
 :::
 #### 参数
 - array 数组
-- key 指定数组对象需要对比的key
+- option
+- option.key 数组对象去重时指定的键
+- option.deep 是否启用引用类型的去重 默认true， 如果指定了key, deep 强制为 true
 #### 返回
 - `any[]`
 ::: tip
@@ -182,26 +189,43 @@ array参数需要Array array参数错误时触发
 ::: danger
 key参数需要String key存在且不是字符串时触发
 :::
+::: danger
+key指定的属性不存在 key在数组对象的对象中找不到次属性时触发
+:::
 #### 示例 
 ```ts
 unique([1, 2, 1]) => [1, 2]
 ```
-数组对象去重
+数组对象去重-指定key
 ```ts
-unique([{id: 1, name: '1'}, {id: 2, name: '2'}, {id: 1, name: '1'}], 'id')
+unique([{id: 1, name: '1'}, {id: 2, name: '2'}, {id: 1, name: '1'}], {key: 'id'})
 // => [{id: 1, name: '1'}, {id: 2, name: '2'}]
+```
+不指定key，默认启用引用类型的去重
+```ts
+unique([{id: 1, name: '1'}, {id: 1, name: '2'}, {id: 1, name: '1'}])
+// => [{id: 1, name: '1'}, {id: 1, name: '2'}]
+```
+不指定key，关闭引用类型的去重
+```ts
+unique([1, 2, 1, {id: 1, name: '1'}, {id: 1, name: '2'}, {id: 1, name: '1'}], {deep: false})
+// => [1, 2, {id: 1, name: '1'}, {id: 1, name: '2'}, {id: 1, name: '1'}]
 ```
 #### 源码
 ::: code-group
 ```Ts [TS版本]
 import isArray from "@/verify/isArray"
 import isString from "@/verify/isString"
-export default function unique(array: any[], key?: string): any[] {
+import isEqual from "@/verify/isEqual"
+export default function unique(array: any[], option?: {key?: string, deep?: boolean}): any[] {
   if (!isArray(array)) throw `array传入参数需要Array`
-  if (key && !isString(key)) throw `key传入参数需要String`
-  if (key) {
+  if (option?.key && !isString(option.key)) throw `key传入参数需要String`
+  if (option?.key && option.deep != true) option.deep = true
+  if (!option) option = {deep: true}
+  if (option && option.deep) {
     return array.reduce((x, y) => {
-      const isTr = x.some((el: any) => el[key] == y[key])
+      if (option.key && y[option.key!] == undefined) throw `key指定的属性不存在`
+      const isTr = option.key ? x.some((el: any) => isEqual(el[option.key!], y[option.key!])) : x.some((el: any) => isEqual(el, y))
       if (!isTr) x.push(y)
       return x
     }, [])
@@ -214,14 +238,21 @@ export default function unique(array: any[], key?: string): any[] {
 ```Js [JS版本]
 import isArray from "@/verify/isArray";
 import isString from "@/verify/isString";
-export default function unique(array, key) {
+import isEqual from "@/verify/isEqual";
+export default function unique(array, option) {
     if (!isArray(array))
         throw `array传入参数需要Array`;
-    if (key && !isString(key))
+    if (option?.key && !isString(option.key))
         throw `key传入参数需要String`;
-    if (key) {
+    if (option?.key && option.deep != true)
+        option.deep = true;
+    if (!option)
+        option = { deep: true };
+    if (option && option.deep) {
         return array.reduce((x, y) => {
-            const isTr = x.some((el) => el[key] == y[key]);
+            if (option.key && y[option.key] == undefined)
+                throw `key指定的属性不存在`;
+            const isTr = option.key ? x.some((el) => isEqual(el[option.key], y[option.key])) : x.some((el) => isEqual(el, y));
             if (!isTr)
                 x.push(y);
             return x;

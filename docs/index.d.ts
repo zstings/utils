@@ -5,7 +5,7 @@ declare const utils = {
  * @param size 长度 默认1
  * @return 新的数组
  * @throws array参数需要Array array参数错误时触发
- * @throws size参数需要Number size参数错误时触发
+ * @throws 请检查size参数，必须符合大于0的整数 size参数错误时触发
  * @category 数组Array
  * @example
 * eg:
@@ -61,10 +61,13 @@ fromPairs(array: any[]): Record<string, unknown>;
 /**
  * 数组去重
  * @param array 数组
- * @param key 指定数组对象需要对比的key
+ * @param option
+ * @param option.key 数组对象去重时指定的键
+ * @param option.deep 是否启用引用类型的去重 默认true， 如果指定了key, deep 强制为 true
  * @return 新的数组
  * @throws array参数需要Array array参数错误时触发
  * @throws key参数需要String key存在且不是字符串时触发
+ * @throws key指定的属性不存在 key在数组对象的对象中找不到次属性时触发
  * @category 数组Array
  * @example
 * eg:
@@ -73,13 +76,26 @@ fromPairs(array: any[]): Record<string, unknown>;
  * ```
  * @example
 * eg:
- * 数组对象去重
+ * 数组对象去重-指定key
  * ```ts
- * unique([{id: 1, name: '1'}, {id: 2, name: '2'}, {id: 1, name: '1'}], 'id')
+ * unique([{id: 1, name: '1'}, {id: 2, name: '2'}, {id: 1, name: '1'}], {key: 'id'})
  * // => [{id: 1, name: '1'}, {id: 2, name: '2'}]
  * ```
+ * 不指定key，默认启用引用类型的去重
+ * ```ts
+ * unique([{id: 1, name: '1'}, {id: 1, name: '2'}, {id: 1, name: '1'}])
+ * // => [{id: 1, name: '1'}, {id: 1, name: '2'}]
+ * ```
+ * 不指定key，关闭引用类型的去重
+ * ```ts
+ * unique([1, 2, 1, {id: 1, name: '1'}, {id: 1, name: '2'}, {id: 1, name: '1'}], {deep: false})
+ * // => [1, 2, {id: 1, name: '1'}, {id: 1, name: '2'}, {id: 1, name: '1'}]
+ * ```
  */
-unique(array: any[], key?: string): any[];
+unique(array: any[], option?: {
+    key?: string;
+    deep?: boolean;
+}): any[];
 
 /**
  * 将3(4)位16进制色值转为6(8)位
@@ -1663,6 +1679,63 @@ isDom(tarage: Element): boolean;
  * ```
  */
 isEmptyObject(object: Record<string, unknown>): boolean;
+
+/**
+ * 判断任意两个值是否相等
+ * @param value1 任意值
+ * @param value2 任意值
+ * @return true | false
+ * @category 工具Util
+ * @example
+* eg:
+ * 没有参数时，直接返回true
+ * ```ts
+ * isEqual() => true
+ * ```
+ * @example
+* eg:
+ * 只要一个参数时，第二个参数默等于第一个参数
+ * ```ts
+ * isEqual(1) => true
+ * ```
+ * ```ts
+ * isEqual(false) => true
+ * ```
+ * ```ts
+ * isEqual([]) => true
+ * ```
+ * @example
+* eg:
+ * 基本数据类型
+ * ```ts
+ * isEqual(1, 1) => true
+ * ```
+ * ```ts
+ * isEqual(1, 2) => false
+ * ```
+ * ```ts
+ * isEqual(true, 'a') => false
+ * ```
+ * @example
+* eg:
+ * 引用数据类型
+ * ```ts
+ * isEqual([], []) => true
+ * ```
+ * ```ts
+ * isEqual({}, {}) => true
+ * ```
+ * ```ts
+ * isEqual([], {}) => false
+ * ```
+ * ```ts
+ * isEqual([1, 2], [1, 2]) => true
+ * ```
+ * ```ts
+ * isEqual({a: 1}, {a: 1}) => true
+ * ```
+ */
+isEqual(value1?: any, value2?: any): boolean;
 
 /**
  * 判断是否为Function
