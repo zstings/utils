@@ -14,5 +14,5 @@ import typeOf from '@/common/typeOf'
  * ```
  */
 export default function isBasicType(value: any): boolean {
-  return ['String', 'Number', 'Boolean', 'Null', 'Undefined'].includes(typeOf(value))
+  return ['String', 'Number', 'Boolean', 'Null', 'Undefined', 'Symbol', 'BigInt'].includes(typeOf(value))
 }
