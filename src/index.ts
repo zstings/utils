@@ -22,6 +22,7 @@ import isDom from '@/verify/isDom'
 import isArrObj from '@/verify/isArrObj'
 import isNullOrUndefined from '@/verify/isNullOrUndefined'
 import isEqual from '@/verify/isEqual'
+import isBasicType from "@/verify/isBasicType"
 export {
   isArray,
   isPhone,
@@ -41,7 +42,8 @@ export {
   isDom,
   isArrObj,
   isNullOrUndefined,
-  isEqual
+  isEqual,
+  isBasicType
 }
 
 // 设备相关

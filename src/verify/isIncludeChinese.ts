@@ -12,6 +12,6 @@
  * isIncludeChinese('你好') // => true
  * ```
  */
-export default function isIncludeChinese(value: string): boolean {
+export default function isIncludeChinese(value: string = ''): boolean {
   return /\p{sc=Han}/gu.test(value)
 }

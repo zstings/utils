@@ -2,7 +2,7 @@ import typeOf from '@/common/typeOf'
 
 /**
  * 是否是dom
- * @param tarage dom
+ * @param value dom
  * @return true | false
  * @category 浏览器Dom
  * @example
@@ -14,6 +14,6 @@ import typeOf from '@/common/typeOf'
  * isDom(document.querySelector('head')) // => true
  * ```
  */
-export default function isDom(tarage: Element): boolean {
-  return typeOf(tarage).includes('Element')
+export default function isDom(value: any): boolean {
+  return typeOf(value).includes('Element')
 }
