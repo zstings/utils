@@ -329,6 +329,7 @@ import isArray from '@/verify/isArray'
 import isObject from '@/verify/isObject'
 export default function isArrObj(object: any) {
   if (!isArray(object)) return false
+  if (object.length == 0) return false
   return object.every((item: any) => {
     return isObject(item)
   })
@@ -340,6 +341,8 @@ import isArray from '@/verify/isArray';
 import isObject from '@/verify/isObject';
 export default function isArrObj(object) {
     if (!isArray(object))
+        return false;
+    if (object.length == 0)
         return false;
     return object.every((item) => {
         return isObject(item);

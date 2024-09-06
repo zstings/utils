@@ -97,10 +97,10 @@ export default function launchFullscreen(el = document.body) {
 
 #### 类型说明
 ::: info
-`function isDom(tarage: Element): boolean;`
+`function isDom(value: any): boolean;`
 :::
 #### 参数
-- tarage dom
+- value dom
 #### 返回
 - `boolean`
 ::: tip
@@ -117,15 +117,15 @@ isDom(document.querySelector('head')) // => true
 ::: code-group
 ```Ts [TS版本]
 import typeOf from '@/common/typeOf'
-export default function isDom(tarage: Element): boolean {
-  return typeOf(tarage).includes('Element')
+export default function isDom(value: any): boolean {
+  return typeOf(value).includes('Element')
 }
 ```
 
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
-export default function isDom(tarage) {
-    return typeOf(tarage).includes('Element');
+export default function isDom(value) {
+    return typeOf(value).includes('Element');
 }
 
 ```

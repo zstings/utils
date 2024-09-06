@@ -1641,7 +1641,7 @@ isDate(value: any): boolean;
 
 /**
  * 是否是dom
- * @param tarage dom
+ * @param value dom
  * @return true | false
  * @category 浏览器Dom
  * @example
@@ -1655,7 +1655,7 @@ isDate(value: any): boolean;
  * isDom(document.querySelector('head')) // => true
  * ```
  */
-isDom(tarage: Element): boolean;
+isDom(value: any): boolean;
 
 /**
  * 判断对象是否是空对象
@@ -1771,7 +1771,7 @@ isFunction(value: any): boolean;
  * isIncludeChinese('你好') // => true
  * ```
  */
-isIncludeChinese(value: string): boolean;
+isIncludeChinese(value?: string): boolean;
 
 /**
  * 是否为整数

@@ -642,7 +642,7 @@ isBasicType([]) // => false
 ```Ts [TS版本]
 import typeOf from '@/common/typeOf'
 export default function isBasicType(value: any): boolean {
-  return ['String', 'Number', 'Boolean', 'Null', 'Undefined'].includes(typeOf(value))
+  return ['String', 'Number', 'Boolean', 'Null', 'Undefined', 'Symbol', 'BigInt'].includes(typeOf(value))
 }
 
 ```
@@ -650,7 +650,7 @@ export default function isBasicType(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isBasicType(value) {
-    return ['String', 'Number', 'Boolean', 'Null', 'Undefined'].includes(typeOf(value));
+    return ['String', 'Number', 'Boolean', 'Null', 'Undefined', 'Symbol', 'BigInt'].includes(typeOf(value));
 }
 
 ```
@@ -821,7 +821,7 @@ export default function isEqual(value1 = '', value2 = '') {
 
 #### 类型说明
 ::: info
-`function isIncludeChinese(value: string): boolean;`
+`function isIncludeChinese(value?: string): boolean;`
 :::
 #### 参数
 - value 字符串
@@ -841,13 +841,13 @@ isIncludeChinese('你好') // => true
 ::: code-group
 ```Ts [TS版本]
 
-export default function isIncludeChinese(value: string): boolean {
+export default function isIncludeChinese(value: string = ''): boolean {
   return /\p{sc=Han}/gu.test(value)
 }
 ```
 
 ```Js [JS版本]
-export default function isIncludeChinese(value) {
+export default function isIncludeChinese(value = '') {
     return /\p{sc=Han}/gu.test(value);
 }
 
