@@ -129,4 +129,5 @@ function writeFile(path, cont, msg = '内容已成功写入到文件！') {
 // console.log(allDts)
 console.log('写入在线运行时的类型文件')
 let modulesStr = ('declare const utils = {\n' + allDts + '\n}').replaceAll('export default function ', '').replaceAll('@example', '@example\n* eg:')
-fs.writeFileSync(`./docsvite/public/index.d.ts`, modulesStr)
+fs.writeFileSync(`./docsvite/public/index.d.txt`, modulesStr)
+fs.writeFileSync(`./docsvite/public/utils.es.js`, fs.readFileSync('./dist/utils.es.js'), 'utf-8')

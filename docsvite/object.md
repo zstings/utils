@@ -80,15 +80,23 @@ assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
 ::: code-group
 ```Ts [TS版本]
 import isEmptyObject from "@/verify/isEmptyObject"
-export default function assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any> {
-  if (isEmptyObject(target)) return {}
-  return Object.assign(target, ...sources)
+import isObject from "@/verify/isObject"
+// 将元组类型转成对象类型的工具类型
+type MergeTuple<T extends any[]> = T extends [infer F, ...infer R] ? Omit<F, keyof MergeTuple<R>> & MergeTuple<R> : {};
+type Merge<T, U> = Omit<T, keyof U> & U;
+export default function assign<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U) {
+  if (!isObject(target)) throw 'target参数必须是对象'
+  if (isEmptyObject(target)) return {} as keyof T extends never ? {} : Merge<T, MergeTuple<U>>
+  return Object.assign(target, ...sources) as keyof T extends never ? {} : Merge<T, MergeTuple<U>>
 }
 ```
 
 ```Js [JS版本]
 import isEmptyObject from "@/verify/isEmptyObject";
+import isObject from "@/verify/isObject";
 export default function assign(target, ...sources) {
+    if (!isObject(target))
+        throw 'target参数必须是对象';
     if (isEmptyObject(target))
         return {};
     return Object.assign(target, ...sources);
@@ -120,25 +128,31 @@ assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
 ::: code-group
 ```Ts [TS版本]
 import isEmptyObject from "@/verify/isEmptyObject"
-export default function assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any> {
-  if (isEmptyObject(target)) return {}
-  const _object = Object.assign({}, target, ...sources)
-  Object.keys(target).forEach(item => {
-    target[item] = _object[item]
-  })
-  return target
+import isObject from "@/verify/isObject"
+// 将元组类型转成对象类型的工具类型
+type MergeTuple<T extends any[]> = T extends [infer F, ...infer R] ? Omit<F, keyof MergeTuple<R>> & MergeTuple<R> : {};
+type Merge<T, U> = Omit<T, keyof U> & U;
+export default function assignMin<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U) {
+  if (!isObject(target)) throw 'target参数必须是对象'
+  if (isEmptyObject(target)) return {} as keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof Merge<T, MergeTuple<U>>, keyof T>>
+  const merge = Object.assign({}, target, ...sources)
+  // 使用索引签名并确保类型安全
+  Object.keys(target).forEach(key => target[key as keyof T] = merge[key as keyof T]);
+  return target as unknown as keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof Merge<T, MergeTuple<U>>, keyof T>>
 }
 ```
 
 ```Js [JS版本]
 import isEmptyObject from "@/verify/isEmptyObject";
+import isObject from "@/verify/isObject";
 export default function assignMin(target, ...sources) {
+    if (!isObject(target))
+        throw 'target参数必须是对象';
     if (isEmptyObject(target))
         return {};
-    const _object = Object.assign({}, target, ...sources);
-    Object.keys(target).forEach(item => {
-        target[item] = _object[item];
-    });
+    const merge = Object.assign({}, target, ...sources);
+    // 使用索引签名并确保类型安全
+    Object.keys(target).forEach(key => target[key] = merge[key]);
     return target;
 }
 
@@ -239,24 +253,27 @@ omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {b: 2}
 ::: code-group
 ```Ts [TS版本]
 import deepClone from "@/util/deepClone"
-export default function omit(object: Record<string, any>, keys: string[] = []): Record<string, any> {
-  const _object = deepClone(object)
-  Object.keys(_object).forEach(item => {
-    if (keys.includes(item)) delete _object[item]
-  })
-  return _object
+import isObject from "@/verify/isObject";
+// 函数重载声明
+export default function omit<T extends Record<string, any>>(target: T): T;
+export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys: U): Omit<T, U[number]>;
+export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys?: U) {
+  if (!isObject(target)) throw 'target参数必须是对象'
+  const _target = deepClone(target)
+  ;(keys || []).forEach(key => delete _target[key])
+  return _target
 }
 ```
 
 ```Js [JS版本]
 import deepClone from "@/util/deepClone";
-export default function omit(object, keys = []) {
-    const _object = deepClone(object);
-    Object.keys(_object).forEach(item => {
-        if (keys.includes(item))
-            delete _object[item];
-    });
-    return _object;
+import isObject from "@/verify/isObject";
+export default function omit(target, keys) {
+    if (!isObject(target))
+        throw 'target参数必须是对象';
+    const _target = deepClone(target);
+    (keys || []).forEach(key => delete _target[key]);
+    return _target;
 }
 
 ```

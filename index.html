@@ -59,28 +59,19 @@
   </div>
   <!-- <script type="module" src="/dev/index.ts"></script> -->
   <script>
-    var require = { paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs' } }
+    var require = { paths: { 'vs': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/monaco-editor/0.38.0/min/vs' } }
   </script>
-  <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
-  <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/editor/editor.main.nls.js"></script>
-  <script src="https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs/editor/editor.main.js"></script>
+  <script src="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+  <script src="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/monaco-editor/0.38.0/min/vs/editor/editor.main.nls.js"></script>
+  <script src="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/monaco-editor/0.38.0/min/vs/editor/editor.main.js"></script>
   <script type="module">
     import * as utils from './src/index'
-    require.config({ paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.38.0/min/vs' }});
+    require.config({ paths: { 'vs': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/monaco-editor/0.38.0/min/vs' }});
     require(["vs/editor/editor.main"], async () => {
-      // const modules = import.meta.glob('./dist/types/src/index.d.ts', { as: 'raw', eager: true })
-      // console.log(modules['./dist/types/src/index.d.ts'])
-      // monaco.languages.typescript.javascriptDefaults.addExtraLib(modules['./dist/types/src/index.d.ts'], './dist/types/src/index.d.ts');
-      // monaco.editor.createModel(modules['./dist/types/src/index.d.ts'], "typescript", monaco.Uri.parse('/dist/types/src/index.d.ts'));
-
-      // const modules = import.meta.glob('./dist/types/src/array.d.ts', { as: 'raw', eager: true })
-      // const aa = modules['./dist/types/src/array.d.ts'].replaceAll('export declare function ', '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
-      // console.log(aa)
-
       const modules = import.meta.glob(['./src/**/*.ts', '!./src/index.ts'], { query: '?raw', eager: true })
       let modulesStr = ''
       Object.keys(modules).forEach(path => {
-        modulesStr += modules[path].default.replaceAll('export default function', '').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
+        modulesStr += modules[path].default.replace(/export default function ([\s\S]+?)({[\s\S]+})/, '$1;').replace(/import[\s\S]+?\n/g, '').replaceAll('```', '\`\`\`').replaceAll('@example', '@example\n* eg:')
       })
       // validation settings
       monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
