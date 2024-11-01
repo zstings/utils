@@ -1,5 +1,6 @@
 import { expect, it, describe } from 'vitest'
-import typeOf from "@/common/typeOf"
+import {typeOf, version} from "@/index"
+import { version as ver } from '../package.json'
 
 
 describe('typeOf', () => {
@@ -17,5 +18,11 @@ describe('typeOf', () => {
     expect(typeOf(new Int8Array([1, 2]))).toBe('Int8Array');
     expect(typeOf(new Uint8Array([1, 2]))).toBe('Uint8Array');
     expect(typeOf(new Float64Array([1.0, 2.0]))).toBe('Float64Array');
+  });
+});
+
+describe('version', () => {
+  it('版本读取', () => {
+    expect(version()).toBe(ver);
   });
 });
