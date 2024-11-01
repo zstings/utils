@@ -4,6 +4,12 @@ import { arrObjSum, assignMin, createData, assign, omit } from '@/index'
 describe('arrObjSum', () => {
   it('测试 arrObjSum 函数参数错误', () => {
     expect(() => arrObjSum('notAnArray' as any, ['key'])).toThrow('object 必须是数组对象');
+    const objects = [
+      { key1: 'a', key2: 2 },
+      { key1: 3, key2: 'b' }
+    ];
+    const result = arrObjSum(objects, ['key1', 'key2']);
+    expect(result).toEqual({ key1: 3, key2: 2 });
   });
 
   it('测试 arrObjSum 函数功能', () => {
