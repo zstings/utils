@@ -103,12 +103,17 @@ describe('getMonthDays', () => {
 
 describe('howLongAgo', () => {
   it('测试默认参数', () => {
-    expect(() => howLongAgo()).toThrow('startTime 必须大于 endTime');
+    expect(howLongAgo()).toBe('刚刚');
+    expect(howLongAgo('')).toBe('刚刚');
   });
 
   it('测试传入不同时间参数', () => {
-    expect(howLongAgo('2024-10-01', '2024-11-01')).toMatch('1月前');
-    expect(howLongAgo('2024-10-01', '2024-10-04')).toMatch('3天前');
+    expect(howLongAgo('2024-10-01 10:10:10', '2024-10-01 10:10:11')).toMatch('1秒前');
+    expect(howLongAgo('2024-10-01 10:10:10', '2024-10-01 10:11:10')).toMatch('1分钟前');
+    expect(howLongAgo('2024-10-01 10:10:10', '2024-10-01 11:10:10')).toMatch('1小时前');
+    expect(howLongAgo('2024-10-01 10:10:10', '2024-10-02 10:11:10')).toMatch('1天前');
+    expect(howLongAgo('2024-10-01 10:10:10', '2024-11-01 10:11:10')).toMatch('1月前');
+    expect(howLongAgo('2024-10-01 10:10:10', '2025-10-01 10:11:10')).toMatch('1年前');
   });
 
   it('测试 startTime 小于等于 endTime', () => {

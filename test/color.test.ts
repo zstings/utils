@@ -43,6 +43,18 @@ describe('hexToRgb', () => {
   it('测试不合法的输入', () => {
     expect(() => hexToRgb('#fjk')).toThrow('无法识别正确的hex');
   });
+
+  it('测试不合法的输入', () => {
+    expect(() => hexToRgb('#')).toThrow('无法识别正确的hex');
+  });
+
+  it('测试不合法的输入', () => {
+    expect(() => hexToRgb('#3')).toThrow('无法识别正确的hex');
+  });
+
+  it('测试不合法的输入', () => {
+    expect(() => hexToRgb()).toThrow('无法识别正确的hex');
+  });
 });
 
 describe('isHex', () => {
@@ -61,6 +73,10 @@ describe('isHex', () => {
   it('测试不合法的输入', () => {
     expect(isHex('notHex')).toBe(false);
   });
+
+  it('测试不合法的输入', () => {
+    expect(isHex()).toBe(false);
+  });
 });
 
 describe('isRgba', () => {
@@ -75,6 +91,7 @@ describe('isRgba', () => {
     expect(isRgba('-1, 0, 0, 0')).toBe(false);
     expect(isRgba('0, 0, 0, -1')).toBe(false);
     expect(isRgba('0, 0, 0, 2')).toBe(false);
+    expect(isRgba()).toBe(false);
   });
 });
 
@@ -109,9 +126,13 @@ describe('shrinkHex', () => {
     expect(shrinkHex('#aaaaaa')).toEqual('#aaa');
     expect(shrinkHex('#aabb11')).toEqual('#ab1');
     expect(shrinkHex('#aabb1111')).toEqual('#ab11');
+    expect(shrinkHex('#abc')).toEqual('#abc');
+    expect(shrinkHex('#abc1')).toEqual('#abc1');
   });
 
   it('测试不合法的输入', () => {
     expect(() => shrinkHex('notHex')).toThrow('无法识别正确的hex');
+    expect(() => shrinkHex('#fg')).toThrow('无法识别正确的hex');
+    expect(() => shrinkHex()).toThrow('无法识别正确的hex');
   });
 });
