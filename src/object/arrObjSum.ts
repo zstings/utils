@@ -11,6 +11,12 @@ import isArrObj from "@/verify/isArrObj"
  * arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
  * // => {id: 3, age: 30}
  * ```
+ * @example
+ * 求和项不是数字时会以0处理
+ * ```ts
+ * arrObjSum([{id: 'a', age: 10, sx: 1}, {id: 2, age: 'b', sx: 2}], ['id', 'age'])
+ * // => {id: 2, age: 10}
+ * ```
  */
 export default function arrObjSum<T extends Record<string, any>, K extends keyof T>(
   object: T[],
@@ -20,8 +26,8 @@ export default function arrObjSum<T extends Record<string, any>, K extends keyof
   const _object = {} as Record<K, number>
   keys.forEach(item => {
     _object[item] = object.reduce((start: number, end) => {
-      const value = start + Number(end[item])
-      return isNaN(value) ? 0 : value
+      const value = start + (isNaN(end[item]) ? 0 : Number(end[item]))
+      return value
     }, 0)
   })
   return _object
