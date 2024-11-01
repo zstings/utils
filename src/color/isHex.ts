@@ -30,7 +30,7 @@ import isString from "@/verify/isString"
  * isHex('#adg') // => false
  * ```
  */
-export default function isHex(hex: string): boolean {
-  if (hex && !isString(hex)) return false
-  return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex)
+export default function isHex(hex?: string): boolean {
+  if (!isString(hex)) return false
+  return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex!)
 }

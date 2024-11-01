@@ -25,9 +25,9 @@ import isString from "@/verify/isString"
  * isRgba('170,187,256,2') // => false
  * ```
  */
-export default function isRgba(rgba: string): boolean {
-  if (rgba && !isString(rgba)) return false
-  return rgba.split(',').every((s, i) => {
+export default function isRgba(rgba?: string): boolean {
+  if (!isString(rgba)) return false
+  return rgba!.split(',').every((s, i) => {
     if (i == 3) return Number(s) * 255 >= 0 && Number(s) * 255 <= 255
     return Number(s) >= 0 && Number(s) <= 255
   })
