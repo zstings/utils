@@ -1,5 +1,6 @@
 import isBoolean from "@/verify/isBoolean"
 import isNumber from "@/verify/isNumber"
+import isFunction from "@/verify/isFunction"
 
 /**
  * 防抖
@@ -45,6 +46,7 @@ export default function debounce(
   const { leading = false, trailing = true } = option
   let _leading = leading
   let timeout = 0
+  if (!isFunction(func)) throw 'func不是function'
   if (awit && !isNumber(awit)) throw 'awit不是number'
   if (!isBoolean(leading)) throw 'leading不是boolean'
   if (!isBoolean(trailing)) throw 'trailing不是boolean'
