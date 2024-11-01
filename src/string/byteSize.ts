@@ -1,5 +1,3 @@
-import isString from "@/verify/isString"
-
 /**
  * 获取字符串的字节长度
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
@@ -25,6 +23,5 @@ import isString from "@/verify/isString"
  * ```
  */
 export default function byteSize(str: any): number {
-  const _str = isString(str) ? str : str.toString()
-  return new Blob([_str]).size
+  return new Blob([str.toString()]).size
 }

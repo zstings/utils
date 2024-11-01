@@ -34,11 +34,11 @@ import isString from "@/verify/isString"
  * mask('123456', 2, 3, '.') // => '12...6'
  * ```
  */
-export default function mask(str: string, start = 0, length?: number, mask = '*'): string {
-  const _str = isString(str) ? str : str.toString()
+export default function mask(str: string, start = 0, length = Infinity, mask = '*'): string {
   if (!isNumber(start)) throw 'start 必须是数字'
-  if ((length || length == 0) && !isNumber(length)) throw 'length 必须是数字'
+  if (!isNumber(length)) throw 'length 必须是数字'
   if (!isString(mask)) throw 'mask 必须是字符串'
-  const val = length || length == 0 ? _str.slice(start, length + start) : _str.slice(start)
-  return _str.replace(val, mask.padEnd(val.length, mask))
+  str = str.toString()
+  const val = str.slice(start, length + start)
+  return str.replace(val, ''.padEnd(val.length, mask))
 }

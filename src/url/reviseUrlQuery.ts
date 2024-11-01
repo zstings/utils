@@ -56,7 +56,7 @@ export default function reviseUrlQuery(
   if (option.hash) {
     const arr = getUrlQuery({ url, type: 'hash' })
     const hashStr = qsStringify(Object.assign({}, arr, option.hash))
-    hash = hashStr ? (hash.split('?')[0] || '#') + '?' + hashStr : ''
+    hash = hashStr ? hash.split('?')[0] + '?' + hashStr : hash.split('?')[0]
   }
   return origin + pathname + search + hash
 }

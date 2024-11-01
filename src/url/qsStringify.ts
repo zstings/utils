@@ -15,7 +15,7 @@ import isNullOrUndefined from "@/verify/isNullOrUndefined"
  * 如果你想空参数，可以使用 `''`
  * ```ts
  * qsStringify({a: 1, b: undefined, c: null})
- * // => 'a=1&b=2&c=%7B%22a%22%3A1%7D'
+ * // => 'a=1'
  * ```
  * @example
  * ```ts

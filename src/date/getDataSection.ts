@@ -54,7 +54,7 @@ export default function getDataSection(
   if (!isString(format)) throw 'option.format 必须是字符串'
   if (!isBoolean(timestamp)) throw 'option.timestamp 必须是布尔值'
   const _startTime = days(start).getTime()
-  const _endTime = _startTime - ((day || 1) - 1) * 8.64e7
+  const _endTime = _startTime - (day - 1) * 8.64e7
   if (timestamp) return [timeStamp(_endTime, format), timeStamp(_startTime, format)]
   return [formats(_endTime, format), formats(_startTime, format)]
 }

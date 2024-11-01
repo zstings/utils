@@ -1,5 +1,3 @@
-import isString from "@/verify/isString"
-
 /**
  * 移除字符串中的html标签
  * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
@@ -21,10 +19,9 @@ import isString from "@/verify/isString"
  * ```
  */
 export default function removeHTML(str: any): string {
-  const _str = isString(str) ? str : str.toString()
   const escapeReg =
     /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi
-  return _str
+  return str.toString()
     .replace(/<[^>]+>/g, '')
     .replace(escapeReg, '')
     .trim()
