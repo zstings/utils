@@ -23,6 +23,7 @@ import isArrObj from '@/verify/isArrObj'
 import isNullOrUndefined from '@/verify/isNullOrUndefined'
 import isEqual from '@/verify/isEqual'
 import isBasicType from "@/verify/isBasicType"
+import isJsonString from "@/verify/isJsonString"
 export {
   isArray,
   isPhone,
@@ -43,7 +44,8 @@ export {
   isArrObj,
   isNullOrUndefined,
   isEqual,
-  isBasicType
+  isBasicType,
+  isJsonString
 }
 
 // 设备相关

@@ -2,6 +2,9 @@ import { expect, it, describe } from 'vitest'
 import {typeOf, version} from "@/index"
 import { version as ver } from '../package.json'
 
+/**
+ * @vitest-environment happy-dom
+ */
 
 describe('typeOf', () => {
   it('测试各种数据的类型获取情况', () => {
@@ -18,6 +21,7 @@ describe('typeOf', () => {
     expect(typeOf(new Int8Array([1, 2]))).toBe('Int8Array');
     expect(typeOf(new Uint8Array([1, 2]))).toBe('Uint8Array');
     expect(typeOf(new Float64Array([1.0, 2.0]))).toBe('Float64Array');
+    expect(typeOf(document.querySelector('body'))).toBe('HTMLBodyElement');
   });
 });
 
