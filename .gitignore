@@ -28,4 +28,3 @@ testcdn
 *.sln
 *.sw?
 docsvite/.vitepress/cache
-coverage
