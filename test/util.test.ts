@@ -95,10 +95,64 @@ describe('deepClone', () => {
 });
 
 describe('downloadFile', () => {
-  it('测试 downloadFile 函数功能', () => {
+  beforeEach(() => {
+    // 每次测试前清空 document.body
+    document.body.innerHTML = '';
+    // 模拟 URL.createObjectURL 和 revokeObjectURL
+    vi.spyOn(URL, 'createObjectURL').mockReturnValue('mockUrl');
+    vi.spyOn(URL, 'revokeObjectURL');
+
+    // 监控 a.remove 的调用，防止真实移除
+    // vi.spyOn(HTMLElement.prototype, 'remove').mockImplementation(function () {
+    //   // 什么都不做，屏蔽真正的 remove 事件
+    // });
+    
+    // 创建一个 spy 对象来监控 a.click 方法
+    vi.spyOn(HTMLAnchorElement.prototype, 'click');
+  });
+
+  afterEach(() => {
+    // 恢复原来的 remove 方法
+    // vi.restoreAllMocks();
+  });
+
+  it('应创建并点击下载链接', () => {
     const blob = new Blob(['test content'], { type: 'text/plain' });
-    downloadFile('test.txt', blob);
-    expect(true).toBe(true);
+    const name = 'test.txt';
+    const originalRemove = HTMLElement.prototype.remove;
+    HTMLElement.prototype.remove = () => {}
+
+    // 调用 downloadFile 函数
+    downloadFile(name, blob);
+
+    const link = document.querySelector('a');
+    expect(link).not.toBeNull(); // 确保链接被创建
+    expect(link!.href).toContain('mockUrl'); // 验证链接的 href
+    expect(link!.download).toBe(name); // 验证下载的文件名
+
+    // 验证 a.click() 是否被调用
+    expect(HTMLAnchorElement.prototype.click).toHaveBeenCalled(); // 验证点击事件被触发
+
+    HTMLElement.prototype.remove = originalRemove;
+  });
+
+  it('应在下载后移除链接', () => {
+    const blob = new Blob(['test content'], { type: 'text/plain' });
+    const name = 'test.txt';
+
+    downloadFile(name, blob);
+
+    const link = document.querySelector('a');
+    expect(link).toBeNull(); // 确保链接被移除
+  });
+
+  it('应调用 revokeObjectURL 来释放资源', () => {
+    const blob = new Blob(['test content'], { type: 'text/plain' });
+    const name = 'test.txt';
+
+    downloadFile(name, blob);
+
+    expect(URL.revokeObjectURL).toHaveBeenCalledWith('mockUrl'); // 验证 revokeObjectURL 被调用
   });
 });
 
@@ -156,12 +210,12 @@ describe('phoneEncrypt', () => {
 });
 
 describe('random', () => {
-  it('应返回 startNum 当 startNum 和 endNum 相等时', () => {
+  it('应返回 startNum, 当 startNum 和 endNum 相等时', () => {
     const result = random(5, 5);
     expect(result).toBe(5);
   });
 
-  it('应返回 min 或 max 当 startNum 和 endNum 相差 1 时', () => {
+  it('应返回 startNum 或 endNum, 当 startNum 和 endNum 相差 1 时', () => {
     const result1 = random(1, 2);
     const result2 = random(2, 1);
     expect(result1).toBeGreaterThanOrEqual(1);
@@ -205,11 +259,42 @@ describe('random', () => {
   });
 });
 
-describe('scrollTo', () => {
-  it('测试 scrollTo 函数功能', () => {
-    const callback = () => {
-      expect(true).toBe(true);
-    };
-    scrollTo({ num: 100 }, callback);
+describe('scrollTo 函数测试', () => {
+  const mockElement = {
+    scrollTop: 0,
+    scrollLeft: 0,
+  } as HTMLElement;
+
+  it('默认情况下滚动到指定位置', () => {
+    scrollTo({ num: 100, dom: mockElement }, () => {
+      expect(mockElement.scrollTop).toBe(100);
+    });
+  });
+
+  it('指定 rate 使滚动过程更平滑', () => {
+    scrollTo({ num: 100, rate: 10, dom: mockElement }, () => {
+      expect(mockElement.scrollTop).toBe(100);
+    });
+  });
+
+  it('向左滚动', () => {
+    scrollTo({ num: 50, direction: 'left', dom: mockElement }, () => {
+      expect(mockElement.scrollLeft).toBe(50);
+    });
+  });
+
+  it('使用回调函数', () => {
+    const callback = vi.fn();
+    scrollTo({ num: 200, dom: mockElement }, callback);
+    setTimeout(() => {
+      expect(callback).toHaveBeenCalled();
+    }, 100); // 等待足够的时间以确保动画完成
+  });
+
+  it('如果目标位置已经达到则不改变', () => {
+    mockElement.scrollTop = 100;
+    scrollTo({ num: 100, dom: mockElement }, () => {
+      expect(mockElement.scrollTop).toBe(100);
+    });
   });
 });
