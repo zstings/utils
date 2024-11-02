@@ -22,6 +22,6 @@ import isPhone from "@/verify/isPhone"
  */
 export default function phoneEncrypt(value: string | number): string {
   if (!isPhone(value)) throw '手机号格式不正确'
-  if (typeof value === 'number') value = value.toString()
+  value = value.toString()
   return mask(value, 3, 4)
 }
