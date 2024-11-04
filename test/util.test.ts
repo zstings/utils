@@ -252,6 +252,12 @@ describe('random', () => {
     expect(result).toBeLessThanOrEqual(5);
   });
 
+  it('省略endNum时', () => {
+    const result = random(5);
+    expect(result).toBeGreaterThanOrEqual(0);
+    expect(result).toBeLessThanOrEqual(5);
+  });
+
   it('应处理反向范围并返回随机数', () => {
     const result = random(10, 5);
     expect(result).toBeGreaterThanOrEqual(5);

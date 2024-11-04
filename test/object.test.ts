@@ -1,5 +1,5 @@
 import { expect, it, describe } from 'vitest'
-import { arrObjSum, assignMin, createData, assign, omit } from '@/index'
+import { arrObjSum, assignMin, createData, assign, omit, pick, resetObjectValues } from '@/index'
 
 describe('arrObjSum', () => {
   it('测试 arrObjSum 函数参数错误', () => {
@@ -81,5 +81,39 @@ describe('omit', () => {
 
   it('测试目标对象不是对象的情况', () => {
     expect(() => omit(1 as any)).toThrow('target参数必须是对象');
+  });
+});
+
+describe('pick', () => {
+  it('测试基本的提取功能', () => {
+    expect(pick({ a: 1, b: 2 }, ['a'])).toEqual({ a: 1 });
+    expect(pick({ a: 1, b: 2 }, [])).toEqual({});
+    expect(pick({ a: 1, b: 2 })).toEqual({});
+  });
+
+  it('测试目标对象为空的情况', () => {
+    expect(pick({})).toEqual({});
+  });
+
+  it('测试目标对象不是对象的情况', () => {
+    expect(() => pick(1 as any)).toThrow('target参数必须是object');
+  });
+
+  it('测试提取属性不是数组的情况', () => {
+    expect(() => pick({a: 1}, 1 as any)).toThrow('keys参数必须是array');
+  });
+});
+
+describe('resetObjectValues', () => {
+  it('测试基本的重置功能', () => {
+    expect(resetObjectValues({a: 1, b: '2', c: true, d: [1, 2, 3], e: {a: 1, b: '2', c: [6, 7]}})).toEqual({a: 0, b: '', c: false, d: [], e: {a: 0, b: '', c: []}});
+  });
+
+  it('测试目标对象为空的情况', () => {
+    expect(resetObjectValues({})).toEqual({});
+  });
+
+  it('测试目标对象不是对象的情况', () => {
+    expect(() => resetObjectValues(1 as any)).toThrow('target参数必须是object');
   });
 });
