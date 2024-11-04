@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/verify/isArrObj.ts</title>
+    <title>Code coverage report for src/object/pick.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/verify</a> isArrObj.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/object</a> pick.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -85,7 +85,27 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -104,32 +124,51 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span></td><td class="text"><pre class="prettyprint lang-js">import isArray from '@/verify/isArray'
-import isObject from '@/verify/isObject'
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import deepClone from "@/util/deepClone"
+import isObject from "@/verify/isObject";
+import isArray from "@/verify/isArray";
 &nbsp;
 /**
- * 是否是数组对象
- * @return true | false
- * @category 数组Array
+ * 提取指定对象的指定属性
+ * @param target 指定对象
+ * @param keys 由需要提取的属性组成的数组，不传时为[]
+ * @return 新的对象
+ * @category 对象Object
  * @example
  * ```ts
- * isArrObj([{}]) // =&gt; true
+ * omit({a: 1, b: 2, c: 3}) // =&gt; {}
+ * omit({a: 1, b: 2, c: 3}, []) // =&gt; {}
  * ```
  * @example
- * ```ts
- * isArrObj([]) // =&gt; false
+ * ```
+ * omit({a: 1, b: 2, c: 3}, ['a', 'c']) // =&gt; {a: 1, c: 3}
  * ```
  */
-export default function isArrObj(object: any) {
-  if (!isArray(object)) return false
-  if (object.length == 0) return false
-  return object.every((item: any) =&gt; {
-    return isObject(item)
+// 函数重载声明
+export default function pick&lt;T extends Record&lt;string, any&gt;&gt;(target: T, keys?: []): {};
+export default function pick&lt;T extends Record&lt;string, any&gt;, K extends keyof T&gt;(target: T, keys: K[]): Pick&lt;T, K&gt;;
+export default function pick&lt;T extends Record&lt;string, any&gt;, K extends keyof T&gt;(target: T, keys: K[] = []): K extends keyof T ? Pick&lt;T, K&gt; : {} {
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  if (!isArray(keys)) throw new Error('keys参数必须是array');
+  if (keys.length == 0) return {} as K extends keyof T ? Pick&lt;T, K&gt; : {}
+  target = deepClone(target);
+  Object.keys(target).forEach(key =&gt; {
+    if (!keys.includes(key as K)) {
+      delete target[key]
+    } 
   })
-}</pre></td></tr></table></pre>
+  return target as K extends keyof T ? Pick&lt;T, K&gt; : {};
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
