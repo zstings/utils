@@ -103,7 +103,8 @@ import assign from '@/object/assign'
 import assignMin from '@/object/assignMin'
 import arrObjSum from '@/object/arrObjSum'
 import pick from '@/object/pick'
-export { createData, omit, assign, assignMin, arrObjSum, pick }
+import resetObjectValues from '@/object/resetObjectValues'
+export { createData, omit, assign, assignMin, arrObjSum, pick, resetObjectValues }
 
 // url相关
 import getUrlParam from '@/url/getUrlParam'
