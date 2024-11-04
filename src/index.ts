@@ -102,7 +102,8 @@ import omit from '@/object/omit'
 import assign from '@/object/assign'
 import assignMin from '@/object/assignMin'
 import arrObjSum from '@/object/arrObjSum'
-export { createData, omit, assign, assignMin, arrObjSum }
+import pick from '@/object/pick'
+export { createData, omit, assign, assignMin, arrObjSum, pick }
 
 // url相关
 import getUrlParam from '@/url/getUrlParam'
