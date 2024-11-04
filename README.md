@@ -44,14 +44,14 @@ cdn导入
 <!-- 默认最新版 -->
 <script src="https://cdn.jsdelivr.net/npm/@zstings/utils/dist/utils.umd.min.js"></script>
 <script>
-  utils.getDataType([]) // Array
+  utils.typeOf([]) // Array
 </script>
 ```
 cdn 使用模块导入
 ```html
 <script type="module">
-  import {getDataType} from 'https://cdn.jsdelivr.net/npm/@zstings/utils@0.4.0/dist/utils.es.min.js'
-  getDataType([]) // Array
+  import {typeOf} from 'https://cdn.jsdelivr.net/npm/@zstings/utils/dist/utils.es.min.js'
+  typeOf([]) // Array
 </script>
 ```
 cdn 使用模块导入-importmap模式
@@ -59,13 +59,13 @@ cdn 使用模块导入-importmap模式
 <script type="importmap">
   {
     "imports": {
-      "@zstings/utils": "https://cdn.jsdelivr.net/npm/@zstings/utils@0.4.0/dist/"
+      "@zstings/utils": "https://cdn.jsdelivr.net/npm/@zstings/utils/dist/"
     }
   }
 </script>
 <script type="module">
-  import {getDataType} from '@zstings/utils'
-  console.log(getDataType([])) // Array
+  import {typeOf} from '@zstings/utils'
+  console.log(typeOf([])) // Array
 </script>
 ```
 
