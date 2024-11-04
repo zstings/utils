@@ -17,7 +17,7 @@ export default function omit<T extends Record<string, any>>(target: T): T;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys: U): Omit<T, U[number]>;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys?: U) {
   if (!isObject(target)) throw 'target参数必须是对象'
-  const _target = deepClone(target)
-  ;(keys || []).forEach(key => delete _target[key])
-  return _target
+  target = deepClone(target)
+  ;(keys || []).forEach(key => delete target[key])
+  return target
 }
