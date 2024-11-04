@@ -439,7 +439,7 @@ import mask from "@/string/mask"
 import isPhone from "@/verify/isPhone"
 export default function phoneEncrypt(value: string | number): string {
   if (!isPhone(value)) throw '手机号格式不正确'
-  if (typeof value === 'number') value = value.toString()
+  value = value.toString()
   return mask(value, 3, 4)
 }
 ```
@@ -450,8 +450,7 @@ import isPhone from "@/verify/isPhone";
 export default function phoneEncrypt(value) {
     if (!isPhone(value))
         throw '手机号格式不正确';
-    if (typeof value === 'number')
-        value = value.toString();
+    value = value.toString();
     return mask(value, 3, 4);
 }
 
@@ -460,22 +459,26 @@ export default function phoneEncrypt(value) {
 ## random 
 均衡获取指定范围的随机整数
 
-返回一个min 和 max之间的随机整数。如果你没有参数，那么将返回0和1之间的整数。如果你只传递一个参数，那么将返回0和这个参数之间的整数。
+返回一个startNum 和 endNum之间的随机整数。如果你没有参数，那么将返回随机返回0和1。
+
+如果你只传递一个参数，那么将返回0和这个参数之间的整数。
+
+如果两个参数相差值是1，随机返回传入的两个值。
 
 #### 类型说明
 ::: info
-`function random(min?: number, max?: number): number;`
+`function random(startNum?: number, endNum?: number): number;`
 :::
 #### 参数
-- min 范围最小整数
-- max 范围最大整数
+- startNum 整数
+- endNum 整数
 #### 返回
 - `number`
 ::: tip
 随机整数
 :::
 #### 示例 
-均衡获取0或者1的数
+随机返回0或者1
 ```ts
 random()
 ```
@@ -491,35 +494,30 @@ random(1, 10)
 ::: code-group
 ```Ts [TS版本]
 import isNumber from "@/verify/isNumber"
-export default function random(min = 0, max?: number): number {
-  if (!isNumber(min)) throw `min 必须整数`
-  if (max && !isNumber(max)) throw `max 必须整数`
-  if (min == null) {
-    min = 0
-    max = max || 1
-  } else if (max == null) {
-    max = min
-    min = 0
-  }
+export default function random(startNum = 1, endNum = 0): number {
+  if (!isNumber(startNum)) throw `min 必须整数`
+  if (!isNumber(endNum)) throw `max 必须整数`
+  if (startNum == endNum) return startNum
+  const max = Math.max(startNum, endNum)
+  const min = Math.min(startNum, endNum)
+  if (max - min == 1) return Math.random() > 0.5 ? max : min
   return Math.round(Math.random() * (max - min) + min)
 }
 ```
 
 ```Js [JS版本]
 import isNumber from "@/verify/isNumber";
-export default function random(min = 0, max) {
-    if (!isNumber(min))
+export default function random(startNum = 1, endNum = 0) {
+    if (!isNumber(startNum))
         throw `min 必须整数`;
-    if (max && !isNumber(max))
+    if (!isNumber(endNum))
         throw `max 必须整数`;
-    if (min == null) {
-        min = 0;
-        max = max || 1;
-    }
-    else if (max == null) {
-        max = min;
-        min = 0;
-    }
+    if (startNum == endNum)
+        return startNum;
+    const max = Math.max(startNum, endNum);
+    const min = Math.min(startNum, endNum);
+    if (max - min == 1)
+        return Math.random() > 0.5 ? max : min;
     return Math.round(Math.random() * (max - min) + min);
 }
 

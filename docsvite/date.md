@@ -275,7 +275,7 @@ export default function getDataSection(
   if (!isString(format)) throw 'option.format 必须是字符串'
   if (!isBoolean(timestamp)) throw 'option.timestamp 必须是布尔值'
   const _startTime = days(start).getTime()
-  const _endTime = _startTime - ((day || 1) - 1) * 8.64e7
+  const _endTime = _startTime - (day - 1) * 8.64e7
   if (timestamp) return [timeStamp(_endTime, format), timeStamp(_startTime, format)]
   return [formats(_endTime, format), formats(_startTime, format)]
 }
@@ -300,7 +300,7 @@ export default function getDataSection(day = 1, option = { start: new Date(), fo
     if (!isBoolean(timestamp))
         throw 'option.timestamp 必须是布尔值';
     const _startTime = days(start).getTime();
-    const _endTime = _startTime - ((day || 1) - 1) * 8.64e7;
+    const _endTime = _startTime - (day - 1) * 8.64e7;
     if (timestamp)
         return [timeStamp(_endTime, format), timeStamp(_startTime, format)];
     return [formats(_endTime, format), formats(_startTime, format)];
@@ -410,40 +410,14 @@ export default function howLongAgo(
   const _endTime = days(endTime).getTime()
   const _startTime = days(startTime).getTime()
   const date = _startTime - _endTime
-  if (date <= 0) throw 'startTime 必须大于 endTime'
-  const dater = [
-    {
-      num: 31536000000,
-      lab: '年'
-    },
-    {
-      num: 2592000000,
-      lab: '月'
-    },
-    {
-      num: 86400000,
-      lab: '天'
-    },
-    {
-      num: 3600000,
-      lab: '小时'
-    },
-    {
-      num: 60000,
-      lab: '分钟'
-    },
-    {
-      num: 1000,
-      lab: '秒'
-    }
-  ]
-  for (let i = 0; i < dater.length; i++) {
-    const dates = Math.floor(date / dater[i].num)
-    if (dates >= 1) {
-      return `${dates}${dater[i].lab}前`
-    }
-  }
-  return ''
+  if (date < 0) throw 'startTime 必须大于 endTime'
+  if (date >= 31536000000) return Math.floor(date / 31536000000) + '年前'
+  else if (date >= 2592000000) return Math.floor(date / 2592000000) + '月前'
+  else if (date >= 86400000) return Math.floor(date / 86400000) + '天前'
+  else if (date >= 3600000) return Math.floor(date / 3600000) + '小时前'
+  else if (date >= 60000) return Math.floor(date / 60000) + '分钟前'
+  else if (date >= 1000) return Math.floor(date / 1000) + '秒前'
+  else return '刚刚'
 }
 ```
 
@@ -453,41 +427,22 @@ export default function howLongAgo(endTime = new Date(), startTime = new Date())
     const _endTime = days(endTime).getTime();
     const _startTime = days(startTime).getTime();
     const date = _startTime - _endTime;
-    if (date <= 0)
+    if (date < 0)
         throw 'startTime 必须大于 endTime';
-    const dater = [
-        {
-            num: 31536000000,
-            lab: '年'
-        },
-        {
-            num: 2592000000,
-            lab: '月'
-        },
-        {
-            num: 86400000,
-            lab: '天'
-        },
-        {
-            num: 3600000,
-            lab: '小时'
-        },
-        {
-            num: 60000,
-            lab: '分钟'
-        },
-        {
-            num: 1000,
-            lab: '秒'
-        }
-    ];
-    for (let i = 0; i < dater.length; i++) {
-        const dates = Math.floor(date / dater[i].num);
-        if (dates >= 1) {
-            return `${dates}${dater[i].lab}前`;
-        }
-    }
-    return '';
+    if (date >= 31536000000)
+        return Math.floor(date / 31536000000) + '年前';
+    else if (date >= 2592000000)
+        return Math.floor(date / 2592000000) + '月前';
+    else if (date >= 86400000)
+        return Math.floor(date / 86400000) + '天前';
+    else if (date >= 3600000)
+        return Math.floor(date / 3600000) + '小时前';
+    else if (date >= 60000)
+        return Math.floor(date / 60000) + '分钟前';
+    else if (date >= 1000)
+        return Math.floor(date / 1000) + '秒前';
+    else
+        return '刚刚';
 }
 
 ```

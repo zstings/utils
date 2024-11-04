@@ -19,6 +19,11 @@
 arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
 // => {id: 3, age: 30}
 ```
+求和项不是数字时会以0处理
+```ts
+arrObjSum([{id: 'a', age: 10, sx: 1}, {id: 2, age: 'b', sx: 2}], ['id', 'age'])
+// => {id: 2, age: 10}
+```
 #### 源码
 ::: code-group
 ```Ts [TS版本]
@@ -31,8 +36,8 @@ export default function arrObjSum<T extends Record<string, any>, K extends keyof
   const _object = {} as Record<K, number>
   keys.forEach(item => {
     _object[item] = object.reduce((start: number, end) => {
-      const value = start + Number(end[item])
-      return isNaN(value) ? 0 : value
+      const value = start + (isNaN(end[item]) ? 0 : Number(end[item]))
+      return value
     }, 0)
   })
   return _object
@@ -47,8 +52,8 @@ export default function arrObjSum(object, keys) {
     const _object = {};
     keys.forEach(item => {
         _object[item] = object.reduce((start, end) => {
-            const value = start + Number(end[item]);
-            return isNaN(value) ? 0 : value;
+            const value = start + (isNaN(end[item]) ? 0 : Number(end[item]));
+            return value;
         }, 0);
     });
     return _object;
@@ -61,15 +66,21 @@ export default function arrObjSum(object, keys) {
 
 #### 类型说明
 ::: info
-`function assign(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;`
+`function assign<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U): keyof T extends never ? {} : Merge<T, MergeTuple<U>>;
+export {};`
 :::
 #### 参数
 - target 目标对象，被合并的对象
 - sources 源对象，可以多个
 #### 返回
-- `Record<string, any>`
+- `keyof T extends never ? {} : Merge<T, MergeTuple<U>>;
+export {}`
 ::: tip
 目标对象
+:::
+#### 异常
+::: danger
+target参数必须是对象  target参数不是对象时触发
 :::
 #### 示例 
 对象合并效果与Object.assign一致
@@ -109,15 +120,21 @@ export default function assign(target, ...sources) {
 
 #### 类型说明
 ::: info
-`function assignMin(target: Record<string, any>, ...sources: Record<string, any>[]): Record<string, any>;`
+`function assignMin<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U): keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof MergeTuple<U>, keyof T> | Exclude<Exclude<keyof T, keyof MergeTuple<U>>, keyof T>>;
+export {};`
 :::
 #### 参数
 - target 目标对象，被合并的对象
 - sources 源对象，可以多个
 #### 返回
-- `Record<string, any>`
+- `keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof MergeTuple<U>, keyof T> | Exclude<Exclude<keyof T, keyof MergeTuple<U>>, keyof T>>;
+export {}`
 ::: tip
 目标对象
+:::
+#### 异常
+::: danger
+target参数必须是对象  target参数不是对象时触发
 :::
 #### 示例 
 最小合并对象，只会合并源对象原有的属性，其他忽略
@@ -235,13 +252,14 @@ export default function createData(deep = 1, breadth = 0) {
 
 #### 类型说明
 ::: info
-`function omit(object: Record<string, any>, keys?: string[]): Record<string, any>;`
+`function omit<T extends Record<string, any>>(target: T): T;
+export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys: U): Omit<T, U[number]>;`
 :::
 #### 参数
-- object 指定对象
-- keys 指定属性
+- target 指定对象
+- keys 由需要删除的属性组成的数组，不传时为[]
 #### 返回
-- `Record<string, any>`
+- `Omit<T, U[number]>`
 ::: tip
 新的对象
 :::
@@ -259,9 +277,9 @@ export default function omit<T extends Record<string, any>>(target: T): T;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys: U): Omit<T, U[number]>;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys?: U) {
   if (!isObject(target)) throw 'target参数必须是对象'
-  const _target = deepClone(target)
-  ;(keys || []).forEach(key => delete _target[key])
-  return _target
+  target = deepClone(target)
+  ;(keys || []).forEach(key => delete target[key])
+  return target
 }
 ```
 
@@ -271,9 +289,154 @@ import isObject from "@/verify/isObject";
 export default function omit(target, keys) {
     if (!isObject(target))
         throw 'target参数必须是对象';
-    const _target = deepClone(target);
-    (keys || []).forEach(key => delete _target[key]);
-    return _target;
+    target = deepClone(target);
+    (keys || []).forEach(key => delete target[key]);
+    return target;
+}
+
+```
+:::
+## pick 
+提取指定对象的指定属性
+
+#### 类型说明
+::: info
+`function pick<T extends Record<string, any>>(target: T, keys?: []): {};
+export default function pick<T extends Record<string, any>, K extends keyof T>(target: T, keys: K[]): Pick<T, K>;`
+:::
+#### 参数
+- target 指定对象
+- keys 由需要提取的属性组成的数组，不传时为[]
+#### 返回
+- `Pick<T, K>`
+::: tip
+新的对象
+:::
+#### 示例 
+```ts
+omit({a: 1, b: 2, c: 3}) // => {}
+omit({a: 1, b: 2, c: 3}, []) // => {}
+```
+```
+omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {a: 1, c: 3}
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import deepClone from "@/util/deepClone"
+import isObject from "@/verify/isObject";
+import isArray from "@/verify/isArray";
+// 函数重载声明
+export default function pick<T extends Record<string, any>>(target: T, keys?: []): {};
+export default function pick<T extends Record<string, any>, K extends keyof T>(target: T, keys: K[]): Pick<T, K>;
+export default function pick<T extends Record<string, any>, K extends keyof T>(target: T, keys: K[] = []): K extends keyof T ? Pick<T, K> : {} {
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  if (!isArray(keys)) throw new Error('keys参数必须是array');
+  if (keys.length == 0) return {} as K extends keyof T ? Pick<T, K> : {}
+  target = deepClone(target);
+  Object.keys(target).forEach(key => {
+    if (!keys.includes(key as K)) {
+      delete target[key]
+    } 
+  })
+  return target as K extends keyof T ? Pick<T, K> : {};
+}
+
+```
+
+```Js [JS版本]
+import deepClone from "@/util/deepClone";
+import isObject from "@/verify/isObject";
+import isArray from "@/verify/isArray";
+export default function pick(target, keys = []) {
+    if (!isObject(target))
+        throw new Error('target参数必须是object');
+    if (!isArray(keys))
+        throw new Error('keys参数必须是array');
+    if (keys.length == 0)
+        return {};
+    target = deepClone(target);
+    Object.keys(target).forEach(key => {
+        if (!keys.includes(key)) {
+            delete target[key];
+        }
+    });
+    return target;
+}
+
+```
+:::
+## resetObjectValues 
+重置指定对象的值
+
+对对象中值为字符串的重置为: ''
+
+对对象中值为布尔值的重置为: false
+
+对对象中值为数字的重置为: 0
+
+对对象中值为数组的重置为: []
+
+对对象中值为对象的就递归，直到结束
+
+#### 类型说明
+::: info
+`function resetObjectValues<T extends Record<string, any>>(target: T, n?: number): T;`
+:::
+#### 参数
+- target 指定对象
+#### 返回
+- `T`
+::: tip
+新的对象
+:::
+#### 示例 
+```ts
+omit({a: 1, b: '2', c: true, d: [1, 2, 3], e: {a: 1, b: '2', c: [6, 7]}})
+// => {a: 0, b: '', c: false, d: [], e: {a: 0, b: '', c: []}}
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import deepClone from "@/util/deepClone"
+import typeOf from "@/common/typeOf";
+import isObject from "@/verify/isObject";
+export default function resetObjectValues<T extends Record<string, any>>(target: T, n = 0) {
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  if (n != 1) target = deepClone(target);
+  Object.keys(target).forEach(key => {
+    if (typeOf(target[key]) == 'String') (target as Record<string, any>)[key] = ''
+    if (typeOf(target[key]) == 'Number') (target as Record<string, any>)[key] = 0
+    if (typeOf(target[key]) == 'Boolean') (target as Record<string, any>)[key] = false
+    if (typeOf(target[key]) == 'Array') (target as Record<string, any>)[key] = []
+    if (typeOf(target[key]) == 'Object') resetObjectValues(target[key], 1)
+  })
+  return target
+}
+```
+
+```Js [JS版本]
+import deepClone from "@/util/deepClone";
+import typeOf from "@/common/typeOf";
+import isObject from "@/verify/isObject";
+export default function resetObjectValues(target, n = 0) {
+    if (!isObject(target))
+        throw new Error('target参数必须是object');
+    if (n != 1)
+        target = deepClone(target);
+    Object.keys(target).forEach(key => {
+        if (typeOf(target[key]) == 'String')
+            target[key] = '';
+        if (typeOf(target[key]) == 'Number')
+            target[key] = 0;
+        if (typeOf(target[key]) == 'Boolean')
+            target[key] = false;
+        if (typeOf(target[key]) == 'Array')
+            target[key] = [];
+        if (typeOf(target[key]) == 'Object')
+            resetObjectValues(target[key], 1);
+    });
+    return target;
 }
 
 ```

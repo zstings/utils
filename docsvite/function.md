@@ -50,6 +50,7 @@ getlist: debounce(function () { ... })
 ```Ts [TS版本]
 import isBoolean from "@/verify/isBoolean"
 import isNumber from "@/verify/isNumber"
+import isFunction from "@/verify/isFunction"
 export default function debounce(
   func: (...params: any[]) => any,
   awit = 500,
@@ -58,6 +59,7 @@ export default function debounce(
   const { leading = false, trailing = true } = option
   let _leading = leading
   let timeout = 0
+  if (!isFunction(func)) throw 'func不是function'
   if (awit && !isNumber(awit)) throw 'awit不是number'
   if (!isBoolean(leading)) throw 'leading不是boolean'
   if (!isBoolean(trailing)) throw 'trailing不是boolean'
@@ -79,10 +81,13 @@ export default function debounce(
 ```Js [JS版本]
 import isBoolean from "@/verify/isBoolean";
 import isNumber from "@/verify/isNumber";
+import isFunction from "@/verify/isFunction";
 export default function debounce(func, awit = 500, option = { leading: false, trailing: true }) {
     const { leading = false, trailing = true } = option;
     let _leading = leading;
     let timeout = 0;
+    if (!isFunction(func))
+        throw 'func不是function';
     if (awit && !isNumber(awit))
         throw 'awit不是number';
     if (!isBoolean(leading))
@@ -124,8 +129,9 @@ getlist: once(function () { ... })
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-
+import isFunction from "@/verify/isFunction"
 export default function once(func: (...params: any[]) => any) {
+  if (!isFunction(func)) throw 'func不是function'
   let called = false
   return function (this: unknown, ...args: any[]) {
     if (!called) {
@@ -137,7 +143,10 @@ export default function once(func: (...params: any[]) => any) {
 ```
 
 ```Js [JS版本]
+import isFunction from "@/verify/isFunction";
 export default function once(func) {
+    if (!isFunction(func))
+        throw 'func不是function';
     let called = false;
     return function (...args) {
         if (!called) {
@@ -188,9 +197,11 @@ getlist: throttle(function () { ... })
 ```Ts [TS版本]
 import isBoolean from "@/verify/isBoolean"
 import isNumber from "@/verify/isNumber"
+import isFunction from "@/verify/isFunction"
 export default function throttle(func: (...params: any[]) => any, wait = 500, immediate = false) {
   let timeout = 0
   let _immediate = immediate
+  if (!isFunction(func)) throw 'func不是function'
   if (wait && !isNumber(wait)) throw 'wait不是number'
   if (!isBoolean(immediate)) throw 'immediate不是boolean'
   return function (this: unknown, ...args: any[]) {
@@ -212,9 +223,12 @@ export default function throttle(func: (...params: any[]) => any, wait = 500, im
 ```Js [JS版本]
 import isBoolean from "@/verify/isBoolean";
 import isNumber from "@/verify/isNumber";
+import isFunction from "@/verify/isFunction";
 export default function throttle(func, wait = 500, immediate = false) {
     let timeout = 0;
     let _immediate = immediate;
+    if (!isFunction(func))
+        throw 'func不是function';
     if (wait && !isNumber(wait))
         throw 'wait不是number';
     if (!isBoolean(immediate))

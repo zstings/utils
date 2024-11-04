@@ -24,7 +24,9 @@ function readTSFiles(dir) {
       // 如果是.ts文件，读取内容并输出
       if (path.extname(filePath) == '.ts' && !filePath.includes('index.d.ts')) {
         const sourcePath = filePath.replace('.d.ts', '.ts').replace('dist\\types\\', '')
-        const [dtsContent, dtsFnContent] = fs.readFileSync(filePath, 'utf8').replace(/\/\*\*|\*\/| \* /g, '').split('export default ')
+        // const [dtsContent, dtsFnContent] = fs.readFileSync(filePath, 'utf8').replace(/\/\*\*|\*\/| \* /g, '').split('export default ')
+        const dtsContent = fs.readFileSync(filePath, 'utf8').match(/\/\*\*[\s\S]+\*\//)[0].replace(/\/\*\*|\*\/| \* /g, '')
+        const dtsFnContent = fs.readFileSync(filePath, 'utf8').replace(/\/\*\*[\s\S]+\*\//, '').replace('export default ', '')
         const sourceContent = fs.readFileSync(sourcePath, 'utf8')
         const sourceContentTs = sourceContent.replace(/\/\*\*[\s\S]+\*\//, '')
         const sourceContentJs = typescript.transpileModule(sourceContentTs, {
@@ -33,6 +35,9 @@ function readTSFiles(dir) {
             target: typescript.ScriptTarget.ESNext,
           },
         }).outputText;
+        // if (filePath.includes('assign.d.ts')) {
+        //   console.log(sourceContentJs, '--', sourceContentTs)
+        // }
         tsPaths.push({
           dtsContent: dtsContent.split('\n'),
           dtsFnContent,

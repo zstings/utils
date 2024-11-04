@@ -60,7 +60,7 @@ export default function extendHex(hex) {
 
 #### 类型说明
 ::: info
-`function hexToRgb(hex: string): string;`
+`function hexToRgb(hex?: string): string;`
 :::
 #### 参数
 - hex 字符串
@@ -87,13 +87,11 @@ hexToRgb('#aabbcc8d') // => '170,187,204,0.55'
 import toFixed from "@/number/toFixed"
 import extendHex from "@/color/extendHex"
 import isHex from "@/color/isHex"
-export default function hexToRgb(hex: string): string {
+export default function hexToRgb(hex?: string): string {
   if (!isHex(hex)) throw '无法识别正确的hex'
-  let _hex = hex.substring(1)
-  if (_hex.length < 6) _hex = extendHex(hex).substring(1)
-  _hex = (_hex.match(/[0-9a-f]{2}/gi) || [])
-    .map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16)))
-    .join(',')
+  let _hex = hex!.substring(1)
+  if (_hex.length < 6) _hex = extendHex(hex!).substring(1)
+  _hex = (_hex.match(/[0-9a-f]{2}/gi)!).map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16))).join(',')
   return _hex
 }
 ```
@@ -108,9 +106,7 @@ export default function hexToRgb(hex) {
     let _hex = hex.substring(1);
     if (_hex.length < 6)
         _hex = extendHex(hex).substring(1);
-    _hex = (_hex.match(/[0-9a-f]{2}/gi) || [])
-        .map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16)))
-        .join(',');
+    _hex = (_hex.match(/[0-9a-f]{2}/gi)).map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16))).join(',');
     return _hex;
 }
 
@@ -121,7 +117,7 @@ export default function hexToRgb(hex) {
 
 #### 类型说明
 ::: info
-`function isHex(hex: string): boolean;`
+`function isHex(hex?: string): boolean;`
 :::
 #### 参数
 - hex 字符串
@@ -154,16 +150,16 @@ isHex('#adg') // => false
 ::: code-group
 ```Ts [TS版本]
 import isString from "@/verify/isString"
-export default function isHex(hex: string): boolean {
-  if (hex && !isString(hex)) return false
-  return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex)
+export default function isHex(hex?: string): boolean {
+  if (!isString(hex)) return false
+  return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex!)
 }
 ```
 
 ```Js [JS版本]
 import isString from "@/verify/isString";
 export default function isHex(hex) {
-    if (hex && !isString(hex))
+    if (!isString(hex))
         return false;
     return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex);
 }
@@ -175,7 +171,7 @@ export default function isHex(hex) {
 
 #### 类型说明
 ::: info
-`function isRgba(rgba: string): boolean;`
+`function isRgba(rgba?: string): boolean;`
 :::
 #### 参数
 - rgba 字符串
@@ -204,9 +200,9 @@ isRgba('170,187,256,2') // => false
 ::: code-group
 ```Ts [TS版本]
 import isString from "@/verify/isString"
-export default function isRgba(rgba: string): boolean {
-  if (rgba && !isString(rgba)) return false
-  return rgba.split(',').every((s, i) => {
+export default function isRgba(rgba?: string): boolean {
+  if (!isString(rgba)) return false
+  return rgba!.split(',').every((s, i) => {
     if (i == 3) return Number(s) * 255 >= 0 && Number(s) * 255 <= 255
     return Number(s) >= 0 && Number(s) <= 255
   })
@@ -217,7 +213,7 @@ export default function isRgba(rgba: string): boolean {
 ```Js [JS版本]
 import isString from "@/verify/isString";
 export default function isRgba(rgba) {
-    if (rgba && !isString(rgba))
+    if (!isString(rgba))
         return false;
     return rgba.split(',').every((s, i) => {
         if (i == 3)
@@ -380,7 +376,7 @@ export default function rgbToHex(rgba) {
 
 #### 类型说明
 ::: info
-`function shrinkHex(hex: string): string;`
+`function shrinkHex(hex?: string): string;`
 :::
 #### 参数
 - hex 字符串
@@ -405,12 +401,11 @@ shrinkHex('#0037ff') // => '#0037ff'
 ::: code-group
 ```Ts [TS版本]
 import isHex from "@/color/isHex"
-export default function shrinkHex(hex: string): string {
+export default function shrinkHex(hex?: string): string {
   if (!isHex(hex)) throw '无法识别正确的hex'
-  if (hex.length < 6) return hex
-  const _hex = hex.substring(1).match(/[0-9a-f]{2}/gi) || []
-  const isTrue = _hex.every(item => item[0] == item[1])
-  return isTrue ? '#' + _hex.map(item => item[0]).join('') : hex
+  if (hex!.length < 6) return hex!
+  const _hex = hex!.substring(1).match(/[0-9a-f]{2}/gi)!
+  return '#' + _hex.map(item => item[0]).join('')
 }
 ```
 
@@ -421,9 +416,8 @@ export default function shrinkHex(hex) {
         throw '无法识别正确的hex';
     if (hex.length < 6)
         return hex;
-    const _hex = hex.substring(1).match(/[0-9a-f]{2}/gi) || [];
-    const isTrue = _hex.every(item => item[0] == item[1]);
-    return isTrue ? '#' + _hex.map(item => item[0]).join('') : hex;
+    const _hex = hex.substring(1).match(/[0-9a-f]{2}/gi);
+    return '#' + _hex.map(item => item[0]).join('');
 }
 
 ```

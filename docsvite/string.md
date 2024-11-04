@@ -31,18 +31,15 @@ byteSize(true) // '4'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isString from "@/verify/isString"
+
 export default function byteSize(str: any): number {
-  const _str = isString(str) ? str : str.toString()
-  return new Blob([_str]).size
+  return new Blob([str.toString()]).size
 }
 ```
 
 ```Js [JS版本]
-import isString from "@/verify/isString";
 export default function byteSize(str) {
-    const _str = isString(str) ? str : str.toString();
-    return new Blob([_str]).size;
+    return new Blob([str.toString()]).size;
 }
 
 ```
@@ -97,13 +94,13 @@ mask('123456', 2, 3, '.') // => '12...6'
 ```Ts [TS版本]
 import isNumber from "@/verify/isNumber"
 import isString from "@/verify/isString"
-export default function mask(str: string, start = 0, length?: number, mask = '*'): string {
-  const _str = isString(str) ? str : str.toString()
+export default function mask(str: string, start = 0, length = Infinity, mask = '*'): string {
   if (!isNumber(start)) throw 'start 必须是数字'
-  if ((length || length == 0) && !isNumber(length)) throw 'length 必须是数字'
+  if (!isNumber(length)) throw 'length 必须是数字'
   if (!isString(mask)) throw 'mask 必须是字符串'
-  const val = length || length == 0 ? _str.slice(start, length + start) : _str.slice(start)
-  return _str.replace(val, mask.padEnd(val.length, mask))
+  str = str.toString()
+  const val = str.slice(start, length + start)
+  return str.replace(val, ''.padEnd(val.length, mask))
 }
 
 ```
@@ -111,16 +108,16 @@ export default function mask(str: string, start = 0, length?: number, mask = '*'
 ```Js [JS版本]
 import isNumber from "@/verify/isNumber";
 import isString from "@/verify/isString";
-export default function mask(str, start = 0, length, mask = '*') {
-    const _str = isString(str) ? str : str.toString();
+export default function mask(str, start = 0, length = Infinity, mask = '*') {
     if (!isNumber(start))
         throw 'start 必须是数字';
-    if ((length || length == 0) && !isNumber(length))
+    if (!isNumber(length))
         throw 'length 必须是数字';
     if (!isString(mask))
         throw 'mask 必须是字符串';
-    const val = length || length == 0 ? _str.slice(start, length + start) : _str.slice(start);
-    return _str.replace(val, mask.padEnd(val.length, mask));
+    str = str.toString();
+    const val = str.slice(start, length + start);
+    return str.replace(val, ''.padEnd(val.length, mask));
 }
 
 ```
@@ -154,12 +151,11 @@ removeHTML(true) // 'true'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isString from "@/verify/isString"
+
 export default function removeHTML(str: any): string {
-  const _str = isString(str) ? str : str.toString()
   const escapeReg =
     /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi
-  return _str
+  return str.toString()
     .replace(/<[^>]+>/g, '')
     .replace(escapeReg, '')
     .trim()
@@ -167,11 +163,9 @@ export default function removeHTML(str: any): string {
 ```
 
 ```Js [JS版本]
-import isString from "@/verify/isString";
 export default function removeHTML(str) {
-    const _str = isString(str) ? str : str.toString();
     const escapeReg = /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi;
-    return _str
+    return str.toString()
         .replace(/<[^>]+>/g, '')
         .replace(escapeReg, '')
         .trim();

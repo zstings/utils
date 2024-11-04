@@ -268,8 +268,6 @@ export default function isURL(url) {
 由参数组成的对象
 :::
 #### 示例 
-支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
-不传值时，默认从window.location中取值
 ```ts
 qsParse('a=1&b=2')
 // => 'a=1&b=2'
@@ -334,7 +332,7 @@ qsStringify({a: 1, b: 2})
 如果你想空参数，可以使用 `''`
 ```ts
 qsStringify({a: 1, b: undefined, c: null})
-// => 'a=1&b=2&c=%7B%22a%22%3A1%7D'
+// => 'a=1'
 ```
 ```ts
 qsStringify({a: 1, b: 2, c: {a: 1}})
@@ -469,7 +467,7 @@ export default function reviseUrlQuery(
   if (option.hash) {
     const arr = getUrlQuery({ url, type: 'hash' })
     const hashStr = qsStringify(Object.assign({}, arr, option.hash))
-    hash = hashStr ? (hash.split('?')[0] || '#') + '?' + hashStr : ''
+    hash = hashStr ? hash.split('?')[0] + '?' + hashStr : hash.split('?')[0]
   }
   return origin + pathname + search + hash
 }
@@ -504,7 +502,7 @@ export default function reviseUrlQuery(option, url = window.location.href) {
     if (option.hash) {
         const arr = getUrlQuery({ url, type: 'hash' });
         const hashStr = qsStringify(Object.assign({}, arr, option.hash));
-        hash = hashStr ? (hash.split('?')[0] || '#') + '?' + hashStr : '';
+        hash = hashStr ? hash.split('?')[0] + '?' + hashStr : hash.split('?')[0];
     }
     return origin + pathname + search + hash;
 }
