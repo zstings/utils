@@ -28,3 +28,4 @@ testcdn
 *.sln
 *.sw?
 docsvite/.vitepress/cache
+temp_code

@@ -1,6 +1,6 @@
 import fs from 'fs'
-import path from 'path'
-import typescript from 'typescript'
+import path from 'node:path'
+// import typescript from 'typescript'
 
 const srcDir = './dist/types/src'
 
@@ -29,12 +29,13 @@ function readTSFiles(dir) {
         const dtsFnContent = fs.readFileSync(filePath, 'utf8').replace(/\/\*\*[\s\S]+\*\//, '').replace('export default ', '')
         const sourceContent = fs.readFileSync(sourcePath, 'utf8')
         const sourceContentTs = sourceContent.replace(/\/\*\*[\s\S]+\*\//, '')
-        const sourceContentJs = typescript.transpileModule(sourceContentTs, {
-          compilerOptions: {
-            module: typescript.ModuleKind.ESNext,
-            target: typescript.ScriptTarget.ESNext,
-          },
-        }).outputText;
+        const sourceContentJs = fs.readFileSync('./temp_code/'+path.basename(filePath).replace('.d', ''), 'utf-8')
+        // const sourceContentJs = typescript.transpileModule(sourceContentTs, {
+        //   compilerOptions: {
+        //     module: typescript.ModuleKind.ESNext,
+        //     target: typescript.ScriptTarget.ESNext,
+        //   },
+        // }).outputText;
         // if (filePath.includes('assign.d.ts')) {
         //   console.log(sourceContentJs, '--', sourceContentTs)
         // }
@@ -55,7 +56,8 @@ function readTSFiles(dir) {
 // 调用函数开始读取-写入ts数据到tsPaths
 readTSFiles(srcDir)
 
-let str = ''
+
+
 let strObj = {}
 let menu = []
 tsPaths.forEach(aitx => {
