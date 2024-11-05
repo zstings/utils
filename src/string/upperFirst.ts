@@ -19,6 +19,5 @@
  * ```
  */
 export default function upperFirst(str: any): string {
-  const _str = (str as string).toString()
-  return _str.replace(/(\w)/, $1 => $1.toLocaleUpperCase())
+  return (str as string).toString().replace(/(\w)/, $1 => $1.toLocaleUpperCase())
 }
