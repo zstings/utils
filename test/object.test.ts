@@ -1,5 +1,5 @@
 import { expect, it, describe } from 'vitest'
-import { arrObjSum, assignMin, createData, assign, omit, pick, resetObjectValues } from '@/index'
+import { arrObjSum, assignMin, createData, assign, omit, pick, resetObjectValues, hasOwn } from '@/index'
 
 describe('arrObjSum', () => {
   it('测试 arrObjSum 函数参数错误', () => {
@@ -115,5 +115,20 @@ describe('resetObjectValues', () => {
 
   it('测试目标对象不是对象的情况', () => {
     expect(() => resetObjectValues(1 as any)).toThrow('target参数必须是object');
+  });
+});
+
+describe('hasOwn', () => {
+  it('测试属性存在的情况', () => {
+    expect(hasOwn({a: 0, b: 1}, 'a')).toBe(true);
+    expect(hasOwn({a: 0, b: 1}, 'b')).toBe(true);
+  });
+
+  it('测试属性不存在的情况', () => {
+    expect(hasOwn({a: 0, b: 1}, 'c')).toBe(false);
+  });
+
+  it('测试目标对象不是对象的情况', () => {
+    expect(() => hasOwn(1 as any, '11')).toThrow('target参数必须是object');
   });
 });
