@@ -104,7 +104,8 @@ import assignMin from '@/object/assignMin'
 import arrObjSum from '@/object/arrObjSum'
 import pick from '@/object/pick'
 import resetObjectValues from '@/object/resetObjectValues'
-export { createData, omit, assign, assignMin, arrObjSum, pick, resetObjectValues }
+import hasOwn from '@/object/hasOwn'
+export { createData, omit, assign, assignMin, arrObjSum, pick, resetObjectValues, hasOwn }
 
 // url相关
 import getUrlParam from '@/url/getUrlParam'
