@@ -69,28 +69,23 @@ days('aaa') // throw 'Invalid Date'
 ```Ts [TS版本]
 import isArray from '@/verify/isArray'
 export default function days(time: number | string | Date | (string | number)[] = new Date()): Date {
-  const _time =
-    time || time === 0
-      ? isArray(time)
-        ? new Date(...(time as []))
-        : new Date(time as number | string | Date)
-      : new Date()
-  if (_time.toString() === 'Invalid Date') throw 'Invalid Date'
-  return _time
+  // 处理 null undefined ''
+  if (time === null || time === undefined || (typeof time === 'string' && time.trim() === '')) time = new Date()
+  else if (isArray(time)) time = new Date(...(time as []))
+  else time = new Date(time as number | string | Date)
+  if (time.toString() === 'Invalid Date') throw 'Invalid Date'
+  return time
 }
 ```
 
 ```Js [JS版本]
 import isArray from '@/verify/isArray';
 export default function days(time = new Date()) {
-    const _time = time || time === 0
-        ? isArray(time)
-            ? new Date(...time)
-            : new Date(time)
-        : new Date();
-    if (_time.toString() === 'Invalid Date')
-        throw 'Invalid Date';
-    return _time;
+  if (time === null || time === void 0 || typeof time === 'string' && time.trim() === '') time = /* @__PURE__ */ new Date();
+  else if (isArray(time)) time = new Date(...time);
+  else time = new Date(time);
+  if (time.toString() === 'Invalid Date') throw 'Invalid Date';
+  return time;
 }
 
 ```
@@ -167,32 +162,20 @@ export default function formats(
 import days from '@/date/days';
 import padInt from '@/number/padInt';
 export default function formats(time = new Date(), format = 'YYYY-MM-DD hh:mm:ss') {
-    const date = days(time);
-    const YYYY = padInt(date.getFullYear());
-    const YY = YYYY.toString().substring(2);
-    const MM = padInt(date.getMonth() + 1);
-    const M = padInt(date.getMonth() + 1, 1);
-    const DD = padInt(date.getDate());
-    const D = padInt(date.getDate(), 1);
-    const hh = padInt(date.getHours());
-    const h = padInt(date.getHours(), 1);
-    const mm = padInt(date.getMinutes());
-    const m = padInt(date.getMinutes(), 1);
-    const ss = padInt(date.getSeconds());
-    const s = padInt(date.getSeconds(), 1);
-    return format
-        .replace('YYYY', YYYY)
-        .replace('YY', YY)
-        .replace('MM', MM)
-        .replace('M', M)
-        .replace('DD', DD)
-        .replace('D', D)
-        .replace('hh', hh)
-        .replace('h', h)
-        .replace('mm', mm)
-        .replace('m', m)
-        .replace('ss', ss)
-        .replace('s', s);
+  const date = days(time);
+  const YYYY = padInt(date.getFullYear());
+  const YY = YYYY.toString().substring(2);
+  const MM = padInt(date.getMonth() + 1);
+  const M = padInt(date.getMonth() + 1, 1);
+  const DD = padInt(date.getDate());
+  const D = padInt(date.getDate(), 1);
+  const hh = padInt(date.getHours());
+  const h = padInt(date.getHours(), 1);
+  const mm = padInt(date.getMinutes());
+  const m = padInt(date.getMinutes(), 1);
+  const ss = padInt(date.getSeconds());
+  const s = padInt(date.getSeconds(), 1);
+  return format.replace('YYYY', YYYY).replace('YY', YY).replace('MM', MM).replace('M', M).replace('DD', DD).replace('D', D).replace('hh', hh).replace('h', h).replace('mm', mm).replace('m', m).replace('ss', ss).replace('s', s);
 }
 
 ```
@@ -274,10 +257,10 @@ export default function getDataSection(
   const { start = new Date(), format = 'YYYY-MM-DD', timestamp = false } = option
   if (!isString(format)) throw 'option.format 必须是字符串'
   if (!isBoolean(timestamp)) throw 'option.timestamp 必须是布尔值'
-  const _startTime = days(start).getTime()
-  const _endTime = _startTime - (day - 1) * 8.64e7
-  if (timestamp) return [timeStamp(_endTime, format), timeStamp(_startTime, format)]
-  return [formats(_endTime, format), formats(_startTime, format)]
+  const startTime = days(start).getTime()
+  const endTime = startTime - (day - 1) * 8.64e7
+  if (timestamp) return [timeStamp(endTime, format), timeStamp(startTime, format)]
+  return [formats(endTime, format), formats(startTime, format)]
 }
 ```
 
@@ -290,20 +273,15 @@ import isString from '@/verify/isString';
 import formats from '@/date/formats';
 import timeStamp from '@/date/timeStamp';
 export default function getDataSection(day = 1, option = { start: new Date(), format: 'YYYY-MM-DD', timestamp: false }) {
-    if (!isNumber(day))
-        throw 'day 必须是数字';
-    if (!isObject(option))
-        throw 'option 必须是对象';
-    const { start = new Date(), format = 'YYYY-MM-DD', timestamp = false } = option;
-    if (!isString(format))
-        throw 'option.format 必须是字符串';
-    if (!isBoolean(timestamp))
-        throw 'option.timestamp 必须是布尔值';
-    const _startTime = days(start).getTime();
-    const _endTime = _startTime - (day - 1) * 8.64e7;
-    if (timestamp)
-        return [timeStamp(_endTime, format), timeStamp(_startTime, format)];
-    return [formats(_endTime, format), formats(_startTime, format)];
+  if (!isNumber(day)) throw 'day 必须是数字';
+  if (!isObject(option)) throw 'option 必须是对象';
+  const { start = /* @__PURE__ */ new Date(), format = 'YYYY-MM-DD', timestamp = false } = option;
+  if (!isString(format)) throw 'option.format 必须是字符串';
+  if (!isBoolean(timestamp)) throw 'option.timestamp 必须是布尔值';
+  const startTime = days(start).getTime();
+  const endTime = startTime - (day - 1) * 864e5;
+  if (timestamp) return [timeStamp(endTime, format), timeStamp(startTime, format)];
+  return [formats(endTime, format), formats(startTime, format)];
 }
 
 ```
@@ -341,9 +319,9 @@ getMonthDays(2022, 1) // => 31
 ```Ts [TS版本]
 
 export default function getMonthDays(year?: number, month?: number): number {
-  const _year = year ? year : new Date().getFullYear()
-  const _month = month ? month : new Date().getMonth() + 1
-  const days = new Date(_year, _month, 0)
+  year = year ? year : new Date().getFullYear()
+  month = month ? month : new Date().getMonth() + 1
+  const days = new Date(year, month, 0)
   if (isNaN(days.getTime())) throw 'Invalid Date'
   return days.getDate()
 }
@@ -351,12 +329,11 @@ export default function getMonthDays(year?: number, month?: number): number {
 
 ```Js [JS版本]
 export default function getMonthDays(year, month) {
-    const _year = year ? year : new Date().getFullYear();
-    const _month = month ? month : new Date().getMonth() + 1;
-    const days = new Date(_year, _month, 0);
-    if (isNaN(days.getTime()))
-        throw 'Invalid Date';
-    return days.getDate();
+  year = year ? year : (/* @__PURE__ */ new Date()).getFullYear();
+  month = month ? month : (/* @__PURE__ */ new Date()).getMonth() + 1;
+  const days = new Date(year, month, 0);
+  if (isNaN(days.getTime())) throw 'Invalid Date';
+  return days.getDate();
 }
 
 ```
@@ -407,9 +384,9 @@ export default function howLongAgo(
   endTime: number | string | Date | (string | number)[] = new Date(),
   startTime: number | string | Date | (string | number)[] = new Date()
 ) {
-  const _endTime = days(endTime).getTime()
-  const _startTime = days(startTime).getTime()
-  const date = _startTime - _endTime
+  endTime = days(endTime).getTime()
+  startTime = days(startTime).getTime()
+  const date = startTime - endTime
   if (date < 0) throw 'startTime 必须大于 endTime'
   if (date >= 31536000000) return Math.floor(date / 31536000000) + '年前'
   else if (date >= 2592000000) return Math.floor(date / 2592000000) + '月前'
@@ -423,26 +400,18 @@ export default function howLongAgo(
 
 ```Js [JS版本]
 import days from '@/date/days';
-export default function howLongAgo(endTime = new Date(), startTime = new Date()) {
-    const _endTime = days(endTime).getTime();
-    const _startTime = days(startTime).getTime();
-    const date = _startTime - _endTime;
-    if (date < 0)
-        throw 'startTime 必须大于 endTime';
-    if (date >= 31536000000)
-        return Math.floor(date / 31536000000) + '年前';
-    else if (date >= 2592000000)
-        return Math.floor(date / 2592000000) + '月前';
-    else if (date >= 86400000)
-        return Math.floor(date / 86400000) + '天前';
-    else if (date >= 3600000)
-        return Math.floor(date / 3600000) + '小时前';
-    else if (date >= 60000)
-        return Math.floor(date / 60000) + '分钟前';
-    else if (date >= 1000)
-        return Math.floor(date / 1000) + '秒前';
-    else
-        return '刚刚';
+export default function howLongAgo(endTime = new Date(), startTime = /* @__PURE__ */ new Date()) {
+  endTime = days(endTime).getTime();
+  startTime = days(startTime).getTime();
+  const date = startTime - endTime;
+  if (date < 0) throw 'startTime 必须大于 endTime';
+  if (date >= 31536e6) return Math.floor(date / 31536e6) + '年前';
+  else if (date >= 2592e6) return Math.floor(date / 2592e6) + '月前';
+  else if (date >= 864e5) return Math.floor(date / 864e5) + '天前';
+  else if (date >= 36e5) return Math.floor(date / 36e5) + '小时前';
+  else if (date >= 6e4) return Math.floor(date / 6e4) + '分钟前';
+  else if (date >= 1e3) return Math.floor(date / 1e3) + '秒前';
+  else return '刚刚';
 }
 
 ```
@@ -496,8 +465,8 @@ export default function timeStamp(time: number | string | Date | (string | numbe
 ```Js [JS版本]
 import days from '@/date/days';
 export default function timeStamp(time = new Date(), unit = 'ms') {
-    const ts = days(time).getTime();
-    return unit == 's' ? (ts / 1000) | 0 : ts;
+  const ts = days(time).getTime();
+  return unit == 's' ? ts / 1e3 | 0 : ts;
 }
 
 ```
@@ -537,7 +506,7 @@ export default function isDate(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isDate(value) {
-    return typeOf(value) === 'Date';
+  return typeOf(value) === 'Date';
 }
 
 ```

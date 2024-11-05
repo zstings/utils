@@ -32,13 +32,9 @@ export default function exitFullscreen(): void {
 
 ```Js [JS版本]
 export default function exitFullscreen() {
-    const exitFullscreen = document.exitFullscreen ||
-        document.msExitFullscreen ||
-        document.mozCancelFullScreen ||
-        document.webkitExitFullscreen;
-    if (!exitFullscreen)
-        throw '浏览器不支持全屏操作';
-    exitFullscreen();
+  const exitFullscreen2 = document.exitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+  if (!exitFullscreen2) throw '浏览器不支持全屏操作';
+  exitFullscreen2();
 }
 
 ```
@@ -81,13 +77,9 @@ export default function launchFullscreen(el: HTMLElement = document.body): void 
 
 ```Js [JS版本]
 export default function launchFullscreen(el = document.body) {
-    const requestFullscreen = el.requestFullscreen ||
-        el.mozRequestFullscreen ||
-        el.msRequestFullscreen ||
-        el.webkitRequestFullscreen;
-    if (!requestFullscreen)
-        throw '浏览器不支持全屏操作';
-    requestFullscreen();
+  const requestFullscreen = el.requestFullscreen || el.mozRequestFullscreen || el.msRequestFullscreen || el.webkitRequestFullscreen;
+  if (!requestFullscreen) throw '浏览器不支持全屏操作';
+  requestFullscreen();
 }
 
 ```
@@ -125,7 +117,7 @@ export default function isDom(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isDom(value) {
-    return typeOf(value).includes('Element');
+  return typeOf(value).includes('Element');
 }
 
 ```

@@ -11,13 +11,13 @@ declare const utils = {
 * eg:
  * ```ts
  * chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 2)
- * // => [[{"a":1},{"a":2}],[{"a":3},{"a":4}]]
+ * // => [[{a:1},{a:2}],[{a:3},{a:4}]]
  * ```
  * @example
 * eg:
  * ```ts
  * chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3)
- * // => [[{"a":1},{"a":2},{"a":3}],[{"a":4}]]
+ * // => [[{a:1},{a:2},{a:3}],[{a:4}]]
  * ```
  */
 chunk(array: any[], size?: number): any[];
@@ -553,7 +553,7 @@ timeStamp(time?: number | string | Date | (string | number)[], unit?: string): n
 
 /**
  * 获取设备类型
- * @return "Mobile" | "Desktop"
+ * @return 'Mobile' | 'Desktop'
  * @category 设备Device
  * @example
 * eg:
@@ -934,7 +934,7 @@ toNumber<T>(value: T): number;
 
 /**
  * 数组对象key值求和
- * @param object 目标对象
+ * @param target 目标对象
  * @param keys 需要求和的key数组
  * @return 求和后的对象
  * @category 对象Object
@@ -952,7 +952,7 @@ toNumber<T>(value: T): number;
  * // => {id: 2, age: 10}
  * ```
  */
-arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]): Record<string, any>;
+arrObjSum<T extends Record<string, any>, K extends keyof T>(target: T[], keys: K[]): Record<string, any>;
 
 type MergeTuple<T extends any[]> = T extends [infer F, ...infer R] ? Omit<F, keyof MergeTuple<R>> & MergeTuple<R> : {};
 type Merge<T, U> = Omit<T, keyof U> & U;
@@ -961,7 +961,7 @@ type Merge<T, U> = Omit<T, keyof U> & U;
  * @param target 目标对象，被合并的对象
  * @param sources 源对象，可以多个
  * @return 目标对象
- * @throws target参数必须是对象  target参数不是对象时触发
+ * @throws target参数必须是object  target参数不是对象时触发
  * @category 对象Object
  * @example
 * eg:
@@ -980,7 +980,7 @@ type Merge<T, U> = Omit<T, keyof U> & U;
  * @param target 目标对象，被合并的对象
  * @param sources 源对象，可以多个
  * @return 目标对象
- * @throws target参数必须是对象  target参数不是对象时触发
+ * @throws target参数必须是object  target参数不是对象时触发
  * @category 对象Object
  * @example
 * eg:
@@ -1009,12 +1009,12 @@ export {};
  * createData(2, 2)
  * // =>
  * {
- *   "data": {
- *      "0": 0,
- *      "1": 1,
- *      "data": {
- *          "0": 0,
- *          "1": 1
+ *   data: {
+ *      0: 0,
+ *      1: 1,
+ *      data: {
+ *          0: 0,
+ *          1: 1
  *      }
  *   }
  * }
@@ -1024,6 +1024,21 @@ createData(deep?: number, breadth?: number): {
     [key: number]: any;
     data?: any;
 };
+
+/**
+ * 检查指定对象是否存在指定属性
+ * @param target 指定对象
+ * @param key 要检查的属性
+ * @return true | false
+ * @category 对象Object
+ * @example
+* eg:
+ * ```ts
+ * hasOwn({a: 1, b: 0}, 'b') // => true
+ * hasOwn({a: 1, b: 0}, 'c') // => false
+ * ```
+ */
+hasOwn(target: Record<string, any>, key: string): boolean;
 
 /**
  * 删除指定对象的指定属性
@@ -1303,13 +1318,13 @@ isURL(url: string): boolean;
  * @example
 * eg:
  * ```ts
- * qsParse('a=1&b=2&c={"a":1}')
+ * qsParse('a=1&b=2&c={'a':1}')
  * // => { a:1, b:2, c: { a :1 } }
  * ```
  * @example
 * eg:
  * ```ts
- * qsParse('a=1&b=2&c={"a":1}', false)
+ * qsParse('a=1&b=2&c={'a':1}', false)
  * // => { a:1, b:2, c: '{ a: 1 }' }
  * ```
  */
@@ -1346,7 +1361,7 @@ qsParse(query?: string, decode?: boolean): {
  * 解码后输出
  * ```ts
  * qsStringify({a: 1, b: 2, c: {a: 1}}, true)
- * // => 'a=1&b=2&c={"a":1}'
+ * // => `a=1&b=2&c={'a':1}`
  * ```
  */
 qsStringify(query?: Record<string, any>, decode?: boolean): string;

@@ -39,7 +39,7 @@ export default function byteSize(str: any): number {
 
 ```Js [JS版本]
 export default function byteSize(str) {
-    return new Blob([str.toString()]).size;
+  return new Blob([str.toString()]).size;
 }
 
 ```
@@ -92,8 +92,8 @@ mask('123456', 2, 3, '.') // => '12...6'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isNumber from "@/verify/isNumber"
-import isString from "@/verify/isString"
+import isNumber from '@/verify/isNumber'
+import isString from '@/verify/isString'
 export default function mask(str: string, start = 0, length = Infinity, mask = '*'): string {
   if (!isNumber(start)) throw 'start 必须是数字'
   if (!isNumber(length)) throw 'length 必须是数字'
@@ -106,18 +106,15 @@ export default function mask(str: string, start = 0, length = Infinity, mask = '
 ```
 
 ```Js [JS版本]
-import isNumber from "@/verify/isNumber";
-import isString from "@/verify/isString";
-export default function mask(str, start = 0, length = Infinity, mask = '*') {
-    if (!isNumber(start))
-        throw 'start 必须是数字';
-    if (!isNumber(length))
-        throw 'length 必须是数字';
-    if (!isString(mask))
-        throw 'mask 必须是字符串';
-    str = str.toString();
-    const val = str.slice(start, length + start);
-    return str.replace(val, ''.padEnd(val.length, mask));
+import isNumber from '@/verify/isNumber';
+import isString from '@/verify/isString';
+export default function mask(str, start = 0, length = Infinity, mask2 = '*') {
+  if (!isNumber(start)) throw 'start 必须是数字';
+  if (!isNumber(length)) throw 'length 必须是数字';
+  if (!isString(mask2)) throw 'mask 必须是字符串';
+  str = str.toString();
+  const val = str.slice(start, length + start);
+  return str.replace(val, ''.padEnd(val.length, mask2));
 }
 
 ```
@@ -164,11 +161,8 @@ export default function removeHTML(str: any): string {
 
 ```Js [JS版本]
 export default function removeHTML(str) {
-    const escapeReg = /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi;
-    return str.toString()
-        .replace(/<[^>]+>/g, '')
-        .replace(escapeReg, '')
-        .trim();
+  const escapeReg = /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi;
+  return str.toString().replace(/<[^>]+>/g, '').replace(escapeReg, '').trim();
 }
 
 ```
@@ -204,15 +198,13 @@ upperFirst(true) // 'True'
 ```Ts [TS版本]
 
 export default function upperFirst(str: any): string {
-  const _str = (str as string).toString()
-  return _str.replace(/(\w)/, $1 => $1.toLocaleUpperCase())
+  return (str as string).toString().replace(/(\w)/, $1 => $1.toLocaleUpperCase())
 }
 ```
 
 ```Js [JS版本]
 export default function upperFirst(str) {
-    const _str = str.toString();
-    return _str.replace(/(\w)/, $1 => $1.toLocaleUpperCase());
+  return str.toString().replace(/(\w)/, ($1) => $1.toLocaleUpperCase());
 }
 
 ```
@@ -252,7 +244,7 @@ export default function isString(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isString(value) {
-    return typeOf(value) === 'String';
+  return typeOf(value) === 'String';
 }
 
 ```

@@ -24,18 +24,18 @@ array参数需要Array array参数错误时触发
 #### 示例 
 ```ts
 chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 2)
-// => [[{"a":1},{"a":2}],[{"a":3},{"a":4}]]
+// => [[{a:1},{a:2}],[{a:3},{a:4}]]
 ```
 ```ts
 chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3)
-// => [[{"a":1},{"a":2},{"a":3}],[{"a":4}]]
+// => [[{a:1},{a:2},{a:3}],[{a:4}]]
 ```
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isArray from "@/verify/isArray"
-import isInt from "@/verify/isInt"
-import isNumber from "@/verify/isNumber"
+import isArray from '@/verify/isArray'
+import isInt from '@/verify/isInt'
+import isNumber from '@/verify/isNumber'
 export default function chunk(array: any[], size = 1): any[] {
   if (!isArray(array)) throw `array参数需要Array`
   if (!isNumber(size) || !isInt(size) || size <= 0) throw `请检查size参数，必须符合大于0的整数`
@@ -50,20 +50,18 @@ export default function chunk(array: any[], size = 1): any[] {
 ```
 
 ```Js [JS版本]
-import isArray from "@/verify/isArray";
-import isInt from "@/verify/isInt";
-import isNumber from "@/verify/isNumber";
+import isArray from '@/verify/isArray';
+import isInt from '@/verify/isInt';
+import isNumber from '@/verify/isNumber';
 export default function chunk(array, size = 1) {
-    if (!isArray(array))
-        throw `array参数需要Array`;
-    if (!isNumber(size) || !isInt(size) || size <= 0)
-        throw `请检查size参数，必须符合大于0的整数`;
-    const arr = [];
-    const count = Math.ceil(array.length / size);
-    for (let i = 0; i < count; i++) {
-        arr.push(array.slice(i * size, i * size + size));
-    }
-    return arr;
+  if (!isArray(array)) throw `array参数需要Array`;
+  if (!isNumber(size) || !isInt(size) || size <= 0) throw `请检查size参数，必须符合大于0的整数`;
+  const arr = [];
+  const count = Math.ceil(array.length / size);
+  for (let i = 0; i < count; i++) {
+    arr.push(array.slice(i * size, i * size + size));
+  }
+  return arr;
 }
 
 ```
@@ -94,7 +92,7 @@ compact([1, 0, false, 2, NaN, 3, null]) => [1, 2, 3]
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isArray from "@/verify/isArray"
+import isArray from '@/verify/isArray'
 export default function compact(array: any[]): any[] {
   if (!isArray(array)) throw `array参数需要Array`
   return array.filter(item => !!item)
@@ -103,11 +101,10 @@ export default function compact(array: any[]): any[] {
 ```
 
 ```Js [JS版本]
-import isArray from "@/verify/isArray";
+import isArray from '@/verify/isArray';
 export default function compact(array) {
-    if (!isArray(array))
-        throw `array参数需要Array`;
-    return array.filter(item => !!item);
+  if (!isArray(array)) throw `array参数需要Array`;
+  return array.filter((item) => !!item);
 }
 
 ```
@@ -144,7 +141,7 @@ fromPairs([['a', 1], ['b', 2, 3]) => {a: 1, b: 2}
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isArray from "@/verify/isArray"
+import isArray from '@/verify/isArray'
 export default function fromPairs(array: any[]): Record<string, unknown> {
   if (!isArray(array)) throw `array传入参数需要Array`
   return Object.fromEntries(new Map(array))
@@ -153,11 +150,10 @@ export default function fromPairs(array: any[]): Record<string, unknown> {
 ```
 
 ```Js [JS版本]
-import isArray from "@/verify/isArray";
+import isArray from '@/verify/isArray';
 export default function fromPairs(array) {
-    if (!isArray(array))
-        throw `array传入参数需要Array`;
-    return Object.fromEntries(new Map(array));
+  if (!isArray(array)) throw `array传入参数需要Array`;
+  return Object.fromEntries(new Map(array));
 }
 
 ```
@@ -214,9 +210,9 @@ unique([1, 2, 1, {id: 1, name: '1'}, {id: 1, name: '2'}, {id: 1, name: '1'}], {d
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isArray from "@/verify/isArray"
-import isString from "@/verify/isString"
-import isEqual from "@/verify/isEqual"
+import isArray from '@/verify/isArray'
+import isString from '@/verify/isString'
+import isEqual from '@/verify/isEqual'
 export default function unique(array: any[], option?: {key?: string, deep?: boolean}): any[] {
   if (!isArray(array)) throw `array传入参数需要Array`
   if (option?.key && !isString(option.key)) throw `key传入参数需要String`
@@ -236,29 +232,23 @@ export default function unique(array: any[], option?: {key?: string, deep?: bool
 ```
 
 ```Js [JS版本]
-import isArray from "@/verify/isArray";
-import isString from "@/verify/isString";
-import isEqual from "@/verify/isEqual";
+import isArray from '@/verify/isArray';
+import isString from '@/verify/isString';
+import isEqual from '@/verify/isEqual';
 export default function unique(array, option) {
-    if (!isArray(array))
-        throw `array传入参数需要Array`;
-    if (option?.key && !isString(option.key))
-        throw `key传入参数需要String`;
-    if (option?.key && option.deep != true)
-        option.deep = true;
-    if (!option)
-        option = { deep: true };
-    if (option && option.deep) {
-        return array.reduce((x, y) => {
-            if (option.key && y[option.key] == undefined)
-                throw `key指定的属性不存在`;
-            const isTr = option.key ? x.some((el) => isEqual(el[option.key], y[option.key])) : x.some((el) => isEqual(el, y));
-            if (!isTr)
-                x.push(y);
-            return x;
-        }, []);
-    }
-    return [...new Set(array)];
+  if (!isArray(array)) throw `array传入参数需要Array`;
+  if (option?.key && !isString(option.key)) throw `key传入参数需要String`;
+  if (option?.key && option.deep != true) option.deep = true;
+  if (!option) option = { deep: true };
+  if (option && option.deep) {
+    return array.reduce((x, y) => {
+      if (option.key && y[option.key] == void 0) throw `key指定的属性不存在`;
+      const isTr = option.key ? x.some((el) => isEqual(el[option.key], y[option.key])) : x.some((el) => isEqual(el, y));
+      if (!isTr) x.push(y);
+      return x;
+    }, []);
+  }
+  return [...new Set(array)];
 }
 
 ```
@@ -298,7 +288,7 @@ export default function isArray(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isArray(value) {
-    return typeOf(value) === 'Array';
+  return typeOf(value) === 'Array';
 }
 
 ```
@@ -340,13 +330,11 @@ export default function isArrObj(object: any) {
 import isArray from '@/verify/isArray';
 import isObject from '@/verify/isObject';
 export default function isArrObj(object) {
-    if (!isArray(object))
-        return false;
-    if (object.length == 0)
-        return false;
-    return object.every((item) => {
-        return isObject(item);
-    });
+  if (!isArray(object)) return false;
+  if (object.length == 0) return false;
+  return object.every((item) => {
+    return isObject(item);
+  });
 }
 
 ```

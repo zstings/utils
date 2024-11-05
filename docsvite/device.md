@@ -9,7 +9,7 @@
 #### 返回
 - `"Mobile" | "Desktop"`
 ::: tip
-"Mobile" | "Desktop"
+'Mobile' | 'Desktop'
 :::
 #### 示例 
 移动端访问
@@ -31,7 +31,7 @@ export default function detectDeviceType() {
 
 ```Js [JS版本]
 export default function detectDeviceType() {
-    return /Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+  return /Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
 }
 
 ```
@@ -69,7 +69,7 @@ export default function isAndroid() {
 ```Js [JS版本]
 import isMobile from '@/device/isMobile';
 export default function isAndroid() {
-    return isMobile() && /Android/i.test(navigator.userAgent);
+  return isMobile() && /Android/i.test(navigator.userAgent);
 }
 
 ```
@@ -107,7 +107,7 @@ export default function isDesktop() {
 ```Js [JS版本]
 import detectDeviceType from '@/device/detectDeviceType';
 export default function isDesktop() {
-    return detectDeviceType() === 'Desktop';
+  return detectDeviceType() === 'Desktop';
 }
 
 ```
@@ -147,7 +147,7 @@ export default function isIOS() {
 import isMobile from '@/device/isMobile';
 import isAndroid from '@/device/isAndroid';
 export default function isIOS() {
-    return isMobile() && !isAndroid();
+  return isMobile() && !isAndroid();
 }
 
 ```
@@ -185,7 +185,7 @@ export default function isMobile() {
 ```Js [JS版本]
 import detectDeviceType from '@/device/detectDeviceType';
 export default function isMobile() {
-    return detectDeviceType() === 'Mobile';
+  return detectDeviceType() === 'Mobile';
 }
 
 ```
@@ -222,7 +222,7 @@ export default function isQQ() {
 
 ```Js [JS版本]
 export default function isQQ() {
-    return /QQ\//i.test(navigator.userAgent);
+  return /QQ\//i.test(navigator.userAgent);
 }
 
 ```
@@ -259,7 +259,7 @@ export default function isWeixin() {
 
 ```Js [JS版本]
 export default function isWeixin() {
-    return /MicroMessenger\//i.test(navigator.userAgent);
+  return /MicroMessenger\//i.test(navigator.userAgent);
 }
 
 ```
@@ -296,7 +296,7 @@ export default function isWeixinMini() {
 
 ```Js [JS版本]
 export default function isWeixinMini() {
-    return /miniProgram/i.test(navigator.userAgent);
+  return /miniProgram/i.test(navigator.userAgent);
 }
 
 ```
@@ -334,7 +334,7 @@ export default function isWin() {
 
 ```Js [JS版本]
 export default function isWin() {
-    return /Windows/i.test(navigator.userAgent);
+  return /Windows/i.test(navigator.userAgent);
 }
 
 ```

@@ -36,9 +36,8 @@ export default function padInt(value: string | number, len = 2): string {
 
 ```Js [JS版本]
 export default function padInt(value, len = 2) {
-    if (isNaN(Number(value)))
-        throw '不是一个合法的数字';
-    return Number(value).toString().padStart(len, '0');
+  if (isNaN(Number(value))) throw '不是一个合法的数字';
+  return Number(value).toString().padStart(len, '0');
 }
 
 ```
@@ -87,10 +86,10 @@ toFixed(1.238, 2, false) // 1.23
 import isBoolean from '@/verify/isBoolean'
 import toNumber from '@/number/toNumber'
 export default function toFixed(value: number, num = 2, isRound = true): number {
-  const _val = toNumber(value)
+  value = toNumber(value)
   if (!isBoolean(isRound)) throw 'isRound不是boolean'
-  if (isRound) return parseFloat(_val.toFixed(num))
-  return parseFloat(_val.toFixed(num + 1).slice(0, -1))
+  if (isRound) return parseFloat(value.toFixed(num))
+  return parseFloat(value.toFixed(num + 1).slice(0, -1))
 }
 ```
 
@@ -98,12 +97,10 @@ export default function toFixed(value: number, num = 2, isRound = true): number 
 import isBoolean from '@/verify/isBoolean';
 import toNumber from '@/number/toNumber';
 export default function toFixed(value, num = 2, isRound = true) {
-    const _val = toNumber(value);
-    if (!isBoolean(isRound))
-        throw 'isRound不是boolean';
-    if (isRound)
-        return parseFloat(_val.toFixed(num));
-    return parseFloat(_val.toFixed(num + 1).slice(0, -1));
+  value = toNumber(value);
+  if (!isBoolean(isRound)) throw 'isRound不是boolean';
+  if (isRound) return parseFloat(value.toFixed(num));
+  return parseFloat(value.toFixed(num + 1).slice(0, -1));
 }
 
 ```
@@ -148,9 +145,8 @@ export default function toNumber<T>(value: T): number {
 
 ```Js [JS版本]
 export default function toNumber(value) {
-    if (isNaN(Number(value)))
-        throw `${value}无法转换为数字`;
-    return Number(value);
+  if (isNaN(Number(value))) throw `${value}无法转换为数字`;
+  return Number(value);
 }
 
 ```
@@ -188,7 +184,7 @@ export default function isInt(value: any): boolean {
 
 ```Js [JS版本]
 export default function isInt(value) {
-    return Number.isInteger(value);
+  return Number.isInteger(value);
 }
 
 ```
@@ -228,7 +224,7 @@ export default function isNumber(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isNumber(value) {
-    return typeOf(value) === 'Number';
+  return typeOf(value) === 'Number';
 }
 
 ```

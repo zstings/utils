@@ -27,30 +27,20 @@ extendHex('#03ff') // => '#0033ffff'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isHex from "@/color/isHex"
+import isHex from '@/color/isHex'
 export default function extendHex(hex: string): string {
   if (!isHex(hex)) throw '无法识别正确的hex'
-  if (hex.length > 6) return hex
-  return `#${hex
-    .substring(1)
-    .split('')
-    .map(item => (item += item))
-    .join('')}`
+  if (hex.length >= 6) return hex
+  return `#${hex.substring(1).split('').map(item => (item += item)).join('')}`
 }
 ```
 
 ```Js [JS版本]
-import isHex from "@/color/isHex";
+import isHex from '@/color/isHex';
 export default function extendHex(hex) {
-    if (!isHex(hex))
-        throw '无法识别正确的hex';
-    if (hex.length > 6)
-        return hex;
-    return `#${hex
-        .substring(1)
-        .split('')
-        .map(item => (item += item))
-        .join('')}`;
+  if (!isHex(hex)) throw '无法识别正确的hex';
+  if (hex.length >= 6) return hex;
+  return `#${hex.substring(1).split('').map((item) => item += item).join('')}`;
 }
 
 ```
@@ -84,30 +74,26 @@ hexToRgb('#aabbcc8d') // => '170,187,204,0.55'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import toFixed from "@/number/toFixed"
-import extendHex from "@/color/extendHex"
-import isHex from "@/color/isHex"
+import toFixed from '@/number/toFixed'
+import extendHex from '@/color/extendHex'
+import isHex from '@/color/isHex'
 export default function hexToRgb(hex?: string): string {
   if (!isHex(hex)) throw '无法识别正确的hex'
-  let _hex = hex!.substring(1)
-  if (_hex.length < 6) _hex = extendHex(hex!).substring(1)
-  _hex = (_hex.match(/[0-9a-f]{2}/gi)!).map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16))).join(',')
-  return _hex
+  if (hex!.substring(1).length < 6) hex = extendHex(hex!).substring(1)
+  hex = (hex!.match(/[0-9a-f]{2}/gi)!).map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16))).join(',')
+  return hex
 }
 ```
 
 ```Js [JS版本]
-import toFixed from "@/number/toFixed";
-import extendHex from "@/color/extendHex";
-import isHex from "@/color/isHex";
+import toFixed from '@/number/toFixed';
+import extendHex from '@/color/extendHex';
+import isHex from '@/color/isHex';
 export default function hexToRgb(hex) {
-    if (!isHex(hex))
-        throw '无法识别正确的hex';
-    let _hex = hex.substring(1);
-    if (_hex.length < 6)
-        _hex = extendHex(hex).substring(1);
-    _hex = (_hex.match(/[0-9a-f]{2}/gi)).map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16))).join(',');
-    return _hex;
+  if (!isHex(hex)) throw '无法识别正确的hex';
+  if (hex.substring(1).length < 6) hex = extendHex(hex).substring(1);
+  hex = hex.match(/[0-9a-f]{2}/gi).map((s, i) => i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16)).join(',');
+  return hex;
 }
 
 ```
@@ -149,7 +135,7 @@ isHex('#adg') // => false
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isString from "@/verify/isString"
+import isString from '@/verify/isString'
 export default function isHex(hex?: string): boolean {
   if (!isString(hex)) return false
   return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex!)
@@ -157,11 +143,10 @@ export default function isHex(hex?: string): boolean {
 ```
 
 ```Js [JS版本]
-import isString from "@/verify/isString";
+import isString from '@/verify/isString';
 export default function isHex(hex) {
-    if (!isString(hex))
-        return false;
-    return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex);
+  if (!isString(hex)) return false;
+  return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex);
 }
 
 ```
@@ -199,7 +184,7 @@ isRgba('170,187,256,2') // => false
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isString from "@/verify/isString"
+import isString from '@/verify/isString'
 export default function isRgba(rgba?: string): boolean {
   if (!isString(rgba)) return false
   return rgba!.split(',').every((s, i) => {
@@ -211,15 +196,13 @@ export default function isRgba(rgba?: string): boolean {
 ```
 
 ```Js [JS版本]
-import isString from "@/verify/isString";
+import isString from '@/verify/isString';
 export default function isRgba(rgba) {
-    if (!isString(rgba))
-        return false;
-    return rgba.split(',').every((s, i) => {
-        if (i == 3)
-            return Number(s) * 255 >= 0 && Number(s) * 255 <= 255;
-        return Number(s) >= 0 && Number(s) <= 255;
-    });
+  if (!isString(rgba)) return false;
+  return rgba.split(',').every((s, i) => {
+    if (i == 3) return Number(s) * 255 >= 0 && Number(s) * 255 <= 255;
+    return Number(s) >= 0 && Number(s) <= 255;
+  });
 }
 
 ```
@@ -243,7 +226,7 @@ randomHex() // => '#cf65dd'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import random from "@/util/random"
+import random from '@/util/random'
 export default function randomHex(): string {
   const hexs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
   let hex = '#'
@@ -255,14 +238,14 @@ export default function randomHex(): string {
 ```
 
 ```Js [JS版本]
-import random from "@/util/random";
+import random from '@/util/random';
 export default function randomHex() {
-    const hexs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
-    let hex = '#';
-    for (let i = 0; i < 6; i++) {
-        hex += hexs[random(0, 15)];
-    }
-    return hex;
+  const hexs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+  let hex = '#';
+  for (let i = 0; i < 6; i++) {
+    hex += hexs[random(0, 15)];
+  }
+  return hex;
 }
 
 ```
@@ -286,18 +269,18 @@ randomRgba() // => '#cf65dd'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import toFixed from "@/number/toFixed";
-import random from "@/util/random";
+import toFixed from '@/number/toFixed';
+import random from '@/util/random';
 export default function randomRgba(): string {
   return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`
 }
 ```
 
 ```Js [JS版本]
-import toFixed from "@/number/toFixed";
-import random from "@/util/random";
+import toFixed from '@/number/toFixed';
+import random from '@/util/random';
 export default function randomRgba() {
-    return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`;
+  return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`;
 }
 
 ```
@@ -331,42 +314,29 @@ rgbToHex('170,187,255,0.91') // => '#aabbffe8'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isRgba from "@/color/isRgba"
+import isRgba from '@/color/isRgba'
 export default function rgbToHex(rgba: string): string {
   if (!isRgba(rgba)) throw '无法识别正确的rgba'
-  return (
-    '#' +
-    rgba
-      .split(',')
-      .map((s, i) => {
-        if (i == 3)
-          return Math.round(Number(s) * 255)
-            .toString(16)
-            .padStart(2, '0')
-        return Number(s).toString(16).padStart(2, '0')
-      })
-      .join('')
-  )
+  let rgbas = rgba.split(',')
+  rgbas = rgbas.map((s, i) => {
+    if (i == 3) return Math.round(Number(s) * 255).toString(16).padStart(2, '0')
+    return Number(s).toString(16).padStart(2, '0')
+  })
+  return '#' + rgbas.join('')
 }
 
 ```
 
 ```Js [JS版本]
-import isRgba from "@/color/isRgba";
+import isRgba from '@/color/isRgba';
 export default function rgbToHex(rgba) {
-    if (!isRgba(rgba))
-        throw '无法识别正确的rgba';
-    return ('#' +
-        rgba
-            .split(',')
-            .map((s, i) => {
-            if (i == 3)
-                return Math.round(Number(s) * 255)
-                    .toString(16)
-                    .padStart(2, '0');
-            return Number(s).toString(16).padStart(2, '0');
-        })
-            .join(''));
+  if (!isRgba(rgba)) throw '无法识别正确的rgba';
+  let rgbas = rgba.split(',');
+  rgbas = rgbas.map((s, i) => {
+    if (i == 3) return Math.round(Number(s) * 255).toString(16).padStart(2, '0');
+    return Number(s).toString(16).padStart(2, '0');
+  });
+  return '#' + rgbas.join('');
 }
 
 ```
@@ -400,24 +370,22 @@ shrinkHex('#0037ff') // => '#0037ff'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isHex from "@/color/isHex"
+import isHex from '@/color/isHex'
 export default function shrinkHex(hex?: string): string {
   if (!isHex(hex)) throw '无法识别正确的hex'
-  if (hex!.length < 6) return hex!
-  const _hex = hex!.substring(1).match(/[0-9a-f]{2}/gi)!
-  return '#' + _hex.map(item => item[0]).join('')
+  if (hex!.substring(1)!.length < 6) return hex!
+  const hexs = hex!.substring(1).match(/[0-9a-f]{2}/gi)!
+  return '#' + hexs.map(item => item[0]).join('')
 }
 ```
 
 ```Js [JS版本]
-import isHex from "@/color/isHex";
+import isHex from '@/color/isHex';
 export default function shrinkHex(hex) {
-    if (!isHex(hex))
-        throw '无法识别正确的hex';
-    if (hex.length < 6)
-        return hex;
-    const _hex = hex.substring(1).match(/[0-9a-f]{2}/gi);
-    return '#' + _hex.map(item => item[0]).join('');
+  if (!isHex(hex)) throw '无法识别正确的hex';
+  if (hex.substring(1).length < 6) return hex;
+  const hexs = hex.substring(1).match(/[0-9a-f]{2}/gi);
+  return '#' + hexs.map((item) => item[0]).join('');
 }
 
 ```

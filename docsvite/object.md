@@ -4,10 +4,10 @@
 
 #### 类型说明
 ::: info
-`function arrObjSum<T extends Record<string, any>, K extends keyof T>(object: T[], keys: K[]): Record<string, any>;`
+`function arrObjSum<T extends Record<string, any>, K extends keyof T>(target: T[], keys: K[]): Record<string, any>;`
 :::
 #### 参数
-- object 目标对象
+- target 目标对象
 - keys 需要求和的key数组
 #### 返回
 - `Record<string, any>`
@@ -27,36 +27,35 @@ arrObjSum([{id: 'a', age: 10, sx: 1}, {id: 2, age: 'b', sx: 2}], ['id', 'age'])
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isArrObj from "@/verify/isArrObj"
+import isArrObj from '@/verify/isArrObj'
 export default function arrObjSum<T extends Record<string, any>, K extends keyof T>(
-  object: T[],
+  target: T[],
   keys: K[]
 ): Record<string, any> {
-  if (!isArrObj(object)) throw 'object 必须是数组对象'
-  const _object = {} as Record<K, number>
+  if (!isArrObj(target)) throw 'object 必须是数组对象'
+  const object = {} as Record<K, number>
   keys.forEach(item => {
-    _object[item] = object.reduce((start: number, end) => {
+    object[item] = target.reduce((start: number, end) => {
       const value = start + (isNaN(end[item]) ? 0 : Number(end[item]))
       return value
     }, 0)
   })
-  return _object
+  return object
 }
 ```
 
 ```Js [JS版本]
-import isArrObj from "@/verify/isArrObj";
-export default function arrObjSum(object, keys) {
-    if (!isArrObj(object))
-        throw 'object 必须是数组对象';
-    const _object = {};
-    keys.forEach(item => {
-        _object[item] = object.reduce((start, end) => {
-            const value = start + (isNaN(end[item]) ? 0 : Number(end[item]));
-            return value;
-        }, 0);
-    });
-    return _object;
+import isArrObj from '@/verify/isArrObj';
+export default function arrObjSum(target, keys) {
+  if (!isArrObj(target)) throw 'object 必须是数组对象';
+  const object = {};
+  keys.forEach((item) => {
+    object[item] = target.reduce((start, end) => {
+      const value = start + (isNaN(end[item]) ? 0 : Number(end[item]));
+      return value;
+    }, 0);
+  });
+  return object;
 }
 
 ```
@@ -80,7 +79,7 @@ export {}`
 :::
 #### 异常
 ::: danger
-target参数必须是对象  target参数不是对象时触发
+target参数必须是object  target参数不是对象时触发
 :::
 #### 示例 
 对象合并效果与Object.assign一致
@@ -90,27 +89,25 @@ assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isEmptyObject from "@/verify/isEmptyObject"
-import isObject from "@/verify/isObject"
+import isEmptyObject from '@/verify/isEmptyObject'
+import isObject from '@/verify/isObject'
 // 将元组类型转成对象类型的工具类型
 type MergeTuple<T extends any[]> = T extends [infer F, ...infer R] ? Omit<F, keyof MergeTuple<R>> & MergeTuple<R> : {};
 type Merge<T, U> = Omit<T, keyof U> & U;
 export default function assign<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U) {
-  if (!isObject(target)) throw 'target参数必须是对象'
+  if (!isObject(target)) throw 'target参数必须是object'
   if (isEmptyObject(target)) return {} as keyof T extends never ? {} : Merge<T, MergeTuple<U>>
   return Object.assign(target, ...sources) as keyof T extends never ? {} : Merge<T, MergeTuple<U>>
 }
 ```
 
 ```Js [JS版本]
-import isEmptyObject from "@/verify/isEmptyObject";
-import isObject from "@/verify/isObject";
+import isEmptyObject from '@/verify/isEmptyObject';
+import isObject from '@/verify/isObject';
 export default function assign(target, ...sources) {
-    if (!isObject(target))
-        throw 'target参数必须是对象';
-    if (isEmptyObject(target))
-        return {};
-    return Object.assign(target, ...sources);
+  if (!isObject(target)) throw 'target参数必须是object';
+  if (isEmptyObject(target)) return {};
+  return Object.assign(target, ...sources);
 }
 
 ```
@@ -134,7 +131,7 @@ export {}`
 :::
 #### 异常
 ::: danger
-target参数必须是对象  target参数不是对象时触发
+target参数必须是object  target参数不是对象时触发
 :::
 #### 示例 
 最小合并对象，只会合并源对象原有的属性，其他忽略
@@ -144,13 +141,13 @@ assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isEmptyObject from "@/verify/isEmptyObject"
-import isObject from "@/verify/isObject"
+import isEmptyObject from '@/verify/isEmptyObject'
+import isObject from '@/verify/isObject'
 // 将元组类型转成对象类型的工具类型
 type MergeTuple<T extends any[]> = T extends [infer F, ...infer R] ? Omit<F, keyof MergeTuple<R>> & MergeTuple<R> : {};
 type Merge<T, U> = Omit<T, keyof U> & U;
 export default function assignMin<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U) {
-  if (!isObject(target)) throw 'target参数必须是对象'
+  if (!isObject(target)) throw 'target参数必须是object'
   if (isEmptyObject(target)) return {} as keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof Merge<T, MergeTuple<U>>, keyof T>>
   const merge = Object.assign({}, target, ...sources)
   // 使用索引签名并确保类型安全
@@ -160,17 +157,14 @@ export default function assignMin<T extends Record<string, any>, U extends Recor
 ```
 
 ```Js [JS版本]
-import isEmptyObject from "@/verify/isEmptyObject";
-import isObject from "@/verify/isObject";
+import isEmptyObject from '@/verify/isEmptyObject';
+import isObject from '@/verify/isObject';
 export default function assignMin(target, ...sources) {
-    if (!isObject(target))
-        throw 'target参数必须是对象';
-    if (isEmptyObject(target))
-        return {};
-    const merge = Object.assign({}, target, ...sources);
-    // 使用索引签名并确保类型安全
-    Object.keys(target).forEach(key => target[key] = merge[key]);
-    return target;
+  if (!isObject(target)) throw 'target参数必须是object';
+  if (isEmptyObject(target)) return {};
+  const merge = Object.assign({}, target, ...sources);
+  Object.keys(target).forEach((key) => target[key] = merge[key]);
+  return target;
 }
 
 ```
@@ -204,12 +198,12 @@ createData(1) // => {data: {}}
 createData(2, 2)
 // =>
 {
-"data": {
-"0": 0,
-"1": 1,
-"data": {
-"0": 0,
-"1": 1
+data: {
+0: 0,
+1: 1,
+data: {
+0: 0,
+1: 1
 }
 }
 }
@@ -234,15 +228,54 @@ export default function createData(deep = 1, breadth = 0) {
 
 ```Js [JS版本]
 export default function createData(deep = 1, breadth = 0) {
-    const data = {};
-    let temp = data;
-    for (let i = 0; i < deep; i++) {
-        temp = temp['data'] = {};
-        for (let j = 0; j < breadth; j++) {
-            temp[j] = j;
-        }
+  const data = {};
+  let temp = data;
+  for (let i = 0; i < deep; i++) {
+    temp = temp['data'] = {};
+    for (let j = 0; j < breadth; j++) {
+      temp[j] = j;
     }
-    return data;
+  }
+  return data;
+}
+
+```
+:::
+## hasOwn 
+检查指定对象是否存在指定属性
+
+#### 类型说明
+::: info
+`function hasOwn(target: Record<string, any>, key: string): boolean;`
+:::
+#### 参数
+- target 指定对象
+- key 要检查的属性
+#### 返回
+- `boolean`
+::: tip
+true | false
+:::
+#### 示例 
+```ts
+hasOwn({a: 1, b: 0}, 'b') // => true
+hasOwn({a: 1, b: 0}, 'c') // => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isObject from '@/verify/isObject';
+export default function hasOwn(target: Record<string, any>, key:string) {
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  return Object.prototype.hasOwnProperty.call(target, key)
+}
+```
+
+```Js [JS版本]
+import isObject from '@/verify/isObject';
+export default function hasOwn(target, key) {
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  return Object.prototype.hasOwnProperty.call(target, key);
 }
 
 ```
@@ -270,13 +303,13 @@ omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {b: 2}
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import deepClone from "@/util/deepClone"
-import isObject from "@/verify/isObject";
+import deepClone from '@/util/deepClone'
+import isObject from '@/verify/isObject';
 // 函数重载声明
 export default function omit<T extends Record<string, any>>(target: T): T;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys: U): Omit<T, U[number]>;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys?: U) {
-  if (!isObject(target)) throw 'target参数必须是对象'
+  if (!isObject(target)) throw 'target参数必须是object'
   target = deepClone(target)
   ;(keys || []).forEach(key => delete target[key])
   return target
@@ -284,14 +317,13 @@ export default function omit<T extends Record<string, any>, U extends (keyof T)[
 ```
 
 ```Js [JS版本]
-import deepClone from "@/util/deepClone";
-import isObject from "@/verify/isObject";
+import deepClone from '@/util/deepClone';
+import isObject from '@/verify/isObject';
 export default function omit(target, keys) {
-    if (!isObject(target))
-        throw 'target参数必须是对象';
-    target = deepClone(target);
-    (keys || []).forEach(key => delete target[key]);
-    return target;
+  if (!isObject(target)) throw 'target参数必须是object';
+  target = deepClone(target);
+  (keys || []).forEach((key) => delete target[key]);
+  return target;
 }
 
 ```
@@ -323,9 +355,9 @@ omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {a: 1, c: 3}
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import deepClone from "@/util/deepClone"
-import isObject from "@/verify/isObject";
-import isArray from "@/verify/isArray";
+import deepClone from '@/util/deepClone'
+import isObject from '@/verify/isObject';
+import isArray from '@/verify/isArray';
 // 函数重载声明
 export default function pick<T extends Record<string, any>>(target: T, keys?: []): {};
 export default function pick<T extends Record<string, any>, K extends keyof T>(target: T, keys: K[]): Pick<T, K>;
@@ -345,23 +377,20 @@ export default function pick<T extends Record<string, any>, K extends keyof T>(t
 ```
 
 ```Js [JS版本]
-import deepClone from "@/util/deepClone";
-import isObject from "@/verify/isObject";
-import isArray from "@/verify/isArray";
+import deepClone from '@/util/deepClone';
+import isObject from '@/verify/isObject';
+import isArray from '@/verify/isArray';
 export default function pick(target, keys = []) {
-    if (!isObject(target))
-        throw new Error('target参数必须是object');
-    if (!isArray(keys))
-        throw new Error('keys参数必须是array');
-    if (keys.length == 0)
-        return {};
-    target = deepClone(target);
-    Object.keys(target).forEach(key => {
-        if (!keys.includes(key)) {
-            delete target[key];
-        }
-    });
-    return target;
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  if (!isArray(keys)) throw new Error('keys参数必须是array');
+  if (keys.length == 0) return {};
+  target = deepClone(target);
+  Object.keys(target).forEach((key) => {
+    if (!keys.includes(key)) {
+      delete target[key];
+    }
+  });
+  return target;
 }
 
 ```
@@ -398,9 +427,9 @@ omit({a: 1, b: '2', c: true, d: [1, 2, 3], e: {a: 1, b: '2', c: [6, 7]}})
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import deepClone from "@/util/deepClone"
-import typeOf from "@/common/typeOf";
-import isObject from "@/verify/isObject";
+import deepClone from '@/util/deepClone'
+import typeOf from '@/common/typeOf';
+import isObject from '@/verify/isObject';
 export default function resetObjectValues<T extends Record<string, any>>(target: T, n = 0) {
   if (!isObject(target)) throw new Error('target参数必须是object');
   if (n != 1) target = deepClone(target);
@@ -416,27 +445,20 @@ export default function resetObjectValues<T extends Record<string, any>>(target:
 ```
 
 ```Js [JS版本]
-import deepClone from "@/util/deepClone";
-import typeOf from "@/common/typeOf";
-import isObject from "@/verify/isObject";
+import deepClone from '@/util/deepClone';
+import typeOf from '@/common/typeOf';
+import isObject from '@/verify/isObject';
 export default function resetObjectValues(target, n = 0) {
-    if (!isObject(target))
-        throw new Error('target参数必须是object');
-    if (n != 1)
-        target = deepClone(target);
-    Object.keys(target).forEach(key => {
-        if (typeOf(target[key]) == 'String')
-            target[key] = '';
-        if (typeOf(target[key]) == 'Number')
-            target[key] = 0;
-        if (typeOf(target[key]) == 'Boolean')
-            target[key] = false;
-        if (typeOf(target[key]) == 'Array')
-            target[key] = [];
-        if (typeOf(target[key]) == 'Object')
-            resetObjectValues(target[key], 1);
-    });
-    return target;
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  if (n != 1) target = deepClone(target);
+  Object.keys(target).forEach((key) => {
+    if (typeOf(target[key]) == 'String') target[key] = '';
+    if (typeOf(target[key]) == 'Number') target[key] = 0;
+    if (typeOf(target[key]) == 'Boolean') target[key] = false;
+    if (typeOf(target[key]) == 'Array') target[key] = [];
+    if (typeOf(target[key]) == 'Object') resetObjectValues(target[key], 1);
+  });
+  return target;
 }
 
 ```
@@ -481,9 +503,8 @@ export default function isEmptyObject(object: Record<string, unknown>): boolean 
 ```Js [JS版本]
 import isObject from '@/verify/isObject';
 export default function isEmptyObject(object) {
-    if (!isObject(object))
-        throw '传入参数不是Object';
-    return !Object.keys(object).length;
+  if (!isObject(object)) throw '传入参数不是Object';
+  return !Object.keys(object).length;
 }
 
 ```
@@ -523,7 +544,7 @@ export default function isMap(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isMap(value) {
-    return typeOf(value) === 'Map';
+  return typeOf(value) === 'Map';
 }
 
 ```
@@ -563,7 +584,7 @@ export default function isObject(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isObject(value) {
-    return value !== null && typeOf(value) === 'Object';
+  return value !== null && typeOf(value) === 'Object';
 }
 
 ```
@@ -603,7 +624,7 @@ export default function isSet(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isSet(value) {
-    return typeOf(value) === 'Set';
+  return typeOf(value) === 'Set';
 }
 
 ```
@@ -643,7 +664,7 @@ export default function isSymbol(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isSymbol(value) {
-    return typeOf(value) === 'Symbol';
+  return typeOf(value) === 'Symbol';
 }
 
 ```

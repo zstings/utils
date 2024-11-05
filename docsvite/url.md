@@ -35,7 +35,7 @@ getUrlParam('id', 'http://a.b.com/?id=a#/index/?id=b') => 'a'
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isURL from "@/url/isURL"
+import isURL from '@/url/isURL'
 export default function getUrlParam(name: string, url: string = window.location.href): string | null {
   // 检查url值是否有效
   if (!isURL(url)) throw 'url 参数错误，不是有效的'
@@ -53,23 +53,16 @@ export default function getUrlParam(name: string, url: string = window.location.
 ```
 
 ```Js [JS版本]
-import isURL from "@/url/isURL";
+import isURL from '@/url/isURL';
 export default function getUrlParam(name, url = window.location.href) {
-    // 检查url值是否有效
-    if (!isURL(url))
-        throw 'url 参数错误，不是有效的';
-    const urlPar = new URL(url);
-    // 构造一个含有目标参数的正则表达式对象
-    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
-    // 匹配目标参数
-    const r = urlPar.search.substring(1).match(reg);
-    const h = urlPar.hash.split('?')[1]?.match(reg);
-    // 返回参数
-    if (r != null)
-        return decodeURIComponent(r[2]);
-    if (h != null)
-        return decodeURIComponent(h[2]);
-    return null;
+  if (!isURL(url)) throw 'url 参数错误，不是有效的';
+  const urlPar = new URL(url);
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+  const r = urlPar.search.substring(1).match(reg);
+  const h = urlPar.hash.split('?')[1]?.match(reg);
+  if (r != null) return decodeURIComponent(r[2]);
+  if (h != null) return decodeURIComponent(h[2]);
+  return null;
 }
 
 ```
@@ -125,11 +118,11 @@ getUrlQuery({url: 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4', type: 'hash'}) // =
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isNullOrUndefined from "@/verify/isNullOrUndefined";
-import isObject from "@/verify/isObject";
-import isURL from "@/url/isURL";
-import isString from "@/verify/isString";
-import qsParse from "@/url/qsParse";
+import isNullOrUndefined from '@/verify/isNullOrUndefined';
+import isObject from '@/verify/isObject';
+import isURL from '@/url/isURL';
+import isString from '@/verify/isString';
+import qsParse from '@/url/qsParse';
 export default function getUrlQuery(
   option: { url?: string; type?: 'search' | 'hash' | 'all' } = {
     url: window.location.href,
@@ -157,36 +150,28 @@ export default function getUrlQuery(
 ```
 
 ```Js [JS版本]
-import isNullOrUndefined from "@/verify/isNullOrUndefined";
-import isObject from "@/verify/isObject";
-import isURL from "@/url/isURL";
-import isString from "@/verify/isString";
-import qsParse from "@/url/qsParse";
+import isNullOrUndefined from '@/verify/isNullOrUndefined';
+import isObject from '@/verify/isObject';
+import isURL from '@/url/isURL';
+import isString from '@/verify/isString';
+import qsParse from '@/url/qsParse';
 export default function getUrlQuery(option = {
-    url: window.location.href,
-    type: 'all'
+  url: window.location.href,
+  type: 'all'
 }) {
-    // 检查参数类型
-    if (isNullOrUndefined(option) || !isObject(option))
-        throw `参数错误， 应该传入一个对象`;
-    // 检查参数属性是否存在，不存在设置默认值
-    if (!option.url)
-        option.url = window.location.href;
-    if (!option.type)
-        option.type = 'all';
-    // 检查参数属性值类型
-    if (!isURL(option.url))
-        throw `url 参数错误，不是有效的`;
-    if (!isString(option.type) || !['search', 'hash', 'all'].includes(option.type))
-        throw `type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'`;
-    // 获取参数对象
-    const { url, type } = option;
-    const urlStr = new URL(url);
-    const urlSearch = urlStr.search.substring(1);
-    const urlHash = urlStr.hash.indexOf('?') >= 0 ? urlStr.hash.slice(urlStr.hash.indexOf('?') + 1) : '';
-    const searchArr = type == 'hash' ? {} : qsParse(urlSearch);
-    const hashArr = type == 'search' ? {} : qsParse(urlHash);
-    return Object.assign({}, searchArr, hashArr, searchArr);
+  if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象`;
+  if (!option.url) option.url = window.location.href;
+  if (!option.type) option.type = 'all';
+  if (!isURL(option.url)) throw `url 参数错误，不是有效的`;
+  if (!isString(option.type) || !['search', 'hash', 'all'].includes(option.type))
+    throw `type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'`;
+  const { url, type } = option;
+  const urlStr = new URL(url);
+  const urlSearch = urlStr.search.substring(1);
+  const urlHash = urlStr.hash.indexOf('?') >= 0 ? urlStr.hash.slice(urlStr.hash.indexOf('?') + 1) : '';
+  const searchArr = type == 'hash' ? {} : qsParse(urlSearch);
+  const hashArr = type == 'search' ? {} : qsParse(urlHash);
+  return Object.assign({}, searchArr, hashArr, searchArr);
 }
 
 ```
@@ -221,7 +206,7 @@ isURL('123')
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isString from "@/verify/isString"
+import isString from '@/verify/isString'
 export default function isURL(url: string): boolean {
   if (!isString(url)) throw '参数必须是string'
   // if (URL.canParse) return URL.canParse(url)
@@ -235,18 +220,15 @@ export default function isURL(url: string): boolean {
 ```
 
 ```Js [JS版本]
-import isString from "@/verify/isString";
+import isString from '@/verify/isString';
 export default function isURL(url) {
-    if (!isString(url))
-        throw '参数必须是string';
-    // if (URL.canParse) return URL.canParse(url)
-    try {
-        new URL(url);
-        return true;
-    }
-    catch (err) {
-        return false;
-    }
+  if (!isString(url)) throw '参数必须是string';
+  try {
+    new URL(url);
+    return true;
+  } catch (err) {
+    return false;
+  }
 }
 
 ```
@@ -273,17 +255,17 @@ qsParse('a=1&b=2')
 // => 'a=1&b=2'
 ```
 ```ts
-qsParse('a=1&b=2&c={"a":1}')
+qsParse('a=1&b=2&c={'a':1}')
 // => { a:1, b:2, c: { a :1 } }
 ```
 ```ts
-qsParse('a=1&b=2&c={"a":1}', false)
+qsParse('a=1&b=2&c={'a':1}', false)
 // => { a:1, b:2, c: '{ a: 1 }' }
 ```
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isJsonString from "@/verify/isJsonString"
+import isJsonString from '@/verify/isJsonString'
 export default function qsParse(query = '', decode = true): { [k: string]: any } {
   const queryObj = JSON.parse(JSON.stringify(Object.fromEntries(new URLSearchParams(query) as any)))
   if (decode) {
@@ -297,16 +279,16 @@ export default function qsParse(query = '', decode = true): { [k: string]: any }
 ```
 
 ```Js [JS版本]
-import isJsonString from "@/verify/isJsonString";
+import isJsonString from '@/verify/isJsonString';
 export default function qsParse(query = '', decode = true) {
-    const queryObj = JSON.parse(JSON.stringify(Object.fromEntries(new URLSearchParams(query))));
-    if (decode) {
-        Object.keys(queryObj).forEach(key => {
-            if (isJsonString(queryObj[key]) && (queryObj[key].startsWith('{') || queryObj[key].startsWith('[')))
-                queryObj[key] = JSON.parse(queryObj[key]);
-        });
-    }
-    return queryObj;
+  const queryObj = JSON.parse(JSON.stringify(Object.fromEntries(new URLSearchParams(query))));
+  if (decode) {
+    Object.keys(queryObj).forEach((key) => {
+      if (isJsonString(queryObj[key]) && (queryObj[key].startsWith('{') || queryObj[key].startsWith('[')))
+        queryObj[key] = JSON.parse(queryObj[key]);
+    });
+  }
+  return queryObj;
 }
 
 ```
@@ -341,13 +323,13 @@ qsStringify({a: 1, b: 2, c: {a: 1}})
 解码后输出
 ```ts
 qsStringify({a: 1, b: 2, c: {a: 1}}, true)
-// => 'a=1&b=2&c={"a":1}'
+// => `a=1&b=2&c={'a':1}`
 ```
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isBasicType from "@/verify/isBasicType"
-import isNullOrUndefined from "@/verify/isNullOrUndefined"
+import isBasicType from '@/verify/isBasicType'
+import isNullOrUndefined from '@/verify/isNullOrUndefined'
 export default function qsStringify(query: Record<string, any> = {}, decode = false): string {
   // 缓存Object.keys(query)的结果，避免重复调用
   const keys = Object.keys(query)
@@ -367,24 +349,19 @@ export default function qsStringify(query: Record<string, any> = {}, decode = fa
 ```
 
 ```Js [JS版本]
-import isBasicType from "@/verify/isBasicType";
-import isNullOrUndefined from "@/verify/isNullOrUndefined";
+import isBasicType from '@/verify/isBasicType';
+import isNullOrUndefined from '@/verify/isNullOrUndefined';
 export default function qsStringify(query = {}, decode = false) {
-    // 缓存Object.keys(query)的结果，避免重复调用
-    const keys = Object.keys(query);
-    // 使用数组和join方法代替URLSearchParams对象，减少内存占用和转换开销
-    const queryArr = [];
-    for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        const value = query[key];
-        if (isNullOrUndefined(value))
-            continue;
-        // 使用三元运算符代替if语句，简化代码逻辑
-        const encodedValue = isBasicType(value) ? encodeURIComponent(value) : encodeURIComponent(JSON.stringify(value));
-        queryArr.push(key + '=' + encodedValue);
-    }
-    // 根据decode参数决定是否解码
-    return decode ? decodeURIComponent(queryArr.join('&')) : queryArr.join('&');
+  const keys = Object.keys(query);
+  const queryArr = [];
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const value = query[key];
+    if (isNullOrUndefined(value)) continue;
+    const encodedValue = isBasicType(value) ? encodeURIComponent(value) : encodeURIComponent(JSON.stringify(value));
+    queryArr.push(key + '=' + encodedValue);
+  }
+  return decode ? decodeURIComponent(queryArr.join('&')) : queryArr.join('&');
 }
 
 ```
@@ -440,11 +417,11 @@ reviseUrlQuery({search: {a: '5', b: '6'}, hash: {c: '7', b: '8'}}, 'http://a.b.c
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isNullOrUndefined from "@/verify/isNullOrUndefined";
-import isObject from "@/verify/isObject";
-import getUrlQuery from "@/url/getUrlQuery";
-import isURL from "@/url/isURL";
-import qsStringify from "@/url/qsStringify";
+import isNullOrUndefined from '@/verify/isNullOrUndefined';
+import isObject from '@/verify/isObject';
+import getUrlQuery from '@/url/getUrlQuery';
+import isURL from '@/url/isURL';
+import qsStringify from '@/url/qsStringify';
 export default function reviseUrlQuery(
   option: { search?: Record<string, any>; hash?: Record<string, any> },
   url: string = window.location.href
@@ -474,37 +451,29 @@ export default function reviseUrlQuery(
 ```
 
 ```Js [JS版本]
-import isNullOrUndefined from "@/verify/isNullOrUndefined";
-import isObject from "@/verify/isObject";
-import getUrlQuery from "@/url/getUrlQuery";
-import isURL from "@/url/isURL";
-import qsStringify from "@/url/qsStringify";
+import isNullOrUndefined from '@/verify/isNullOrUndefined';
+import isObject from '@/verify/isObject';
+import getUrlQuery from '@/url/getUrlQuery';
+import isURL from '@/url/isURL';
+import qsStringify from '@/url/qsStringify';
 export default function reviseUrlQuery(option, url = window.location.href) {
-    // 检查参数类型
-    if (isNullOrUndefined(option) || !isObject(option))
-        throw `参数错误， 应该传入一个对象`;
-    // 检查参数属性存在但不是对象
-    if (option.search && !isObject(option.search))
-        throw `search 参数错误， 应该传入一个对象`;
-    if (option.hash && !isObject(option.hash))
-        throw `hash 参数错误， 应该传入一个对象`;
-    // 检查url值是否有效
-    if (!isURL(url))
-        throw 'url 参数错误，不是有效的';
-    // 修改参数的实现逻辑
-    const { origin, pathname } = new URL(url);
-    let { search, hash } = new URL(url);
-    if (option.search) {
-        const arr = getUrlQuery({ url, type: 'search' });
-        const searchStr = qsStringify(Object.assign({}, arr, option.search));
-        search = searchStr ? '?' + searchStr : '';
-    }
-    if (option.hash) {
-        const arr = getUrlQuery({ url, type: 'hash' });
-        const hashStr = qsStringify(Object.assign({}, arr, option.hash));
-        hash = hashStr ? hash.split('?')[0] + '?' + hashStr : hash.split('?')[0];
-    }
-    return origin + pathname + search + hash;
+  if (isNullOrUndefined(option) || !isObject(option)) throw `参数错误， 应该传入一个对象`;
+  if (option.search && !isObject(option.search)) throw `search 参数错误， 应该传入一个对象`;
+  if (option.hash && !isObject(option.hash)) throw `hash 参数错误， 应该传入一个对象`;
+  if (!isURL(url)) throw 'url 参数错误，不是有效的';
+  const { origin, pathname } = new URL(url);
+  let { search, hash } = new URL(url);
+  if (option.search) {
+    const arr = getUrlQuery({ url, type: 'search' });
+    const searchStr = qsStringify(Object.assign({}, arr, option.search));
+    search = searchStr ? '?' + searchStr : '';
+  }
+  if (option.hash) {
+    const arr = getUrlQuery({ url, type: 'hash' });
+    const hashStr = qsStringify(Object.assign({}, arr, option.hash));
+    hash = hashStr ? hash.split('?')[0] + '?' + hashStr : hash.split('?')[0];
+  }
+  return origin + pathname + search + hash;
 }
 
 ```
@@ -539,8 +508,8 @@ setUrlQuery('https://a.b.com/?a=1&b=2', 'replaceState')
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-import isString from "@/verify/isString"
-import isURL from "@/url/isURL"
+import isString from '@/verify/isString'
+import isURL from '@/url/isURL'
 export default function setUrlQuery(url: string, type: 'pushState' | 'replaceState' = 'pushState'): void {
   // 检查url值是否有效
   if (!isURL(url)) throw 'url 参数错误，不是有效的'
@@ -556,19 +525,17 @@ export default function setUrlQuery(url: string, type: 'pushState' | 'replaceSta
 ```
 
 ```Js [JS版本]
-import isString from "@/verify/isString";
-import isURL from "@/url/isURL";
+import isString from '@/verify/isString';
+import isURL from '@/url/isURL';
 export default function setUrlQuery(url, type = 'pushState') {
-    // 检查url值是否有效
-    if (!isURL(url))
-        throw 'url 参数错误，不是有效的';
-    if (!isString(type) || !['pushState', 'replaceState'].includes(type))
-        throw `type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'`;
-    if (history.state && history.state.current) {
-        const pathname = new URL(url).pathname;
-        history.state.current = pathname;
-    }
-    window.history[type](history.state, '', url);
+  if (!isURL(url)) throw 'url 参数错误，不是有效的';
+  if (!isString(type) || !['pushState', 'replaceState'].includes(type))
+    throw `type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'`;
+  if (history.state && history.state.current) {
+    const pathname = new URL(url).pathname;
+    history.state.current = pathname;
+  }
+  window.history[type](history.state, '', url);
 }
 
 ```
@@ -608,7 +575,7 @@ export default function isLocation(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 export default function isLocation(value) {
-    return typeOf(value) === 'Location';
+  return typeOf(value) === 'Location';
 }
 
 ```
