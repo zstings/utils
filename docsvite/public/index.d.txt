@@ -313,13 +313,6 @@ shrinkHex(hex?: string): string;
 typeOf(value: any): string;
 
 /**
- * 获取版本号
- * @return 版本号
- * @category 工具Util
- */
-version(): string;
-
-/**
  * 获取时间对象
  * @param time 时间戳|格式化后的时间字符|时间对象|可转化的时间数组
  * @return 时间对象

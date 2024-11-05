@@ -54,35 +54,6 @@ export default function typeOf(value) {
 
 ```
 :::
-## version 
-获取版本号
-
-#### 类型说明
-::: info
-`function version(): string;`
-:::
-#### 返回
-- `string`
-::: tip
-版本号
-:::
-#### 源码
-::: code-group
-```Ts [TS版本]
-import { version as ver } from '../../package.json'
-export default function version(): string {
-  return ver
-}
-```
-
-```Js [JS版本]
-import { version as ver } from '../../package.json';
-export default function version() {
-  return ver;
-}
-
-```
-:::
 ## base64ToBlob 
 base64转blob
 
