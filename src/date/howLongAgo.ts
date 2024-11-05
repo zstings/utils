@@ -32,9 +32,9 @@ export default function howLongAgo(
   endTime: number | string | Date | (string | number)[] = new Date(),
   startTime: number | string | Date | (string | number)[] = new Date()
 ) {
-  const _endTime = days(endTime).getTime()
-  const _startTime = days(startTime).getTime()
-  const date = _startTime - _endTime
+  endTime = days(endTime).getTime()
+  startTime = days(startTime).getTime()
+  const date = startTime - endTime
   if (date < 0) throw 'startTime 必须大于 endTime'
   if (date >= 31536000000) return Math.floor(date / 31536000000) + '年前'
   else if (date >= 2592000000) return Math.floor(date / 2592000000) + '月前'

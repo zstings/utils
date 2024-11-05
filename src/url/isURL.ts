@@ -1,4 +1,4 @@
-import isString from "@/verify/isString"
+import isString from '@/verify/isString'
 
 /**
  * 是否是url

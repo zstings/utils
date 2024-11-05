@@ -1,4 +1,4 @@
-import isString from "@/verify/isString"
+import isString from '@/verify/isString'
 
 /**
  * 判断是否是16进制hex色值

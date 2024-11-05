@@ -1,5 +1,5 @@
-import deepClone from "@/util/deepClone"
-import isObject from "@/verify/isObject";
+import deepClone from '@/util/deepClone'
+import isObject from '@/verify/isObject';
 
 /**
  * 删除指定对象的指定属性
@@ -16,7 +16,7 @@ import isObject from "@/verify/isObject";
 export default function omit<T extends Record<string, any>>(target: T): T;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys: U): Omit<T, U[number]>;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys?: U) {
-  if (!isObject(target)) throw 'target参数必须是对象'
+  if (!isObject(target)) throw 'target参数必须是object'
   target = deepClone(target)
   ;(keys || []).forEach(key => delete target[key])
   return target

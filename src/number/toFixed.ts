@@ -30,8 +30,8 @@ import toNumber from '@/number/toNumber'
  * ```
  */
 export default function toFixed(value: number, num = 2, isRound = true): number {
-  const _val = toNumber(value)
+  value = toNumber(value)
   if (!isBoolean(isRound)) throw 'isRound不是boolean'
-  if (isRound) return parseFloat(_val.toFixed(num))
-  return parseFloat(_val.toFixed(num + 1).slice(0, -1))
+  if (isRound) return parseFloat(value.toFixed(num))
+  return parseFloat(value.toFixed(num + 1).slice(0, -1))
 }

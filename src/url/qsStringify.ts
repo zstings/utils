@@ -1,5 +1,5 @@
-import isBasicType from "@/verify/isBasicType"
-import isNullOrUndefined from "@/verify/isNullOrUndefined"
+import isBasicType from '@/verify/isBasicType'
+import isNullOrUndefined from '@/verify/isNullOrUndefined'
 
 /**
  * 参数序列化-对象转字符
@@ -26,7 +26,7 @@ import isNullOrUndefined from "@/verify/isNullOrUndefined"
  * 解码后输出
  * ```ts
  * qsStringify({a: 1, b: 2, c: {a: 1}}, true)
- * // => 'a=1&b=2&c={"a":1}'
+ * // => `a=1&b=2&c={'a':1}`
  * ```
  */
 export default function qsStringify(query: Record<string, any> = {}, decode = false): string {

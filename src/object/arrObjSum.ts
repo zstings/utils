@@ -1,8 +1,8 @@
-import isArrObj from "@/verify/isArrObj"
+import isArrObj from '@/verify/isArrObj'
 
 /**
  * 数组对象key值求和
- * @param object 目标对象
+ * @param target 目标对象
  * @param keys 需要求和的key数组
  * @return 求和后的对象
  * @category 对象Object
@@ -19,16 +19,16 @@ import isArrObj from "@/verify/isArrObj"
  * ```
  */
 export default function arrObjSum<T extends Record<string, any>, K extends keyof T>(
-  object: T[],
+  target: T[],
   keys: K[]
 ): Record<string, any> {
-  if (!isArrObj(object)) throw 'object 必须是数组对象'
-  const _object = {} as Record<K, number>
+  if (!isArrObj(target)) throw 'object 必须是数组对象'
+  const object = {} as Record<K, number>
   keys.forEach(item => {
-    _object[item] = object.reduce((start: number, end) => {
+    object[item] = target.reduce((start: number, end) => {
       const value = start + (isNaN(end[item]) ? 0 : Number(end[item]))
       return value
     }, 0)
   })
-  return _object
+  return object
 }

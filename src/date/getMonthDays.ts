@@ -18,9 +18,9 @@
  * ```
  */
 export default function getMonthDays(year?: number, month?: number): number {
-  const _year = year ? year : new Date().getFullYear()
-  const _month = month ? month : new Date().getMonth() + 1
-  const days = new Date(_year, _month, 0)
+  year = year ? year : new Date().getFullYear()
+  month = month ? month : new Date().getMonth() + 1
+  const days = new Date(year, month, 0)
   if (isNaN(days.getTime())) throw 'Invalid Date'
   return days.getDate()
 }

@@ -1,5 +1,5 @@
-import isNumber from "@/verify/isNumber"
-import isString from "@/verify/isString"
+import isNumber from '@/verify/isNumber'
+import isString from '@/verify/isString'
 
 
 /**

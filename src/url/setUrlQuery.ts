@@ -1,5 +1,5 @@
-import isString from "@/verify/isString"
-import isURL from "@/url/isURL"
+import isString from '@/verify/isString'
+import isURL from '@/url/isURL'
 
 /**
  * 设置浏览器地址栏url

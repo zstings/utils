@@ -53,8 +53,8 @@ export default function getDataSection(
   const { start = new Date(), format = 'YYYY-MM-DD', timestamp = false } = option
   if (!isString(format)) throw 'option.format 必须是字符串'
   if (!isBoolean(timestamp)) throw 'option.timestamp 必须是布尔值'
-  const _startTime = days(start).getTime()
-  const _endTime = _startTime - (day - 1) * 8.64e7
-  if (timestamp) return [timeStamp(_endTime, format), timeStamp(_startTime, format)]
-  return [formats(_endTime, format), formats(_startTime, format)]
+  const startTime = days(start).getTime()
+  const endTime = startTime - (day - 1) * 8.64e7
+  if (timestamp) return [timeStamp(endTime, format), timeStamp(startTime, format)]
+  return [formats(endTime, format), formats(startTime, format)]
 }

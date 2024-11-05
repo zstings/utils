@@ -1,5 +1,5 @@
-import mask from "@/string/mask"
-import isPhone from "@/verify/isPhone"
+import mask from '@/string/mask'
+import isPhone from '@/verify/isPhone'
 
 /**
  * 对手机号进行加密处理

@@ -1,6 +1,6 @@
-import isArray from "@/verify/isArray"
-import isString from "@/verify/isString"
-import isEqual from "@/verify/isEqual"
+import isArray from '@/verify/isArray'
+import isString from '@/verify/isString'
+import isEqual from '@/verify/isEqual'
 
 /**
  * 数组去重

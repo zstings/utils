@@ -1,4 +1,4 @@
-import isObject from "@/verify/isObject";
+import isObject from '@/verify/isObject';
 
 /**
  * 检查指定对象是否存在指定属性

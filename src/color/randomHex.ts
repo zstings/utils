@@ -1,4 +1,4 @@
-import random from "@/util/random"
+import random from '@/util/random'
 
 /**
  * 随机生成16进制色值

@@ -1,6 +1,6 @@
 /**
  * 获取设备类型
- * @return "Mobile" | "Desktop"
+ * @return 'Mobile' | 'Desktop'
  * @category 设备Device
  * @example
  * 移动端访问

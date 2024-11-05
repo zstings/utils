@@ -1,4 +1,4 @@
-import isFunction from "@/verify/isFunction"
+import isFunction from '@/verify/isFunction'
 /**
  * 只调用一次的函数
  * @param func 函数

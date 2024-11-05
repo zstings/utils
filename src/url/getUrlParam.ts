@@ -1,4 +1,4 @@
-import isURL from "@/url/isURL"
+import isURL from '@/url/isURL'
 
 /**
  * 获取url上的参数

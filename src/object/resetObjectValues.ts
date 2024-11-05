@@ -1,6 +1,6 @@
-import deepClone from "@/util/deepClone"
-import typeOf from "@/common/typeOf";
-import isObject from "@/verify/isObject";
+import deepClone from '@/util/deepClone'
+import typeOf from '@/common/typeOf';
+import isObject from '@/verify/isObject';
 
 /**
  * 重置指定对象的值

@@ -39,18 +39,18 @@ export default function scrollTo(
 ): void {
   let animat = 0
   const { rate = 4, num = 0, direction = 'top', dom = document.scrollingElement } = option
-  const directions = { top: 'scrollTop', left: 'scrollLeft' }
-  let scrollVal = (dom as Element)[directions[direction] as 'scrollTop']
+  const directions = { top: 'scrollTop', left: 'scrollLeft' } as const
+  let scrollVal = dom![directions[direction]]
   const animatRunFun = function () {
     scrollVal = scrollVal + (num - scrollVal) / rate
     // 临界判断，终止动画
     if (Math.abs(scrollVal - num) <= 1) {
-      ;(dom as Element)[directions[direction] as 'scrollTop'] = num
+      dom![directions[direction]] = num
       cancelAnimationFrame(animat)
       callback && callback()
       return
     }
-    ;(dom as Element)[directions[direction] as 'scrollTop'] = scrollVal
+    dom![directions[direction]] = scrollVal
     animat = requestAnimationFrame(animatRunFun)
   }
   animatRunFun()

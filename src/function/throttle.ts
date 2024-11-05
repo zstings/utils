@@ -1,6 +1,6 @@
-import isBoolean from "@/verify/isBoolean"
-import isNumber from "@/verify/isNumber"
-import isFunction from "@/verify/isFunction"
+import isBoolean from '@/verify/isBoolean'
+import isNumber from '@/verify/isNumber'
+import isFunction from '@/verify/isFunction'
 
 /**
  * 节流
@@ -32,14 +32,13 @@ import isFunction from "@/verify/isFunction"
  */
 export default function throttle(func: (...params: any[]) => any, wait = 500, immediate = false) {
   let timeout = 0
-  let _immediate = immediate
   if (!isFunction(func)) throw 'func不是function'
   if (wait && !isNumber(wait)) throw 'wait不是number'
   if (!isBoolean(immediate)) throw 'immediate不是boolean'
   return function (this: unknown, ...args: any[]) {
-    if (_immediate) {
+    if (immediate) {
       func.apply(this, args)
-      _immediate = false
+      immediate = false
     }
     if (!timeout) {
       timeout = setTimeout(() => {

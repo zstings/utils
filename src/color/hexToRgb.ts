@@ -1,6 +1,6 @@
-import toFixed from "@/number/toFixed"
-import extendHex from "@/color/extendHex"
-import isHex from "@/color/isHex"
+import toFixed from '@/number/toFixed'
+import extendHex from '@/color/extendHex'
+import isHex from '@/color/isHex'
 
 /**
  * 将16进制hex色值转为rgb(a)色值
@@ -20,8 +20,7 @@ import isHex from "@/color/isHex"
  */
 export default function hexToRgb(hex?: string): string {
   if (!isHex(hex)) throw '无法识别正确的hex'
-  let _hex = hex!.substring(1)
-  if (_hex.length < 6) _hex = extendHex(hex!).substring(1)
-  _hex = (_hex.match(/[0-9a-f]{2}/gi)!).map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16))).join(',')
-  return _hex
+  if (hex!.substring(1).length < 6) hex = extendHex(hex!).substring(1)
+  hex = (hex!.match(/[0-9a-f]{2}/gi)!).map((s, i) => (i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16))).join(',')
+  return hex
 }

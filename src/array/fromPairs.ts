@@ -1,4 +1,4 @@
-import isArray from "@/verify/isArray"
+import isArray from '@/verify/isArray'
 
 /**
  * 二维数组转化为对象

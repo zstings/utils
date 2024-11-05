@@ -1,4 +1,4 @@
-import isNumber from "@/verify/isNumber"
+import isNumber from '@/verify/isNumber'
 
 /**
  * 均衡获取指定范围的随机整数

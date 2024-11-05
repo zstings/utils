@@ -1,6 +1,6 @@
-import isBoolean from "@/verify/isBoolean"
-import isNumber from "@/verify/isNumber"
-import isFunction from "@/verify/isFunction"
+import isBoolean from '@/verify/isBoolean'
+import isNumber from '@/verify/isNumber'
+import isFunction from '@/verify/isFunction'
 
 /**
  * 防抖
@@ -43,8 +43,7 @@ export default function debounce(
   awit = 500,
   option: { leading?: boolean; trailing?: boolean } = { leading: false, trailing: true }
 ): any {
-  const { leading = false, trailing = true } = option
-  let _leading = leading
+  let { leading = false, trailing = true } = option
   let timeout = 0
   if (!isFunction(func)) throw 'func不是function'
   if (awit && !isNumber(awit)) throw 'awit不是number'
@@ -52,12 +51,12 @@ export default function debounce(
   if (!isBoolean(trailing)) throw 'trailing不是boolean'
   return function (this: unknown, ...args: any[]) {
     clearTimeout(timeout)
-    if (_leading) {
+    if (leading) {
       func.apply(this, args)
-      _leading = false
+      leading = false
     }
     timeout = setTimeout(() => {
-      _leading = leading
+      leading = leading
       trailing && func.apply(this, args)
     }, awit)
   }

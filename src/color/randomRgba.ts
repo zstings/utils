@@ -1,5 +1,5 @@
-import toFixed from "@/number/toFixed";
-import random from "@/util/random";
+import toFixed from '@/number/toFixed';
+import random from '@/util/random';
 
 /**
  * 随机生成RGBA色值

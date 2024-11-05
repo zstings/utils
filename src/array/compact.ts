@@ -1,4 +1,4 @@
-import isArray from "@/verify/isArray"
+import isArray from '@/verify/isArray'
 
 /**
  * 移除所有 falsey 值的数组

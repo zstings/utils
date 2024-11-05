@@ -1,4 +1,4 @@
-import isRgba from "@/color/isRgba"
+import isRgba from '@/color/isRgba'
 
 /**
  * 将rgb(a)色值转为16进制hex色值
@@ -18,17 +18,10 @@ import isRgba from "@/color/isRgba"
  */
 export default function rgbToHex(rgba: string): string {
   if (!isRgba(rgba)) throw '无法识别正确的rgba'
-  return (
-    '#' +
-    rgba
-      .split(',')
-      .map((s, i) => {
-        if (i == 3)
-          return Math.round(Number(s) * 255)
-            .toString(16)
-            .padStart(2, '0')
-        return Number(s).toString(16).padStart(2, '0')
-      })
-      .join('')
-  )
+  let rgbas = rgba.split(',')
+  rgbas = rgbas.map((s, i) => {
+    if (i == 3) return Math.round(Number(s) * 255).toString(16).padStart(2, '0')
+    return Number(s).toString(16).padStart(2, '0')
+  })
+  return '#' + rgbas.join('')
 }

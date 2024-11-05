@@ -1,6 +1,6 @@
-import deepClone from "@/util/deepClone"
-import isObject from "@/verify/isObject";
-import isArray from "@/verify/isArray";
+import deepClone from '@/util/deepClone'
+import isObject from '@/verify/isObject';
+import isArray from '@/verify/isArray';
 
 /**
  * 提取指定对象的指定属性

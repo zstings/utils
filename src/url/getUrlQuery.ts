@@ -1,8 +1,8 @@
-import isNullOrUndefined from "@/verify/isNullOrUndefined";
-import isObject from "@/verify/isObject";
-import isURL from "@/url/isURL";
-import isString from "@/verify/isString";
-import qsParse from "@/url/qsParse";
+import isNullOrUndefined from '@/verify/isNullOrUndefined';
+import isObject from '@/verify/isObject';
+import isURL from '@/url/isURL';
+import isString from '@/verify/isString';
+import qsParse from '@/url/qsParse';
 
 /**
  * 获取url上的参数

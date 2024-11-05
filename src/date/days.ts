@@ -61,12 +61,10 @@ import isArray from '@/verify/isArray'
  * ```
  */
 export default function days(time: number | string | Date | (string | number)[] = new Date()): Date {
-  const _time =
-    time || time === 0
-      ? isArray(time)
-        ? new Date(...(time as []))
-        : new Date(time as number | string | Date)
-      : new Date()
-  if (_time.toString() === 'Invalid Date') throw 'Invalid Date'
-  return _time
+  // 处理 null undefined ''
+  if (time === null || time === undefined || (typeof time === 'string' && time.trim() === '')) time = new Date()
+  else if (isArray(time)) time = new Date(...(time as []))
+  else time = new Date(time as number | string | Date)
+  if (time.toString() === 'Invalid Date') throw 'Invalid Date'
+  return time
 }

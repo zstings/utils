@@ -1,4 +1,4 @@
-import isJsonString from "@/verify/isJsonString"
+import isJsonString from '@/verify/isJsonString'
 
 /**
  * 参数序列化-字符转对象
@@ -11,12 +11,12 @@ import isJsonString from "@/verify/isJsonString"
  * ```
  * @example
  * ```ts
- * qsParse('a=1&b=2&c={"a":1}')
+ * qsParse('a=1&b=2&c={'a':1}')
  * // => { a:1, b:2, c: { a :1 } }
  * ```
  * @example
  * ```ts
- * qsParse('a=1&b=2&c={"a":1}', false)
+ * qsParse('a=1&b=2&c={'a':1}', false)
  * // => { a:1, b:2, c: '{ a: 1 }' }
  * ```
  */

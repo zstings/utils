@@ -1,8 +1,8 @@
-import isNullOrUndefined from "@/verify/isNullOrUndefined";
-import isObject from "@/verify/isObject";
-import getUrlQuery from "@/url/getUrlQuery";
-import isURL from "@/url/isURL";
-import qsStringify from "@/url/qsStringify";
+import isNullOrUndefined from '@/verify/isNullOrUndefined';
+import isObject from '@/verify/isObject';
+import getUrlQuery from '@/url/getUrlQuery';
+import isURL from '@/url/isURL';
+import qsStringify from '@/url/qsStringify';
 
 /**
  * 修改url上的参数

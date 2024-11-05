@@ -1,6 +1,6 @@
-import isArray from "@/verify/isArray"
-import isInt from "@/verify/isInt"
-import isNumber from "@/verify/isNumber"
+import isArray from '@/verify/isArray'
+import isInt from '@/verify/isInt'
+import isNumber from '@/verify/isNumber'
 
 /**
  * 按长度拆分数组
@@ -13,12 +13,12 @@ import isNumber from "@/verify/isNumber"
  * @example
  * ```ts
  * chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 2)
- * // => [[{"a":1},{"a":2}],[{"a":3},{"a":4}]]
+ * // => [[{a:1},{a:2}],[{a:3},{a:4}]]
  * ```
  * @example
  * ```ts
  * chunk([{a:1}, {a: 2}, {a: 3}, {a: 4}], 3)
- * // => [[{"a":1},{"a":2},{"a":3}],[{"a":4}]]
+ * // => [[{a:1},{a:2},{a:3}],[{a:4}]]
  * ```
  */
 export default function chunk(array: any[], size = 1): any[] {
