@@ -1,6 +1,6 @@
 // 公共
 import typeOf from '@/common/typeOf'
-import version from '@/common/version'
+import { version } from '../package.json'
 export { typeOf, version }
 // 验证相关
 import isArray from '@/verify/isArray'

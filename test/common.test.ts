@@ -27,6 +27,6 @@ describe('typeOf', () => {
 
 describe('version', () => {
   it('版本读取', () => {
-    expect(version()).toBe(ver);
+    expect(version).toBe(ver);
   });
 });
