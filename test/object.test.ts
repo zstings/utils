@@ -34,7 +34,7 @@ describe('assignMin', () => {
   });
 
   it('测试被合并对象不是对象的情况', () => {
-    expect(() => assignMin(1 as any, { a: 1 })).toThrow('target参数必须是对象');
+    expect(() => assignMin(1 as any, { a: 1 })).toThrow('target参数必须是object');
   });
 
   it('测试当源对象中有与目标相同的键时值被覆盖的情况', () => {
@@ -61,7 +61,7 @@ describe('assign', () => {
   });
 
   it('测试被合并对象不是对象的情况', () => {
-    expect(() => assign(1 as any, { a: 1 })).toThrow('target参数必须是对象');
+    expect(() => assign(1 as any, { a: 1 })).toThrow('target参数必须是object');
   });
 
   it('测试当源对象中有与目标相同的键时值被覆盖的情况', () => {
@@ -80,7 +80,7 @@ describe('omit', () => {
   });
 
   it('测试目标对象不是对象的情况', () => {
-    expect(() => omit(1 as any)).toThrow('target参数必须是对象');
+    expect(() => omit(1 as any)).toThrow('target参数必须是object');
   });
 });
 
