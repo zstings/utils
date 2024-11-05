@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/string/byteSize.ts</title>
+    <title>Code coverage report for src/object/hasOwn.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/string</a> byteSize.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/object</a> hasOwn.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -80,26 +80,7 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,32 +96,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * 获取字符串的字节长度
- * @param str 传入参数, 如果参数不是字符串，会先调用toString方法
- * @return 字符串
- * @category 字符串String
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">import isObject from "@/verify/isObject";
+&nbsp;
+/**
+ * 检查指定对象是否存在指定属性
+ * @param target 指定对象
+ * @param key 要检查的属性
+ * @return true | false
+ * @category 对象Object
  * @example
  * ```ts
- * byteSize('fred') // 4
- * ```
- * @example
- * ```ts
- * byteSize('你好!') // 7
- * ```
- * @example
- * 生僻汉字
- * ```ts
- * byteSize('𠮷') // 4
- * ```
- * @example
- * 参数不是字符串，会先调用toString方法
- * ```ts
- * byteSize(true) // '4'
+ * hasOwn({a: 1, b: 0}, 'b') // =&gt; true
+ * hasOwn({a: 1, b: 0}, 'c') // =&gt; false
  * ```
  */
-export default function byteSize(str: any): number {
-  return new Blob([str.toString()]).size
+export default function hasOwn(target: Record&lt;string, any&gt;, key:string) {
+  if (!isObject(target)) throw new Error('target参数必须是object');
+  return Object.prototype.hasOwnProperty.call(target, key)
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
