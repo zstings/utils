@@ -63,7 +63,7 @@ export default function debounce(
     }
     timeout = setTimeout(() => {
       _leading = true
-      if (leading && trailing) func.apply(this, args)
+      if (trailing) func.apply(this, args)
     }, awit)
   }
 }
