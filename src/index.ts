@@ -74,7 +74,8 @@ import formats from '@/date/formats'
 import getMonthDays from '@/date/getMonthDays'
 import howLongAgo from '@/date/howLongAgo'
 import getDataSection from '@/date/getDataSection'
-export { days, timeStamp, formats, getMonthDays, howLongAgo, getDataSection }
+import getMonthsUntilDate from '@/date/getMonthsUntilDate'
+export { days, timeStamp, formats, getMonthDays, howLongAgo, getDataSection, getMonthsUntilDate }
 
 // 函数相关
 import debounce from '@/function/debounce'
