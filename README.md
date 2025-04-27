@@ -28,13 +28,13 @@ javascript、typescript 工具函数库
 ## 第2步：导入
 按需导入
 ```ts
-import { getDataType } from '@zstings/utils'
-getDataType([]) // => Array
+import { typeOf } from '@zstings/utils'
+typeOf([]) // => Array
 ```
 全量导入
 ```ts
 import * as utils from '@zstings/utils'
-utils.getDataType([]) // => Array
+utils.typeOf([]) // => Array
 ```
 ## 使用CDN
 cdn导入
