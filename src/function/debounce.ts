@@ -7,8 +7,8 @@ import isFunction from '@/verify/isFunction'
  * @param func 函数
  * @param awit 延迟时间 默认 500毫秒
  * @param option 可选的对象
- * @param option.leading 前置边缘执行，默认 false
- * @param option.trailing 后置边缘执行，默认 true
+ * @param option.leading 指定在超时前调用, 函数触发时立即执行一次。默认 false
+ * @param option.trailing 指定在超时后调用, 函数延迟时间达到后执行。默认 true
  * @throws awit不是number awit存在但不是数字时触发
  * @throws leading不是boolean leading存在但不是boolean时触发
  * @throws trailing不是boolean trailing存在但不是boolean时触发
