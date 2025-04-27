@@ -25,15 +25,27 @@ describe('debounce', () => {
     }
     const debouncedIncrement = debounce(increment, 500)
 
-    debouncedIncrement()
-    debouncedIncrement()
-    debouncedIncrement()
+    debouncedIncrement() // 防抖中，不会立即调用
+    debouncedIncrement() // 防抖中，不会立即调用
+    debouncedIncrement() // 防抖中，不会立即调用
 
-    expect(count).toBe(0) // 还没有调用
+    expect(count).toBe(0) // leading 为 false，不会立即调用
 
-    // 快进时间
     vi.advanceTimersByTime(500)
-    expect(count).toBe(1) // 现在调用了一次
+    expect(count).toBe(1) // trailing 为 true，延迟后调用一次
+
+    // 第二次调用序列
+    debouncedIncrement()
+    expect(count).toBe(1) // 仍然不会立即调用，因为 leading 为 false
+
+    vi.advanceTimersByTime(500)
+    expect(count).toBe(2) // 再次延迟调用
+
+    // 测试 _leading 状态恢复但不影响 trailing 调用
+    debouncedIncrement()
+    debouncedIncrement()
+    vi.advanceTimersByTime(500)
+    expect(count).toBe(3) // 仍然只有 trailing 调用
   })
 
   it('测试 debounce 函数功能 - leading: true, trailing: false', () => {
@@ -44,14 +56,17 @@ describe('debounce', () => {
     const debouncedIncrement = debounce(increment, 200, { leading: true, trailing: false })
 
     debouncedIncrement()
-    debouncedIncrement()
-    debouncedIncrement()
-
     expect(count).toBe(1) // 立即调用
 
-    // 快进时间
-    vi.advanceTimersByTime(300)
-    expect(count).toBe(1) // 没有后续调用
+    debouncedIncrement()
+    expect(count).toBe(1) // 防抖中，不会立即调用
+
+    vi.advanceTimersByTime(200)
+    expect(count).toBe(1) // trailing 为 false，不会延迟调用
+
+    // 新增测试：验证之后调用是否恢复 leading 状态
+    debouncedIncrement()
+    expect(count).toBe(2) // leading 已恢复，立即调用
   })
 
   it('测试 debounce 函数功能 - leading: false, trailing: true', () => {
@@ -63,13 +78,16 @@ describe('debounce', () => {
 
     debouncedIncrement()
     debouncedIncrement()
-    debouncedIncrement()
-
     expect(count).toBe(0) // 还没有调用
 
-    // 快进时间
-    vi.advanceTimersByTime(300)
-    expect(count).toBe(1) // 现在调用了一次
+    vi.advanceTimersByTime(200)
+    expect(count).toBe(1) // 延迟后调用一次
+
+    // 新增测试：验证之后调用是否恢复 leading 状态
+    debouncedIncrement()
+    expect(count).toBe(1) // leading 为 false，不会立即调用
+    vi.advanceTimersByTime(200)
+    expect(count).toBe(2) // 延迟后再次调用
   })
 
   it('测试 debounce 函数功能 - leading: true, trailing: true', () => {
@@ -80,14 +98,17 @@ describe('debounce', () => {
     const debouncedIncrement = debounce(increment, 200, { leading: true, trailing: true })
 
     debouncedIncrement()
-    debouncedIncrement()
-    debouncedIncrement()
-
     expect(count).toBe(1) // 立即调用
 
-    // 快进时间
-    vi.advanceTimersByTime(300)
-    expect(count).toBe(2) // 现在调用了一次
+    debouncedIncrement()
+    expect(count).toBe(1) // 防抖中
+
+    vi.advanceTimersByTime(200)
+    expect(count).toBe(2) // 延迟后再次调用
+
+    // 新增测试：验证之后调用是否恢复 leading 状态
+    debouncedIncrement()
+    expect(count).toBe(3) // leading 已恢复，立即调用
   })
 
   it('测试 debounce 函数功能 - leading: false, trailing: false', () => {
@@ -99,13 +120,32 @@ describe('debounce', () => {
 
     debouncedIncrement()
     debouncedIncrement()
-    debouncedIncrement()
+    expect(count).toBe(0) // 没有调用
 
-    expect(count).toBe(0) // 还没有调用
-
-    // 快进时间
-    vi.advanceTimersByTime(300)
+    vi.advanceTimersByTime(200)
     expect(count).toBe(0) // 仍然没有调用
+
+    // 新增测试：验证之后调用是否恢复 leading 状态
+    debouncedIncrement()
+    expect(count).toBe(0) // leading 为 false，不会调用
+  })
+
+  // 新增测试用例 - 验证多次调用后的 leading 状态恢复
+  it('测试 debounce 函数功能 - 验证 leading 状态恢复', () => {
+    let count = 0
+    const increment = () => {
+      count++
+    }
+    const debouncedIncrement = debounce(increment, 100, { leading: true, trailing: false })
+
+    // 第一次调用
+    debouncedIncrement()
+    expect(count).toBe(1) // 立即调用
+    vi.advanceTimersByTime(100) // 等待防抖时间过去
+
+    // 第二次调用
+    debouncedIncrement()
+    expect(count).toBe(2) // leading 已恢复，立即调用
   })
 })
 
