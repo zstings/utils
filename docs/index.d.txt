@@ -477,6 +477,34 @@ getDataSection(day?: number, option?: {
 getMonthDays(year?: number, month?: number): number;
 
 /**
+ * 获取从当前时间到指定年月之前的所有年月
+ * @param targetDateStr 年月组成的字符串 '2025-01' or '2025-1'
+ * @return 年月字符串的数组
+ * @throws Invalid Date 参数targetDateStr无法转为Date时触发
+ * @category 时间Date
+ * @example
+* eg:
+ * 获取当前到2025-01的年月数组，假设当前时间为2025-03
+ * ```ts
+ * getMonthsUntilDate('2025-01') // ['2025-03', '2025-02', '2025-01']
+ * ```
+ * @example
+* eg:
+ * 获取当前到2025-05的年月数组，假设当前时间为2025-03
+ * ```ts
+ * getMonthsUntilDate('2025-05') // ['2025-03', '2025-04', '2025-05']
+ * ```
+ * @example
+* eg:
+ * 无实际传参时
+ * ```ts
+ * getMonthsUntilDate('') // ['2025-03']
+ * getMonthsUntilDate() // ['2025-03']
+ * ```
+ */
+getMonthsUntilDate(targetDateStr: string): string[];
+
+/**
  * 获取距离指定时间之前
  * @param endTime 目标时间戳或者格式化的时间字符
  * @param startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
@@ -769,13 +797,14 @@ launchFullscreen(el?: HTMLElement): void;
  * ```
  * @example
 * eg:
- * 前置边缘执行,函数触发时立即执行一次
+ * 指定在超时前调用, 函数触发时立即执行一次。
+ * 函数运行时机：立即执行，验证延迟时间，如果延迟时间内没有在触发函数，下次触发不变。如果在延迟时间内再次触发了函数，函数会在延迟时间后在运行一次。
  * ```ts
  * debounce(function () { ... }, 500, {leading: true})
  * ```
  * @example
 * eg:
- * 后置边缘执行,函数延迟时间达到后执行
+ * 指定在超时后调用, 函数延迟时间达到后执行。
  * ```ts
  * debounce(function () { ... }, 500, {trailing: true})
  * ```

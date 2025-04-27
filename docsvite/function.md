@@ -33,11 +33,12 @@ debounce(function () { ... })
 ```ts
 debounce(function () { ... }, 300)
 ```
-前置边缘执行,函数触发时立即执行一次
+指定在超时前调用, 函数触发时立即执行一次。
+函数运行时机：立即执行，验证延迟时间，如果延迟时间内没有在触发函数，下次触发不变。如果在延迟时间内再次触发了函数，函数会在延迟时间后在运行一次。
 ```ts
 debounce(function () { ... }, 500, {leading: true})
 ```
-后置边缘执行,函数延迟时间达到后执行
+指定在超时后调用, 函数延迟时间达到后执行。
 ```ts
 debounce(function () { ... }, 500, {trailing: true})
 ```
@@ -56,21 +57,26 @@ export default function debounce(
   awit = 500,
   option: { leading?: boolean; trailing?: boolean } = { leading: false, trailing: true }
 ): any {
-  let { leading = false, trailing = true } = option
+  const { leading = false, trailing = true } = option
   let timeout = 0
+  let _leading = leading
   if (!isFunction(func)) throw 'func不是function'
   if (awit && !isNumber(awit)) throw 'awit不是number'
   if (!isBoolean(leading)) throw 'leading不是boolean'
   if (!isBoolean(trailing)) throw 'trailing不是boolean'
   return function (this: unknown, ...args: any[]) {
     clearTimeout(timeout)
-    if (leading) {
-      func.apply(this, args)
-      leading = false
+    if (_leading && leading) {
+      _leading && func.apply(this, args)
+      _leading = false
+      timeout = setTimeout(() => {
+        _leading = true
+      }, awit)
+      return
     }
     timeout = setTimeout(() => {
-      leading = leading
-      trailing && func.apply(this, args)
+      _leading = true
+      if (trailing) func.apply(this, args)
     }, awit)
   }
 }
@@ -82,21 +88,26 @@ import isBoolean from '@/verify/isBoolean';
 import isNumber from '@/verify/isNumber';
 import isFunction from '@/verify/isFunction';
 export default function debounce(func, awit = 500, option = { leading: false, trailing: true }) {
-  let { leading = false, trailing = true } = option;
+  const { leading = false, trailing = true } = option;
   let timeout = 0;
+  let _leading = leading;
   if (!isFunction(func)) throw 'func不是function';
   if (awit && !isNumber(awit)) throw 'awit不是number';
   if (!isBoolean(leading)) throw 'leading不是boolean';
   if (!isBoolean(trailing)) throw 'trailing不是boolean';
   return function(...args) {
     clearTimeout(timeout);
-    if (leading) {
-      func.apply(this, args);
-      leading = false;
+    if (_leading && leading) {
+      _leading && func.apply(this, args);
+      _leading = false;
+      timeout = setTimeout(() => {
+        _leading = true;
+      }, awit);
+      return;
     }
     timeout = setTimeout(() => {
-      leading = leading;
-      trailing && func.apply(this, args);
+      _leading = true;
+      if (trailing) func.apply(this, args);
     }, awit);
   };
 }
