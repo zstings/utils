@@ -46,9 +46,6 @@ export default function getMonthsUntilDate(targetDateStr: string) {
     result.push(`${currentYear}-${currentMonthStr}`)
     // 指定年月超过当前年月时，跳出循环
     const isExceed = currentDate.getTime() < targetDate.getTime()
-    // if (currentDate.getTime() < targetDate.getTime()) {
-    //   break
-    // }
     // 检查是否已经到达目标年月，如果是则跳出循环
     if (currentYear === targetDate.getFullYear() && currentMonth === targetDate.getMonth() + 1) {
       break
