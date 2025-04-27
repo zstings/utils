@@ -18,8 +18,6 @@ create_docs_md/data.json
 testcdn
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
 .idea
 .DS_Store
 *.suo
