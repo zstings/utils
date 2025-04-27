@@ -13,8 +13,8 @@
 - func 函数
 - awit 延迟时间 默认 500毫秒
 - option 可选的对象
-- option.leading 前置边缘执行，默认 false
-- option.trailing 后置边缘执行，默认 true
+- option.leading 指定在超时前调用, 函数触发时立即执行一次。默认 false
+- option.trailing 指定在超时后调用, 函数延迟时间达到后执行。默认 true
 #### 异常
 ::: danger
 awit不是number awit存在但不是数字时触发
