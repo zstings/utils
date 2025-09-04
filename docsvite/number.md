@@ -47,23 +47,30 @@ export default function padInt(value, len = 2) {
 
 #### 类型说明
 ::: info
-`function toFixed(value: number, num?: number, isRound?: boolean): number;`
+`function toFixed<T extends 'number' | 'string' = 'number'>(value: number | string, num?: number, isRound?: boolean, returnType?: T): T extends 'string' ? string : number;`
 :::
 #### 参数
 - value 数字
 - num 保留的小数位
 - isRound 是否需要四舍五入
+- returnType 返回类型 数字 或 字符串
 #### 返回
-- `number`
+- `T extends 'string' ? string : number`
 ::: tip
-返回数字
+返回数字 或 字符串
 :::
 #### 异常
 ::: danger
 无法转换为数字
 :::
 ::: danger
+value 无法转换为数字
+:::
+::: danger
 isRound不是boolean
+:::
+::: danger
+type 不是 number 或 string
 :::
 #### 示例 
 ```ts
@@ -84,23 +91,49 @@ toFixed(1.238, 2, false) // 1.23
 ::: code-group
 ```Ts [TS版本]
 import isBoolean from '@/verify/isBoolean'
-import toNumber from '@/number/toNumber'
-export default function toFixed(value: number, num = 2, isRound = true): number {
-  value = toNumber(value)
+export default function toFixed<T extends 'number' | 'string' = 'number'>(
+  value: number | string,
+  num = 2,
+  isRound = true,
+  returnType?: T
+): T extends 'string' ? string : number {
+  if (returnType == undefined) returnType = 'number' as T
+  if ((typeof value === 'string' && isNaN(value as any)) || typeof value !== 'number') {
+    throw new TypeError('value 无法转换为数字')
+  }
   if (!isBoolean(isRound)) throw 'isRound不是boolean'
-  if (isRound) return parseFloat(value.toFixed(num))
-  return parseFloat(value.toFixed(num + 1).slice(0, -1))
+  if (returnType !== 'number' && returnType !== 'string') throw 'type 不是 number 或 string'
+  value = value.toString()
+  const formatNumber = (value: string) => {
+    const parts = value.split('.')
+    const integerPart = parts[0]
+    const decimalPart = (parts[1] || '').slice(0, num).padEnd(num, '0')
+    return `${integerPart}.${decimalPart}`
+  }
+  const nValue = isRound ? Number(value).toFixed(num) : formatNumber(value)
+  return (returnType === 'string' ? nValue : Number(nValue)) as T extends 'string' ? string : number
 }
+
 ```
 
 ```Js [JS版本]
 import isBoolean from '@/verify/isBoolean';
-import toNumber from '@/number/toNumber';
-export default function toFixed(value, num = 2, isRound = true) {
-  value = toNumber(value);
+export default function toFixed(value, num = 2, isRound = true, returnType) {
+  if (returnType == void 0) returnType = 'number';
+  if (typeof value === 'string' && isNaN(value) || typeof value !== 'number') {
+    throw new TypeError('value 无法转换为数字');
+  }
   if (!isBoolean(isRound)) throw 'isRound不是boolean';
-  if (isRound) return parseFloat(value.toFixed(num));
-  return parseFloat(value.toFixed(num + 1).slice(0, -1));
+  if (returnType !== 'number' && returnType !== 'string') throw 'type 不是 number 或 string';
+  value = value.toString();
+  const formatNumber = (value2) => {
+    const parts = value2.split('.');
+    const integerPart = parts[0];
+    const decimalPart = (parts[1] || '').slice(0, num).padEnd(num, '0');
+    return `${integerPart}.${decimalPart}`;
+  };
+  const nValue = isRound ? Number(value).toFixed(num) : formatNumber(value);
+  return returnType === 'string' ? nValue : Number(nValue);
 }
 
 ```
