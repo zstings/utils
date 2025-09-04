@@ -4,9 +4,12 @@ import isBoolean from '@/verify/isBoolean'
  * @param value 数字
  * @param num 保留的小数位
  * @param isRound 是否需要四舍五入
- * @return 返回数字
+ * @param returnType 返回类型 数字 或 字符串
+ * @return 返回数字 或 字符串
  * @throws 无法转换为数字
+ * @throws value 无法转换为数字
  * @throws isRound不是boolean
+ * @throws type 不是 number 或 string
  * @category 数字Number
  * @example
  * ```ts
