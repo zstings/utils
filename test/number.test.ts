@@ -55,7 +55,7 @@ describe('toFixed', () => {
   // 异常情况测试
   it('异常情况测试', () => {
     // 非数字 value
-    expect(() => toFixed('abc' as any, 2)).toThrow(TypeError)
+    expect(() => toFixed('abc' as any, 2)).toThrow('abc无法转换为数字')
     // 非 boolean isRound
     expect(() => toFixed(1.23, 2, 'notBool' as any)).toThrow('isRound不是boolean')
     // 非 number/string returnType
