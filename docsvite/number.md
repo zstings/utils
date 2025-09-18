@@ -91,6 +91,7 @@ toFixed(1.238, 2, false) // 1.23
 ::: code-group
 ```Ts [TS版本]
 import isBoolean from '@/verify/isBoolean'
+import toNumber from './toNumber'
 export default function toFixed<T extends 'number' | 'string' = 'number'>(
   value: number | string,
   num = 2,
@@ -98,12 +99,9 @@ export default function toFixed<T extends 'number' | 'string' = 'number'>(
   returnType?: T
 ): T extends 'string' ? string : number {
   if (returnType == undefined) returnType = 'number' as T
-  if ((typeof value === 'string' && isNaN(value as any)) || typeof value !== 'number') {
-    throw new TypeError('value 无法转换为数字')
-  }
   if (!isBoolean(isRound)) throw 'isRound不是boolean'
   if (returnType !== 'number' && returnType !== 'string') throw 'type 不是 number 或 string'
-  value = value.toString()
+  value = toNumber(value).toString()
   const formatNumber = (value: string) => {
     const parts = value.split('.')
     const integerPart = parts[0]
@@ -118,14 +116,12 @@ export default function toFixed<T extends 'number' | 'string' = 'number'>(
 
 ```Js [JS版本]
 import isBoolean from '@/verify/isBoolean';
+import toNumber from './toNumber';
 export default function toFixed(value, num = 2, isRound = true, returnType) {
   if (returnType == void 0) returnType = 'number';
-  if (typeof value === 'string' && isNaN(value) || typeof value !== 'number') {
-    throw new TypeError('value 无法转换为数字');
-  }
   if (!isBoolean(isRound)) throw 'isRound不是boolean';
   if (returnType !== 'number' && returnType !== 'string') throw 'type 不是 number 或 string';
-  value = value.toString();
+  value = toNumber(value).toString();
   const formatNumber = (value2) => {
     const parts = value2.split('.');
     const integerPart = parts[0];
@@ -166,6 +162,9 @@ toNumber('1.2') // 1.2
 ```ts
 toNumber('a123') // error => a123无法转换为数字
 ```
+```ts
+toNumber(111) // 111
+```
 #### 源码
 ::: code-group
 ```Ts [TS版本]
@@ -174,6 +173,7 @@ export default function toNumber<T>(value: T): number {
   if (isNaN(Number(value))) throw `${value}无法转换为数字`
   return Number(value)
 }
+
 ```
 
 ```Js [JS版本]

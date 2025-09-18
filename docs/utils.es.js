@@ -1,38 +1,38 @@
 function u(t) {
   return Object.prototype.toString.call(t).slice(8, -1);
 }
-const X = "0.9.1";
+const Z = "0.9.2";
 function g(t) {
   return u(t) === "Array";
 }
 function q(t) {
   return /^1[3-9][\d]{9}$/.test(t.toString());
 }
-function Z(t) {
+function _(t) {
   return u(t) === "Location";
 }
 function a(t) {
   return t !== null && u(t) === "Object";
 }
-function _(t) {
+function z(t) {
   return u(t) === "Date";
 }
 function b(t) {
   return u(t) === "Function";
 }
-function z(t) {
+function v(t) {
   return u(t) === "Map";
 }
-function v(t) {
+function tt(t) {
   return u(t) === "Promise" && b(t.then) && b(t.catch);
 }
-function tt(t) {
+function et(t) {
   return u(t) === "Set";
 }
 function d(t) {
   return u(t) === "String";
 }
-function et(t) {
+function nt(t) {
   return u(t) === "Symbol";
 }
 function m(t) {
@@ -45,10 +45,10 @@ function E(t) {
   if (!a(t)) throw "传入参数不是Object";
   return !Object.keys(t).length;
 }
-function nt(t = "") {
+function rt(t = "") {
   return new RegExp("\\p{sc=Han}", "gu").test(t);
 }
-function rt(t) {
+function it(t) {
   return u(t).includes("Element");
 }
 function $(t) {
@@ -94,45 +94,43 @@ function x() {
 function J() {
   return x() && /Android/i.test(navigator.userAgent);
 }
-function it() {
+function ot() {
   return T() === "Desktop";
 }
-function ot() {
+function st() {
   return x() && !J();
 }
-function st() {
+function ct() {
   return /QQ\//i.test(navigator.userAgent);
 }
-function ct() {
+function ut() {
   return /MicroMessenger\//i.test(navigator.userAgent);
 }
-function ut() {
+function at() {
   return /miniProgram/i.test(navigator.userAgent);
 }
-function at() {
+function ft() {
   return /Windows/i.test(navigator.userAgent);
 }
 function l(t, e = 2) {
   if (isNaN(Number(t))) throw "不是一个合法的数字";
   return Number(t).toString().padStart(e, "0");
 }
-function ft(t) {
+function Q(t) {
   if (isNaN(Number(t))) throw `${t}无法转换为数字`;
   return Number(t);
 }
 function F(t, e = 2, n = !0, r) {
-  if (r == null && (r = "number"), typeof t == "string" && isNaN(t) || typeof t != "number")
-    throw new TypeError("value 无法转换为数字");
-  if (!y(n)) throw "isRound不是boolean";
+  if (r == null && (r = "number"), !y(n)) throw "isRound不是boolean";
   if (r !== "number" && r !== "string") throw "type 不是 number 或 string";
-  t = t.toString();
+  t = Q(t).toString();
   const i = n ? Number(t).toFixed(e) : ((s) => {
     const c = s.split("."), f = c[0], w = (c[1] || "").slice(0, e).padEnd(e, "0");
     return `${f}.${w}`;
   })(t);
   return r === "string" ? i : Number(i);
 }
-function Q(t) {
+function V(t) {
   return Number.isInteger(t);
 }
 function h(t = /* @__PURE__ */ new Date()) {
@@ -232,7 +230,7 @@ function St(t) {
   const e = /&(lt|gt|le|ge|nbsp|amp|quot|times|Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|MU|NU|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigmaf|sigma|tau|upsilon|phi|chi|psi|omega|thetasym|upsih|piv|circ|tilde|ndash|permil|lsquo|rsquo|ldquo|rdquo|prime);/gi;
   return t.toString().replace(/<[^>]+>/g, "").replace(e, "").trim();
 }
-function V(t, e = 0, n = 1 / 0, r = "*") {
+function W(t, e = 0, n = 1 / 0, r = "*") {
   if (!m(e)) throw "start 必须是数字";
   if (!m(n)) throw "length 必须是数字";
   if (!d(r)) throw "mask 必须是字符串";
@@ -242,7 +240,7 @@ function V(t, e = 0, n = 1 / 0, r = "*") {
 }
 function Mt(t, e = 1) {
   if (!g(t)) throw "array参数需要Array";
-  if (!m(e) || !Q(e) || e <= 0) throw "请检查size参数，必须符合大于0的整数";
+  if (!m(e) || !V(e) || e <= 0) throw "请检查size参数，必须符合大于0的整数";
   const n = [], r = Math.ceil(t.length / e);
   for (let o = 0; o < r; o++)
     n.push(t.slice(o * e, o * e + e));
@@ -311,10 +309,10 @@ function Et(t, e = []) {
     e.includes(n) || delete t[n];
   }), t);
 }
-function W(t, e = 0) {
+function G(t, e = 0) {
   if (!a(t)) throw new Error("target参数必须是object");
   return e != 1 && (t = M(t)), Object.keys(t).forEach((n) => {
-    u(t[n]) == "String" && (t[n] = ""), u(t[n]) == "Number" && (t[n] = 0), u(t[n]) == "Boolean" && (t[n] = !1), u(t[n]) == "Array" && (t[n] = []), u(t[n]) == "Object" && W(t[n], 1);
+    u(t[n]) == "String" && (t[n] = ""), u(t[n]) == "Number" && (t[n] = 0), u(t[n]) == "Boolean" && (t[n] = !1), u(t[n]) == "Array" && (t[n] = []), u(t[n]) == "Object" && G(t[n], 1);
   }), t;
 }
 function Tt(t, e) {
@@ -421,7 +419,7 @@ function Ct(t = {}, e) {
 }
 function qt(t) {
   if (!q(t)) throw "手机号格式不正确";
-  return t = t.toString(), V(t, 3, 4);
+  return t = t.toString(), W(t, 3, 4);
 }
 function p(t = 1, e = 0) {
   if (!m(t)) throw "min 必须整数";
@@ -464,19 +462,19 @@ function Jt() {
 function j(t) {
   return d(t) ? /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(t) : !1;
 }
-function G(t) {
+function K(t) {
   if (!j(t)) throw "无法识别正确的hex";
   return t.length >= 6 ? t : `#${t.substring(1).split("").map((e) => e += e).join("")}`;
 }
 function Qt(t) {
   if (!j(t)) throw "无法识别正确的hex";
-  return t.substring(1).length < 6 && (t = G(t).substring(1)), t = t.match(/[0-9a-f]{2}/gi).map((e, n) => n === 3 ? F(parseInt(e, 16) / 255) : parseInt(e, 16)).join(","), t;
+  return t.substring(1).length < 6 && (t = K(t).substring(1)), t = t.match(/[0-9a-f]{2}/gi).map((e, n) => n === 3 ? F(parseInt(e, 16) / 255) : parseInt(e, 16)).join(","), t;
 }
-function K(t) {
+function X(t) {
   return d(t) ? t.split(",").every((e, n) => n == 3 ? Number(e) * 255 >= 0 && Number(e) * 255 <= 255 : Number(e) >= 0 && Number(e) <= 255) : !1;
 }
 function Vt(t) {
-  if (!K(t)) throw "无法识别正确的rgba";
+  if (!X(t)) throw "无法识别正确的rgba";
   let e = t.split(",");
   return e = e.map((n, r) => r == 3 ? Math.round(Number(n) * 255).toString(16).padStart(2, "0") : Number(n).toString(16).padStart(2, "0")), "#" + e.join("");
 }
@@ -510,7 +508,7 @@ export {
   T as detectDeviceType,
   It as downloadFile,
   Kt as exitFullscreen,
-  G as extendHex,
+  K as extendHex,
   A as formats,
   Ot as fromPairs,
   Lt as gbkToUtf8,
@@ -528,36 +526,36 @@ export {
   g as isArray,
   H as isBasicType,
   y as isBoolean,
-  _ as isDate,
-  it as isDesktop,
-  rt as isDom,
+  z as isDate,
+  ot as isDesktop,
+  it as isDom,
   E as isEmptyObject,
   S as isEqual,
   b as isFunction,
   j as isHex,
-  ot as isIOS,
-  nt as isIncludeChinese,
-  Q as isInt,
+  st as isIOS,
+  rt as isIncludeChinese,
+  V as isInt,
   B as isJsonString,
-  Z as isLocation,
-  z as isMap,
+  _ as isLocation,
+  v as isMap,
   x as isMobile,
   O as isNullOrUndefined,
   m as isNumber,
   a as isObject,
   q as isPhone,
-  v as isPromise,
-  st as isQQ,
-  K as isRgba,
-  tt as isSet,
+  tt as isPromise,
+  ct as isQQ,
+  X as isRgba,
+  et as isSet,
   d as isString,
-  et as isSymbol,
+  nt as isSymbol,
   D as isURL,
-  ct as isWeixin,
-  ut as isWeixinMini,
-  at as isWin,
+  ut as isWeixin,
+  at as isWeixinMini,
+  ft as isWin,
   Gt as launchFullscreen,
-  V as mask,
+  W as mask,
   At as omit,
   pt as once,
   l as padInt,
@@ -569,7 +567,7 @@ export {
   Bt as randomHex,
   Jt as randomRgba,
   St as removeHTML,
-  W as resetObjectValues,
+  G as resetObjectValues,
   kt as reviseUrlQuery,
   Vt as rgbToHex,
   Ct as scrollTo,
@@ -578,9 +576,9 @@ export {
   wt as throttle,
   N as timeStamp,
   F as toFixed,
-  ft as toNumber,
+  Q as toNumber,
   u as typeOf,
   jt as unique,
   bt as upperFirst,
-  X as version
+  Z as version
 };
