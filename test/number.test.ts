@@ -28,6 +28,9 @@ describe('toFixed', () => {
     expect(toFixed(1.9999, 2)).toBe(2)
     expect(toFixed(12.3456, 2)).toBe(12.35)
     expect(toFixed(12.3456, 2, false)).toBe(12.34)
+    expect(toFixed('12.3456', 2, false)).toBe(12.34)
+    expect(toFixed(0, 2, false)).toBe(0)
+    expect(toFixed('0', 2, false)).toBe(0)
   })
   // 默认参数测试
   it('默认参数测试', () => {
@@ -76,5 +79,7 @@ describe('toNumber', () => {
   it('测试 toNumber 函数功能', () => {
     expect(toNumber(5)).toBe(5)
     expect(toNumber('5')).toBe(5)
+    expect(toNumber('123.45')).toBe(123.45)
+    expect(toNumber('123.00')).toBe(123)
   })
 })

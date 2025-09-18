@@ -16,6 +16,10 @@
  * ```ts
  * toNumber('a123') // error => a123无法转换为数字
  * ```
+ * @example
+ * ```ts
+ * toNumber(111) // 111
+ * ```
  */
 export default function toNumber<T>(value: T): number {
   if (isNaN(Number(value))) throw `${value}无法转换为数字`

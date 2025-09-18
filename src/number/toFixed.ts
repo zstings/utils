@@ -1,4 +1,5 @@
 import isBoolean from '@/verify/isBoolean'
+import toNumber from './toNumber'
 /**
  * 数字保留小数位
  * @param value 数字
@@ -37,12 +38,9 @@ export default function toFixed<T extends 'number' | 'string' = 'number'>(
   returnType?: T
 ): T extends 'string' ? string : number {
   if (returnType == undefined) returnType = 'number' as T
-  if ((typeof value === 'string' && isNaN(value as any)) || typeof value !== 'number') {
-    throw new TypeError('value 无法转换为数字')
-  }
   if (!isBoolean(isRound)) throw 'isRound不是boolean'
   if (returnType !== 'number' && returnType !== 'string') throw 'type 不是 number 或 string'
-  value = value.toString()
+  value = toNumber(value).toString()
   const formatNumber = (value: string) => {
     const parts = value.split('.')
     const integerPart = parts[0]
