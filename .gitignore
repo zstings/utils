@@ -27,3 +27,5 @@ testcdn
 *.sw?
 docsvite/.vitepress/cache
 temp_code
+
+.docs

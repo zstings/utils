@@ -38,20 +38,21 @@
     "ts工具函数"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.12.2",
-    "@typescript-eslint/parser": "^8.12.2",
-    "@vitest/coverage-v8": "^2.1.4",
-    "eslint": "^9.13.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "happy-dom": "^15.7.4",
-    "prettier": "^3.3.3",
-    "tsc-alias": "^1.8.10",
-    "typedoc": "^0.26.10",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.10",
-    "vitepress": "1.4.3",
-    "vitest": "^2.1.4"
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
+    "@vitest/coverage-v8": "^4.0.9",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "happy-dom": "^20.0.1",
+    "prettier": "^3.6.2",
+    "shelljs": "^0.10.0",
+    "tsc-alias": "^1.8.16",
+    "typedoc": "^0.28.14",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vitepress": "1.6.4",
+    "vitest": "^4.0.9"
   },
   "homepage": "https://github.com/zstings/utils#readme",
   "repository": {
@@ -61,5 +62,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
