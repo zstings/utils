@@ -13,15 +13,17 @@
   "types": "./dist/types/src/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/src/index.d.ts",
       "import": "./dist/utils.es.js",
       "require": "./dist/utils.umd.js",
-      "types": "./dist/types/src/index.d.ts"
+      "default": "./dist/utils.es.js"
     }
   },
   "scripts": {
     "lint": "eslint --fix --ext .md",
     "dev": "vite",
-    "build": "vite build && tsc && tsc-alias && node run.js && vitepress build vitepress",
+    "build": "vite build && tsc && tsc-alias && node run.js",
+    "build1": "vite build && tsc && tsc-alias && node run.js && vitepress build vitepress",
     "preview": "vite preview",
     "docs:dev": "vitepress dev vitepress",
     "docs:build": "vitepress build vitepress",

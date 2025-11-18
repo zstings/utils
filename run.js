@@ -1,5 +1,5 @@
 import { parse } from 'comment-parser'
-import { readFileSync, writeFileSync, globSync } from 'node:fs'
+import { readFileSync, writeFileSync, globSync, rmSync } from 'node:fs'
 import { basename, dirname } from 'node:path'
 
 // console.log(globSync('./src/**/*.ts', { exclude: ['./src/**/index.ts'] }).length)
@@ -20,10 +20,14 @@ files.forEach(item => {
   }
 })
 // console.log(funcs)
+// 写入md文件
 funcs.forEach((item, key) => {
   writeFileSync(`./vitepress/${key}.md`, item)
 })
+// 写入菜单文件
 createMenu()
+// 清除temp_code目录
+rmSync('./temp_code', { recursive: true })
 
 function createMdCont(path) {
   const ml = basename(dirname(path))
@@ -38,7 +42,7 @@ function createMdCont(path) {
     .replace(/(\n\s*\n)+/g, '\n')
     .trim()
 
-  const jsSourceContent = readFileSync(`./temp_code/${fileName}.ts`, 'utf-8').trim()
+  const jsSourceContent = readFileSync(`./temp_code/${fileName}.js`, 'utf-8').trim()
 
   const parsed = parse(sourceDTS)
 
