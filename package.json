@@ -21,11 +21,11 @@
   "scripts": {
     "lint": "eslint --fix --ext .md",
     "dev": "vite",
-    "build": "vite build && tsc && tsc-alias && node run.js && vitepress build docsvite",
+    "build": "vite build && tsc && tsc-alias && node run.js && vitepress build vitepress",
     "preview": "vite preview",
-    "docs:dev": "vitepress dev docsvite",
-    "docs:build": "vitepress build docsvite",
-    "docs:serve": "vitepress serve docsvite",
+    "docs:dev": "vitepress dev vitepress",
+    "docs:build": "vitepress build vitepress",
+    "docs:serve": "vitepress serve vitepress",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
@@ -48,11 +48,11 @@
     "prettier": "^3.6.2",
     "shelljs": "^0.10.0",
     "tsc-alias": "^1.8.16",
-    "typedoc": "^0.28.14",
     "typescript": "^5.9.3",
     "vite": "^7.2.2",
     "vitepress": "1.6.4",
-    "vitest": "^4.0.9"
+    "vitest": "^4.0.9",
+    "comment-parser": "^1.4.1"
   },
   "homepage": "https://github.com/zstings/utils#readme",
   "repository": {

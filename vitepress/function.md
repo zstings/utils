@@ -1,7 +1,42 @@
-## 函数Function
-## debounce 
-防抖
+## isFunction
+判断是否为Function
+#### 类型说明
+::: info
+`function isFunction(value: any): boolean;`
+:::
+#### 参数
+- `value` 任意值
+#### 返回值
+::: tip 
+true
+:::
+#### 示例
+验证通过
+```ts
+isFunction(function(){}) => true
+```
+验证失败
+```ts
+isFunction(123) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isFunction(value: any): boolean {
+  return typeOf(value) === 'Function'
+}
+```
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isFunction(value) {
+  return typeOf(value) === 'Function';
+}
+```
+:::
 
+## debounce
+防抖
 #### 类型说明
 ::: info
 `function debounce(func: (...params: any[]) => any, awit?: number, option?: {
@@ -10,22 +45,22 @@
 }): any;`
 :::
 #### 参数
-- func 函数
-- awit 延迟时间 默认 500毫秒
-- option 可选的对象
-- option.leading 指定在超时前调用, 函数触发时立即执行一次。默认 false
-- option.trailing 指定在超时后调用, 函数延迟时间达到后执行。默认 true
+- `func` 函数
+- `awit` 延迟时间 默认 500毫秒
+- `option` 可选的对象
+- `option.leading` 指定在超时前调用, 函数触发时立即执行一次。默认 false
+- `option.trailing` 指定在超时后调用, 函数延迟时间达到后执行。默认 true
 #### 异常
-::: danger
+::: danger 
 awit不是number awit存在但不是数字时触发
 :::
-::: danger
+::: danger 
 leading不是boolean leading存在但不是boolean时触发
 :::
-::: danger
+::: danger 
 trailing不是boolean trailing存在但不是boolean时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 debounce(function () { ... })
 ```
@@ -80,9 +115,7 @@ export default function debounce(
     }, awit)
   }
 }
-
 ```
-
 ```Js [JS版本]
 import isBoolean from '@/verify/isBoolean';
 import isNumber from '@/verify/isNumber';
@@ -111,19 +144,18 @@ export default function debounce(func, awit = 500, option = { leading: false, tr
     }, awit);
   };
 }
-
 ```
 :::
-## once 
-只调用一次的函数
 
+## once
+只调用一次的函数
 #### 类型说明
 ::: info
 `function once(func: (...params: any[]) => any): (this: unknown, ...args: any[]) => void;`
 :::
 #### 参数
-- func 函数
-#### 示例 
+- `func` 函数
+#### 示例
 ```ts
 once(function () { ... })
 ```
@@ -146,7 +178,6 @@ export default function once(func: (...params: any[]) => any) {
   }
 }
 ```
-
 ```Js [JS版本]
 import isFunction from '@/verify/isFunction';
 export default function once(func) {
@@ -159,28 +190,27 @@ export default function once(func) {
     }
   };
 }
-
 ```
 :::
-## throttle 
-节流
 
+## throttle
+节流
 #### 类型说明
 ::: info
 `function throttle(func: (...params: any[]) => any, wait?: number, immediate?: boolean): (this: unknown, ...args: any[]) => void;`
 :::
 #### 参数
-- func 函数
-- wait 延迟时间 默认 500毫秒
-- immediate 是否立即执行
+- `func` 函数
+- `wait` 延迟时间 默认 500毫秒
+- `immediate` 是否立即执行
 #### 异常
-::: danger
+::: danger 
 wait不是number wait存在但不是数字时触发
 :::
-::: danger
+::: danger 
 immediate不是boolean immediate存在但不是boolean时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 throttle(function () { ... })
 ```
@@ -220,9 +250,7 @@ export default function throttle(func: (...params: any[]) => any, wait = 500, im
     }
   }
 }
-
 ```
-
 ```Js [JS版本]
 import isBoolean from '@/verify/isBoolean';
 import isNumber from '@/verify/isNumber';
@@ -245,46 +273,5 @@ export default function throttle(func, wait = 500, immediate = false) {
     }
   };
 }
-
-```
-:::
-## isFunction 
-判断是否为Function
-
-#### 类型说明
-::: info
-`function isFunction(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isFunction(function(){}) => true
-```
-验证失败
-```ts
-isFunction(123) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import typeOf from '@/common/typeOf'
-export default function isFunction(value: any): boolean {
-  return typeOf(value) === 'Function'
-}
-```
-
-```Js [JS版本]
-import typeOf from '@/common/typeOf';
-export default function isFunction(value) {
-  return typeOf(value) === 'Function';
-}
-
 ```
 :::

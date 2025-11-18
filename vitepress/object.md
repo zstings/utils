@@ -1,20 +1,208 @@
-## 对象Object
-## arrObjSum 
-数组对象key值求和
+## isEmptyObject
+判断对象是否是空对象
+#### 类型说明
+::: info
+`function isEmptyObject(object: Record<string, unknown>): boolean;`
+:::
+#### 参数
+- `object` 对象
+#### 返回值
+::: tip 
+true
+:::
+#### 异常
+::: danger 
+传入参数不是Object 传入参数不是Object时触发
+:::
+#### 示例
+验证通过
+```ts
+isEmptyObject({}) => true
+```
+验证失败
+```ts
+isEmptyObject({a: 1}) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import isObject from '@/verify/isObject'
+export default function isEmptyObject(object: Record<string, unknown>): boolean {
+  if (!isObject(object)) throw '传入参数不是Object'
+  return !Object.keys(object).length
+}
+```
+```Js [JS版本]
+import isObject from '@/verify/isObject';
+export default function isEmptyObject(object) {
+  if (!isObject(object)) throw '传入参数不是Object';
+  return !Object.keys(object).length;
+}
+```
+:::
 
+## isMap
+判断是否为Map
+#### 类型说明
+::: info
+`function isMap(value: any): boolean;`
+:::
+#### 参数
+- `value` 任意值
+#### 返回值
+::: tip 
+true
+:::
+#### 示例
+验证通过
+```ts
+isMap(new Map()) => true
+```
+验证失败
+```ts
+isMap(123) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isMap(value: any): boolean {
+  return typeOf(value) === 'Map'
+}
+```
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isMap(value) {
+  return typeOf(value) === 'Map';
+}
+```
+:::
+
+## isObject
+判断是否为对象
+#### 类型说明
+::: info
+`function isObject(value: any): boolean;`
+:::
+#### 参数
+- `value` 任意值
+#### 返回值
+::: tip 
+true
+:::
+#### 示例
+验证通过
+```ts
+isObject({}) => true
+```
+验证失败
+```ts
+isObject([]) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isObject(value: any): boolean {
+  return value !== null && typeOf(value) === 'Object'
+}
+```
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isObject(value) {
+  return value !== null && typeOf(value) === 'Object';
+}
+```
+:::
+
+## isSet
+判断是否为Set
+#### 类型说明
+::: info
+`function isSet(value: any): boolean;`
+:::
+#### 参数
+- `value` 任意值
+#### 返回值
+::: tip 
+true
+:::
+#### 示例
+验证通过
+```ts
+isSet(new Set()) => true
+```
+验证失败
+```ts
+isSet(123) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isSet(value: any): boolean {
+  return typeOf(value) === 'Set'
+}
+```
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isSet(value) {
+  return typeOf(value) === 'Set';
+}
+```
+:::
+
+## isSymbol
+判断是否为Symbol
+#### 类型说明
+::: info
+`function isSymbol(value: any): boolean;`
+:::
+#### 参数
+- `value` 任意值
+#### 返回值
+::: tip 
+true
+:::
+#### 示例
+验证通过
+```ts
+isSymbol(Symbol(1)) => true
+```
+验证失败
+```ts
+isSymbol(Symbol) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isSymbol(value: any): boolean {
+  return typeOf(value) === 'Symbol'
+}
+```
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isSymbol(value) {
+  return typeOf(value) === 'Symbol';
+}
+```
+:::
+
+## arrObjSum
+数组对象key值求和
 #### 类型说明
 ::: info
 `function arrObjSum<T extends Record<string, any>, K extends keyof T>(target: T[], keys: K[]): Record<string, any>;`
 :::
 #### 参数
-- target 目标对象
-- keys 需要求和的key数组
-#### 返回
-- `Record<string, any>`
-::: tip
+- `target` 目标对象
+- `keys` 需要求和的key数组
+#### 返回值
+::: tip 
 求和后的对象
 :::
-#### 示例 
+#### 示例
 ```ts
 arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
 // => {id: 3, age: 30}
@@ -43,7 +231,6 @@ export default function arrObjSum<T extends Record<string, any>, K extends keyof
   return object
 }
 ```
-
 ```Js [JS版本]
 import isArrObj from '@/verify/isArrObj';
 export default function arrObjSum(target, keys) {
@@ -57,31 +244,28 @@ export default function arrObjSum(target, keys) {
   });
   return object;
 }
-
 ```
 :::
-## assign 
-合并对象
 
+## assign
+合并对象
 #### 类型说明
 ::: info
 `function assign<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U): keyof T extends never ? {} : Merge<T, MergeTuple<U>>;
 export {};`
 :::
 #### 参数
-- target 目标对象，被合并的对象
-- sources 源对象，可以多个
-#### 返回
-- `keyof T extends never ? {} : Merge<T, MergeTuple<U>>;
-export {}`
-::: tip
+- `target` 目标对象，被合并的对象
+- `sources` 源对象，可以多个
+#### 返回值
+::: tip 
 目标对象
 :::
 #### 异常
-::: danger
-target参数必须是object  target参数不是对象时触发
+::: danger 
+target参数必须是object target参数不是对象时触发
 :::
-#### 示例 
+#### 示例
 对象合并效果与Object.assign一致
 ```ts
 assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
@@ -100,7 +284,6 @@ export default function assign<T extends Record<string, any>, U extends Record<s
   return Object.assign(target, ...sources) as keyof T extends never ? {} : Merge<T, MergeTuple<U>>
 }
 ```
-
 ```Js [JS版本]
 import isEmptyObject from '@/verify/isEmptyObject';
 import isObject from '@/verify/isObject';
@@ -109,31 +292,28 @@ export default function assign(target, ...sources) {
   if (isEmptyObject(target)) return {};
   return Object.assign(target, ...sources);
 }
-
 ```
 :::
-## assignMin 
-最小合并对象
 
+## assignMin
+最小合并对象
 #### 类型说明
 ::: info
 `function assignMin<T extends Record<string, any>, U extends Record<string, any>[]>(target: T, ...sources: U): keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof MergeTuple<U>, keyof T> | Exclude<Exclude<keyof T, keyof MergeTuple<U>>, keyof T>>;
 export {};`
 :::
 #### 参数
-- target 目标对象，被合并的对象
-- sources 源对象，可以多个
-#### 返回
-- `keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof MergeTuple<U>, keyof T> | Exclude<Exclude<keyof T, keyof MergeTuple<U>>, keyof T>>;
-export {}`
-::: tip
+- `target` 目标对象，被合并的对象
+- `sources` 源对象，可以多个
+#### 返回值
+::: tip 
 目标对象
 :::
 #### 异常
-::: danger
-target参数必须是object  target参数不是对象时触发
+::: danger 
+target参数必须是object target参数不是对象时触发
 :::
-#### 示例 
+#### 示例
 最小合并对象，只会合并源对象原有的属性，其他忽略
 ```ts
 assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
@@ -155,7 +335,6 @@ export default function assignMin<T extends Record<string, any>, U extends Recor
   return target as unknown as keyof T extends never ? {} : Omit<Merge<T, MergeTuple<U>>, Exclude<keyof Merge<T, MergeTuple<U>>, keyof T>>
 }
 ```
-
 ```Js [JS版本]
 import isEmptyObject from '@/verify/isEmptyObject';
 import isObject from '@/verify/isObject';
@@ -166,12 +345,11 @@ export default function assignMin(target, ...sources) {
   Object.keys(target).forEach((key) => target[key] = merge[key]);
   return target;
 }
-
 ```
 :::
-## createData 
-指定深度或者广度的对象
 
+## createData
+指定深度或者广度的对象
 #### 类型说明
 ::: info
 `function createData(deep?: number, breadth?: number): {
@@ -180,17 +358,13 @@ export default function assignMin(target, ...sources) {
 };`
 :::
 #### 参数
-- deep 深度
-- breadth 广度
-#### 返回
-- `{
-    [key: number]: any;
-    data?: any;
-}`
-::: tip
+- `deep` 深度
+- `breadth` 广度
+#### 返回值
+::: tip 
 对象
 :::
-#### 示例 
+#### 示例
 ```ts
 createData(1) // => {data: {}}
 ```
@@ -211,7 +385,6 @@ data: {
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-
 export default function createData(deep = 1, breadth = 0) {
   const data: { data?: any; [key: number]: any } = {}
   let temp = data
@@ -223,9 +396,7 @@ export default function createData(deep = 1, breadth = 0) {
   }
   return data
 }
-
 ```
-
 ```Js [JS版本]
 export default function createData(deep = 1, breadth = 0) {
   const data = {};
@@ -238,25 +409,23 @@ export default function createData(deep = 1, breadth = 0) {
   }
   return data;
 }
-
 ```
 :::
-## hasOwn 
-检查指定对象是否存在指定属性
 
+## hasOwn
+检查指定对象是否存在指定属性
 #### 类型说明
 ::: info
 `function hasOwn(target: Record<string, any>, key: string): boolean;`
 :::
 #### 参数
-- target 指定对象
-- key 要检查的属性
-#### 返回
-- `boolean`
-::: tip
-true | false
+- `target` 指定对象
+- `key` 要检查的属性
+#### 返回值
+::: tip 
+true
 :::
-#### 示例 
+#### 示例
 ```ts
 hasOwn({a: 1, b: 0}, 'b') // => true
 hasOwn({a: 1, b: 0}, 'c') // => false
@@ -270,33 +439,30 @@ export default function hasOwn(target: Record<string, any>, key:string) {
   return Object.prototype.hasOwnProperty.call(target, key)
 }
 ```
-
 ```Js [JS版本]
 import isObject from '@/verify/isObject';
 export default function hasOwn(target, key) {
   if (!isObject(target)) throw new Error('target参数必须是object');
   return Object.prototype.hasOwnProperty.call(target, key);
 }
-
 ```
 :::
-## omit 
-删除指定对象的指定属性
 
+## omit
+删除指定对象的指定属性
 #### 类型说明
 ::: info
 `function omit<T extends Record<string, any>>(target: T): T;
 export default function omit<T extends Record<string, any>, U extends (keyof T)[]>(target: T, keys: U): Omit<T, U[number]>;`
 :::
 #### 参数
-- target 指定对象
-- keys 由需要删除的属性组成的数组，不传时为[]
-#### 返回
-- `Omit<T, U[number]>`
-::: tip
+- `target` 指定对象
+- `keys` 由需要删除的属性组成的数组，不传时为[]
+#### 返回值
+::: tip 
 新的对象
 :::
-#### 示例 
+#### 示例
 ```ts
 omit({a: 1, b: 2, c: 3}, ['a', 'c']) // => {b: 2}
 ```
@@ -315,7 +481,6 @@ export default function omit<T extends Record<string, any>, U extends (keyof T)[
   return target
 }
 ```
-
 ```Js [JS版本]
 import deepClone from '@/util/deepClone';
 import isObject from '@/verify/isObject';
@@ -325,26 +490,24 @@ export default function omit(target, keys) {
   (keys || []).forEach((key) => delete target[key]);
   return target;
 }
-
 ```
 :::
-## pick 
-提取指定对象的指定属性
 
+## pick
+提取指定对象的指定属性
 #### 类型说明
 ::: info
 `function pick<T extends Record<string, any>>(target: T, keys?: []): {};
 export default function pick<T extends Record<string, any>, K extends keyof T>(target: T, keys: K[]): Pick<T, K>;`
 :::
 #### 参数
-- target 指定对象
-- keys 由需要提取的属性组成的数组，不传时为[]
-#### 返回
-- `Pick<T, K>`
-::: tip
+- `target` 指定对象
+- `keys` 由需要提取的属性组成的数组，不传时为[]
+#### 返回值
+::: tip 
 新的对象
 :::
-#### 示例 
+#### 示例
 ```ts
 omit({a: 1, b: 2, c: 3}) // => {}
 omit({a: 1, b: 2, c: 3}, []) // => {}
@@ -373,9 +536,7 @@ export default function pick<T extends Record<string, any>, K extends keyof T>(t
   })
   return target as K extends keyof T ? Pick<T, K> : {};
 }
-
 ```
-
 ```Js [JS版本]
 import deepClone from '@/util/deepClone';
 import isObject from '@/verify/isObject';
@@ -392,34 +553,22 @@ export default function pick(target, keys = []) {
   });
   return target;
 }
-
 ```
 :::
-## resetObjectValues 
-重置指定对象的值
 
-对对象中值为字符串的重置为: ''
-
-对对象中值为布尔值的重置为: false
-
-对对象中值为数字的重置为: 0
-
-对对象中值为数组的重置为: []
-
-对对象中值为对象的就递归，直到结束
-
+## resetObjectValues
+重置指定对象的值 对对象中值为字符串的重置为: '' 对对象中值为布尔值的重置为: false 对对象中值为数字的重置为: 0 对对象中值为数组的重置为: [] 对对象中值为对象的就递归，直到结束
 #### 类型说明
 ::: info
 `function resetObjectValues<T extends Record<string, any>>(target: T, n?: number): T;`
 :::
 #### 参数
-- target 指定对象
-#### 返回
-- `T`
-::: tip
+- `target` 指定对象
+#### 返回值
+::: tip 
 新的对象
 :::
-#### 示例 
+#### 示例
 ```ts
 omit({a: 1, b: '2', c: true, d: [1, 2, 3], e: {a: 1, b: '2', c: [6, 7]}})
 // => {a: 0, b: '', c: false, d: [], e: {a: 0, b: '', c: []}}
@@ -443,7 +592,6 @@ export default function resetObjectValues<T extends Record<string, any>>(target:
   return target
 }
 ```
-
 ```Js [JS版本]
 import deepClone from '@/util/deepClone';
 import typeOf from '@/common/typeOf';
@@ -460,212 +608,5 @@ export default function resetObjectValues(target, n = 0) {
   });
   return target;
 }
-
-```
-:::
-## isEmptyObject 
-判断对象是否是空对象
-
-#### 类型说明
-::: info
-`function isEmptyObject(object: Record<string, unknown>): boolean;`
-:::
-#### 参数
-- object 对象
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 异常
-::: danger
-传入参数不是Object 传入参数不是Object时触发
-:::
-#### 示例 
-验证通过
-```ts
-isEmptyObject({}) => true
-```
-验证失败
-```ts
-isEmptyObject({a: 1}) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import isObject from '@/verify/isObject'
-export default function isEmptyObject(object: Record<string, unknown>): boolean {
-  if (!isObject(object)) throw '传入参数不是Object'
-  return !Object.keys(object).length
-}
-```
-
-```Js [JS版本]
-import isObject from '@/verify/isObject';
-export default function isEmptyObject(object) {
-  if (!isObject(object)) throw '传入参数不是Object';
-  return !Object.keys(object).length;
-}
-
-```
-:::
-## isMap 
-判断是否为Map
-
-#### 类型说明
-::: info
-`function isMap(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isMap(new Map()) => true
-```
-验证失败
-```ts
-isMap(123) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import typeOf from '@/common/typeOf'
-export default function isMap(value: any): boolean {
-  return typeOf(value) === 'Map'
-}
-```
-
-```Js [JS版本]
-import typeOf from '@/common/typeOf';
-export default function isMap(value) {
-  return typeOf(value) === 'Map';
-}
-
-```
-:::
-## isObject 
-判断是否为对象
-
-#### 类型说明
-::: info
-`function isObject(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isObject({}) => true
-```
-验证失败
-```ts
-isObject([]) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import typeOf from '@/common/typeOf'
-export default function isObject(value: any): boolean {
-  return value !== null && typeOf(value) === 'Object'
-}
-```
-
-```Js [JS版本]
-import typeOf from '@/common/typeOf';
-export default function isObject(value) {
-  return value !== null && typeOf(value) === 'Object';
-}
-
-```
-:::
-## isSet 
-判断是否为Set
-
-#### 类型说明
-::: info
-`function isSet(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isSet(new Set()) => true
-```
-验证失败
-```ts
-isSet(123) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import typeOf from '@/common/typeOf'
-export default function isSet(value: any): boolean {
-  return typeOf(value) === 'Set'
-}
-```
-
-```Js [JS版本]
-import typeOf from '@/common/typeOf';
-export default function isSet(value) {
-  return typeOf(value) === 'Set';
-}
-
-```
-:::
-## isSymbol 
-判断是否为Symbol
-
-#### 类型说明
-::: info
-`function isSymbol(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isSymbol(Symbol(1)) => true
-```
-验证失败
-```ts
-isSymbol(Symbol) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import typeOf from '@/common/typeOf'
-export default function isSymbol(value: any): boolean {
-  return typeOf(value) === 'Symbol'
-}
-```
-
-```Js [JS版本]
-import typeOf from '@/common/typeOf';
-export default function isSymbol(value) {
-  return typeOf(value) === 'Symbol';
-}
-
 ```
 :::

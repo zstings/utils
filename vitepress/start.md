@@ -30,6 +30,7 @@ $ yarn add @zstings/utils
 ```sh [bun]
 $ bun add @zstings/utils
 ```
+
 :::
 
 ## 第2步：导入

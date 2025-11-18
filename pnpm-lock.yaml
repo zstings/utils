@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      comment-parser:
+        specifier: ^1.4.1
+        version: 1.4.1
     devDependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.46.4
@@ -1050,6 +1054,10 @@ packages:
   commander@9.5.0:
     resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==}
     engines: {node: ^12.20.0 || >=14}
+
+  comment-parser@1.4.1:
+    resolution: {integrity: sha512-buhp5kePrmda3vhc5B9t7pUQXAb2Tnd0qgpkIhPhkHXxJpiPJ11H0ZEU0oBpJ2QztSbzG/ZxMj/CHsYJqRHmyg==}
+    engines: {node: '>= 12.0.0'}
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -2837,6 +2845,8 @@ snapshots:
   comma-separated-tokens@2.0.3: {}
 
   commander@9.5.0: {}
+
+  comment-parser@1.4.1: {}
 
   concat-map@0.0.1: {}
 

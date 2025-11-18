@@ -1,23 +1,57 @@
-## 时间Date
-## days 
-获取时间对象
+## isDate
+判断是否为Date
+#### 类型说明
+::: info
+`function isDate(value: any): boolean;`
+:::
+#### 参数
+- `value` 任意值
+#### 返回值
+::: tip 
+true
+:::
+#### 示例
+验证通过
+```ts
+isDate(new Date()) => true
+```
+验证失败
+```ts
+isDate(123) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isDate(value: any): boolean {
+  return typeOf(value) === 'Date'
+}
+```
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isDate(value) {
+  return typeOf(value) === 'Date';
+}
+```
+:::
 
+## days
+获取时间对象
 #### 类型说明
 ::: info
 `function days(time?: number | string | Date | (string | number)[]): Date;`
 :::
 #### 参数
-- time 时间戳|格式化后的时间字符|时间对象|可转化的时间数组
-#### 返回
-- `Date`
-::: tip
+- `time` 时间戳|格式化后的时间字符|时间对象|可转化的时间数组
+#### 返回值
+::: tip 
 时间对象
 :::
 #### 异常
-::: danger
+::: danger 
 Invalid Date 传入值无法转为Date时触发
 :::
-#### 示例 
+#### 示例
 获取当前的时间对象
 ```ts
 days()
@@ -77,7 +111,6 @@ export default function days(time: number | string | Date | (string | number)[] 
   return time
 }
 ```
-
 ```Js [JS版本]
 import isArray from '@/verify/isArray';
 export default function days(time = new Date()) {
@@ -87,25 +120,23 @@ export default function days(time = new Date()) {
   if (time.toString() === 'Invalid Date') throw 'Invalid Date';
   return time;
 }
-
 ```
 :::
-## formats 
-获取指定格式的时间
 
+## formats
+获取指定格式的时间
 #### 类型说明
 ::: info
 `function formats(time?: number | string | Date | (string | number)[], format?: string): string;`
 :::
 #### 参数
-- value 时间对象或者时间戳
-- format 返回格式 默认 YYYY-MM-DD hh:mm:ss
-#### 返回
-- `string`
-::: tip
+- `value` 时间对象或者时间戳
+- `format` 返回格式 默认 YYYY-MM-DD hh:mm:ss
+#### 返回值
+::: tip 
 指定格式的时间
 :::
-#### 示例 
+#### 示例
 获取当前的日期
 ```ts
 formats() // '2022-07-30 12:41:26'
@@ -157,7 +188,6 @@ export default function formats(
     .replace('s', s)
 }
 ```
-
 ```Js [JS版本]
 import days from '@/date/days';
 import padInt from '@/number/padInt';
@@ -177,12 +207,11 @@ export default function formats(time = new Date(), format = 'YYYY-MM-DD hh:mm:ss
   const s = padInt(date.getSeconds(), 1);
   return format.replace('YYYY', YYYY).replace('YY', YY).replace('MM', MM).replace('M', M).replace('DD', DD).replace('D', D).replace('hh', hh).replace('h', h).replace('mm', mm).replace('m', m).replace('ss', ss).replace('s', s);
 }
-
 ```
 :::
-## getDataSection 
-获取时间区间
 
+## getDataSection
+获取时间区间
 #### 类型说明
 ::: info
 `function getDataSection(day?: number, option?: {
@@ -192,33 +221,32 @@ export default function formats(time = new Date(), format = 'YYYY-MM-DD hh:mm:ss
 }): (number | string)[];`
 :::
 #### 参数
-- day 间隔天数，默认1，表示今天
-- option 选项
-- option.start 起始时间， 默认今天
-- option.format 时间格式， 默认YYYY-MM-DD
-- option.timeStamp 是否时间戳，默认false， 为true时，忽略 format
-#### 返回
-- `(number | string)[]`
-::: tip
-数组 [起始时间, 结束时间]
+- `day` 间隔天数，默认1，表示今天
+- `option` 选项
+- `option.start` 起始时间， 默认今天
+- `option.format` 时间格式， 默认YYYY-MM-DD
+- `option.timeStamp` 是否时间戳，默认false， 为true时，忽略 format
+#### 返回值
+::: tip 
+数组
 :::
 #### 异常
-::: danger
+::: danger 
 day 必须是数字
 :::
-::: danger
+::: danger 
 option 必须是对象
 :::
-::: danger
+::: danger 
 option.start 必须可以被转化为Date
 :::
-::: danger
+::: danger 
 option.format 必须是字符串
 :::
-::: danger
+::: danger 
 option.timeStamp 必须是布尔值
 :::
-#### 示例 
+#### 示例
 ```ts
 getDataSection() // => ['2022-08-23', '2022-08-23']
 ```
@@ -263,7 +291,6 @@ export default function getDataSection(
   return [formats(endTime, format), formats(startTime, format)]
 }
 ```
-
 ```Js [JS版本]
 import days from '@/date/days';
 import isBoolean from '@/verify/isBoolean';
@@ -283,29 +310,27 @@ export default function getDataSection(day = 1, option = { start: new Date(), fo
   if (timestamp) return [timeStamp(endTime, format), timeStamp(startTime, format)];
   return [formats(endTime, format), formats(startTime, format)];
 }
-
 ```
 :::
-## getMonthDays 
-获取指定月的天数
 
+## getMonthDays
+获取指定月的天数
 #### 类型说明
 ::: info
 `function getMonthDays(year?: number, month?: number): number;`
 :::
 #### 参数
-- year 年份, 默认当前年
-- month 月份, 默认当前月
-#### 返回
-- `number`
-::: tip
+- `year` 年份, 默认当前年
+- `month` 月份, 默认当前月
+#### 返回值
+::: tip 
 天数
 :::
 #### 异常
-::: danger
+::: danger 
 Invalid Date 传入值无法转为Date时触发
 :::
-#### 示例 
+#### 示例
 获取当前月份的天数
 ```ts
 getMonthDays() // => 31
@@ -317,7 +342,6 @@ getMonthDays(2022, 1) // => 31
 #### 源码
 ::: code-group
 ```Ts [TS版本]
-
 export default function getMonthDays(year?: number, month?: number): number {
   year = year ? year : new Date().getFullYear()
   month = month ? month : new Date().getMonth() + 1
@@ -326,7 +350,6 @@ export default function getMonthDays(year?: number, month?: number): number {
   return days.getDate()
 }
 ```
-
 ```Js [JS版本]
 export default function getMonthDays(year, month) {
   year = year ? year : (/* @__PURE__ */ new Date()).getFullYear();
@@ -335,28 +358,26 @@ export default function getMonthDays(year, month) {
   if (isNaN(days.getTime())) throw 'Invalid Date';
   return days.getDate();
 }
-
 ```
 :::
-## getMonthsUntilDate 
-获取从当前时间到指定年月之前的所有年月
 
+## getMonthsUntilDate
+获取从当前时间到指定年月之前的所有年月
 #### 类型说明
 ::: info
 `function getMonthsUntilDate(targetDateStr: string): string[];`
 :::
 #### 参数
-- targetDateStr 年月组成的字符串 '2025-01' or '2025-1'
-#### 返回
-- `string[]`
-::: tip
+- `targetDateStr` 年月组成的字符串 '2025-01' or '2025-1'
+#### 返回值
+::: tip 
 年月字符串的数组
 :::
 #### 异常
-::: danger
+::: danger 
 Invalid Date 参数targetDateStr无法转为Date时触发
 :::
-#### 示例 
+#### 示例
 获取当前到2025-01的年月数组，假设当前时间为2025-03
 ```ts
 getMonthsUntilDate('2025-01') // ['2025-03', '2025-02', '2025-01']
@@ -423,9 +444,7 @@ export default function getMonthsUntilDate(targetDateStr: string) {
   }
   return result
 }
-
 ```
-
 ```Js [JS版本]
 import days from '@/date/days';
 export default function getMonthsUntilDate(targetDateStr) {
@@ -465,32 +484,30 @@ export default function getMonthsUntilDate(targetDateStr) {
   }
   return result;
 }
-
 ```
 :::
-## howLongAgo 
-获取距离指定时间之前
 
+## howLongAgo
+获取距离指定时间之前
 #### 类型说明
 ::: info
 `function howLongAgo(endTime?: number | string | Date | (string | number)[], startTime?: number | string | Date | (string | number)[]): string;`
 :::
 #### 参数
-- endTime 目标时间戳或者格式化的时间字符
-- startTime 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
-#### 返回
-- `string`
-::: tip
-年|月|天|小时|分钟|秒 之前
+- `endTime` 目标时间戳或者格式化的时间字符
+- `startTime` 开始时间戳或者格式化的时间字符, 默认当前时间戳，非必填
+#### 返回值
+::: tip 
+年|月|天|小时|分钟|秒
 :::
 #### 异常
-::: danger
+::: danger 
 无法转换为时间 传入值无法转为Date时触发
 :::
-::: danger
+::: danger 
 只接受 number | string 传入值不是 number | string时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 howLongAgo(1660644035390) // => '4分钟前'
 ```
@@ -527,7 +544,6 @@ export default function howLongAgo(
   else return '刚刚'
 }
 ```
-
 ```Js [JS版本]
 import days from '@/date/days';
 export default function howLongAgo(endTime = new Date(), startTime = /* @__PURE__ */ new Date()) {
@@ -543,29 +559,27 @@ export default function howLongAgo(endTime = new Date(), startTime = /* @__PURE_
   else if (date >= 1e3) return Math.floor(date / 1e3) + '秒前';
   else return '刚刚';
 }
-
 ```
 :::
-## timeStamp 
-获取时间戳
 
+## timeStamp
+获取时间戳
 #### 类型说明
 ::: info
 `function timeStamp(time?: number | string | Date | (string | number)[], unit?: string): number;`
 :::
 #### 参数
-- time 时间戳|格式化后的时间字符|时间对象
-- unit 返回格式,支持毫秒或者秒,默认毫秒
-#### 返回
-- `number`
-::: tip
+- `time` 时间戳|格式化后的时间字符|时间对象
+- `unit` 返回格式,支持毫秒或者秒,默认毫秒
+#### 返回值
+::: tip 
 时间戳
 :::
 #### 异常
-::: danger
+::: danger 
 Invalid Date 参数time无法转为Date时触发
 :::
-#### 示例 
+#### 示例
 获取当前的时间戳
 ```ts
 timeStamp() // 1659334598129
@@ -591,53 +605,11 @@ export default function timeStamp(time: number | string | Date | (string | numbe
   return unit == 's' ? (ts / 1000) | 0 : ts
 }
 ```
-
 ```Js [JS版本]
 import days from '@/date/days';
 export default function timeStamp(time = new Date(), unit = 'ms') {
   const ts = days(time).getTime();
   return unit == 's' ? ts / 1e3 | 0 : ts;
 }
-
-```
-:::
-## isDate 
-判断是否为Date
-
-#### 类型说明
-::: info
-`function isDate(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isDate(new Date()) => true
-```
-验证失败
-```ts
-isDate(123) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import typeOf from '@/common/typeOf'
-export default function isDate(value: any): boolean {
-  return typeOf(value) === 'Date'
-}
-```
-
-```Js [JS版本]
-import typeOf from '@/common/typeOf';
-export default function isDate(value) {
-  return typeOf(value) === 'Date';
-}
-
 ```
 :::

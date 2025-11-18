@@ -1,24 +1,58 @@
-## URL
-## getUrlParam 
-获取url上的参数
+## isLocation
+判断是否为Location
+#### 类型说明
+::: info
+`function isLocation(value: any): boolean;`
+:::
+#### 参数
+- `value` 任意值
+#### 返回值
+::: tip 
+true
+:::
+#### 示例
+验证通过
+```ts
+isLocation(window.location) => true
+```
+验证失败
+```ts
+isLocation(123) => false
+```
+#### 源码
+::: code-group
+```Ts [TS版本]
+import typeOf from '@/common/typeOf'
+export default function isLocation(value: any): boolean {
+  return typeOf(value) === 'Location'
+}
+```
+```Js [JS版本]
+import typeOf from '@/common/typeOf';
+export default function isLocation(value) {
+  return typeOf(value) === 'Location';
+}
+```
+:::
 
+## getUrlParam
+获取url上的参数
 #### 类型说明
 ::: info
 `function getUrlParam(name: string, url?: string): string | null;`
 :::
 #### 参数
-- name 参数名，必填
-- url url地址，为空时是window.location.href， 非必填
-#### 返回
-- `string | null`
-::: tip
-符合的值或者null
-:::
+- `name` 参数名，必填
+- `url` url地址，为空时是window.location.href， 非必填
 #### 异常
-::: danger
+::: danger 
 url 参数错误，不是有效的
 :::
-#### 示例 
+#### 返回值
+::: tip 
+符合的值或者null
+:::
+#### 示例
 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
 不传值时，默认从window.location.href中取值
 ```ts
@@ -51,7 +85,6 @@ export default function getUrlParam(name: string, url: string = window.location.
   return null
 }
 ```
-
 ```Js [JS版本]
 import isURL from '@/url/isURL';
 export default function getUrlParam(name, url = window.location.href) {
@@ -64,12 +97,11 @@ export default function getUrlParam(name, url = window.location.href) {
   if (h != null) return decodeURIComponent(h[2]);
   return null;
 }
-
 ```
 :::
-## getUrlQuery 
-获取url上的参数
 
+## getUrlQuery
+获取url上的参数
 #### 类型说明
 ::: info
 `function getUrlQuery(option?: {
@@ -78,25 +110,24 @@ export default function getUrlParam(name, url = window.location.href) {
 }): Record<string, any>;`
 :::
 #### 参数
-- option 可选的对象
-- option.url url地址，默认window.location.href， 非必填
-- option.type 类型，默认all， 非必填, 可选值：all, query, hash
-#### 返回
-- `Record<string, any>`
-::: tip
-由参数组成的对象
-:::
+- `option` 可选的对象
+- `option.url` url地址，默认window.location.href， 非必填
+- `option.type` 类型，默认all， 非必填, 可选值：all, query, hash
 #### 异常
-::: danger
+::: danger 
 参数错误， 应该传入一个对象 option不是对象时触发
 :::
-::: danger
-url参数错误，不是有效的  url不是有效链接时触发
+::: danger 
+url参数错误，不是有效的 url不是有效链接时触发
 :::
-::: danger
+::: danger 
 type 参数错误， 应该传入一个字符串 'search' | 'hash' | 'all'
 :::
-#### 示例 
+#### 返回值
+::: tip 
+由参数组成的对象
+:::
+#### 示例
 支持search和hash中取值，如果search和hash中有相同的参数，则默认使用search。
 不传值时，默认从window.location.href中取值
 ```ts
@@ -148,7 +179,6 @@ export default function getUrlQuery(
   return Object.assign({}, searchArr, hashArr, searchArr)
 }
 ```
-
 ```Js [JS版本]
 import isNullOrUndefined from '@/verify/isNullOrUndefined';
 import isObject from '@/verify/isObject';
@@ -173,28 +203,26 @@ export default function getUrlQuery(option = {
   const hashArr = type == 'search' ? {} : qsParse(urlHash);
   return Object.assign({}, searchArr, hashArr, searchArr);
 }
-
 ```
 :::
-## isURL 
-是否是url
 
+## isURL
+是否是url
 #### 类型说明
 ::: info
 `function isURL(url: string): boolean;`
 :::
 #### 参数
-- url 需要验证的内容，类型：string
-#### 返回
-- `boolean`
-::: tip
+- `url` 需要验证的内容，类型：string
+#### 返回值
+::: tip 
 Boolean
 :::
 #### 异常
-::: danger
+::: danger 
 参数必须是string 参数不是string时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 isURL('https://a.b.c')
 // => true
@@ -218,7 +246,6 @@ export default function isURL(url: string): boolean {
   }
 }
 ```
-
 ```Js [JS版本]
 import isString from '@/verify/isString';
 export default function isURL(url) {
@@ -230,26 +257,22 @@ export default function isURL(url) {
     return false;
   }
 }
-
 ```
 :::
-## qsParse 
-参数序列化-字符转对象
 
+## qsParse
+参数序列化-字符转对象
 #### 类型说明
 ::: info
 `function qsParse(query?: string, decode?: boolean): {
     [k: string]: any;
 };`
 :::
-#### 返回
-- `{
-    [k: string]: any;
-}`
-::: tip
+#### 返回值
+::: tip 
 由参数组成的对象
 :::
-#### 示例 
+#### 示例
 ```ts
 qsParse('a=1&b=2')
 // => 'a=1&b=2'
@@ -277,7 +300,6 @@ export default function qsParse(query = '', decode = true): { [k: string]: any }
   return queryObj
 }
 ```
-
 ```Js [JS版本]
 import isJsonString from '@/verify/isJsonString';
 export default function qsParse(query = '', decode = true) {
@@ -290,22 +312,20 @@ export default function qsParse(query = '', decode = true) {
   }
   return queryObj;
 }
-
 ```
 :::
-## qsStringify 
-参数序列化-对象转字符
 
+## qsStringify
+参数序列化-对象转字符
 #### 类型说明
 ::: info
 `function qsStringify(query?: Record<string, any>, decode?: boolean): string;`
 :::
-#### 返回
-- `string`
-::: tip
+#### 返回值
+::: tip 
 由参数组成的对象
 :::
-#### 示例 
+#### 示例
 ```ts
 qsStringify({a: 1, b: 2})
 // => 'a=1&b=2'
@@ -347,7 +367,6 @@ export default function qsStringify(query: Record<string, any> = {}, decode = fa
   return decode ? decodeURIComponent(queryArr.join('&')) : queryArr.join('&')
 }
 ```
-
 ```Js [JS版本]
 import isBasicType from '@/verify/isBasicType';
 import isNullOrUndefined from '@/verify/isNullOrUndefined';
@@ -363,12 +382,11 @@ export default function qsStringify(query = {}, decode = false) {
   }
   return decode ? decodeURIComponent(queryArr.join('&')) : queryArr.join('&');
 }
-
 ```
 :::
-## reviseUrlQuery 
-修改url上的参数
 
+## reviseUrlQuery
+修改url上的参数
 #### 类型说明
 ::: info
 `function reviseUrlQuery(option: {
@@ -377,28 +395,27 @@ export default function qsStringify(query = {}, decode = false) {
 }, url?: string): string;`
 :::
 #### 参数
-- option.search 对象 用于修改search部分的数据， 非必填
-- option.hash 对象 用于修改hash部分的数据， 非必填
-- url url地址，默认window.location.href， 非必填
-#### 返回
-- `string`
-::: tip
-修改后的url地址
-:::
+- `option.search` 对象 用于修改search部分的数据， 非必填
+- `option.hash` 对象 用于修改hash部分的数据， 非必填
+- `url` url地址，默认window.location.href， 非必填
 #### 异常
-::: danger
+::: danger 
 参数错误， 应该传入一个对象 option不是对象时触发
 :::
-::: danger
+::: danger 
 search 参数错误， 应该传入一个对象 option不是对象时触发
 :::
-::: danger
+::: danger 
 hash 参数错误， 应该传入一个对象 option不是对象时触发
 :::
-::: danger
+::: danger 
 url 参数错误，不是有效的
 :::
-#### 示例 
+#### 返回值
+::: tip 
+修改后的url地址
+:::
+#### 示例
 修改search中的值
 ```ts
 reviseUrlQuery({search: {a: '2', b: '3'}}, 'http://a.b.com/?a=1&b=2#/index/?c=3&b=4')
@@ -449,7 +466,6 @@ export default function reviseUrlQuery(
   return origin + pathname + search + hash
 }
 ```
-
 ```Js [JS版本]
 import isNullOrUndefined from '@/verify/isNullOrUndefined';
 import isObject from '@/verify/isObject';
@@ -475,28 +491,27 @@ export default function reviseUrlQuery(option, url = window.location.href) {
   }
   return origin + pathname + search + hash;
 }
-
 ```
 :::
-## setUrlQuery 
-设置浏览器地址栏url
 
+## setUrlQuery
+设置浏览器地址栏url
 #### 类型说明
 ::: info
 `function setUrlQuery(url: string, type?: 'pushState' | 'replaceState'): void;`
 :::
 #### 参数
-- option 可选的对象
-- url url地址，默认window.location， 非必填
-- type 类型，默认pushState， 非必填, 可选值：pushState, replaceState
+- `option` 可选的对象
+- `url` url地址，默认window.location， 非必填
+- `type` 类型，默认pushState， 非必填, 可选值：pushState, replaceState
 #### 异常
-::: danger
+::: danger 
 url 参数错误，不是有效的
 :::
-::: danger
+::: danger 
 type 参数错误， 应该传入一个字符串 'pushState' | 'replaceState'
 :::
-#### 示例 
+#### 示例
 修改了浏览器页面的地址栏的url显示，默认会添加新的历史记录
 ```ts
 setUrlQuery('https://a.b.com/?a=1&b=2')
@@ -521,9 +536,7 @@ export default function setUrlQuery(url: string, type: 'pushState' | 'replaceSta
   }
   window.history[type](history.state, '', url)
 }
-
 ```
-
 ```Js [JS版本]
 import isString from '@/verify/isString';
 import isURL from '@/url/isURL';
@@ -537,46 +550,5 @@ export default function setUrlQuery(url, type = 'pushState') {
   }
   window.history[type](history.state, '', url);
 }
-
-```
-:::
-## isLocation 
-判断是否为Location
-
-#### 类型说明
-::: info
-`function isLocation(value: any): boolean;`
-:::
-#### 参数
-- value 任意值
-#### 返回
-- `boolean`
-::: tip
-true | false
-:::
-#### 示例 
-验证通过
-```ts
-isLocation(window.location) => true
-```
-验证失败
-```ts
-isLocation(123) => false
-```
-#### 源码
-::: code-group
-```Ts [TS版本]
-import typeOf from '@/common/typeOf'
-export default function isLocation(value: any): boolean {
-  return typeOf(value) === 'Location'
-}
-```
-
-```Js [JS版本]
-import typeOf from '@/common/typeOf';
-export default function isLocation(value) {
-  return typeOf(value) === 'Location';
-}
-
 ```
 :::

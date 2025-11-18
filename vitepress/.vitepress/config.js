@@ -31,6 +31,15 @@ export default {
     docFooter: {
       prev: '上一页',
       next: '下一页'
+    },
+    search: {
+      provider: 'local'
+    }
+  },
+  markdown: {
+    anchor: {
+      // 禁止自动 lower-case
+      slugify: str => str
     }
   }
 }

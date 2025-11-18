@@ -1,23 +1,20 @@
-## 颜色Color
-## extendHex 
+## extendHex
 将3(4)位16进制色值转为6(8)位
-
 #### 类型说明
 ::: info
 `function extendHex(hex: string): string;`
 :::
 #### 参数
-- hex 字符串
-#### 返回
-- `string`
-::: tip
+- `hex` 字符串
+#### 返回值
+::: tip 
 6位hex
 :::
 #### 异常
-::: danger
+::: danger 
 无法识别正确的hex hex参数不是正确的hex时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 extendHex('#03f') // => '#0033ff'
 ```
@@ -34,7 +31,6 @@ export default function extendHex(hex: string): string {
   return `#${hex.substring(1).split('').map(item => (item += item)).join('')}`
 }
 ```
-
 ```Js [JS版本]
 import isHex from '@/color/isHex';
 export default function extendHex(hex) {
@@ -42,28 +38,26 @@ export default function extendHex(hex) {
   if (hex.length >= 6) return hex;
   return `#${hex.substring(1).split('').map((item) => item += item).join('')}`;
 }
-
 ```
 :::
-## hexToRgb 
-将16进制hex色值转为rgb(a)色值
 
+## hexToRgb
+将16进制hex色值转为rgb(a)色值
 #### 类型说明
 ::: info
 `function hexToRgb(hex?: string): string;`
 :::
 #### 参数
-- hex 字符串
-#### 返回
-- `string`
-::: tip
+- `hex` 字符串
+#### 返回值
+::: tip 
 字符串
 :::
 #### 异常
-::: danger
+::: danger 
 无法识别正确的hex hex参数不是正确的hex时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 hexToRgb('#aabbcc') // => '170,187,204'
 ```
@@ -84,7 +78,6 @@ export default function hexToRgb(hex?: string): string {
   return hex
 }
 ```
-
 ```Js [JS版本]
 import toFixed from '@/number/toFixed';
 import extendHex from '@/color/extendHex';
@@ -95,24 +88,22 @@ export default function hexToRgb(hex) {
   hex = hex.match(/[0-9a-f]{2}/gi).map((s, i) => i === 3 ? toFixed(parseInt(s, 16) / 255) : parseInt(s, 16)).join(',');
   return hex;
 }
-
 ```
 :::
-## isHex 
-判断是否是16进制hex色值
 
+## isHex
+判断是否是16进制hex色值
 #### 类型说明
 ::: info
 `function isHex(hex?: string): boolean;`
 :::
 #### 参数
-- hex 字符串
-#### 返回
-- `boolean`
-::: tip
-true | false
+- `hex` 字符串
+#### 返回值
+::: tip 
+true
 :::
-#### 示例 
+#### 示例
 ```ts
 isHex('#aabbcc') // => true
 ```
@@ -141,31 +132,28 @@ export default function isHex(hex?: string): boolean {
   return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex!)
 }
 ```
-
 ```Js [JS版本]
 import isString from '@/verify/isString';
 export default function isHex(hex) {
   if (!isString(hex)) return false;
   return /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(hex);
 }
-
 ```
 :::
-## isRgba 
-判断是否是16进制hex色值
 
+## isRgba
+判断是否是16进制hex色值
 #### 类型说明
 ::: info
 `function isRgba(rgba?: string): boolean;`
 :::
 #### 参数
-- rgba 字符串
-#### 返回
-- `boolean`
-::: tip
-true | false
+- `rgba` 字符串
+#### 返回值
+::: tip 
+true
 :::
-#### 示例 
+#### 示例
 ```ts
 isRgba('170,187,255') // => true
 ```
@@ -192,9 +180,7 @@ export default function isRgba(rgba?: string): boolean {
     return Number(s) >= 0 && Number(s) <= 255
   })
 }
-
 ```
-
 ```Js [JS版本]
 import isString from '@/verify/isString';
 export default function isRgba(rgba) {
@@ -204,22 +190,20 @@ export default function isRgba(rgba) {
     return Number(s) >= 0 && Number(s) <= 255;
   });
 }
-
 ```
 :::
-## randomHex 
-随机生成16进制色值
 
+## randomHex
+随机生成16进制色值
 #### 类型说明
 ::: info
 `function randomHex(): string;`
 :::
-#### 返回
-- `string`
-::: tip
+#### 返回值
+::: tip 
 字符串
 :::
-#### 示例 
+#### 示例
 ```ts
 randomHex() // => '#cf65dd'
 ```
@@ -236,7 +220,6 @@ export default function randomHex(): string {
   return hex
 }
 ```
-
 ```Js [JS版本]
 import random from '@/util/random';
 export default function randomHex() {
@@ -247,22 +230,20 @@ export default function randomHex() {
   }
   return hex;
 }
-
 ```
 :::
-## randomRgba 
-随机生成RGBA色值
 
+## randomRgba
+随机生成RGBA色值
 #### 类型说明
 ::: info
 `function randomRgba(): string;`
 :::
-#### 返回
-- `string`
-::: tip
+#### 返回值
+::: tip 
 字符串
 :::
-#### 示例 
+#### 示例
 ```ts
 randomRgba() // => '#cf65dd'
 ```
@@ -275,35 +256,32 @@ export default function randomRgba(): string {
   return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`
 }
 ```
-
 ```Js [JS版本]
 import toFixed from '@/number/toFixed';
 import random from '@/util/random';
 export default function randomRgba() {
   return `${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, ${toFixed(random(0, 100) / 100)}`;
 }
-
 ```
 :::
-## rgbToHex 
-将rgb(a)色值转为16进制hex色值
 
+## rgbToHex
+将rgb(a)色值转为16进制hex色值
 #### 类型说明
 ::: info
 `function rgbToHex(rgba: string): string;`
 :::
 #### 参数
-- rgba 字符串
-#### 返回
-- `string`
-::: tip
+- `rgba` 字符串
+#### 返回值
+::: tip 
 字符串
 :::
 #### 异常
-::: danger
+::: danger 
 无法识别正确的rgba rgba参数不是正确的hex时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 rgbToHex('170,187,255') // => '#aabbff'
 ```
@@ -324,9 +302,7 @@ export default function rgbToHex(rgba: string): string {
   })
   return '#' + rgbas.join('')
 }
-
 ```
-
 ```Js [JS版本]
 import isRgba from '@/color/isRgba';
 export default function rgbToHex(rgba) {
@@ -338,28 +314,26 @@ export default function rgbToHex(rgba) {
   });
   return '#' + rgbas.join('');
 }
-
 ```
 :::
-## shrinkHex 
-将6(8)位16进制色值转为3(4)位
 
+## shrinkHex
+将6(8)位16进制色值转为3(4)位
 #### 类型说明
 ::: info
 `function shrinkHex(hex?: string): string;`
 :::
 #### 参数
-- hex 字符串
-#### 返回
-- `string`
-::: tip
+- `hex` 字符串
+#### 返回值
+::: tip 
 3位hex
 :::
 #### 异常
-::: danger
+::: danger 
 无法识别正确的hex hex参数不是正确的hex时触发
 :::
-#### 示例 
+#### 示例
 ```ts
 shrinkHex('#0033ff') // => '#03f'
 ```
@@ -378,7 +352,6 @@ export default function shrinkHex(hex?: string): string {
   return '#' + hexs.map(item => item[0]).join('')
 }
 ```
-
 ```Js [JS版本]
 import isHex from '@/color/isHex';
 export default function shrinkHex(hex) {
@@ -387,6 +360,5 @@ export default function shrinkHex(hex) {
   const hexs = hex.substring(1).match(/[0-9a-f]{2}/gi);
   return '#' + hexs.map((item) => item[0]).join('');
 }
-
 ```
 :::

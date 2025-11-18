@@ -1,140 +1,88 @@
-import fs from 'fs'
-import path from 'node:path'
-// import typescript from 'typescript'
+import { parse } from 'comment-parser'
+import { readFileSync, writeFileSync, globSync } from 'node:fs'
+import { basename, dirname } from 'node:path'
 
-const srcDir = './dist/types/src'
+// console.log(globSync('./src/**/*.ts', { exclude: ['./src/**/index.ts'] }).length)
 
-let tsPaths = []
+const files = globSync('./src/**/*.ts', { exclude: ['./src/**/index.ts'] })
 
-let allDts = ''
+const menus = []
+const funcs = new Map()
 
-// 递归函数，获取目录下所有.ts文件的内容
-function readTSFiles(dir) {
-  // 读取目录
-  const files = fs.readdirSync(dir)
+files.forEach(item => {
+  const { str, fileName, description, category } = createMdCont(item)
+  const ml = category.replace(/\p{sc=Han}/gu, '').toLocaleLowerCase()
+  menus.push({ link: `/${ml}#${fileName}`, text: `${fileName}\n${description}`, category })
+  if (!funcs.has(ml)) {
+    funcs.set(ml, str)
+  } else {
+    funcs.set(ml, funcs.get(ml) + '\n' + str)
+  }
+})
+// console.log(funcs)
+funcs.forEach((item, key) => {
+  writeFileSync(`./vitepress/${key}.md`, item)
+})
+createMenu()
 
-  // 遍历目录中的文件和子目录
-  files.forEach(file => {
-    const filePath = path.join(dir, file)
-    const stats = fs.statSync(filePath)  
-    // 如果是目录，递归调用该函数
-    if (stats.isDirectory()) {
-      readTSFiles(filePath)
+function createMdCont(path) {
+  const ml = basename(dirname(path))
+  const fileName = basename(path, '.ts')
+  let category = ''
+
+  const sourceTs = readFileSync(`./src/${ml}/${fileName}.ts`, 'utf8')
+  const sourceDTS = readFileSync(`./dist/types/src/${ml}/${fileName}.d.ts`, 'utf8')
+
+  const tsSourceContent = sourceTs
+    .replace(/\/\*\*[\s\S]+\*\//, '')
+    .replace(/(\n\s*\n)+/g, '\n')
+    .trim()
+
+  const jsSourceContent = readFileSync(`./temp_code/${fileName}.ts`, 'utf-8').trim()
+
+  const parsed = parse(sourceDTS)
+
+  let str = `## ${fileName}\n`
+  str += parsed[0].description + '\n'
+  str += `#### 类型说明\n::: info\n\`${sourceDTS.match(/function (\w+)[\s\S]*\([\s\S]*\): ([\s\S]+)?;/)[0]}\`\n:::\n`
+  parsed[0].tags.forEach(item => {
+    if (item.tag == 'param') {
+      if (!str.includes('#### 参数')) str += `#### 参数\n`
+      str += `- \`${item.name}\` ${item.description}\n`
+    }
+    if (item.tag == 'return') {
+      if (!str.includes('#### 返回值')) str += `#### 返回值\n`
+      str += `::: tip \n${item.name}\n:::\n`
+    }
+    if (item.tag == 'throws') {
+      if (!str.includes('#### 异常')) str += `#### 异常\n`
+      str += `::: danger \n${item.name} ${item.description}\n:::\n`
+    }
+    if (item.tag == 'example') {
+      if (!str.includes('#### 示例')) str += `#### 示例\n`
+      item.source.forEach(itemx => {
+        if (itemx.tokens.description) str += `${itemx.tokens.description}\n`
+      })
+    }
+    if (item.tag == 'category') {
+      category = item.name
+    }
+  })
+  str += `#### 源码\n::: code-group\n\`\`\`Ts [TS版本]\n${tsSourceContent.replace(/(\n\s*\n)+/g, '\n')}\n\`\`\`\n\`\`\`Js [JS版本]\n${jsSourceContent}\n\`\`\`\n:::\n`
+
+  // console.log(str)
+
+  return { str, fileName, description: parsed[0].description.split(' ')[0], category }
+}
+function createMenu() {
+  const str = menus.reduce((pre, cur) => {
+    let index = pre.findIndex(item => item.text == cur.category)
+    if (index == -1) {
+      pre.push({ text: cur.category, items: [Object.assign(cur, { category: undefined })] })
     } else {
-      // 如果是.ts文件，读取内容并输出
-      if (path.extname(filePath) == '.ts' && !filePath.includes('index.d.ts')) {
-        const sourcePath = filePath.replace('.d.ts', '.ts').replace('dist\\types\\', '')
-        // const [dtsContent, dtsFnContent] = fs.readFileSync(filePath, 'utf8').replace(/\/\*\*|\*\/| \* /g, '').split('export default ')
-        const dtsContent = fs.readFileSync(filePath, 'utf8').match(/\/\*\*[\s\S]+\*\//)[0].replace(/\/\*\*|\*\/| \* /g, '')
-        const dtsFnContent = fs.readFileSync(filePath, 'utf8').replace(/\/\*\*[\s\S]+\*\//, '').replace('export default ', '')
-        const sourceContent = fs.readFileSync(sourcePath, 'utf8')
-        const sourceContentTs = sourceContent.replace(/\/\*\*[\s\S]+\*\//, '')
-        const sourceContentJs = fs.readFileSync('./temp_code/'+path.basename(filePath).replace('.d', ''), 'utf-8')
-        // const sourceContentJs = typescript.transpileModule(sourceContentTs, {
-        //   compilerOptions: {
-        //     module: typescript.ModuleKind.ESNext,
-        //     target: typescript.ScriptTarget.ESNext,
-        //   },
-        // }).outputText;
-        // if (filePath.includes('assign.d.ts')) {
-        //   console.log(sourceContentJs, '--', sourceContentTs)
-        // }
-        tsPaths.push({
-          dtsContent: dtsContent.split('\n'),
-          dtsFnContent,
-          sourceContentTs,
-          sourceContentJs
-        })
-        allDts += fs.readFileSync(filePath, 'utf8') + '\n'
-        // if (filePath.includes('chunk.d.ts')) {
-        // }
-      }
+      pre[index].items.push(Object.assign(cur, { category: undefined }))
     }
-  })
+    return pre
+  }, [])
+  writeFileSync('./vitepress/.vitepress/menu.js', 'export default ' + JSON.stringify(str, null, 2))
 }
-
-// 调用函数开始读取-写入ts数据到tsPaths
-readTSFiles(srcDir)
-
-
-
-let strObj = {}
-let menu = []
-tsPaths.forEach(aitx => {
-  const strArr = ['', '', '', '', '', '']
-  const [f1, f2, f3] = aitx.dtsFnContent.match(/function (\w+)[\s\S]*\([\s\S]*\): ([\s\S]+)?;/)
-
-  aitx.dtsContent.forEach(itx => {
-    itx = itx.trim()
-    if (itx) {
-      if (itx.includes('@param')) {
-        if (!strArr[2].includes('#### 参数')) strArr[2] = '#### 参数\n'
-        strArr[2] += itx.replace('@param', '-') + '\n'
-      } else if (itx.includes('@return')) {
-        if (!strArr[3].includes('#### 返回')) strArr[3] = '#### 返回\n'
-        strArr[3] += `- \`${f3}\`\n::: tip\n${itx.replace('@return ', '')}\n:::\n`
-      } else if (itx.includes('@throws')) {
-        if (!strArr[4].includes('#### 异常')) strArr[4] = '#### 异常\n'
-        strArr[4] += `::: danger\n${itx.replace('@throws ', '')}\n:::\n`
-      } else if (itx.includes('@category')) {
-        strArr[0] += itx.replace('@category ', '')
-      } else if (itx.includes('@example')) {
-        if (!strArr[5].includes('#### 示例')) strArr[5] = itx.replace('@example', '#### 示例 \n')
-      } else if (strArr[5].includes('#### 示例')) {
-        strArr[5] += itx + '\n'
-      } else {
-        if (!strArr[1]) strArr[1] = [`## ${f2} \n`]
-        strArr[1].push(`${itx}\n\n`)
-      }
-    }
-  })
-  // console.log(f2, strArr[0], '---')
-  menu.push({
-    name: strArr[0],
-    link: '/' + strArr[0].replace(/\p{sc=Han}/gu, '').toLocaleLowerCase() + '#' + f2.toLocaleLowerCase(),
-    text: f2 + '\n' + strArr[1][1].replace(`\n\n`, '')
-  })
-  strArr[1] = strArr[1].join('') + `#### 类型说明\n::: info\n\`${f1}\`\n:::\n`
-  strArr.push(`#### 源码\n::: code-group\n\`\`\`Ts [TS版本]\n${aitx.sourceContentTs.replace(/(\n\s*\n)+/g, '\n')}\n\`\`\`\n\n\`\`\`Js [JS版本]\n${aitx.sourceContentJs}\n\`\`\`\n:::\n`)
-  // console.log(aitx.sourceContentTs.replace(/(\n\s*\n)+/g, '\n'))
-  // console.log(strArr)
-  strObj[strArr[0]] = (strObj[strArr[0]] || '') + strArr.slice(1).join('')
-})
-
-Object.keys(strObj).forEach(item => {
-  writeFile('./docsvite/'+ item.replace(/\p{sc=Han}/gu, '').toLocaleLowerCase() +'.md', '## ' + item + '\n' + strObj[item], '')
-})
-console.log('文档正文内容写入完成')
-writeFile('./docsvite/.vitepress/menu.js', createdMenu(menu), '菜单内容写入完成')
-
-function createdMenu(menu) {
-  return (
-    'export default \n' +
-    JSON.stringify(
-      menu.reduce((x, y) => {
-        const { name, ...args } = y
-        const idx = x.findIndex(z => z.text == name)
-        if (idx == -1) {
-          x.push({
-            text: name,
-            items: [args]
-          })
-        } else {
-          x[idx].items.push(args)
-        }
-        return x
-      }, [])
-    )
-  )
-}
-
-// 将文本内容写入文件
-function writeFile(path, cont, msg = '内容已成功写入到文件！') {
-  fs.writeFileSync(path, cont)
-  msg && console.log(msg)
-}
-// console.log(allDts)
-console.log('写入在线运行时的类型文件')
-let modulesStr = ('declare const utils = {\n' + allDts + '\n}').replaceAll('export default function ', '').replaceAll('@example', '@example\n* eg:')
-fs.writeFileSync(`./docsvite/public/index.d.txt`, modulesStr)
-fs.writeFileSync(`./docsvite/public/utils.es.js`, fs.readFileSync('./dist/utils.es.js'), 'utf-8')
