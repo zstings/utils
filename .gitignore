@@ -25,7 +25,7 @@ testcdn
 *.njsproj
 *.sln
 *.sw?
-docsvite/.vitepress/cache
+vitepress/.vitepress/cache
 temp_code
 
 .docs
