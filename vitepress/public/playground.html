@@ -11,12 +11,15 @@
         padding: 0;
         /* background-color: #1e1e1e; */
       }
+      :root {
+        --eh: 40vh;
+      }
       button {
         padding: 5px 25px;
       }
       #container {
         width: 100%;
-        height: 100%;
+        height: calc(100vh - var(--eh) - 10px - 34px);
         margin-top: 34px;
       }
       #run {
@@ -48,6 +51,36 @@
         width: 100%;
         box-shadow: 1px 2px 3px #000;
       }
+      #outputEl {
+        position: fixed;
+        width: 100%;
+        height: var(--eh);
+        bottom: 0;
+        background: #fff;
+        color: #000;
+        padding: 10px 15px 0;
+        border-bottom: 10px solid #ffff;
+        font-size: 14px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+      }
+      .output-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #999;
+        margin-top: -10px;
+        padding-bottom: 10px;
+        .clear {
+          cursor: pointer;
+        }
+      }
+      #output {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
     </style>
   </head>
   <body>
@@ -56,8 +89,14 @@
       <div class="btns">
         <button title="运行">运行</button>
       </div>
+      <div id="outputEl">
+        <div class="output-info">
+          <span>console</span>
+          <span class="clear">clear</span>
+        </div>
+        <div id="output"></div>
+      </div>
     </div>
-    <!-- <script type="module" src="/dev/index.ts"></script> -->
     <script>
       var require = { paths: { vs: 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/monaco-editor/0.38.0/min/vs' } }
     </script>
@@ -67,6 +106,16 @@
     <script type="module">
       import * as utils from './utils.es.js'
       require.config({ paths: { vs: 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/monaco-editor/0.38.0/min/vs' } })
+      // 重写 console 方法，将输出到控制台的内容显示在页面上
+      ;['log', 'warn', 'error'].forEach(fn => {
+        const old = console[fn]
+        console[fn] = (...args) => {
+          output.innerHTML += `<div style="color:${fn === 'error' ? 'red' : fn === 'warn' ? '#e6a23c' : 'black'}">
+      ${args.join(' ')}
+    </div>`
+          old.apply(console, args)
+        }
+      })
       require(['vs/editor/editor.main'], async () => {
         // validation settings
         monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
@@ -2354,10 +2403,9 @@ export default function unique(array: any[], option?: {
           'declare const utils: typeof import("ts:/types/index.d.ts")',
           'ts:/types/utils-global.d.ts'
         )
-
         const value =
           localStorage.getItem('code') ||
-          `/*\n * 可直接使用utils访问所有函数\n * 点击运行(右上角绿色三角按钮)后在控制台（f12）可以看到结果\n */\nconst {formats} = utils\nconsole.log(formats('', 'YYYY-MM-DD'))`
+          `/*\n * 可直接使用utils访问所有函数\n * 点击运行(右上角绿色三角按钮)或者按下ctrl+s后在控制台区域或（f12）可以看到结果\n */\nconst {formats} = utils\nconsole.log(formats('', 'YYYY-MM-DD'))`
         window.myEditor = monaco.editor.create(document.getElementById('container'), {
           value,
           theme: 'vs-dark',
@@ -2369,10 +2417,25 @@ export default function unique(array: any[], option?: {
         window.myEditor.onDidChangeModelContent(() => {
           localStorage.setItem('code', window.myEditor.getValue())
         })
+        // 首次初始化后运行一次
+        eval(window.myEditor.getValue())
       })
       document.querySelector('button').onclick = () => {
         eval(window.myEditor.getValue())
       }
+      window.onerror = function (message, source, lineno, colno, error) {
+        console.error(`错误信息: ${message}  ->  ${lineno}:${colno}`)
+      }
+      document.querySelector('.clear').onclick = function () {
+        output.innerHTML = ''
+      }
+      // 拦截ctrl+s
+      window.addEventListener('keydown', e => {
+        if (e.ctrlKey && e.key === 's') {
+          e.preventDefault()
+          eval(window.myEditor.getValue())
+        }
+      })
     </script>
   </body>
 </html>
