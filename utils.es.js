@@ -167,7 +167,7 @@ function mt(t = 1, e = { start: /* @__PURE__ */ new Date(), format: "YYYY-MM-DD"
   return o ? [N(s, r), N(i, r)] : [A(s, r), A(i, r)];
 }
 function dt(t) {
-  if ((t == null || typeof t == "string" && t == "") && (t = h().toISOString().slice(0, 7)), !/^\d{4}-\d{1,2}$/.test(t)) throw "Invalid Date, eg: YYYY-MM";
+  if ((t === "" || t === void 0 || t === null) && (t = h().toISOString().slice(0, 7)), !/^\d{4}-\d{1,2}$/.test(t)) throw "Invalid Date, eg: YYYY-MM";
   const e = t.split("-");
   if (e[1] = e[1].padStart(2, "0"), Number(e[0]) < 1970) throw "年份不能小于1970";
   if (Number(e[1]) < 1 || Number(e[1]) > 12) throw "月份不能小于1或大于12";
