@@ -225,14 +225,16 @@ describe('random', () => {
   })
 
   it('应返回 startNum 或 endNum, 当 startNum 和 endNum 相差 1 时', () => {
-    const result1 = random(1, 2)
-    const result2 = random(2, 1)
-    expect(result1).toBeGreaterThanOrEqual(1)
-    expect(result1).toBeLessThanOrEqual(2)
-    expect(result2).toBeGreaterThanOrEqual(1)
-    expect(result2).toBeLessThanOrEqual(2)
-    // expect([result1, result2]).toContain(1);
-    // expect([result1, result2]).toContain(2);
+    // 强制返回 min
+    vi.spyOn(Math, 'random').mockReturnValue(0)
+    expect(random(1, 2)).toBe(1)
+
+    // 强制返回 max
+    vi.spyOn(Math, 'random').mockReturnValue(0.9)
+    expect(random(1, 2)).toBe(2)
+
+    // 清理 mock
+    vi.restoreAllMocks()
   })
 
   it('应在指定范围内返回随机数', () => {

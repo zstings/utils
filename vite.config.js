@@ -45,7 +45,10 @@ export default defineConfig({
       // provider: 'istanbul',
       cleanOnRerun: true,
       reporter: ['text', 'json', 'html'],
-      include: ['src/**']
+      include: ['src/**'],
+      exclude: [
+        'src/index.ts' // 忽略单个文件
+      ]
     }
   }
 })

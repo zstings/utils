@@ -172,5 +172,11 @@ describe('getMonthsUntilDate 函数测试', () => {
     expect(() => getMonthsUntilDate('invalid-date')).toThrow('Invalid Date, eg: YYYY-MM')
     expect(() => getMonthsUntilDate('1')).toThrow('Invalid Date, eg: YYYY-MM')
     expect(() => getMonthsUntilDate([] as any)).toThrow('Invalid Date, eg: YYYY-MM')
+    expect(() => getMonthsUntilDate('1960-01')).toThrow('年份不能小于1970')
+    expect(() => getMonthsUntilDate('1971-14')).toThrow('月份不能小于1或大于12')
+  })
+  it('当未传参或传入空字符串时，应默认使用当前年月', () => {
+    expect(getMonthsUntilDate()).toEqual(['2025-05'])
+    expect(getMonthsUntilDate('')).toEqual(['2025-05'])
   })
 })

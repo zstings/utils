@@ -79,6 +79,11 @@ describe('qsParse', () => {
     const parsedQuery = qsParse(query)
     expect(parsedQuery).toEqual({ param1: 'value1', param2: [1, 2] })
   })
+  it('测试 qsParse 函数功能 - 对象不解析', () => {
+    const query = 'param1=value1&param2={"a":1}'
+    const parsedQuery = qsParse(query, false)
+    expect(parsedQuery).toEqual({ param1: 'value1', param2: '{"a":1}' })
+  })
 })
 
 describe('qsStringify', () => {

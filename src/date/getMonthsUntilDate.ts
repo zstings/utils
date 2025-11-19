@@ -22,8 +22,8 @@ import days from '@/date/days'
  * getMonthsUntilDate() // ['2025-03']
  * ```
  */
-export default function getMonthsUntilDate(targetDateStr: string) {
-  if (targetDateStr == undefined || (typeof targetDateStr == 'string' && targetDateStr == '')) {
+export default function getMonthsUntilDate(targetDateStr?: string) {
+  if (targetDateStr === '' || targetDateStr === undefined || targetDateStr === null) {
     targetDateStr = days().toISOString().slice(0, 7)
   }
   // 格式验证
