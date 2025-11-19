@@ -365,7 +365,7 @@ export default function getMonthDays(year, month) {
 获取从当前时间到指定年月之前的所有年月
 #### 类型说明
 ::: info
-`function getMonthsUntilDate(targetDateStr: string): string[];`
+`function getMonthsUntilDate(targetDateStr?: string): string[];`
 :::
 #### 参数
 - `targetDateStr` 年月组成的字符串 '2025-01' or '2025-1'
@@ -395,8 +395,8 @@ getMonthsUntilDate() // ['2025-03']
 ::: code-group
 ```Ts [TS版本]
 import days from '@/date/days'
-export default function getMonthsUntilDate(targetDateStr: string) {
-  if (targetDateStr == undefined || (typeof targetDateStr == 'string' && targetDateStr == '')) {
+export default function getMonthsUntilDate(targetDateStr?: string) {
+  if (targetDateStr === '' || targetDateStr === undefined || targetDateStr === null) {
     targetDateStr = days().toISOString().slice(0, 7)
   }
   // 格式验证
@@ -448,7 +448,7 @@ export default function getMonthsUntilDate(targetDateStr: string) {
 ```Js [JS版本]
 import days from '@/date/days';
 export default function getMonthsUntilDate(targetDateStr) {
-  if (targetDateStr == void 0 || typeof targetDateStr == 'string' && targetDateStr == '') {
+  if (targetDateStr === '' || targetDateStr === void 0 || targetDateStr === null) {
     targetDateStr = days().toISOString().slice(0, 7);
   }
   if (!/^\d{4}-\d{1,2}$/.test(targetDateStr)) throw 'Invalid Date, eg: YYYY-MM';
