@@ -1,6 +1,7 @@
 import { parse } from 'comment-parser'
 import { readFileSync, writeFileSync, globSync, rmSync } from 'node:fs'
 import { basename, dirname } from 'node:path'
+import { exec } from 'node:child_process'
 
 // console.log(globSync('./src/**/*.ts', { exclude: ['./src/**/index.ts'] }).length)
 
@@ -33,7 +34,7 @@ createPlaygroundDts()
 console.log('playground.d.ts文件写入完成')
 writeFileSync(`./vitepress/public/utils.es.js`, readFileSync('./dist/utils.es.js'), 'utf-8')
 // 清除temp_code目录
-// rmSync('./temp_code', { recursive: true })
+rmSync('./temp_code', { recursive: true })
 console.log('temp_code目录清除完成')
 
 function createMdCont(path) {
@@ -100,9 +101,6 @@ function createMenu() {
 
 function createPlaygroundDts() {
   const playground = readFileSync('./vitepress/public/playground.html', 'utf8')
-  // const str = source.replace(/\/\* dts type start[\s\S]+?dts type end \*\//, '')
-  // writeFileSync('./vitepress/public/playground.html', str)
-
   const files = globSync('./dist/types/src/**/*.ts')
   const addExtraLibs = []
   files.forEach(item => {
@@ -118,8 +116,6 @@ function createPlaygroundDts() {
         `monaco.languages.typescript.typescriptDefaults.addExtraLib(\`${source.replaceAll('`', '\\`')}\`, "ts:/types/${ml}/${fileName}")`
       )
     }
-    // const str = source.replace(/\/\* dts type start[\s\S]+?dts type end \*\//, '')
-    // writeFileSync(item, str)
   })
   writeFileSync(
     './vitepress/public/playground.html',
@@ -128,4 +124,5 @@ function createPlaygroundDts() {
       `// dts type start\n${addExtraLibs.join('\n')}\n// dts type end`
     )
   )
+  exec('npx prettier --write ' + './vitepress/public/playground.html')
 }
