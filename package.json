@@ -22,8 +22,7 @@
   "scripts": {
     "lint": "eslint --fix --ext .md",
     "dev": "vite",
-    "build": "vite build && tsc && tsc-alias && node run.js",
-    "build1": "vite build && tsc && tsc-alias && node run.js && vitepress build vitepress && node deploy.js",
+    "build": "vite build && tsc && tsc-alias && node run.js && vitepress build vitepress && node deploy.js",
     "preview": "vite preview",
     "docs:dev": "vitepress dev vitepress",
     "docs:build": "vitepress build vitepress",
