@@ -16,7 +16,7 @@ export default {
   title: '@zstings/utils v' + version,
   description: 'javascript & typescript utils.',
   base: '/utils/',
-  outDir: '../docs',
+  outDir: '../docsDist',
   head: [['link', { rel: 'stylesheet', href: '/utils/styles/index.css' }]],
   themeConfig: {
     socialLinks: [{ icon: 'github', link: 'https://github.com/zstings/utils/' }],

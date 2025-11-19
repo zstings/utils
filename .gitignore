@@ -29,3 +29,4 @@ vitepress/.vitepress/cache
 temp_code
 
 .docs
+docsDist
