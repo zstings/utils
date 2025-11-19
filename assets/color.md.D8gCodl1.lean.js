@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as h,ag as k}from"./chunks/framework.CDJ_JCPU.js";const g=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"color.md","filePath":"color.md"}'),t={name:"color.md"};function n(l,s,p,e,d,r){return h(),a("div",null,[...s[0]||(s[0]=[k("",121)])])}const F=i(t,[["render",n]]);export{g as __pageData,F as default};

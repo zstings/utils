@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as t,ag as n}from"./chunks/framework.CDJ_JCPU.js";const E=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"start.md","filePath":"start.md"}'),l={name:"start.md"};function p(h,s,e,k,d,r){return t(),a("div",null,[...s[0]||(s[0]=[n("",23)])])}const o=i(l,[["render",p]]);export{E as __pageData,o as default};
