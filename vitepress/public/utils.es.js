@@ -2,7 +2,7 @@ function u(t) {
   return Object.prototype.toString.call(t).slice(8, -1);
 }
 const Z = "0.9.2";
-function g(t) {
+function p(t) {
   return u(t) === "Array";
 }
 function q(t) {
@@ -52,7 +52,7 @@ function it(t) {
   return u(t).includes("Element");
 }
 function $(t) {
-  return !g(t) || t.length == 0 ? !1 : t.every((e) => a(e));
+  return !p(t) || t.length == 0 ? !1 : t.every((e) => a(e));
 }
 function O(t) {
   return ["Null", "Undefined"].includes(u(t));
@@ -125,8 +125,8 @@ function F(t, e = 2, n = !0, r) {
   if (r !== "number" && r !== "string") throw "type 不是 number 或 string";
   t = Q(t).toString();
   const i = n ? Number(t).toFixed(e) : ((s) => {
-    const c = s.split("."), f = c[0], w = (c[1] || "").slice(0, e).padEnd(e, "0");
-    return `${f}.${w}`;
+    const c = s.split("."), f = c[0], g = (c[1] || "").slice(0, e).padEnd(e, "0");
+    return `${f}.${g}`;
   })(t);
   return r === "string" ? i : Number(i);
 }
@@ -134,7 +134,7 @@ function V(t) {
   return Number.isInteger(t);
 }
 function h(t = /* @__PURE__ */ new Date()) {
-  if (t == null || typeof t == "string" && t.trim() === "" ? t = /* @__PURE__ */ new Date() : g(t) ? t = new Date(...t) : t = new Date(t), t.toString() === "Invalid Date") throw "Invalid Date";
+  if (t == null || typeof t == "string" && t.trim() === "" ? t = /* @__PURE__ */ new Date() : p(t) ? t = new Date(...t) : t = new Date(t), t.toString() === "Invalid Date") throw "Invalid Date";
   return t;
 }
 function N(t = /* @__PURE__ */ new Date(), e = "ms") {
@@ -142,8 +142,8 @@ function N(t = /* @__PURE__ */ new Date(), e = "ms") {
   return e == "s" ? n / 1e3 | 0 : n;
 }
 function A(t = /* @__PURE__ */ new Date(), e = "YYYY-MM-DD hh:mm:ss") {
-  const n = h(t), r = l(n.getFullYear()), o = r.toString().substring(2), i = l(n.getMonth() + 1), s = l(n.getMonth() + 1, 1), c = l(n.getDate()), f = l(n.getDate(), 1), w = l(n.getHours()), k = l(n.getHours(), 1), I = l(n.getMinutes()), L = l(n.getMinutes(), 1), P = l(n.getSeconds()), C = l(n.getSeconds(), 1);
-  return e.replace("YYYY", r).replace("YY", o).replace("MM", i).replace("M", s).replace("DD", c).replace("D", f).replace("hh", w).replace("h", k).replace("mm", I).replace("m", L).replace("ss", P).replace("s", C);
+  const n = h(t), r = l(n.getFullYear()), o = r.toString().substring(2), i = l(n.getMonth() + 1), s = l(n.getMonth() + 1, 1), c = l(n.getDate()), f = l(n.getDate(), 1), g = l(n.getHours()), k = l(n.getHours(), 1), I = l(n.getMinutes()), L = l(n.getMinutes(), 1), P = l(n.getSeconds()), C = l(n.getSeconds(), 1);
+  return e.replace("YYYY", r).replace("YY", o).replace("MM", i).replace("M", s).replace("DD", c).replace("D", f).replace("hh", g).replace("h", k).replace("mm", I).replace("m", L).replace("ss", P).replace("s", C);
 }
 function lt(t, e) {
   t = t || (/* @__PURE__ */ new Date()).getFullYear(), e = e || (/* @__PURE__ */ new Date()).getMonth() + 1;
@@ -183,7 +183,7 @@ function dt(t) {
   }
   return o;
 }
-function gt(t, e = 500, n = { leading: !1, trailing: !0 }) {
+function pt(t, e = 500, n = { leading: !1, trailing: !0 }) {
   const { leading: r = !1, trailing: o = !0 } = n;
   let i = 0, s = r;
   if (!b(t)) throw "func不是function";
@@ -202,7 +202,7 @@ function gt(t, e = 500, n = { leading: !1, trailing: !0 }) {
     }, e);
   };
 }
-function wt(t, e = 500, n = !1) {
+function gt(t, e = 500, n = !1) {
   let r = 0;
   if (!b(t)) throw "func不是function";
   if (e && !m(e)) throw "wait不是number";
@@ -213,7 +213,7 @@ function wt(t, e = 500, n = !1) {
     }, e));
   };
 }
-function pt(t) {
+function wt(t) {
   if (!b(t)) throw "func不是function";
   let e = !1;
   return function(...n) {
@@ -239,7 +239,7 @@ function W(t, e = 0, n = 1 / 0, r = "*") {
   return t.replace(o, "".padEnd(o.length, r));
 }
 function Mt(t, e = 1) {
-  if (!g(t)) throw "array参数需要Array";
+  if (!p(t)) throw "array参数需要Array";
   if (!m(e) || !V(e) || e <= 0) throw "请检查size参数，必须符合大于0的整数";
   const n = [], r = Math.ceil(t.length / e);
   for (let o = 0; o < r; o++)
@@ -247,17 +247,17 @@ function Mt(t, e = 1) {
   return n;
 }
 function Dt(t) {
-  if (!g(t)) throw "array参数需要Array";
+  if (!p(t)) throw "array参数需要Array";
   return t.filter((e) => !!e);
 }
 function Ot(t) {
-  if (!g(t)) throw "array传入参数需要Array";
+  if (!p(t)) throw "array传入参数需要Array";
   return Object.fromEntries(new Map(t));
 }
 function jt(t, e) {
-  if (!g(t)) throw "array传入参数需要Array";
-  if (e != null && e.key && !d(e.key)) throw "key传入参数需要String";
-  return e != null && e.key && e.deep != !0 && (e.deep = !0), e || (e = { deep: !0 }), e && e.deep ? t.reduce((n, r) => {
+  if (!p(t)) throw "array传入参数需要Array";
+  if (e?.key && !d(e.key)) throw "key传入参数需要String";
+  return e?.key && e.deep != !0 && (e.deep = !0), e || (e = { deep: !0 }), e && e.deep ? t.reduce((n, r) => {
     if (e.key && r[e.key] == null) throw "key指定的属性不存在";
     return (e.key ? n.some((i) => S(i[e.key], r[e.key])) : n.some((i) => S(i, r))) || n.push(r), n;
   }, []) : [...new Set(t)];
@@ -304,7 +304,7 @@ function Rt(t, e) {
 }
 function Et(t, e = []) {
   if (!a(t)) throw new Error("target参数必须是object");
-  if (!g(e)) throw new Error("keys参数必须是array");
+  if (!p(e)) throw new Error("keys参数必须是array");
   return e.length == 0 ? {} : (t = M(t), Object.keys(t).forEach((n) => {
     e.includes(n) || delete t[n];
   }), t);
@@ -328,9 +328,8 @@ function D(t) {
   }
 }
 function xt(t, e = window.location.href) {
-  var s;
   if (!D(e)) throw "url 参数错误，不是有效的";
-  const n = new URL(e), r = new RegExp("(^|&)" + t + "=([^&]*)(&|$)"), o = n.search.substring(1).match(r), i = (s = n.hash.split("?")[1]) == null ? void 0 : s.match(r);
+  const n = new URL(e), r = new RegExp("(^|&)" + t + "=([^&]*)(&|$)"), o = n.search.substring(1).match(r), i = n.hash.split("?")[1]?.match(r);
   return o != null ? decodeURIComponent(o[2]) : i != null ? decodeURIComponent(i[2]) : null;
 }
 function U(t = "", e = !0) {
@@ -408,20 +407,20 @@ function Ct(t = {}, e) {
   let n = 0;
   const { rate: r = 4, num: o = 0, direction: i = "top", dom: s = document.scrollingElement } = t, c = { top: "scrollTop", left: "scrollLeft" };
   let f = s[c[i]];
-  const w = function() {
+  const g = function() {
     if (f = f + (o - f) / r, Math.abs(f - o) <= 1) {
       s[c[i]] = o, cancelAnimationFrame(n), e && e();
       return;
     }
-    s[c[i]] = f, n = requestAnimationFrame(w);
+    s[c[i]] = f, n = requestAnimationFrame(g);
   };
-  w();
+  g();
 }
 function qt(t) {
   if (!q(t)) throw "手机号格式不正确";
   return t = t.toString(), W(t, 3, 4);
 }
-function p(t = 1, e = 0) {
+function w(t = 1, e = 0) {
   if (!m(t)) throw "min 必须整数";
   if (!m(e)) throw "max 必须整数";
   if (t == e) return t;
@@ -442,8 +441,7 @@ function $t(t) {
   }
 }
 function Ht(t, e) {
-  var s;
-  const n = window.atob(t.replace(/data:([\s\S]+);base64,/, "")), r = e || ((s = t.match(/data:([\s\S]+);base64,/)) == null ? void 0 : s[1]) || "text/plain";
+  const n = window.atob(t.replace(/data:([\s\S]+);base64,/, "")), r = e || t.match(/data:([\s\S]+);base64,/)?.[1] || "text/plain";
   let o = n.length;
   const i = new Uint8Array(o);
   for (; o--; ) i[o] = n.charCodeAt(o);
@@ -453,11 +451,11 @@ function Bt() {
   const t = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
   let e = "#";
   for (let n = 0; n < 6; n++)
-    e += t[p(0, 15)];
+    e += t[w(0, 15)];
   return e;
 }
 function Jt() {
-  return `${p(0, 255)}, ${p(0, 255)}, ${p(0, 255)}, ${F(p(0, 100) / 100)}`;
+  return `${w(0, 255)}, ${w(0, 255)}, ${w(0, 255)}, ${F(w(0, 100) / 100)}`;
 }
 function j(t) {
   return d(t) ? /#(([0-9a-f]{3})|([0-9a-f]{4})|([0-9a-f]{6})|([0-9a-f]{8}))$/gi.test(t) : !1;
@@ -503,7 +501,7 @@ export {
   $t as copy,
   Nt as createData,
   h as days,
-  gt as debounce,
+  pt as debounce,
   M as deepClone,
   T as detectDeviceType,
   It as downloadFile,
@@ -523,7 +521,7 @@ export {
   ht as howLongAgo,
   J as isAndroid,
   $ as isArrObj,
-  g as isArray,
+  p as isArray,
   H as isBasicType,
   y as isBoolean,
   z as isDate,
@@ -557,13 +555,13 @@ export {
   Gt as launchFullscreen,
   W as mask,
   At as omit,
-  pt as once,
+  wt as once,
   l as padInt,
   qt as phoneEncrypt,
   Et as pick,
   U as qsParse,
   R as qsStringify,
-  p as random,
+  w as random,
   Bt as randomHex,
   Jt as randomRgba,
   St as removeHTML,
@@ -573,7 +571,7 @@ export {
   Ct as scrollTo,
   Ft as setUrlQuery,
   Wt as shrinkHex,
-  wt as throttle,
+  gt as throttle,
   N as timeStamp,
   F as toFixed,
   Q as toNumber,

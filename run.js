@@ -24,10 +24,17 @@ files.forEach(item => {
 funcs.forEach((item, key) => {
   writeFileSync(`./vitepress/${key}.md`, item)
 })
+console.log('md文件写入完成')
 // 写入菜单文件
 createMenu()
+console.log('菜单文件写入完成')
+// 创建playground.d.ts文件
+createPlaygroundDts()
+console.log('playground.d.ts文件写入完成')
+writeFileSync(`./vitepress/public/utils.es.js`, readFileSync('./dist/utils.es.js'), 'utf-8')
 // 清除temp_code目录
-rmSync('./temp_code', { recursive: true })
+// rmSync('./temp_code', { recursive: true })
+console.log('temp_code目录清除完成')
 
 function createMdCont(path) {
   const ml = basename(dirname(path))
@@ -89,4 +96,36 @@ function createMenu() {
     return pre
   }, [])
   writeFileSync('./vitepress/.vitepress/menu.js', 'export default ' + JSON.stringify(str, null, 2))
+}
+
+function createPlaygroundDts() {
+  const playground = readFileSync('./vitepress/public/playground.html', 'utf8')
+  // const str = source.replace(/\/\* dts type start[\s\S]+?dts type end \*\//, '')
+  // writeFileSync('./vitepress/public/playground.html', str)
+
+  const files = globSync('./dist/types/src/**/*.ts')
+  const addExtraLibs = []
+  files.forEach(item => {
+    const source = readFileSync(item, 'utf8')
+    const fileName = basename(item)
+    const ml = basename(dirname(item))
+    if (fileName == 'index.d.ts') {
+      addExtraLibs.push(
+        `monaco.languages.typescript.typescriptDefaults.addExtraLib(\`${source.replaceAll('`', '\\`')}\`, "ts:/types/index.d.ts")`
+      )
+    } else {
+      addExtraLibs.push(
+        `monaco.languages.typescript.typescriptDefaults.addExtraLib(\`${source.replaceAll('`', '\\`')}\`, "ts:/types/${ml}/${fileName}")`
+      )
+    }
+    // const str = source.replace(/\/\* dts type start[\s\S]+?dts type end \*\//, '')
+    // writeFileSync(item, str)
+  })
+  writeFileSync(
+    './vitepress/public/playground.html',
+    playground.replace(
+      / \/\/ dts type start([\s\S]+?)\/\/ dts type end/,
+      `// dts type start\n${addExtraLibs.join('\n')}\n// dts type end`
+    )
+  )
 }
