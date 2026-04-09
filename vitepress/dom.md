@@ -27,8 +27,22 @@ export default function isDom(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 是否是dom
+* @param value dom
+* @return true | false
+* @category 浏览器Dom
+* @example
+* ```ts
+* isDom() // => false
+* ```
+* @example
+* ```ts
+* isDom(document.querySelector('head')) // => true
+* ```
+*/
 export default function isDom(value) {
-  return typeOf(value).includes('Element');
+	return typeOf(value).includes('Element');
 }
 ```
 :::
@@ -61,10 +75,19 @@ export default function exitFullscreen(): void {
 }
 ```
 ```Js [JS版本]
+/**
+* 退出全屏
+* @throws 浏览器不支持全屏操作
+* @category 浏览器Dom
+* @example
+* ```ts
+* exitFullscreen()
+* ```
+*/
 export default function exitFullscreen() {
-  const exitFullscreen2 = document.exitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
-  if (!exitFullscreen2) throw '浏览器不支持全屏操作';
-  exitFullscreen2();
+	const exitFullscreen = document.exitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+	if (!exitFullscreen) throw '浏览器不支持全屏操作';
+	exitFullscreen();
 }
 ```
 :::
@@ -102,10 +125,24 @@ export default function launchFullscreen(el: HTMLElement = document.body): void 
 }
 ```
 ```Js [JS版本]
+/**
+* 指定dom节点全屏
+* @param el 指定的dom节点，不指定默认指向document.body
+* @throws 浏览器不支持全屏操作
+* @category 浏览器Dom
+* @example
+* ```ts
+* launchFullscreen()
+* ```
+* @example
+* ```ts
+* upperFirst(document.querySelector('a'))
+* ```
+*/
 export default function launchFullscreen(el = document.body) {
-  const requestFullscreen = el.requestFullscreen || el.mozRequestFullscreen || el.msRequestFullscreen || el.webkitRequestFullscreen;
-  if (!requestFullscreen) throw '浏览器不支持全屏操作';
-  requestFullscreen();
+	const requestFullscreen = el.requestFullscreen || el.mozRequestFullscreen || el.msRequestFullscreen || el.webkitRequestFullscreen;
+	if (!requestFullscreen) throw '浏览器不支持全屏操作';
+	requestFullscreen();
 }
 ```
 :::

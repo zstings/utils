@@ -25,8 +25,22 @@ export default function isInt(value: any): boolean {
 }
 ```
 ```Js [JS版本]
+/**
+* 是否为整数
+* @param value 检查的值
+* @return true | false
+* @category 数字Number
+* @example
+* ```ts
+* isInt(1) // => true
+* ```
+* @example
+* ```ts
+* isInt(1.21) // => false
+* ```
+*/
 export default function isInt(value) {
-  return Number.isInteger(value);
+	return Number.isInteger(value);
 }
 ```
 :::
@@ -62,8 +76,24 @@ export default function isNumber(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 判断是否为数字
+* @param value 任意值
+* @return true | false
+* @category 数字Number
+* @example
+* 验证通过
+* ```ts
+* isNumber(123) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isNumber('123') => false
+* ```
+*/
 export default function isNumber(value) {
-  return typeOf(value) === 'Number';
+	return typeOf(value) === 'Number';
 }
 ```
 :::
@@ -100,9 +130,28 @@ export default function padInt(value: string | number, len = 2): string {
 }
 ```
 ```Js [JS版本]
+/**
+* 数字补0
+* @param value 数字或者字符串的数字
+* @param len 补充的长度， 默认2
+* @return 返回字符串
+* @category 数字Number
+* @example
+* ```ts
+* padInt(1) => '01'
+* ```
+* @example
+* ```ts
+* padInt(12) => '12'
+* ```
+* @example
+* ```ts
+* padInt(12, 3) => '012'
+* ```
+*/
 export default function padInt(value, len = 2) {
-  if (isNaN(Number(value))) throw '不是一个合法的数字';
-  return Number(value).toString().padStart(len, '0');
+	if (isNaN(Number(value))) throw '不是一个合法的数字';
+	return Number(value).toString().padStart(len, '0');
 }
 ```
 :::
@@ -178,19 +227,50 @@ export default function toFixed<T extends 'number' | 'string' = 'number'>(
 ```Js [JS版本]
 import isBoolean from '@/verify/isBoolean';
 import toNumber from './toNumber';
+/**
+* 数字保留小数位
+* @param value 数字
+* @param num 保留的小数位
+* @param isRound 是否需要四舍五入
+* @param returnType 返回类型 数字 或 字符串
+* @return 返回数字 或 字符串
+* @throws 无法转换为数字
+* @throws value 无法转换为数字
+* @throws isRound不是boolean
+* @throws type 不是 number 或 string
+* @category 数字Number
+* @example
+* ```ts
+* toFixed(1) // 1
+* ```
+* @example
+* ```ts
+* toFixed(1.21) // 1.21
+* ```
+* @example
+* 默认会四舍五入
+* ```ts
+* toFixed(1.238, 2) // 1.24
+* ```
+* @example
+* 不进行四舍五入
+* ```ts
+* toFixed(1.238, 2, false) // 1.23
+* ```
+*/
 export default function toFixed(value, num = 2, isRound = true, returnType) {
-  if (returnType == void 0) returnType = 'number';
-  if (!isBoolean(isRound)) throw 'isRound不是boolean';
-  if (returnType !== 'number' && returnType !== 'string') throw 'type 不是 number 或 string';
-  value = toNumber(value).toString();
-  const formatNumber = (value2) => {
-    const parts = value2.split('.');
-    const integerPart = parts[0];
-    const decimalPart = (parts[1] || '').slice(0, num).padEnd(num, '0');
-    return `${integerPart}.${decimalPart}`;
-  };
-  const nValue = isRound ? Number(value).toFixed(num) : formatNumber(value);
-  return returnType === 'string' ? nValue : Number(nValue);
+	if (returnType == undefined) returnType = 'number';
+	if (!isBoolean(isRound)) throw 'isRound不是boolean';
+	if (returnType !== 'number' && returnType !== 'string') throw 'type 不是 number 或 string';
+	value = toNumber(value).toString();
+	const formatNumber = (value) => {
+		const parts = value.split('.');
+		const integerPart = parts[0];
+		const decimalPart = (parts[1] || '').slice(0, num).padEnd(num, '0');
+		return `${integerPart}.${decimalPart}`;
+	};
+	const nValue = isRound ? Number(value).toFixed(num) : formatNumber(value);
+	return returnType === 'string' ? nValue : Number(nValue);
 }
 ```
 :::
@@ -233,9 +313,32 @@ export default function toNumber<T>(value: T): number {
 }
 ```
 ```Js [JS版本]
+/**
+* 转换为数字
+* @param value 任意值
+* @return 返回数字
+* @throws 无法转换为数字
+* @category 数字Number
+* @example
+* ```ts
+* toNumber('1') // 1
+* ```
+* @example
+* ```ts
+* toNumber('1.2') // 1.2
+* ```
+* @example
+* ```ts
+* toNumber('a123') // error => a123无法转换为数字
+* ```
+* @example
+* ```ts
+* toNumber(111) // 111
+* ```
+*/
 export default function toNumber(value) {
-  if (isNaN(Number(value))) throw `${value}无法转换为数字`;
-  return Number(value);
+	if (isNaN(Number(value))) throw `${value}无法转换为数字`;
+	return Number(value);
 }
 ```
 :::

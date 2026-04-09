@@ -237,6 +237,24 @@ export { launchFullscreen, exitFullscreen };
         )
         monaco.languages.typescript.typescriptDefaults.addExtraLib(
           `/**
+ * 是否是数组对象
+ * @return true | false
+ * @category 数组Array
+ * @example
+ * \`\`\`ts
+ * isArrObj([{}]) // => true
+ * \`\`\`
+ * @example
+ * \`\`\`ts
+ * isArrObj([]) // => false
+ * \`\`\`
+ */
+export default function isArrObj(object: any): any;
+`,
+          'ts:/types/verify/isArrObj.d.ts'
+        )
+        monaco.languages.typescript.typescriptDefaults.addExtraLib(
+          `/**
  * 判断是否为数组
  * @param value 任意值
  * @return true | false
@@ -255,24 +273,6 @@ export { launchFullscreen, exitFullscreen };
 export default function isArray(value: any): boolean;
 `,
           'ts:/types/verify/isArray.d.ts'
-        )
-        monaco.languages.typescript.typescriptDefaults.addExtraLib(
-          `/**
- * 是否是数组对象
- * @return true | false
- * @category 数组Array
- * @example
- * \`\`\`ts
- * isArrObj([{}]) // => true
- * \`\`\`
- * @example
- * \`\`\`ts
- * isArrObj([]) // => false
- * \`\`\`
- */
-export default function isArrObj(object: any): any;
-`,
-          'ts:/types/verify/isArrObj.d.ts'
         )
         monaco.languages.typescript.typescriptDefaults.addExtraLib(
           `/**

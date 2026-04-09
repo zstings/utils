@@ -34,9 +34,26 @@ export default function isEmptyObject(object: Record<string, unknown>): boolean 
 ```
 ```Js [JS版本]
 import isObject from '@/verify/isObject';
+/**
+* 判断对象是否是空对象
+* @param object 对象
+* @return true | false
+* @throws 传入参数不是Object 传入参数不是Object时触发
+* @category 对象Object
+* @example
+* 验证通过
+* ```ts
+* isEmptyObject({}) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isEmptyObject({a: 1}) => false
+* ```
+*/
 export default function isEmptyObject(object) {
-  if (!isObject(object)) throw '传入参数不是Object';
-  return !Object.keys(object).length;
+	if (!isObject(object)) throw '传入参数不是Object';
+	return !Object.keys(object).length;
 }
 ```
 :::
@@ -72,8 +89,24 @@ export default function isMap(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 判断是否为Map
+* @param value 任意值
+* @return true | false
+* @category 对象Object
+* @example
+* 验证通过
+* ```ts
+* isMap(new Map()) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isMap(123) => false
+* ```
+*/
 export default function isMap(value) {
-  return typeOf(value) === 'Map';
+	return typeOf(value) === 'Map';
 }
 ```
 :::
@@ -109,8 +142,24 @@ export default function isObject(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 判断是否为对象
+* @param value 任意值
+* @return true | false
+* @category 对象Object
+* @example
+* 验证通过
+* ```ts
+* isObject({}) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isObject([]) => false
+* ```
+*/
 export default function isObject(value) {
-  return value !== null && typeOf(value) === 'Object';
+	return value !== null && typeOf(value) === 'Object';
 }
 ```
 :::
@@ -146,8 +195,24 @@ export default function isSet(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 判断是否为Set
+* @param value 任意值
+* @return true | false
+* @category 对象Object
+* @example
+* 验证通过
+* ```ts
+* isSet(new Set()) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isSet(123) => false
+* ```
+*/
 export default function isSet(value) {
-  return typeOf(value) === 'Set';
+	return typeOf(value) === 'Set';
 }
 ```
 :::
@@ -183,8 +248,24 @@ export default function isSymbol(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 判断是否为Symbol
+* @param value 任意值
+* @return true | false
+* @category 对象Object
+* @example
+* 验证通过
+* ```ts
+* isSymbol(Symbol(1)) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isSymbol(Symbol) => false
+* ```
+*/
 export default function isSymbol(value) {
-  return typeOf(value) === 'Symbol';
+	return typeOf(value) === 'Symbol';
 }
 ```
 :::
@@ -233,16 +314,34 @@ export default function arrObjSum<T extends Record<string, any>, K extends keyof
 ```
 ```Js [JS版本]
 import isArrObj from '@/verify/isArrObj';
+/**
+* 数组对象key值求和
+* @param target 目标对象
+* @param keys 需要求和的key数组
+* @return 求和后的对象
+* @category 对象Object
+* @example
+* ```ts
+* arrObjSum([{id: 1, age: 10, sx: 1}, {id: 2, age: 20, sx: 2}], ['id', 'age'])
+* // => {id: 3, age: 30}
+* ```
+* @example
+* 求和项不是数字时会以0处理
+* ```ts
+* arrObjSum([{id: 'a', age: 10, sx: 1}, {id: 2, age: 'b', sx: 2}], ['id', 'age'])
+* // => {id: 2, age: 10}
+* ```
+*/
 export default function arrObjSum(target, keys) {
-  if (!isArrObj(target)) throw 'object 必须是数组对象';
-  const object = {};
-  keys.forEach((item) => {
-    object[item] = target.reduce((start, end) => {
-      const value = start + (isNaN(end[item]) ? 0 : Number(end[item]));
-      return value;
-    }, 0);
-  });
-  return object;
+	if (!isArrObj(target)) throw 'object 必须是数组对象';
+	const object = {};
+	keys.forEach((item) => {
+		object[item] = target.reduce((start, end) => {
+			const value = start + (isNaN(end[item]) ? 0 : Number(end[item]));
+			return value;
+		}, 0);
+	});
+	return object;
 }
 ```
 :::
@@ -287,10 +386,23 @@ export default function assign<T extends Record<string, any>, U extends Record<s
 ```Js [JS版本]
 import isEmptyObject from '@/verify/isEmptyObject';
 import isObject from '@/verify/isObject';
+/**
+* 合并对象
+* @param target 目标对象，被合并的对象
+* @param sources 源对象，可以多个
+* @return 目标对象
+* @throws target参数必须是object  target参数不是对象时触发
+* @category 对象Object
+* @example
+* 对象合并效果与Object.assign一致
+* ```ts
+* assign({a: 1, c: 3}, {c: 5}) // => {a: 1, c: 5}
+* ```
+*/
 export default function assign(target, ...sources) {
-  if (!isObject(target)) throw 'target参数必须是object';
-  if (isEmptyObject(target)) return {};
-  return Object.assign(target, ...sources);
+	if (!isObject(target)) throw 'target参数必须是object';
+	if (isEmptyObject(target)) return {};
+	return Object.assign(target, ...sources);
 }
 ```
 :::
@@ -338,12 +450,25 @@ export default function assignMin<T extends Record<string, any>, U extends Recor
 ```Js [JS版本]
 import isEmptyObject from '@/verify/isEmptyObject';
 import isObject from '@/verify/isObject';
+/**
+* 最小合并对象
+* @param target 目标对象，被合并的对象
+* @param sources 源对象，可以多个
+* @return 目标对象
+* @throws target参数必须是object  target参数不是对象时触发
+* @category 对象Object
+* @example
+* 最小合并对象，只会合并源对象原有的属性，其他忽略
+* ```ts
+* assignMin({a: 1, c: 1}, {a: 2, b: 3}, {c: 3}) // => {a: 2, c: 3}
+* ```
+*/
 export default function assignMin(target, ...sources) {
-  if (!isObject(target)) throw 'target参数必须是object';
-  if (isEmptyObject(target)) return {};
-  const merge = Object.assign({}, target, ...sources);
-  Object.keys(target).forEach((key) => target[key] = merge[key]);
-  return target;
+	if (!isObject(target)) throw 'target参数必须是object';
+	if (isEmptyObject(target)) return {};
+	const merge = Object.assign({}, target, ...sources);
+	Object.keys(target).forEach((key) => target[key] = merge[key]);
+	return target;
 }
 ```
 :::
@@ -398,16 +523,42 @@ export default function createData(deep = 1, breadth = 0) {
 }
 ```
 ```Js [JS版本]
+/**
+* 指定深度或者广度的对象
+* @param deep 深度
+* @param breadth 广度
+* @return 对象
+* @category 对象Object
+* @example
+* ```ts
+* createData(1) // => {data: {}}
+* ```
+* @example
+* ```ts
+* createData(2, 2)
+* // =>
+* {
+*   data: {
+*      0: 0,
+*      1: 1,
+*      data: {
+*          0: 0,
+*          1: 1
+*      }
+*   }
+* }
+* ```
+*/
 export default function createData(deep = 1, breadth = 0) {
-  const data = {};
-  let temp = data;
-  for (let i = 0; i < deep; i++) {
-    temp = temp['data'] = {};
-    for (let j = 0; j < breadth; j++) {
-      temp[j] = j;
-    }
-  }
-  return data;
+	const data = {};
+	let temp = data;
+	for (let i = 0; i < deep; i++) {
+		temp = temp['data'] = {};
+		for (let j = 0; j < breadth; j++) {
+			temp[j] = j;
+		}
+	}
+	return data;
 }
 ```
 :::
@@ -441,9 +592,21 @@ export default function hasOwn(target: Record<string, any>, key:string) {
 ```
 ```Js [JS版本]
 import isObject from '@/verify/isObject';
+/**
+* 检查指定对象是否存在指定属性
+* @param target 指定对象
+* @param key 要检查的属性
+* @return true | false
+* @category 对象Object
+* @example
+* ```ts
+* hasOwn({a: 1, b: 0}, 'b') // => true
+* hasOwn({a: 1, b: 0}, 'c') // => false
+* ```
+*/
 export default function hasOwn(target, key) {
-  if (!isObject(target)) throw new Error('target参数必须是object');
-  return Object.prototype.hasOwnProperty.call(target, key);
+	if (!isObject(target)) throw new Error('target参数必须是object');
+	return Object.prototype.hasOwnProperty.call(target, key);
 }
 ```
 :::
@@ -485,10 +648,10 @@ export default function omit<T extends Record<string, any>, U extends (keyof T)[
 import deepClone from '@/util/deepClone';
 import isObject from '@/verify/isObject';
 export default function omit(target, keys) {
-  if (!isObject(target)) throw 'target参数必须是object';
-  target = deepClone(target);
-  (keys || []).forEach((key) => delete target[key]);
-  return target;
+	if (!isObject(target)) throw 'target参数必须是object';
+	target = deepClone(target);
+	(keys || []).forEach((key) => delete target[key]);
+	return target;
 }
 ```
 :::
@@ -542,16 +705,16 @@ import deepClone from '@/util/deepClone';
 import isObject from '@/verify/isObject';
 import isArray from '@/verify/isArray';
 export default function pick(target, keys = []) {
-  if (!isObject(target)) throw new Error('target参数必须是object');
-  if (!isArray(keys)) throw new Error('keys参数必须是array');
-  if (keys.length == 0) return {};
-  target = deepClone(target);
-  Object.keys(target).forEach((key) => {
-    if (!keys.includes(key)) {
-      delete target[key];
-    }
-  });
-  return target;
+	if (!isObject(target)) throw new Error('target参数必须是object');
+	if (!isArray(keys)) throw new Error('keys参数必须是array');
+	if (keys.length == 0) return {};
+	target = deepClone(target);
+	Object.keys(target).forEach((key) => {
+		if (!keys.includes(key)) {
+			delete target[key];
+		}
+	});
+	return target;
 }
 ```
 :::
@@ -596,17 +759,33 @@ export default function resetObjectValues<T extends Record<string, any>>(target:
 import deepClone from '@/util/deepClone';
 import typeOf from '@/common/typeOf';
 import isObject from '@/verify/isObject';
+/**
+* 重置指定对象的值
+* 对对象中值为字符串的重置为: ''
+* 对对象中值为布尔值的重置为: false
+* 对对象中值为数字的重置为: 0
+* 对对象中值为数组的重置为: []
+* 对对象中值为对象的就递归，直到结束
+* @param target 指定对象
+* @return 新的对象
+* @category 对象Object
+* @example
+* ```ts
+* omit({a: 1, b: '2', c: true, d: [1, 2, 3], e: {a: 1, b: '2', c: [6, 7]}})
+* // => {a: 0, b: '', c: false, d: [], e: {a: 0, b: '', c: []}}
+* ```
+*/
 export default function resetObjectValues(target, n = 0) {
-  if (!isObject(target)) throw new Error('target参数必须是object');
-  if (n != 1) target = deepClone(target);
-  Object.keys(target).forEach((key) => {
-    if (typeOf(target[key]) == 'String') target[key] = '';
-    if (typeOf(target[key]) == 'Number') target[key] = 0;
-    if (typeOf(target[key]) == 'Boolean') target[key] = false;
-    if (typeOf(target[key]) == 'Array') target[key] = [];
-    if (typeOf(target[key]) == 'Object') resetObjectValues(target[key], 1);
-  });
-  return target;
+	if (!isObject(target)) throw new Error('target参数必须是object');
+	if (n != 1) target = deepClone(target);
+	Object.keys(target).forEach((key) => {
+		if (typeOf(target[key]) == 'String') target[key] = '';
+		if (typeOf(target[key]) == 'Number') target[key] = 0;
+		if (typeOf(target[key]) == 'Boolean') target[key] = false;
+		if (typeOf(target[key]) == 'Array') target[key] = [];
+		if (typeOf(target[key]) == 'Object') resetObjectValues(target[key], 1);
+	});
+	return target;
 }
 ```
 :::

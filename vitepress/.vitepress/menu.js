@@ -3,12 +3,12 @@ export default [
     "text": "数组Array",
     "items": [
       {
-        "link": "/array#isArray",
-        "text": "isArray\n判断是否为数组"
-      },
-      {
         "link": "/array#isArrObj",
         "text": "isArrObj\n是否是数组对象"
+      },
+      {
+        "link": "/array#isArray",
+        "text": "isArray\n判断是否为数组"
       },
       {
         "link": "/array#chunk",

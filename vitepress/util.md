@@ -25,8 +25,29 @@ export default function isBasicType(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 是否是基本类型
+* @return true | false
+* @category 工具Util
+* @example
+* ```ts
+* isBasicType('12') // => true
+* ```
+* @example
+* ```ts
+* isBasicType([]) // => false
+* ```
+*/
 export default function isBasicType(value) {
-  return ['String', 'Number', 'Boolean', 'Null', 'Undefined', 'Symbol', 'BigInt'].includes(typeOf(value));
+	return [
+		'String',
+		'Number',
+		'Boolean',
+		'Null',
+		'Undefined',
+		'Symbol',
+		'BigInt'
+	].includes(typeOf(value));
 }
 ```
 :::
@@ -63,8 +84,25 @@ export default function isBoolean(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 判断是否为Boolean
+* @param value 任意值
+* @return true | false
+* @category 工具Util
+* @example
+* 验证通过
+* ```ts
+* isBoolean(true) => true
+* isBoolean(false) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isBoolean(123) => false
+* ```
+*/
 export default function isBoolean(value) {
-  return typeOf(value) === 'Boolean';
+	return typeOf(value) === 'Boolean';
 }
 ```
 :::
@@ -151,28 +189,79 @@ export default function isEqual(value1:any = '', value2:any = '') {
 }
 ```
 ```Js [JS版本]
+/**
+* 判断任意两个值是否相等
+* @param value1 任意值
+* @param value2 任意值
+* @return true | false
+* @category 工具Util
+* @example
+* 没有参数时，直接返回true
+* ```ts
+* isEqual() => true
+* ```
+* @example
+* 只要一个参数时，第二个参数默等于第一个参数
+* ```ts
+* isEqual(1) => true
+* ```
+* ```ts
+* isEqual(false) => true
+* ```
+* ```ts
+* isEqual([]) => true
+* ```
+* @example
+* 基本数据类型
+* ```ts
+* isEqual(1, 1) => true
+* ```
+* ```ts
+* isEqual(1, 2) => false
+* ```
+* ```ts
+* isEqual(true, 'a') => false
+* ```
+* @example
+* 引用数据类型
+* ```ts
+* isEqual([], []) => true
+* ```
+* ```ts
+* isEqual({}, {}) => true
+* ```
+* ```ts
+* isEqual([], {}) => false
+* ```
+* ```ts
+* isEqual([1, 2], [1, 2]) => true
+* ```
+* ```ts
+* isEqual({a: 1}, {a: 1}) => true
+* ```
+*/
 export default function isEqual(value1 = '', value2 = '') {
-  if (arguments.length == 1) value2 = value1;
-  if (value1 === value2) return true;
-  if (value1 === null || value2 === null) return false;
-  if (value1.constructor !== value2.constructor) return false;
-  if (Array.isArray(value1)) {
-    if (!Array.isArray(value2) || value1.length !== value2.length) return false;
-    for (let i = 0; i < value1.length; i++) {
-      if (!isEqual(value1[i], value2[i])) return false;
-    }
-    return true;
-  }
-  if (typeof value1 === 'object') {
-    const keysA = Object.keys(value1);
-    const keysB = Object.keys(value2);
-    if (keysA.length !== keysB.length) return false;
-    for (let key of keysA) {
-      if (!keysB.includes(key) || !isEqual(value1[key], value2[key])) return false;
-    }
-    return true;
-  }
-  return false;
+	if (arguments.length == 1) value2 = value1;
+	if (value1 === value2) return true;
+	if (value1 === null || value2 === null) return false;
+	if (value1.constructor !== value2.constructor) return false;
+	if (Array.isArray(value1)) {
+		if (!Array.isArray(value2) || value1.length !== value2.length) return false;
+		for (let i = 0; i < value1.length; i++) {
+			if (!isEqual(value1[i], value2[i])) return false;
+		}
+		return true;
+	}
+	if (typeof value1 === 'object') {
+		const keysA = Object.keys(value1);
+		const keysB = Object.keys(value2);
+		if (keysA.length !== keysB.length) return false;
+		for (let key of keysA) {
+			if (!keysB.includes(key) || !isEqual(value1[key], value2[key])) return false;
+		}
+		return true;
+	}
+	return false;
 }
 ```
 :::
@@ -204,8 +293,22 @@ export default function isIncludeChinese(value: string = ''): boolean {
 }
 ```
 ```Js [JS版本]
+/**
+* 检查字符串是否包含中文
+* @param value 字符串
+* @return true | false
+* @category 工具Util
+* @example
+* ```ts
+* isIncludeChinese() // => false
+* ```
+* @example
+* ```ts
+* isIncludeChinese('你好') // => true
+* ```
+*/
 export default function isIncludeChinese(value = '') {
-  return /\p{sc=Han}/gu.test(value);
+	return /\p{sc=Han}/gu.test(value);
 }
 ```
 :::
@@ -240,13 +343,26 @@ export default function isJsonString(str: string) {
 }
 ```
 ```Js [JS版本]
+/**
+* 是否是json字符串
+* @return true | false
+* @category 工具Util
+* @example
+* ```ts
+* isJsonString('{'a':1}') // => true
+* ```
+* @example
+* ```ts
+* isJsonString(1) // => false
+* ```
+*/
 export default function isJsonString(str) {
-  try {
-    JSON.parse(str);
-    return true;
-  } catch (err) {
-    return false;
-  }
+	try {
+		JSON.parse(str);
+		return true;
+	} catch (err) {
+		return false;
+	}
 }
 ```
 :::
@@ -281,8 +397,23 @@ export default function isNullOrUndefined(value: any): boolean {
 ```
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
+/**
+* 是否是null|undefined
+* @param value 任意值
+* @return true | false
+* @category 工具Util
+* @example
+* ```ts
+* isNullOrUndefined(null) // => true
+* isNullOrUndefined(undefined) // => true
+* ```
+* @example
+* ```ts
+* isNullOrUndefined(2) // => false
+* ```
+*/
 export default function isNullOrUndefined(value) {
-  return ['Null', 'Undefined'].includes(typeOf(value));
+	return ['Null', 'Undefined'].includes(typeOf(value));
 }
 ```
 :::
@@ -316,8 +447,24 @@ export default function isPhone(value: string | number): boolean {
 }
 ```
 ```Js [JS版本]
+/**
+* 判断是否为手机号
+* @param value 任意值
+* @return true | false
+* @category 工具Util
+* @example
+* 验证通过
+* ```ts
+* isPhone(13302101452) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isPhone(1330210152) => false
+* ```
+*/
 export default function isPhone(value) {
-  return /^1[3-9][\d]{9}$/.test(value.toString());
+	return /^1[3-9][\d]{9}$/.test(value.toString());
 }
 ```
 :::
@@ -359,8 +506,29 @@ export default function isPromise(value: any): boolean {
 ```Js [JS版本]
 import typeOf from '@/common/typeOf';
 import isFunction from '@/verify/isFunction';
+/**
+* 判断是否为Promise
+* @param value 任意值
+* @return true | false
+* @category 工具Util
+* @example
+* 验证通过
+* ```ts
+* isPromise(new Promise(() => {})) => true
+* isPromise(Promise.all([])) => true
+* ```
+* @example
+* 验证失败
+* ```ts
+* isPromise(Promise) => false
+* ```
+* @example
+* ```ts
+* isPromise(Promise) => false
+* ```
+*/
 export default function isPromise(value) {
-  return typeOf(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch);
+	return typeOf(value) === 'Promise' && isFunction(value.then) && isFunction(value.catch);
 }
 ```
 :::
@@ -396,13 +564,24 @@ export default function base64ToBlob(base64: string, type?: string): Blob {
 }
 ```
 ```Js [JS版本]
+/**
+* base64转blob
+* @param base64 base64
+* @param type 文件类型
+* @return Blob
+* @category 工具Util
+* @example
+* ```ts
+* base64ToBlob()
+* ```
+*/
 export default function base64ToBlob(base64, type) {
-  const base64Str = window.atob(base64.replace(/data:([\s\S]+);base64,/, ''));
-  const base64Type = type || base64.match(/data:([\s\S]+);base64,/)?.[1] || 'text/plain';
-  let n = base64Str.length;
-  const u8arr = new Uint8Array(n);
-  while (n--) u8arr[n] = base64Str.charCodeAt(n);
-  return new Blob([u8arr], { type: base64Type });
+	const base64Str = window.atob(base64.replace(/data:([\s\S]+);base64,/, ''));
+	const base64Type = type || base64.match(/data:([\s\S]+);base64,/)?.[1] || 'text/plain';
+	let n = base64Str.length;
+	const u8arr = new Uint8Array(n);
+	while (n--) u8arr[n] = base64Str.charCodeAt(n);
+	return new Blob([u8arr], { type: base64Type });
 }
 ```
 :::
@@ -457,27 +636,38 @@ export default function copy(value: string) {
 }
 ```
 ```Js [JS版本]
+/**
+* 复制文本内容
+* 优先使用navigator.clipboard.writeText, 浏览器不支持使用时降级document.execCommand。
+* @param value 需要复制的字符串
+* @return Promise
+* @category 工具Util
+* @example
+* ```ts
+* await copy('hello')
+* ```
+*/
 export default function copy(value) {
-  return new Promise((resolve, reject) => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(value).then(() => resolve()).catch(() => {
-        execCommandCopy(value, resolve, reject);
-      });
-    } else {
-      execCommandCopy(value, resolve, reject);
-    }
-  });
-  function execCommandCopy(code, resolve, reject) {
-    const textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
-    textarea.setAttribute('readonly', 'readonly');
-    textarea.innerHTML = code;
-    textarea.select();
-    textarea.setSelectionRange(0, textarea.innerHTML.length);
-    const isc = document.execCommand('copy');
-    textarea.remove();
-    isc ? resolve() : reject('execCommand error');
-  }
+	return new Promise((resolve, reject) => {
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(value).then(() => resolve()).catch(() => {
+				execCommandCopy(value, resolve, reject);
+			});
+		} else {
+			execCommandCopy(value, resolve, reject);
+		}
+	});
+	function execCommandCopy(code, resolve, reject) {
+		const textarea = document.createElement('textarea');
+		document.body.appendChild(textarea);
+		textarea.setAttribute('readonly', 'readonly');
+		textarea.innerHTML = code;
+		textarea.select();
+		textarea.setSelectionRange(0, textarea.innerHTML.length);
+		const isc = document.execCommand('copy');
+		textarea.remove();
+		isc ? resolve() : reject('execCommand error');
+	}
 }
 ```
 :::
@@ -517,16 +707,30 @@ export default function deepClone<T extends Array<T> | any>(source: T): T {
 }
 ```
 ```Js [JS版本]
+/**
+* 深度复制
+* @param origin 对象或者数组
+* @return 深度复制后的对象或者数组
+* @category 工具Util
+* @example
+* ```ts
+* deepClone([1,23, [1]]) // => [1,23, [1]]
+* ```
+* @example
+* ```ts
+* deepClone({a: [1], b: () => {}}) // => {a: [1], b: () => {}}
+* ```
+*/
 export default function deepClone(source) {
-  if (typeof source == 'object') {
-    const cloneTarget = Array.isArray(source) ? [] : {};
-    for (const key in source) {
-      cloneTarget[key] = deepClone(source[key]);
-    }
-    return cloneTarget;
-  } else {
-    return source;
-  }
+	if (typeof source == 'object') {
+		const cloneTarget = Array.isArray(source) ? [] : {};
+		for (const key in source) {
+			cloneTarget[key] = deepClone(source[key]);
+		}
+		return cloneTarget;
+	} else {
+		return source;
+	}
 }
 ```
 :::
@@ -564,16 +768,27 @@ export default function downloadFile(name: string, blob: Blob): void {
 }
 ```
 ```Js [JS版本]
+/**
+* 文件下载
+* @param name 文件名
+* @param blob 文件blob数据
+* @category 工具Util
+* @example
+* ```ts
+* const res = await fetch('https://a.b.com/').then(res => res.blob())
+* downloadFile('a.jpg', res)
+* ```
+*/
 export default function downloadFile(name, blob) {
-  const a = document.createElement('a');
-  const url = window.URL.createObjectURL(blob);
-  a.style.display = 'none';
-  a.href = url;
-  a.download = name;
-  document.body.appendChild(a);
-  a.click();
-  window.URL.revokeObjectURL(url);
-  a.remove();
+	const a = document.createElement('a');
+	const url = window.URL.createObjectURL(blob);
+	a.style.display = 'none';
+	a.href = url;
+	a.download = name;
+	document.body.appendChild(a);
+	a.click();
+	window.URL.revokeObjectURL(url);
+	a.remove();
 }
 ```
 :::
@@ -607,12 +822,23 @@ export default function gbkToUtf8(value: ArrayBuffer): object | string {
 }
 ```
 ```Js [JS版本]
+/**
+* gbk 转 utf-8
+* @param value ArrayBuffer
+* @return 可以被JSON.parse转化时返回js对象，否则返回字符串
+* @category 工具Util
+* @example
+* ```ts
+* const res = await fetch('https://a.b.com/').then(res => res.arrayBuffer())
+* gbkToUtf8(res)
+* ```
+*/
 export default function gbkToUtf8(value) {
-  try {
-    return JSON.parse(new TextDecoder('utf-8').decode(value));
-  } catch (err) {
-    return new TextDecoder('utf-8').decode(value);
-  }
+	try {
+		return JSON.parse(new TextDecoder('utf-8').decode(value));
+	} catch (err) {
+		return new TextDecoder('utf-8').decode(value);
+	}
 }
 ```
 :::
@@ -643,12 +869,19 @@ export default function getUUID(): string {
 }
 ```
 ```Js [JS版本]
+/**
+* 获取uuid
+* @return uuid
+* @category 工具Util
+* @example
+* 符合 RFC4122 版本 4 的 UUID。
+* ```ts
+* getUUID() // '7ac8d9bc-0a0d-4f31-8134-896a485feed1'
+* ```
+*/
 export default function getUUID() {
-  const ysValue = String(1e7) + -1e3 + -4e3 + -8e3 + -1e11;
-  return ysValue.replace(
-    /[018]/g,
-    (c) => (Number(c) ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> Number(c) / 4).toString(16)
-  );
+	const ysValue = String(1e7) + -1e3 + -4e3 + -8e3 + -1e11;
+	return ysValue.replace(/[018]/g, (c) => (Number(c) ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> Number(c) / 4).toString(16));
 }
 ```
 :::
@@ -693,10 +926,29 @@ export default function phoneEncrypt(value: string | number): string {
 ```Js [JS版本]
 import mask from '@/string/mask';
 import isPhone from '@/verify/isPhone';
+/**
+* 对手机号进行加密处理
+* @param value 手机号：支持字符串或者数字
+* @return 字符串 返回经过加密后的字符串
+* @throws 异常 手机号格式不正确
+* @category 工具Util
+* @example
+* ```ts
+* phoneEncrypt(13300001111) => '133****1111'
+* ```
+* @example
+* ```ts
+* phoneEncrypt('13300001111') => '133****1111'
+* ```
+* @example
+* ```ts
+* phoneEncrypt('1330000') => throw '手机号格式不正确'
+* ```
+*/
 export default function phoneEncrypt(value) {
-  if (!isPhone(value)) throw '手机号格式不正确';
-  value = value.toString();
-  return mask(value, 3, 4);
+	if (!isPhone(value)) throw '手机号格式不正确';
+	value = value.toString();
+	return mask(value, 3, 4);
 }
 ```
 :::
@@ -743,14 +995,39 @@ export default function random(startNum = 1, endNum = 0): number {
 ```
 ```Js [JS版本]
 import isNumber from '@/verify/isNumber';
+/**
+* 均衡获取指定范围的随机整数
+* 返回一个startNum 和 endNum之间的随机整数。如果你没有参数，那么将返回随机返回0和1。
+* 如果你只传递一个参数，那么将返回0和这个参数之间的整数。
+* 如果两个参数相差值是1，随机返回传入的两个值。
+* @param startNum 整数
+* @param endNum 整数
+* @return 随机整数
+* @category 工具Util
+* @example
+* 随机返回0或者1
+* ```ts
+* random()
+* ```
+* @example
+* 均衡获取0或者5的数
+* ```ts
+* random(5)
+* ```
+* @example
+* 均衡获取1或者10的数
+* ```ts
+* random(1, 10)
+* ```
+*/
 export default function random(startNum = 1, endNum = 0) {
-  if (!isNumber(startNum)) throw `min 必须整数`;
-  if (!isNumber(endNum)) throw `max 必须整数`;
-  if (startNum == endNum) return startNum;
-  const max = Math.max(startNum, endNum);
-  const min = Math.min(startNum, endNum);
-  if (max - min == 1) return Math.random() > 0.5 ? max : min;
-  return Math.round(Math.random() * (max - min) + min);
+	if (!isNumber(startNum)) throw `min 必须整数`;
+	if (!isNumber(endNum)) throw `max 必须整数`;
+	if (startNum == endNum) return startNum;
+	const max = Math.max(startNum, endNum);
+	const min = Math.min(startNum, endNum);
+	if (max - min == 1) return Math.random() > .5 ? max : min;
+	return Math.round(Math.random() * (max - min) + min);
 }
 ```
 :::
@@ -821,23 +1098,61 @@ export default function scrollTo(
 }
 ```
 ```Js [JS版本]
+/**
+* 滚动至···
+* @param option 可选的对象
+* @param option.rate 滚动的步长，默认 4
+* @param option.num 滚动的目标值，默认 0
+* @param option.direction 滚动的方向，默认 'top', 支持 'top' | 'left'
+* @param option.dom 滚动的目标元素，默认 document.scrollingElement
+* @param callback 滚动结束的回调函数
+* @category 工具Util
+* @example
+* 回到顶部
+* ```ts
+* scrollTo()
+* ```
+* @example
+* 回到顶部后触发回调
+* ```ts
+* scrollTo({}, () => console.log('到了'))
+* ```
+* @example
+* 回到距离顶部的100像素的位置
+* ```ts
+* scrollTo({num: 100})
+* ```
+* @example
+* 滚动到元素box的最左端
+* ```ts
+* scrollTo({dom: document.querySelector('.box')})
+* ```
+* @example
+* 滚动到元素box距离左端100像素位置
+* ```ts
+* scrollTo({num: 100, dom: document.querySelector('.box')})
+* ```
+*/
 export default function scrollTo(option = {}, callback) {
-  let animat = 0;
-  const { rate = 4, num = 0, direction = 'top', dom = document.scrollingElement } = option;
-  const directions = { top: 'scrollTop', left: 'scrollLeft' };
-  let scrollVal = dom[directions[direction]];
-  const animatRunFun = function() {
-    scrollVal = scrollVal + (num - scrollVal) / rate;
-    if (Math.abs(scrollVal - num) <= 1) {
-      dom[directions[direction]] = num;
-      cancelAnimationFrame(animat);
-      callback && callback();
-      return;
-    }
-    dom[directions[direction]] = scrollVal;
-    animat = requestAnimationFrame(animatRunFun);
-  };
-  animatRunFun();
+	let animat = 0;
+	const { rate = 4, num = 0, direction = 'top', dom = document.scrollingElement } = option;
+	const directions = {
+		top: 'scrollTop',
+		left: 'scrollLeft'
+	};
+	let scrollVal = dom[directions[direction]];
+	const animatRunFun = function() {
+		scrollVal = scrollVal + (num - scrollVal) / rate;
+		if (Math.abs(scrollVal - num) <= 1) {
+			dom[directions[direction]] = num;
+			cancelAnimationFrame(animat);
+			callback && callback();
+			return;
+		}
+		dom[directions[direction]] = scrollVal;
+		animat = requestAnimationFrame(animatRunFun);
+	};
+	animatRunFun();
 }
 ```
 :::
@@ -887,8 +1202,44 @@ export default function typeOf(value: any): string {
 }
 ```
 ```Js [JS版本]
+/**
+* 获取数据类型
+* @param value 任意值
+* @return 返回value的类型
+* @category 工具Util
+* @example
+* 数字
+* ```ts
+* typeOf(12) => 'Number'
+* ```
+* @example
+* 字符串
+* ```ts
+* typeOf('12') => 'String'
+* ```
+* @example
+* 布尔
+* ```ts
+* typeOf(true) => 'Boolean'
+* ```
+* @example
+* 函数
+* ```ts
+* typeOf(functuin(){}) => 'Function'
+* ```
+* @example
+* 对象
+* ```ts
+* typeOf({}) => 'Object'
+* ```
+* @example
+* 数组
+* ```ts
+* typeOf([]) => 'Array'
+* ```
+*/
 export default function typeOf(value) {
-  return Object.prototype.toString.call(value).slice(8, -1);
+	return Object.prototype.toString.call(value).slice(8, -1);
 }
 ```
 :::
